@@ -102,21 +102,6 @@ public class BlockParser extends NetexParser implements Parser {
             }
         }
 
-        // vehicle journey
-        for (JAXBElement<?> jaxbJourneyRef : netexBlock.getJourneys().getJourneyRefOrJourneyDesignatorOrServiceDesignator()) {
-            Object reference = jaxbJourneyRef.getValue();
-            if (reference instanceof VehicleJourneyRefStructure) {
-                VehicleJourneyRefStructure vehicleJourneyRefStructure = (VehicleJourneyRefStructure) reference;
-                mobi.chouette.model.VehicleJourney vehicleJourney = ObjectFactory.getVehicleJourney(referential, vehicleJourneyRefStructure.getRef());
-                chouetteBlock.addVehicleJourney(vehicleJourney);
-            } else {
-                if(log.isDebugEnabled()) {
-                    log.debug("Ignoring non-VehicleJourneyRef element with id: " + reference);
-                }
-
-            }
-        }
-
         // dead runs and vehicle journeys
         for (JAXBElement<?> jaxbJourneyRef : netexBlock.getJourneys().getJourneyRefOrJourneyDesignatorOrServiceDesignator()) {
             Object reference = jaxbJourneyRef.getValue();
