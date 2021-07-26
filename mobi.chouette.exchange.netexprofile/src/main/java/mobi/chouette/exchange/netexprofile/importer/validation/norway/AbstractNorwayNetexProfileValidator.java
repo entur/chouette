@@ -33,8 +33,9 @@ public abstract class AbstractNorwayNetexProfileValidator extends AbstractNetexP
 	public static final String PROFILE_NORWAY_NETWORKTIMETABLE_109_13 = "1.09:NO-NeTEx-networktimetable:1.3";
 	public static final String PROFILE_NORWAY_NETWORKTIMETABLE_110_13 = "1.10:NO-NeTEx-networktimetable:1.3";
 	public static final String PROFILE_NORWAY_NETWORKTIMETABLE_111_13 = "1.11:NO-NeTEx-networktimetable:1.3";
+	public static final String PROFILE_NORWAY_NETWORKTIMETABLE_112_13 = "1.12:NO-NeTEx-networktimetable:1.3";
 
-	public static final String EXPORT_PROFILE_ID = PROFILE_NORWAY_NETWORKTIMETABLE_111_13; // Update when new profile version is implemented
+	public static final String EXPORT_PROFILE_ID = PROFILE_NORWAY_NETWORKTIMETABLE_112_13; // Update when new profile version is implemented
 	
 	public static final String NSR_XMLNSURL = "http://www.rutebanken.org/ns/nsr";
 	public static final String NSR_XMLNS = "NSR";
@@ -148,6 +149,8 @@ public abstract class AbstractNorwayNetexProfileValidator extends AbstractNetexP
 	public static final String _1_NETEX_TIMETABLE_FRAME_FLEXIBLE_SERVICE_PROPERTIES_ILLEGAL_FLEXIBLESERVICETYPE = "1-NETEXPROFILE-TimetableFrame_FlexibleServiceProperties_IllegalFlexibleServiceType";
 
 	public static final String _1_NETEX_TIMETABLE_FRAME_INTERCHANGE_PLANNED_AND_ADVERTISED = "1-NETEXPROFILE-TimetableFrame_Interchange_PlannedAndAdvertised";
+	public static final String _1_NETEX_TIMETABLE_FRAME_INTERCHANGE_GUARANTEED_AND_MAX_WAIT_TIME_ZERO = "1-NETEXPROFILE-TimetableFrame_Interchange_GuaranteedAndMaxWaitTimeZero";
+	public static final String _1_NETEX_TIMETABLE_FRAME_INTERCHANGE_MAX_WAIT_TIME_TOO_LONG = "1-NETEXPROFILE-TimetableFrame_Interchange_MaxWaitTimeTooLong";
 
 	public static final String _1_NETEX_COMPOSITE_FRAME_VALIDITYCONDTITIONS = "1-NETEXPROFILE-CompositeFrame_ValidityConditions";
 	public static final String _1_NETEX_VALIDITYCONDITIONS_ON_FRAMES_INSIDE_COMPOSITEFRAME = "1-NETEXPROFILE-ValidityConditionsOnFramesInsideCompositeFrame";
@@ -241,6 +244,8 @@ public abstract class AbstractNorwayNetexProfileValidator extends AbstractNetexP
 		addCheckpoints(context, _1_NETEX_TIMETABLE_FRAME_FLEXIBLE_SERVICE_PROPERTIES_ILLEGAL_FLEXIBLESERVICETYPE, "E");
 
 		addCheckpoints(context, _1_NETEX_TIMETABLE_FRAME_INTERCHANGE_PLANNED_AND_ADVERTISED, "W");
+		addCheckpoints(context, _1_NETEX_TIMETABLE_FRAME_INTERCHANGE_GUARANTEED_AND_MAX_WAIT_TIME_ZERO, "W");
+		addCheckpoints(context, _1_NETEX_TIMETABLE_FRAME_INTERCHANGE_MAX_WAIT_TIME_TOO_LONG, "W");
 
 		addCheckpoints(context, _1_NETEX_SERVICE_FRAME_LINE_PUBLIC_CODE, "W");
 		addCheckpoints(context, _1_NETEX_TIMETABLE_FRAME_VEHICLEJOURNEY_OPERATORREF_OR_LINE_OPREATORREF, "E");
@@ -397,7 +402,7 @@ public abstract class AbstractNorwayNetexProfileValidator extends AbstractNetexP
 	public Collection<String> getSupportedProfiles() {
 		return Arrays.asList(new String[] { PROFILE_NORWAY_NETWORKTIMETABLE_104_10,PROFILE_NORWAY_NETWORKTIMETABLE_104_11,
 				PROFILE_NORWAY_NETWORKTIMETABLE_107_11, PROFILE_NORWAY_NETWORKTIMETABLE_108_11,  PROFILE_NORWAY_NETWORKTIMETABLE_108_12,
-				PROFILE_NORWAY_NETWORKTIMETABLE_108_13, PROFILE_NORWAY_NETWORKTIMETABLE_109_13, PROFILE_NORWAY_NETWORKTIMETABLE_110_13, PROFILE_NORWAY_NETWORKTIMETABLE_111_13});
+				PROFILE_NORWAY_NETWORKTIMETABLE_108_13, PROFILE_NORWAY_NETWORKTIMETABLE_109_13, PROFILE_NORWAY_NETWORKTIMETABLE_110_13, PROFILE_NORWAY_NETWORKTIMETABLE_111_13, PROFILE_NORWAY_NETWORKTIMETABLE_112_13});
 	}
 
 	protected void verifyReferencesToCorrectEntityTypes(Context context, List<IdVersion> localRefs) {

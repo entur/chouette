@@ -9,6 +9,7 @@ import mobi.chouette.dao.DeadRunDAO;
 import mobi.chouette.dao.InterchangeDAO;
 import mobi.chouette.dao.LineDAO;
 import mobi.chouette.dao.RouteSectionDAO;
+import mobi.chouette.dao.ScheduledStopPointDAO;
 import mobi.chouette.dao.TimetableDAO;
 import mobi.chouette.dao.VehicleJourneyDAO;
 import mobi.chouette.exchange.ProgressionCommand;
@@ -73,6 +74,9 @@ public class TransferExportDataWriter implements Command, Constant {
 
 	@EJB
 	private InterchangeDAO interchangeDAO;
+
+	@EJB
+	private ScheduledStopPointDAO scheduledStopPointDAO;
 
 	@PersistenceContext(unitName = "referential")
 	private EntityManager em;
@@ -168,6 +172,15 @@ public class TransferExportDataWriter implements Command, Constant {
 				// persist only the vehicle journeys that were effectively transferred, ignoring the others.
 				List<VehicleJourney> persistentVehicleJourneys = vehicleJourneyDAO.findByObjectIdNoFlush(block.getVehicleJourneys().stream().map(vj -> vj.getObjectId()).collect(Collectors.toList()));
 				block.setVehicleJourneys(persistentVehicleJourneys);
+
+				// persist only the start points and end points that were effectively transferred, ignoring the others
+				if(block.getStartPoint() != null) {
+					block.setStartPoint(scheduledStopPointDAO.findByObjectId(block.getStartPoint().getObjectId()));
+				}
+				if(block.getEndPoint() != null) {
+					block.setEndPoint(scheduledStopPointDAO.findByObjectId(block.getEndPoint().getObjectId()));
+				}
+
 
 				// persist only the deadRuns that were effectively transferred, ignoring the others.
 				List<DeadRun> persistentDeadRuns = deadRunDAO.findByObjectIdNoFlush(block.getDeadRuns().stream().map(vj -> vj.getObjectId()).collect(Collectors.toList()));

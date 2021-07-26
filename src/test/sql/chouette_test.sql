@@ -1343,7 +1343,8 @@ CREATE TABLE scheduled_stop_points (
     objectid character varying(255) NOT NULL,
     object_version integer,
     creation_time timestamp without time zone,
-    creator_id character varying(255)
+    creator_id character varying(255),
+    timing_point_status varchar
 );
 
 
@@ -2859,13 +2860,29 @@ create table blocks
     creator_id varchar(255),
     private_code varchar,
     name varchar,
-    description varchar
+    description varchar,
+    start_time time,
+    end_time time,
+    end_time_day_offset integer,
+    start_point_id integer
+        constraint blocks_scheduled_stop_points_start_point_id_fkey
+            references scheduled_stop_points,
+    end_point_id integer
+        constraint blocks_scheduled_stop_points_end_point_id_fkey
+            references scheduled_stop_points
 );
 
 alter table blocks owner to chouette;
 
 create unique index blocks_objectid_key
     on blocks (objectid);
+
+create index blocks_start_point_id_key
+    on blocks (start_point_id);
+
+create index blocks_end_point_id_key
+    on blocks (end_point_id);
+
 
 create table blocks_vehicle_journeys
 (

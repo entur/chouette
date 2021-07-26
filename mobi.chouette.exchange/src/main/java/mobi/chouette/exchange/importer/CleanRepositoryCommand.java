@@ -19,7 +19,6 @@ import mobi.chouette.dao.*;
 
 import com.jamonapi.Monitor;
 import com.jamonapi.MonitorFactory;
-import mobi.chouette.model.FootNoteAlternativeText;
 
 @Log4j
 @Stateless(name = CleanRepositoryCommand.COMMAND)
@@ -109,7 +108,7 @@ public class CleanRepositoryCommand implements Command {
 	private FlexibleServicePropertiesDAO flexibleServicePropertiesDAO;
 
 	@EJB
-	private ReferentialDAO referentialDAO;
+	private ReferentialLastUpdateDAO referentialLastUpdateDAO;
 
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -148,7 +147,7 @@ public class CleanRepositoryCommand implements Command {
 			flexibleServicePropertiesDAO.truncate();
 			bookingArrangementDAO.truncate();
 			contactStructureDAO.truncate();
-			referentialDAO.setLastUpdateTimestamp(LocalDateTime.now());
+			referentialLastUpdateDAO.setLastUpdateTimestamp(LocalDateTime.now());
 
 			result = SUCCESS;
 		} catch (Exception e) {

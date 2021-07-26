@@ -2,13 +2,16 @@ package mobi.chouette.service;
 
 import lombok.extern.log4j.Log4j;
 import mobi.chouette.dao.ReferentialDAO;
+import mobi.chouette.dao.ReferentialLastUpdateDAO;
 import mobi.chouette.model.dto.ReferentialInfo;
+import mobi.chouette.persistence.hibernate.ContextHolder;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.ConcurrencyManagement;
 import javax.ejb.ConcurrencyManagementType;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -24,6 +27,9 @@ public class ReferentialService {
 
     @EJB
     ReferentialDAO referentialDAO;
+
+    @EJB
+    ReferentialLastUpdateDAO referentialLastUpdateDAO;
 
     private String defaultReferentialAdminUserName;
     private String defaultReferentialAdminEmailFormat;
@@ -108,6 +114,8 @@ public class ReferentialService {
             referentialDAO.createReferential(referentialInfo);
         }
 
+        log.info("Created referential for: " + referentialInfo);
+
         return true;
 
     }
@@ -134,6 +142,8 @@ public class ReferentialService {
         if (!updated) {
             throw new ServiceException(ServiceExceptionCode.INTERNAL_ERROR, "Cannot update referential: internal error: " + referentialInfo);
         }
+
+        log.info("Updated referential for: " + referentialInfo);
     }
 
 
@@ -154,9 +164,20 @@ public class ReferentialService {
         }
 
         referentialDAO.deleteReferential(referentialInfo);
+
+        log.info("Deleted referential for: " + referentialInfo);
     }
 
     public List<String> getReferentialCodes() {
         return referentialDAO.getReferentials();
+    }
+
+    public LocalDateTime getLastUpdateTimestamp(String referential) throws ServiceException {
+
+        if (!referentialDAO.getReferentials().contains(referential)) {
+            throw new ServiceException(ServiceExceptionCode.INVALID_REQUEST, "Cannot retrieve last update timestamp: referential not found: " + referential);
+        }
+        ContextHolder.setContext(referential);
+        return referentialLastUpdateDAO.getLastUpdateTimestamp();
     }
 }
