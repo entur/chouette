@@ -1,18 +1,9 @@
 package mobi.chouette.exchange.importer;
 
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-
+import com.jamonapi.Monitor;
+import com.jamonapi.MonitorFactory;
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.LineString;
 import lombok.extern.log4j.Log4j;
 import mobi.chouette.common.Color;
 import mobi.chouette.common.Constant;
@@ -31,12 +22,22 @@ import mobi.chouette.model.StopPoint;
 import mobi.chouette.model.type.SectionStatusEnum;
 import mobi.chouette.model.type.TransportModeNameEnum;
 import mobi.chouette.model.util.ObjectIdTypes;
-
-import com.jamonapi.Monitor;
-import com.jamonapi.MonitorFactory;
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.LineString;
 import org.apache.commons.collections.CollectionUtils;
+import org.jboss.ejb3.annotation.TransactionTimeout;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @Stateless(name = GenerateRouteSectionsCommand.COMMAND)
 @Log4j
@@ -59,6 +60,7 @@ public class GenerateRouteSectionsCommand implements Command, Constant {
 
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+	@TransactionTimeout(value = 30, unit = TimeUnit.MINUTES)
 	public boolean execute(Context context) throws Exception {
 		Monitor monitor = MonitorFactory.start(COMMAND);
 		AbstractImportParameter configuration = (AbstractImportParameter) context.get(CONFIGURATION);
@@ -66,8 +68,11 @@ public class GenerateRouteSectionsCommand implements Command, Constant {
 		log.info("Generating route sections for all journeyPatterns without route sections for " + configuration.getReferentialName() + " with transport modes: " + configuration.getGenerateMissingRouteSectionsForModes());
 
 		try {
+
+			Map<String, RouteSection> routeSectionCache = new HashMap<>();
+
 			journeyPatternDAO.findAll().stream().filter(jp -> CollectionUtils.isEmpty(jp.getRouteSections()))
-					.filter(jp -> configuration.getGenerateMissingRouteSectionsForModes().contains(jp.getRoute().getLine().getTransportModeName())).forEach(jp -> generateRouteSectionsForJourneyPattern(jp));
+					.filter(jp -> configuration.getGenerateMissingRouteSectionsForModes().contains(jp.getRoute().getLine().getTransportModeName())).forEach(jp -> generateRouteSectionsForJourneyPattern(jp, routeSectionCache));
 		} catch (Exception e) {
 			log.warn("Route section generation failed with exception for " + configuration.getReferentialName() + " : " + e.getMessage(), e);
 		} finally {
@@ -77,7 +82,7 @@ public class GenerateRouteSectionsCommand implements Command, Constant {
 		return SUCCESS;
 	}
 
-	private void generateRouteSectionsForJourneyPattern(JourneyPattern jp) {
+	private void generateRouteSectionsForJourneyPattern(JourneyPattern jp, Map<String, RouteSection> routeSectionCache) {
 		log.debug("Generating route sections for JourneyPattern: " + jp.getObjectId());
 		TransportModeNameEnum transportMode = jp.getRoute().getLine().getTransportModeName();
 
@@ -100,7 +105,7 @@ public class GenerateRouteSectionsCommand implements Command, Constant {
 					}
 
 				}
-				routeSections.add(createRouteSection(prev, sp, lineString));
+				routeSections.add(createRouteSection(prev, sp, lineString, routeSectionCache));
 			}
 			prev = sp;
 		}
@@ -135,21 +140,29 @@ public class GenerateRouteSectionsCommand implements Command, Constant {
 		return true;
 	}
 
-	private RouteSection createRouteSection(StopPoint from, StopPoint to, LineString lineString) {
-		RouteSection routeSection = new RouteSection();
-		routeSection.setObjectId(from.objectIdPrefix() + ":" + ObjectIdTypes.ROUTE_SECTION_KEY + ":" + UUID.randomUUID().toString());
+	private RouteSection createRouteSection(StopPoint from, StopPoint to, LineString lineString, Map<String, RouteSection> routeSectionCache) {
 
-		routeSection.setFromScheduledStopPoint(from.getScheduledStopPoint());
-		routeSection.setToScheduledStopPoint(to.getScheduledStopPoint());
-		routeSection.setInputGeometry(lineString);
-		routeSection.setProcessedGeometry(lineString);
-		routeSection.setNoProcessing(true);
-		routeSection.setFilled(true);
-		routeSection.setDetached(true);
-		if (lineString != null) {
-			routeSection.setDistance(BigDecimal.valueOf(GeometryUtil.convertFromAngleDegreesToMeters(lineString.getLength())));
-		}
-		return routeSection;
+		String fromQuayId = from.getScheduledStopPoint().getContainedInStopAreaRef().getObjectId();
+		String toQuayId = to.getScheduledStopPoint().getContainedInStopAreaRef().getObjectId();
+		String uniqueRouteSectionId = fromQuayId.substring(fromQuayId.lastIndexOf(':') + 1) + '_' + toQuayId.substring(toQuayId.lastIndexOf(':') + 1) + '_' + (lineString == null ? "NULL" : String.valueOf(lineString.hashCode()));
+
+		return routeSectionCache.computeIfAbsent(uniqueRouteSectionId, s -> {
+			log.debug("Generating route section " + uniqueRouteSectionId);
+			RouteSection routeSection = new RouteSection();
+			routeSection.setObjectId(from.objectIdPrefix() + ":" + ObjectIdTypes.ROUTE_SECTION_KEY + ":" + uniqueRouteSectionId);
+
+			routeSection.setFromScheduledStopPoint(from.getScheduledStopPoint());
+			routeSection.setToScheduledStopPoint(to.getScheduledStopPoint());
+			routeSection.setInputGeometry(lineString);
+			routeSection.setProcessedGeometry(lineString);
+			routeSection.setNoProcessing(true);
+			routeSection.setFilled(true);
+			routeSection.setDetached(true);
+			if (lineString != null) {
+				routeSection.setDistance(BigDecimal.valueOf(GeometryUtil.convertFromAngleDegreesToMeters(lineString.getLength())));
+			}
+			return routeSection;
+		});
 	}
 
 	private Coordinate getCoordinateFromStopPoint(StopPoint stopPoint) {
