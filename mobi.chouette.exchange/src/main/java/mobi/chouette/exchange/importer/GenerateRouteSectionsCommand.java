@@ -1,9 +1,20 @@
 package mobi.chouette.exchange.importer;
 
-import com.jamonapi.Monitor;
-import com.jamonapi.MonitorFactory;
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.LineString;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
 import lombok.extern.log4j.Log4j;
 import mobi.chouette.common.Color;
 import mobi.chouette.common.Constant;
@@ -22,22 +33,12 @@ import mobi.chouette.model.StopPoint;
 import mobi.chouette.model.type.SectionStatusEnum;
 import mobi.chouette.model.type.TransportModeNameEnum;
 import mobi.chouette.model.util.ObjectIdTypes;
-import org.apache.commons.collections.CollectionUtils;
-import org.jboss.ejb3.annotation.TransactionTimeout;
 
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
+import com.jamonapi.Monitor;
+import com.jamonapi.MonitorFactory;
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.LineString;
+import org.apache.commons.collections.CollectionUtils;
 
 @Stateless(name = GenerateRouteSectionsCommand.COMMAND)
 @Log4j
@@ -60,7 +61,6 @@ public class GenerateRouteSectionsCommand implements Command, Constant {
 
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-	@TransactionTimeout(value = 30, unit = TimeUnit.MINUTES)
 	public boolean execute(Context context) throws Exception {
 		Monitor monitor = MonitorFactory.start(COMMAND);
 		AbstractImportParameter configuration = (AbstractImportParameter) context.get(CONFIGURATION);
@@ -147,10 +147,8 @@ public class GenerateRouteSectionsCommand implements Command, Constant {
 		String uniqueRouteSectionId = fromQuayId.substring(fromQuayId.lastIndexOf(':') + 1) + '_' + toQuayId.substring(toQuayId.lastIndexOf(':') + 1) + '_' + (lineString == null ? "NULL" : String.valueOf(lineString.hashCode()));
 
 		return routeSectionCache.computeIfAbsent(uniqueRouteSectionId, s -> {
-			log.debug("Generating route section " + uniqueRouteSectionId);
 			RouteSection routeSection = new RouteSection();
 			routeSection.setObjectId(from.objectIdPrefix() + ":" + ObjectIdTypes.ROUTE_SECTION_KEY + ":" + uniqueRouteSectionId);
-
 			routeSection.setFromScheduledStopPoint(from.getScheduledStopPoint());
 			routeSection.setToScheduledStopPoint(to.getScheduledStopPoint());
 			routeSection.setInputGeometry(lineString);
