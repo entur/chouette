@@ -270,8 +270,6 @@ public class NetexExportTests extends Arquillian implements Constant, ReportCons
             utx.commit();
 
         } catch (RuntimeException ex) {
-            System.out.println("The error ");
-            ex.printStackTrace();
             Throwable cause = ex.getCause();
             while (cause != null) {
                 log.error(cause);
