@@ -53,7 +53,7 @@ public class DestinationDisplayDaoTest extends Arquillian {
 	public void checkDirectPersistDestinationDisplay() {
 		try {
 			ContextHolder.setContext("chouette_gui"); // set tenant schema
-
+			stopPointDAO.deleteAll();
 			destinationDisplayDAO.deleteAll();
 			
 			DestinationDisplay parent = new DestinationDisplay();
