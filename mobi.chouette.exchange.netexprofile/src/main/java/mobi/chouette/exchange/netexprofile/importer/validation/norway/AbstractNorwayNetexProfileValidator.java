@@ -34,7 +34,7 @@ public abstract class AbstractNorwayNetexProfileValidator extends AbstractNetexP
 	public static final String PROFILE_NORWAY_NETWORKTIMETABLE_110_13 = "1.10:NO-NeTEx-networktimetable:1.3";
 	public static final String PROFILE_NORWAY_NETWORKTIMETABLE_111_13 = "1.11:NO-NeTEx-networktimetable:1.3";
 	public static final String PROFILE_NORWAY_NETWORKTIMETABLE_112_13 = "1.12:NO-NeTEx-networktimetable:1.3";
-	public static final String PROFILE_NORWAY_NETWORKTIMETABLE_113_13 = "1.12:NO-NeTEx-networktimetable:1.3";
+	public static final String PROFILE_NORWAY_NETWORKTIMETABLE_113_13 = "1.13:NO-NeTEx-networktimetable:1.3";
 
 	public static final String EXPORT_PROFILE_ID = PROFILE_NORWAY_NETWORKTIMETABLE_113_13; // Update when new profile version is implemented
 	
@@ -411,7 +411,7 @@ public abstract class AbstractNorwayNetexProfileValidator extends AbstractNetexP
 	public Collection<String> getSupportedProfiles() {
 		return Arrays.asList(new String[] { PROFILE_NORWAY_NETWORKTIMETABLE_104_10,PROFILE_NORWAY_NETWORKTIMETABLE_104_11,
 				PROFILE_NORWAY_NETWORKTIMETABLE_107_11, PROFILE_NORWAY_NETWORKTIMETABLE_108_11,  PROFILE_NORWAY_NETWORKTIMETABLE_108_12,
-				PROFILE_NORWAY_NETWORKTIMETABLE_108_13, PROFILE_NORWAY_NETWORKTIMETABLE_109_13, PROFILE_NORWAY_NETWORKTIMETABLE_110_13, PROFILE_NORWAY_NETWORKTIMETABLE_111_13, PROFILE_NORWAY_NETWORKTIMETABLE_112_13});
+				PROFILE_NORWAY_NETWORKTIMETABLE_108_13, PROFILE_NORWAY_NETWORKTIMETABLE_109_13, PROFILE_NORWAY_NETWORKTIMETABLE_110_13, PROFILE_NORWAY_NETWORKTIMETABLE_111_13, PROFILE_NORWAY_NETWORKTIMETABLE_112_13, PROFILE_NORWAY_NETWORKTIMETABLE_113_13});
 	}
 
 	protected void verifyReferencesToCorrectEntityTypes(Context context, List<IdVersion> localRefs) {
