@@ -240,6 +240,8 @@ public class NorwayLineNetexProfileValidatorTest {
 
 		expectedResults.put(AbstractNorwayNetexProfileValidator._1_NETEX_SERVICE_FRAME_PASSENGER_STOP_ASSIGNMENT_SCHEDULEDSTOPPOINTREF, NOK);
 		expectedResults.put(AbstractNorwayNetexProfileValidator._1_NETEX_SERVICE_FRAME_PASSENGER_STOP_ASSIGNMENT_QUAYREF, NOK);
+		expectedResults.put(AbstractNorwayNetexProfileValidator._1_NETEX_SERVICE_FRAME_PASSENGER_STOP_ASSIGNMENT_DUPLICATE, OK);
+
 		expectedResults.put(AbstractNorwayNetexProfileValidator._1_NETEX_SERVICE_FRAME_INVALID_TRANSPORTMODE, NOK);
 		expectedResults.put(AbstractNorwayNetexProfileValidator._1_NETEX_SERVICE_FRAME_INVALID_TRANSPORTSUBMODE, NOK);
 		expectedResults.put(AbstractNorwayNetexProfileValidator._1_NETEX_TIMETABLE_FRAME_SERVICE_JOURNEY, NOK);
@@ -309,6 +311,8 @@ public class NorwayLineNetexProfileValidatorTest {
 		expectedResults.put(AbstractNorwayNetexProfileValidator._1_NETEX_NOTICE_ALTERNATIVE_TEXT_LANG, OK);
 		expectedResults.put(AbstractNorwayNetexProfileValidator._1_NETEX_NOTICE_ALTERNATIVE_TEXT_DUPLICATE_LANG, OK);
 		expectedResults.put(AbstractNorwayNetexProfileValidator._1_NETEX_NOTICE_ALTERNATIVE_TEXT_TEXT, OK);
+
+		expectedResults.put(AbstractNorwayNetexProfileValidator._1_NETEX_NOTICE_ASSIGNMENTS_DUPLICATE, OK);
 
 		// Common file specific checkpoints (NOT CHECKED HERE)
 		expectedResults.put(AbstractNorwayNetexProfileValidator._1_NETEX_DUPLICATE_IDS_ACROSS_LINE_FILES, OK);
