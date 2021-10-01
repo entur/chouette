@@ -17,7 +17,7 @@ import javax.xml.stream.events.XMLEvent;
 
 import lombok.extern.log4j.Log4j;
 
-import static mobi.chouette.exchange.netexprofile.parser.xml.XMLParserUtil.getXmlInputFactory;
+import static mobi.chouette.exchange.netexprofile.parser.xml.XMLParserUtil.getSecureXmlInputFactory;
 
 @Log4j
 public class PublicactionDeliveryVersionAttributeReader {
@@ -26,7 +26,7 @@ public class PublicactionDeliveryVersionAttributeReader {
 		String versionAttribute = null;
 		try {
 			// First create a new XMLInputFactory
-			XMLInputFactory inputFactory = getXmlInputFactory();
+			XMLInputFactory inputFactory = getSecureXmlInputFactory();
 			// Setup a new eventReader
 			InputStream in = new FileInputStream(f);
 			XMLEventReader eventReader = inputFactory.createXMLEventReader(new BufferedInputStream(in));
