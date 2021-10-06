@@ -93,7 +93,8 @@ public class NorwayLineNetexProfileValidator extends AbstractNorwayNetexProfileV
 			"nationalCarFerry",
 			"shuttleBus",
 			"sightseeingService",
-			"sightseeingBus"
+			"sightseeingBus",
+			"unknown"
 	};
 
 	private String validTransportModeString;
@@ -105,6 +106,7 @@ public class NorwayLineNetexProfileValidator extends AbstractNorwayNetexProfileV
 	private String validBookingMethodString = formatLegalEnumValues(BookingMethodEnumeration.CALL_DRIVER.value(),
 			BookingMethodEnumeration.CALL_OFFICE.value(),
 			BookingMethodEnumeration.ONLINE.value(),
+			BookingMethodEnumeration.OTHER.value(),
 			BookingMethodEnumeration.PHONE_AT_STOP.value(),
 			BookingMethodEnumeration.TEXT.value());
 	private String validFlexibleLineTypeString = formatLegalEnumValues(FlexibleLineTypeEnumeration.CORRIDOR_SERVICE.value(),
