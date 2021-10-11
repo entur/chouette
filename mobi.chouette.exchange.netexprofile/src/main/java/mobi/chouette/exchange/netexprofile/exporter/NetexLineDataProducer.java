@@ -44,7 +44,6 @@ import mobi.chouette.model.Route;
 import mobi.chouette.model.StopArea;
 import mobi.chouette.model.StopPoint;
 
-import mobi.chouette.model.type.PublicationEnum;
 import org.apache.commons.collections.CollectionUtils;
 import org.rutebanken.netex.model.AvailabilityCondition;
 import org.rutebanken.netex.model.DeadRun;
