@@ -142,7 +142,7 @@ public class NetexLineDataProducer extends NetexProducer implements Constant {
 		calendarProducer.produce(context, exportableData, exportableNetexData);
 
 		for (mobi.chouette.model.VehicleJourney vehicleJourney : exportableData.getVehicleJourneys()) {
-			if(configuration.isExportBlocks() || vehicleJourney.getPublication() == PublicationEnum.Public || vehicleJourney.getPublication() == null) {
+			if(configuration.isExportBlocks() || vehicleJourney.isPublic()) {
 				ServiceJourney serviceJourney = serviceJourneyProducer.produce(context, vehicleJourney, exportableData.getLine());
 				exportableNetexData.getServiceJourneys().add(serviceJourney);
 			}
