@@ -1,5 +1,5 @@
 # Adapted from https://github.com/jboss-dockerfiles/base/blob/master/Dockerfile, https://github.com/jboss-dockerfiles/base-jdk/blob/jdk8/Dockerfile and https://github.com/jboss-dockerfiles/wildfly/blob/8.x/Dockerfile
-# Source initially licenced under the MIT Licence as follows:
+# Source initially licensed under the MIT License as follows:
 # The MIT License (MIT)
 #
 # Copyright (c) 2014 Red Hat
