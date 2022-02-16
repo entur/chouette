@@ -122,6 +122,8 @@ public class NetexParserUtils extends ParserUtils {
 						return TransportSubModeNameEnum.ShuttleBus;
 					case SIGHTSEEING_BUS:
 						return TransportSubModeNameEnum.SightseeingBus;
+					case UNKNOWN:
+						return TransportSubModeNameEnum.Unknown;
 					default:
 						log.warn("Unsupported bus sub mode " + mode);
 				}
