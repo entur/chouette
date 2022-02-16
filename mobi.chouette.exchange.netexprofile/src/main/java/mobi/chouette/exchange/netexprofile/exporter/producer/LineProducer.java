@@ -4,6 +4,7 @@ import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 
+import lombok.extern.log4j.Log4j;
 import mobi.chouette.common.Context;
 import mobi.chouette.common.TimeUtil;
 import mobi.chouette.exchange.netexprofile.Constant;
@@ -27,6 +28,7 @@ import static mobi.chouette.exchange.netexprofile.exporter.producer.NetexProduce
 import static mobi.chouette.exchange.netexprofile.exporter.producer.NetexProducerUtils.netexId;
 import static mobi.chouette.exchange.netexprofile.util.NetexObjectIdTypes.GROUP_OF_LINES;
 
+@Log4j
 public class LineProducer extends NetexProducer implements NetexEntityProducer<org.rutebanken.netex.model.Line_VersionStructure, mobi.chouette.model.Line> {
 
 	private static KeyListStructureProducer keyListStructureProducer = new KeyListStructureProducer();
@@ -98,10 +100,10 @@ public class LineProducer extends NetexProducer implements NetexEntityProducer<o
 			HexBinaryAdapter hexBinaryAdapter = new HexBinaryAdapter();
 			PresentationStructure presentation = new PresentationStructure();
 			if (neptuneLine.getColor() != null) {
-				presentation.setColour(hexBinaryAdapter.unmarshal(neptuneLine.getColor()));
+				presentation.setColour(parseColour(neptuneLine.getColor(), hexBinaryAdapter));
 			}
 			if (neptuneLine.getTextColor() != null) {
-				presentation.setTextColour(hexBinaryAdapter.unmarshal(neptuneLine.getTextColor()));
+				presentation.setTextColour(parseColour(neptuneLine.getTextColor(), hexBinaryAdapter));
 			}
 			netexLine.setPresentation(presentation);
 		}
@@ -110,6 +112,15 @@ public class LineProducer extends NetexProducer implements NetexEntityProducer<o
 		NoticeProducer.addNoticeAndNoticeAssignments(context, exportableNetexData, exportableNetexData.getNoticeAssignmentsTimetableFrame(), neptuneLine.getFootnotes(), neptuneLine);
 
 		return netexLine;
+	}
+
+	private byte[] parseColour(String colour, HexBinaryAdapter hexBinaryAdapter) {
+		try {
+			return hexBinaryAdapter.unmarshal(colour);
+		} catch(IllegalArgumentException e) {
+			log.warn("Ignoring invalid colour encoding: " + colour, e);
+			return null;
+		}
 	}
 
 	FlexibleLine createFlexibleLine(Line neptuneLine) {
