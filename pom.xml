@@ -38,7 +38,7 @@
 		<rutebanken.helpers.version>1.0.55</rutebanken.helpers.version>
 
 
-		<owasp-dependency-check-plugin.version>6.1.6</owasp-dependency-check-plugin.version>
+		<owasp-dependency-check-plugin.version>6.5.3</owasp-dependency-check-plugin.version>
 
 	</properties>
 	<distributionManagement>
