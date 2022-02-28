@@ -25,7 +25,7 @@
 		<hibernate.version>4.3.11.Final</hibernate.version>
 		<hibernate-spatial.version>4.3</hibernate-spatial.version>
 		<jts.version>1.13</jts.version>
-		<arquillian-version>1.1.11.Final</arquillian-version>
+		<arquillian-version>1.6.0.Final</arquillian-version>
 		<jaxb-version>2.2.11</jaxb-version>
 		<lombok-version>1.16.8</lombok-version>
 		<lombok-maven-plugin-version>1.16.8.0</lombok-maven-plugin-version>
