@@ -21,7 +21,7 @@
 		<version.ear.plugin>2.10.1</version.ear.plugin>
 		<shrinkwrap.bom-version>2.1.1</shrinkwrap.bom-version>
 		<postgresql.version>42.3.3</postgresql.version>
-		<postgis.version>2.5.0</postgis.version>
+		<postgis.version>2.5.1</postgis.version>
 		<hibernate.version>4.3.11.Final</hibernate.version>
 		<hibernate-spatial.version>4.3</hibernate-spatial.version>
 		<jts.version>1.13</jts.version>
