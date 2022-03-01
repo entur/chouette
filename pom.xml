@@ -19,7 +19,7 @@
 		<version.war.plugin>2.6</version.war.plugin>
 		<version.ejb.plugin>2.5.1</version.ejb.plugin>
 		<version.ear.plugin>2.10.1</version.ear.plugin>
-		<shrinkwrap.bom-version>2.1.1</shrinkwrap.bom-version>
+		<shrinkwrap.bom-version>2.2.7</shrinkwrap.bom-version>
 		<postgresql.version>42.3.3</postgresql.version>
 		<postgis.version>2.5.0</postgis.version>
 		<hibernate.version>4.3.11.Final</hibernate.version>
