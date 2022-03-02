@@ -26,7 +26,7 @@
 		<hibernate-spatial.version>4.3</hibernate-spatial.version>
 		<jts.version>1.13</jts.version>
 		<arquillian-version>1.1.11.Final</arquillian-version>
-		<jaxb-version>2.2.11</jaxb-version>
+		<jaxb-version>2.3.6</jaxb-version>
 		<lombok-version>1.18.22</lombok-version>
 		<lombok-maven-plugin-version>1.18.20.0</lombok-maven-plugin-version>
 		<prometheus.agent.version>0.16.1</prometheus.agent.version>
