@@ -868,7 +868,7 @@
             <dependency>
                 <groupId>org.jadira.usertype</groupId>
                 <artifactId>usertype.core</artifactId>
-                <version>3.1.0.GA</version>
+                <version>6.0.1.GA</version>
             </dependency>
 			<dependency>
 				<groupId>com.google.guava</groupId>
