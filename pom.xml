@@ -765,6 +765,12 @@
 				<scope>test</scope>
 			</dependency>
 			<dependency>
+				<groupId>com.beust</groupId>
+				<artifactId>jcommander</artifactId>
+				<version>1.82</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
 				<groupId>org.easymock</groupId>
 				<artifactId>easymock</artifactId>
 				<version>3.6</version>
