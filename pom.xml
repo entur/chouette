@@ -754,7 +754,7 @@
 			<dependency>
 				<groupId>org.jboss.resteasy</groupId>
 				<artifactId>resteasy-cache-core</artifactId>
-				<version>3.0.9.Final</version>
+				<version>4.7.5.Final</version>
 			</dependency>
 
 			<!-- Test Dependencies -->
