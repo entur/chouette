@@ -67,7 +67,7 @@
 				<configuration>
 					<version>6</version>
 					<defaultLibBundleDir>lib</defaultLibBundleDir>
-					<fileNameMapping>no-version</fileNameMapping>
+					<outputFileNameMapping>no-version</outputFileNameMapping>
 		        <modules>
 		            <webModule>
 		                <groupId>mobi.chouette</groupId>

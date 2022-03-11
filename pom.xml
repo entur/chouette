@@ -12,13 +12,16 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<wildfly.version>8.2.1.Final</wildfly.version>
-		<version.wildfly.maven.plugin>1.0.2.Final</version.wildfly.maven.plugin>
+		<version.wildfly.maven.plugin>1.2.2.Final</version.wildfly.maven.plugin>
 		<version.compiler.plugin>3.10.0</version.compiler.plugin>
 		<version.jaxb2.plugin>1.5</version.jaxb2.plugin>
-		<version.jar.plugin>2.5</version.jar.plugin>
-		<version.war.plugin>2.6</version.war.plugin>
-		<version.ejb.plugin>2.5.1</version.ejb.plugin>
-		<version.ear.plugin>2.10.1</version.ear.plugin>
+		<version.jar.plugin>3.2.2</version.jar.plugin>
+		<version.war.plugin>3.3.2</version.war.plugin>
+		<version.ejb.plugin>3.1.0</version.ejb.plugin>
+		<version.ear.plugin>3.2.0</version.ear.plugin>
+		<version.resources.plugin>3.2.0</version.resources.plugin>
+		<version.dependency.plugin>3.2.0</version.dependency.plugin>
+		<version.source.plugin>3.2.1</version.source.plugin>
 		<shrinkwrap.bom-version>2.1.1</shrinkwrap.bom-version>
 		<postgresql.version>42.3.3</postgresql.version>
 		<postgis.version>2.5.1</postgis.version>
@@ -39,6 +42,8 @@
 
 
 		<owasp-dependency-check-plugin.version>6.5.3</owasp-dependency-check-plugin.version>
+
+
 
 	</properties>
 	<distributionManagement>
@@ -151,7 +156,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.10</version>
+				<version>${version.dependency.plugin}</version>
 				<executions>
 					<execution>
 						<id>unpack</id>
@@ -310,7 +315,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.7</version>
+				<version>${version.resources.plugin}</version>
 				<executions>
 					<!-- WildFly test configuration files copy -->
 					<execution>
@@ -429,7 +434,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>2.4</version>
+				<version>${version.source.plugin}</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
