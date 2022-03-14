@@ -22,6 +22,7 @@
 		<version.resources.plugin>3.2.0</version.resources.plugin>
 		<version.dependency.plugin>3.2.0</version.dependency.plugin>
 		<version.source.plugin>3.2.1</version.source.plugin>
+		<version.javadoc.plugin>3.3.2</version.javadoc.plugin>
 		<shrinkwrap.bom-version>2.1.1</shrinkwrap.bom-version>
 		<postgresql.version>42.3.3</postgresql.version>
 		<postgis.version>2.5.1</postgis.version>
@@ -447,7 +448,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.10.4</version>
+				<version>${version.javadoc.plugin}</version>
 				<configuration>
 					<quiet>false</quiet>
 					<sourcepath>target/generated-sources/delombok</sourcepath>
