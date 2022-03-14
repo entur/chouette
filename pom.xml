@@ -26,6 +26,10 @@
 		<version.site.plugin>3.11.0</version.site.plugin>
 		<version.surefire.plugin>2.22.2</version.surefire.plugin>
 		<version.assembly.plugin>3.3.0</version.assembly.plugin>
+		<version.build.helper.plugin>3.3.0</version.build.helper.plugin>
+		<version.clean.plugin>3.1.0</version.clean.plugin>
+		<version.install.plugin>2.5.2</version.install.plugin>
+		<version.processor.plugin>2.2.4</version.processor.plugin>
 		<shrinkwrap.bom-version>2.1.1</shrinkwrap.bom-version>
 		<postgresql.version>42.3.3</postgresql.version>
 		<postgis.version>2.5.1</postgis.version>
@@ -46,7 +50,6 @@
 
 
 		<owasp-dependency-check-plugin.version>6.5.3</owasp-dependency-check-plugin.version>
-
 
 	</properties>
 	<distributionManagement>
@@ -494,6 +497,30 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-assembly-plugin</artifactId>
 					<version>${version.assembly.plugin}</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<version>${version.build.helper.plugin}</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>${version.clean.plugin}</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>${version.install.plugin}</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.bsc.maven</groupId>
+					<artifactId>maven-processor-plugin</artifactId>
+					<version>${version.processor.plugin}</version>
 				</plugin>
 
 
