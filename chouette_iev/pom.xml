@@ -67,7 +67,7 @@
 				<configuration>
 					<version>6</version>
 					<defaultLibBundleDir>lib</defaultLibBundleDir>
-					<outputFileNameMapping>no-version</outputFileNameMapping>
+                    <outputFileNameMapping>@{artifactId}@@{dashClassifier?}@.@{extension}@</outputFileNameMapping>
 		        <modules>
 		            <webModule>
 		                <groupId>mobi.chouette</groupId>
