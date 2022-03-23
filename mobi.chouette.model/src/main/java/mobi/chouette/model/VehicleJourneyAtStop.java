@@ -39,7 +39,7 @@ import org.joda.time.LocalTime;
 		"vehicle_journey_id", "stop_point_id" }, name = "index_vehicle_journey_at_stops_on_stop_point_id"))
 @NoArgsConstructor
 @ToString(callSuper=true, exclude = { "vehicleJourney" })
-public class VehicleJourneyAtStop extends NeptuneIdentifiedObject {
+public class VehicleJourneyAtStop extends NeptuneIdentifiedObject implements JourneyAtStop{
 
 	private static final long serialVersionUID = 194243517715939830L;
 
@@ -212,7 +212,7 @@ public class VehicleJourneyAtStop extends NeptuneIdentifiedObject {
 	 */
 	@Getter
 	@Setter
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@JoinColumn(name = "stop_point_id")
 	private StopPoint stopPoint;
 	

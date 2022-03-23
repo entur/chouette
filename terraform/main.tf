@@ -4,7 +4,7 @@ terraform {
 }
 
 provider "google" {
-  version = "~> 3.74.0"
+  version = "~> 4.13.0"
 }
 provider "kubernetes" {
   load_config_file = var.load_config_file
@@ -17,7 +17,8 @@ resource "google_storage_bucket" "storage_bucket" {
   location           = var.bucket_location
   project            = var.gcp_resources_project
   storage_class      = var.bucket_storage_class
-  labels             = var.labels
+  labels             = merge(var.labels, {offsite_enabled = "false"})
+  uniform_bucket_level_access = true
 
 
   lifecycle_rule {

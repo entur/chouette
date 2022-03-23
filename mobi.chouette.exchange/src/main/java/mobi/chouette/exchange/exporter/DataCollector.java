@@ -5,6 +5,7 @@ import mobi.chouette.model.AccessLink;
 import mobi.chouette.model.AccessPoint;
 import mobi.chouette.model.Block;
 import mobi.chouette.model.ConnectionLink;
+import mobi.chouette.model.DeadRun;
 import mobi.chouette.model.Interchange;
 import mobi.chouette.model.JourneyPattern;
 import mobi.chouette.model.Line;
@@ -26,16 +27,19 @@ public class DataCollector {
 	protected LocalDate endDate;
 	protected boolean skipNoCoordinate;
 	protected boolean followLinks;
+	protected boolean onlyPublicData;
+
 	protected ExportableData collection;
 	protected Line line;
 
-	public DataCollector(ExportableData collection, Line line, LocalDate startDate, LocalDate endDate, boolean skipNoCoordinate, boolean followLinks) {
+	public DataCollector(ExportableData collection, Line line, LocalDate startDate, LocalDate endDate, boolean skipNoCoordinate, boolean followLinks, boolean onlyPublicData) {
 		this.collection = collection;
 		this.line = line;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.skipNoCoordinate = skipNoCoordinate;
 		this.followLinks = followLinks;
+		this.onlyPublicData = onlyPublicData;
 	}
 
 	public boolean collect() {
@@ -46,7 +50,7 @@ public class DataCollector {
 		collection.getVehicleJourneys().clear();
 		collection.getFootnotes().clear();
 
-		boolean isValid = line.filter(startDate, endDate);
+		boolean isValid = line.filter(startDate, endDate, onlyPublicData);
 
 		if(isValid) {
 			collectLine();
@@ -93,6 +97,7 @@ public class DataCollector {
 
 	private void collectJourneyPattern(JourneyPattern journeyPattern) {
 		journeyPattern.getVehicleJourneys().forEach(this::collectVehicleJourney);
+		journeyPattern.getDeadRuns().forEach(this::collectDeadRun);
 		collection.getJourneyPatterns().add(journeyPattern);
 		collection.getFootnotes().addAll(journeyPattern.getFootnotes());
 	}
@@ -111,6 +116,13 @@ public class DataCollector {
 		if (vehicleJourney.getCompany() != null) {
 			collection.getCompanies().add(vehicleJourney.getCompany());
 		}
+	}
+
+	private void collectDeadRun(DeadRun deadRun) {
+		collection.getTimetables().addAll(deadRun.getTimetables());
+		collection.getBlocks().addAll(deadRun.getBlocks());
+		collection.getTimetables().addAll(deadRun.getBlocks().stream().map(Block::getTimetables).flatMap(List::stream).collect(Collectors.toList()));
+		collection.getDeadRuns().add(deadRun);
 	}
 
 	private void collectInterchanges(ExportableData collection, VehicleJourney vehicleJourney, boolean skipNoCoordinate, boolean followLinks, LocalDate startDate, LocalDate endDate) {
@@ -132,6 +144,14 @@ public class DataCollector {
 		for (ConnectionLink link : collection.getConnectionLinks()) {
 			collectStopAreas(collection, link.getStartOfLink(), false, false);
 			collectStopAreas(collection, link.getEndOfLink(), false, false);
+		}
+		for(Block block: collection.getBlocks()) {
+			if(block.getStartPoint() != null &&  block.getStartPoint().getContainedInStopAreaRef().getObject() != null) {
+				collectStopAreas(collection, block.getStartPoint().getContainedInStopAreaRef().getObject(), false, false);
+			}
+			if(block.getEndPoint() != null && block.getEndPoint().getContainedInStopAreaRef().getObject() != null) {
+				collectStopAreas(collection, block.getEndPoint().getContainedInStopAreaRef().getObject(), false, false);
+			}
 		}
 	}
 

@@ -2,7 +2,21 @@ package mobi.chouette.exchange.netexprofile.exporter.producer;
 
 import static mobi.chouette.exchange.netexprofile.Constant.NETEX_REFERENTIAL;
 import static mobi.chouette.exchange.netexprofile.exporter.producer.NetexProducerUtils.isSet;
+import static org.rutebanken.netex.model.VehicleModeEnumeration.AIR;
+import static org.rutebanken.netex.model.VehicleModeEnumeration.BUS;
+import static org.rutebanken.netex.model.VehicleModeEnumeration.CABLEWAY;
+import static org.rutebanken.netex.model.VehicleModeEnumeration.COACH;
+import static org.rutebanken.netex.model.VehicleModeEnumeration.FERRY;
+import static org.rutebanken.netex.model.VehicleModeEnumeration.FUNICULAR;
+import static org.rutebanken.netex.model.VehicleModeEnumeration.METRO;
+import static org.rutebanken.netex.model.VehicleModeEnumeration.OTHER;
+import static org.rutebanken.netex.model.VehicleModeEnumeration.RAIL;
+import static org.rutebanken.netex.model.VehicleModeEnumeration.TRAM;
+import static org.rutebanken.netex.model.VehicleModeEnumeration.TROLLEY_BUS;
+import static org.rutebanken.netex.model.VehicleModeEnumeration.WATER;
 
+import mobi.chouette.model.type.TransportModeNameEnum;
+import mobi.chouette.model.type.TransportSubModeNameEnum;
 import org.apache.commons.collections.CollectionUtils;
 import org.rutebanken.netex.model.LocationStructure;
 import org.rutebanken.netex.model.PrivateCodeStructure;
@@ -10,6 +24,8 @@ import org.rutebanken.netex.model.Quay;
 import org.rutebanken.netex.model.Quays_RelStructure;
 import org.rutebanken.netex.model.SimplePoint_VersionStructure;
 import org.rutebanken.netex.model.StopPlace;
+import org.rutebanken.netex.model.TransportSubmodeStructure;
+import org.rutebanken.netex.model.VehicleModeEnumeration;
 import org.rutebanken.netex.model.ZoneRefStructure;
 
 import mobi.chouette.common.Context;
@@ -49,6 +65,13 @@ public class StopPlaceProducer extends NetexProducer implements NetexEntityProdu
 
 			pointStruct.setLocation(locationStruct);
 			stopPlace.setCentroid(pointStruct);
+		}
+
+		if(stopArea.getTransportModeName() != null) {
+			stopPlace.setTransportMode(mapTransportMode(stopArea.getTransportModeName()));
+		}
+		if(stopArea.getTransportSubMode() != null) {
+			mapTransportSubMode(stopPlace, stopArea.getTransportSubMode());
 		}
 
 		if (isSet(stopArea.getParent())) {
@@ -94,6 +117,53 @@ public class StopPlaceProducer extends NetexProducer implements NetexEntityProdu
 
 	
 		return stopPlace;
+	}
+
+	private static VehicleModeEnumeration mapTransportMode(TransportModeNameEnum transportModeNameEnum) {
+		if (transportModeNameEnum == null) {
+			return null;
+		}
+		switch (transportModeNameEnum) {
+			case Air:
+				return AIR;
+			case Bus:
+				return BUS;
+			case Rail:
+				return RAIL;
+			case Tram:
+				return TRAM;
+			case Coach:
+				return COACH;
+			case Ferry:
+				return FERRY;
+			case Metro:
+				return METRO;
+			case Water:
+				return WATER;
+			case Cableway:
+				return CABLEWAY;
+			case Funicular:
+				return FUNICULAR;
+			case TrolleyBus:
+				return TROLLEY_BUS;
+			case Other:
+				return OTHER;
+		}
+		return OTHER;
+	}
+
+	private void mapTransportSubMode(StopPlace stopPlace, TransportSubModeNameEnum transportSubMode) {
+		TransportSubmodeStructure transportSubmodeStructure = ConversionUtil.toTransportSubmodeStructure(transportSubMode);
+		stopPlace.setAirSubmode(transportSubmodeStructure.getAirSubmode());
+		stopPlace.setBusSubmode(transportSubmodeStructure.getBusSubmode());
+		stopPlace.setCoachSubmode(transportSubmodeStructure.getCoachSubmode());
+		stopPlace.setFunicularSubmode(transportSubmodeStructure.getFunicularSubmode());
+		stopPlace.setMetroSubmode(transportSubmodeStructure.getMetroSubmode());
+		stopPlace.setRailSubmode(transportSubmodeStructure.getRailSubmode());
+		stopPlace.setSnowAndIceSubmode(transportSubmodeStructure.getSnowAndIceSubmode());
+		stopPlace.setTelecabinSubmode(transportSubmodeStructure.getTelecabinSubmode());
+		stopPlace.setTramSubmode(transportSubmodeStructure.getTramSubmode());
+		stopPlace.setWaterSubmode(transportSubmodeStructure.getWaterSubmode());
 	}
 
 }

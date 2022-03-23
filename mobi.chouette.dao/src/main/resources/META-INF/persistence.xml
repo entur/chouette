@@ -19,7 +19,13 @@
 		<properties>
 			<property name="hibernate.show_sql" value="false" />
 			<property name="hibernate.format_sql" value="false" />
+
 			<property name="hibernate.jdbc.batch_size" value="100" />
+			<property name="hibernate.jdbc.batch_versioned_data" value="true" />
+			<property name="hibernate.order_inserts" value="true" />
+			<property name="hibernate.order_updates" value="true" />
+
+
 			<property name="hibernate.default_batch_fetch_size" value="100" />
 			<property name="hibernate.connection.datasource" value="java:jboss/datasources/chouette" />
 			<property name="hibernate.cache.use_second_level_cache"
@@ -68,6 +74,8 @@
 		<class>mobi.chouette.model.VehicleJourney</class>
 		<class>mobi.chouette.model.DatedServiceJourney</class>
 		<class>mobi.chouette.model.Block</class>
+		<class>mobi.chouette.model.DeadRun</class>
+		<class>mobi.chouette.model.DeadRunAtStop</class>
 		<class>mobi.chouette.model.Interchange</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<validation-mode>NONE</validation-mode>
@@ -75,7 +83,14 @@
 		<properties>
 			<property name="hibernate.show_sql" value="false" />
 			<property name="hibernate.format_sql" value="false" />
-			<property name="hibernate.jdbc.batch_size" value="2000" />
+
+			<!-- PostgreSQL maximum batch size is 128-->
+			<property name="hibernate.jdbc.batch_size" value="128" />
+			<property name="hibernate.jdbc.batch_versioned_data" value="true" />
+			<property name="hibernate.order_inserts" value="true" />
+			<property name="hibernate.order_updates" value="true" />
+
+
 			<property name="hibernate.default_batch_fetch_size" value="2000" />
 			<property name="hibernate.multiTenancy" value="SCHEMA" />
 			<property name="hibernate.connection.datasource" value="java:jboss/datasources/chouette" />

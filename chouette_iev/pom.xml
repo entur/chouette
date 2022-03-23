@@ -67,7 +67,7 @@
 				<configuration>
 					<version>6</version>
 					<defaultLibBundleDir>lib</defaultLibBundleDir>
-					<fileNameMapping>no-version</fileNameMapping>
+                    <outputFileNameMapping>@{artifactId}@@{dashClassifier?}@.@{extension}@</outputFileNameMapping>
 		        <modules>
 		            <webModule>
 		                <groupId>mobi.chouette</groupId>
@@ -98,6 +98,7 @@
 				</executions>
 			</plugin>
          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-assembly-plugin</artifactId>
             <configuration>
                <finalName>chouette-iev_${project.version}</finalName>
@@ -232,7 +233,7 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.2.3</version>
+			<version>1.2.11</version>
 		</dependency>
 	</dependencies>
 </project>

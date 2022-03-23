@@ -93,7 +93,8 @@ public class NorwayLineNetexProfileValidator extends AbstractNorwayNetexProfileV
 			"nationalCarFerry",
 			"shuttleBus",
 			"sightseeingService",
-			"sightseeingBus"
+			"sightseeingBus",
+			"unknown"
 	};
 
 	private String validTransportModeString;
@@ -105,6 +106,7 @@ public class NorwayLineNetexProfileValidator extends AbstractNorwayNetexProfileV
 	private String validBookingMethodString = formatLegalEnumValues(BookingMethodEnumeration.CALL_DRIVER.value(),
 			BookingMethodEnumeration.CALL_OFFICE.value(),
 			BookingMethodEnumeration.ONLINE.value(),
+			BookingMethodEnumeration.OTHER.value(),
 			BookingMethodEnumeration.PHONE_AT_STOP.value(),
 			BookingMethodEnumeration.TEXT.value());
 	private String validFlexibleLineTypeString = formatLegalEnumValues(FlexibleLineTypeEnumeration.CORRIDOR_SERVICE.value(),
@@ -313,6 +315,8 @@ public class NorwayLineNetexProfileValidator extends AbstractNorwayNetexProfileV
 			validateElementNotPresent(context, xpath, subLevel, "routes/Route[not(pointsInSequence)]", _1_NETEX_SERVICE_FRAME_ROUTE_POINTSINSEQUENCE);
 			validateElementNotPresent(context, xpath, subLevel, "routes/Route/DirectionRef", _1_NETEX_SERVICE_FRAME_ROUTE_DIRECTIONREF);
 
+			validateElementNotPresent(context, xpath, subLevel, "routes/Route/pointsInSequence/PointOnRoute[@order = preceding-sibling::PointOnRoute/@order]", _1_NETEX_SERVICE_FRAME_ROUTE_POINTSINSEQUENCE_DUPLICATE_ORDER);
+
 			//		validateElementNotPresent(context, xpath, subLevel, "journeyPatterns/ServiceJourneyPattern", _1_NETEX_SERVICE_FRAME_SERVICE_JOURNEY_PATTERN);
 			validateAtLeastElementPresent(context, xpath, subLevel, "journeyPatterns/JourneyPattern | journeyPatterns/ServiceJourneyPattern", 1,
 					_1_NETEX_SERVICE_FRAME_JOURNEY_PATTERN);
@@ -351,7 +355,14 @@ public class NorwayLineNetexProfileValidator extends AbstractNorwayNetexProfileV
 					_1_NETEX_SERVICE_FRAME_INVALID_TRANSPORTMODE);
 			validateElementNotPresent(context, xpath, subLevel, "lines/*[self::Line or self::FlexibleLine]/TransportSubmode/*[not(. = (" + validTransportSubModeString + "))]",
 					_1_NETEX_SERVICE_FRAME_INVALID_TRANSPORTSUBMODE);
+
+			validateNoticeAssignments(context, xpath, subLevel);
 		}
+	}
+
+	private void validateNoticeAssignments(Context context, XPathCompiler xpath, XdmNode subLevel) throws XPathExpressionException, SaxonApiException {
+		validateElementNotPresent(context, xpath, subLevel, "noticeAssignments/NoticeAssignment[for $a in following-sibling::NoticeAssignment return if(NoticeRef/@ref= $a/NoticeRef/@ref and NoticedObjectRef/@ref= $a/NoticedObjectRef/@ref) then $a else ()]",
+				_1_NETEX_NOTICE_ASSIGNMENTS_DUPLICATE);
 	}
 
 	/**
@@ -454,7 +465,9 @@ public class NorwayLineNetexProfileValidator extends AbstractNorwayNetexProfileV
 			validateElementNotPresent(context, xpath, subLevel, "vehicleJourneys/DatedServiceJourney[count(ServiceJourneyRef) > 1]", _1_NETEX_TIMETABLE_FRAME_DATED_SERVICE_JOURNEY_MULTIPLE_SERVICEJOURNEYREF);
 			validateElementNotPresent(context, xpath, subLevel, "vehicleJourneys/DatedServiceJourney[@id = preceding-sibling::DatedServiceJourney/@id]", _1_NETEX_TIMETABLE_FRAME_DATED_SERVICE_JOURNEY_DUPLICATE_WITH_DIFFERENT_VERSION);
 
-
+			validateElementNotPresent(context, xpath, subLevel, "vehicleJourneys/DeadRun[not(passingTimes)]", _1_NETEX_TIMETABLE_FRAME_DEAD_RUN_PASSING_TIMES);
+			validateElementNotPresent(context, xpath, subLevel, "vehicleJourneys/DeadRun[not(JourneyPatternRef)]", _1_NETEX_TIMETABLE_FRAME_DEAD_RUN_JOURNEYPATTERN_REF);
+			validateElementNotPresent(context, xpath, subLevel, "vehicleJourneys/DeadRun[not(dayTypes/DayTypeRef)]", _1_NETEX_TIMETABLE_FRAME_DEAD_RUN_DAYTYPE_REF);
 
 			validateElementNotPresent(context, xpath, subLevel, "vehicleJourneys/ServiceJourney/FlexibleServiceProperties[not(@id)]",
 					_1_NETEX_TIMETABLE_FRAME_FLEXIBLE_SERVICE_PROPERTIES_ID);
@@ -480,6 +493,8 @@ public class NorwayLineNetexProfileValidator extends AbstractNorwayNetexProfileV
 			validateElementNotPresent(context, xpath, subLevel, "journeyInterchanges/ServiceJourneyInterchange[MaximumWaitTime > xs:dayTimeDuration('PT1H')]",
 					_1_NETEX_TIMETABLE_FRAME_INTERCHANGE_MAX_WAIT_TIME_TOO_LONG);
 
+			validateNoticeAssignments(context, xpath, subLevel);
+
 		}
 	}
 
@@ -500,6 +515,7 @@ public class NorwayLineNetexProfileValidator extends AbstractNorwayNetexProfileV
 				}
 
 				instance.addExternalReferenceValidator(new ServiceJourneyInterchangeIgnorer());
+				instance.addExternalReferenceValidator(new TrainElementRegistryIdValidator());
 				context.put(NAME, instance);
 			}
 			return instance;
