@@ -218,14 +218,6 @@
 									</outputDirectory>
 								</artifactItem>
 								<artifactItem>
-									<groupId>net.postgis</groupId>
-									<artifactId>postgis-geometry</artifactId>
-									<version>${postgis.version}</version>
-									<outputDirectory>
-										${project.rootDir}/target/wildfly-customized-dependencies/modules/org/postgres/main
-									</outputDirectory>
-								</artifactItem>
-								<artifactItem>
 									<groupId>org.hibernate</groupId>
 									<artifactId>hibernate-spatial</artifactId>
 									<version>${hibernate-spatial.version}</version>
