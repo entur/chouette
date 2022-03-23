@@ -94,7 +94,7 @@ resource "google_sql_database_instance" "db_instance" {
 
   settings {
     location_preference {
-      zone = var.db_zone_letter
+      zone = var.db_zone
     }
     tier = var.db_tier
     user_labels = var.labels
