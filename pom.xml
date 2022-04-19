@@ -18,7 +18,7 @@
 		<wildfly-javaee7-with-tools.version>10.1.1.Final</wildfly-javaee7-with-tools.version>
 
 		<version.wildfly.maven.plugin>1.2.2.Final</version.wildfly.maven.plugin>
-		<version.compiler.plugin>3.10.0</version.compiler.plugin>
+		<version.compiler.plugin>3.10.1</version.compiler.plugin>
 		<version.jaxb2.plugin>1.5</version.jaxb2.plugin>
 		<version.jar.plugin>3.2.2</version.jar.plugin>
 		<version.war.plugin>3.3.2</version.war.plugin>
