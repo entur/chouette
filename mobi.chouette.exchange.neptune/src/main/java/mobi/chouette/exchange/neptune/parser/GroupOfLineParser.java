@@ -45,7 +45,7 @@ public class GroupOfLineParser implements Parser, Constant, JsonExtension {
 						objectId);
 				groupOfLine.setFilled(true);
 			} else if (xpp.getName().equals("objectVersion")) {
-				Integer version = ParserUtils.getInt(xpp.nextText());
+				Long version = ParserUtils.getLong(xpp.nextText());
 				groupOfLine.setObjectVersion(version);
 			} else if (xpp.getName().equals("creationTime")) {
 				LocalDateTime creationTime = ParserUtils.getLocalDateTime(xpp.nextText());

@@ -96,7 +96,7 @@ public class JourneyPatternDaoTest extends Arquillian {
 			
 			Footnote f = new Footnote();
 			f.setObjectId("XYZ:Notice:"+UUID.randomUUID());
-			f.setObjectVersion(1);
+			f.setObjectVersion(1L);
 			f.setCode("Code");
 			f.setLabel("Label");
 			

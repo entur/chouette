@@ -84,7 +84,7 @@ public class ChouetteAreaParser implements Parser, Constant, JsonExtension {
 				stopArea = ObjectFactory.getStopArea(referential, objectId);
 				stopArea.setFilled(true);
 			} else if (xpp.getName().equals("objectVersion")) {
-				Integer version = ParserUtils.getInt(xpp.nextText());
+				Long version = ParserUtils.getLong(xpp.nextText());
 				stopArea.setObjectVersion(version);
 			} else if (xpp.getName().equals("creationTime")) {
 				LocalDateTime creationTime = ParserUtils.getLocalDateTime(xpp.nextText());

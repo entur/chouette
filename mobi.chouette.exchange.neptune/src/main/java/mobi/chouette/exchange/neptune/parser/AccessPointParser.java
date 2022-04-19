@@ -48,7 +48,7 @@ public class AccessPointParser implements Parser, Constant {
 						objectId);
 				accessPoint.setFilled(true);
 			} else if (xpp.getName().equals("objectVersion")) {
-				Integer version = ParserUtils.getInt(xpp.nextText());
+				Long version = ParserUtils.getLong(xpp.nextText());
 				accessPoint.setObjectVersion(version);
 			} else if (xpp.getName().equals("creationTime")) {
 				LocalDateTime creationTime = ParserUtils.getLocalDateTime(xpp.nextText());

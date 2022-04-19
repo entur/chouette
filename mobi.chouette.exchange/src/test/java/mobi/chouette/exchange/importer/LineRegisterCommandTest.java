@@ -34,7 +34,7 @@ public class LineRegisterCommandTest implements Constant {
 	    
 	    VehicleJourneyAtStop vjas = new VehicleJourneyAtStop();
 	    vjas.setObjectId("ObjectID");
-	    vjas.setObjectVersion(1);
+		vjas.setObjectVersion(1L);
 	    vjas.setCreationTime(new LocalDateTime(2000,2,1,0,0));
 	    vjas.setCreatorId("creatorId");
         vjas.setStopPoint(sp);

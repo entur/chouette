@@ -48,7 +48,7 @@ public class TimetableParser implements Parser, Constant {
 				timetable = ObjectFactory.getTimetable(referential, objectId);
 				timetable.setFilled(true);
 			} else if (xpp.getName().equals("objectVersion")) {
-				Integer version = ParserUtils.getInt(xpp.nextText());
+				Long version = ParserUtils.getLong(xpp.nextText());
 				timetable.setObjectVersion(version);
 			} else if (xpp.getName().equals("creationTime")) {
 				LocalDateTime creationTime = ParserUtils.getLocalDateTime(xpp.nextText());

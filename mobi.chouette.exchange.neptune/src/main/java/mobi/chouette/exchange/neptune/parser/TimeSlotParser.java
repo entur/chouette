@@ -56,7 +56,7 @@ public class TimeSlotParser implements Parser, Constant {
 				timeband.setFilled(true);
 
 			} else if (xpp.getName().equals("objectVersion")) {
-				Integer version = ParserUtils.getInt(xpp.nextText());
+				Long version = ParserUtils.getLong(xpp.nextText());
 				timeSlot.setObjectVersion(version);
 				timeband.setObjectVersion(version);
 			} else if (xpp.getName().equals("creationTime")) {

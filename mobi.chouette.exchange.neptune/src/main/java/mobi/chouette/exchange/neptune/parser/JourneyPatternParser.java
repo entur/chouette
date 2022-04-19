@@ -46,7 +46,7 @@ public class JourneyPatternParser implements Parser, Constant {
 						objectId);
 				journeyPattern.setFilled(true);
 			} else if (xpp.getName().equals("objectVersion")) {
-				Integer version = ParserUtils.getInt(xpp.nextText());
+				Long version = ParserUtils.getLong(xpp.nextText());
 				journeyPattern.setObjectVersion(version);
 			} else if (xpp.getName().equals("creationTime")) {
 				LocalDateTime creationTime = ParserUtils.getLocalDateTime(xpp.nextText());

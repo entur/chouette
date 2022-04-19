@@ -49,7 +49,7 @@ public class StopPointParser implements Parser, Constant, JsonExtension {
 				stopPoint = ObjectFactory.getStopPoint(referential, objectId);
 				stopPoint.setFilled(true);
 			} else if (xpp.getName().equals("objectVersion")) {
-				Integer version = ParserUtils.getInt(xpp.nextText());
+				Long version = ParserUtils.getLong(xpp.nextText());
 				stopPoint.setObjectVersion(version);
 			} else if (xpp.getName().equals("creationTime")) {
 				LocalDateTime creationTime = ParserUtils.getLocalDateTime(xpp.nextText());
