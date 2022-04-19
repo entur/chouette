@@ -54,7 +54,7 @@ public class FootnoteDaoTest extends Arquillian {
 			
 			Footnote f = new Footnote();
 			f.setObjectId("XYZ:Notice:"+UUID.randomUUID());
-			f.setObjectVersion(1);
+			f.setObjectVersion(1L);
 			f.setCode("Code");
 			f.setLabel("Label");
 			
@@ -86,7 +86,7 @@ public class FootnoteDaoTest extends Arquillian {
 
 			Footnote footnote = new Footnote();
 			footnote.setObjectId("XYZ:Notice:"+UUID.randomUUID());
-			footnote.setObjectVersion(1);
+			footnote.setObjectVersion(1L);
 			footnote.setCode("Code");
 			footnote.setLabel("Label");
 
@@ -95,7 +95,7 @@ public class FootnoteDaoTest extends Arquillian {
 			FootNoteAlternativeText footNoteAlternativeText = new FootNoteAlternativeText();
 			footNoteAlternativeText.setFootnote(footnote);
 			footNoteAlternativeText.setObjectId("XYZ:AlternativeText:"+UUID.randomUUID());
-			footNoteAlternativeText.setObjectVersion(1);
+			footNoteAlternativeText.setObjectVersion(1L);
 			footNoteAlternativeText.setLanguage("en");
 			footNoteAlternativeText.setText("Alternative Text in english");
 

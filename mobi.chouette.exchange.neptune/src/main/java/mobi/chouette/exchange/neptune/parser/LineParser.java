@@ -53,7 +53,7 @@ public class LineParser implements Parser, Constant, JsonExtension {
 				line.setNetwork(getPtNetwork(referential));
 				line.setCompany(getFirstCompany(referential));
 			} else if (xpp.getName().equals("objectVersion")) {
-				Integer version = ParserUtils.getInt(xpp.nextText());
+				Long version = ParserUtils.getLong(xpp.nextText());
 				line.setObjectVersion(version);
 			} else if (xpp.getName().equals("creationTime")) {
 				LocalDateTime creationTime = ParserUtils.getLocalDateTime(xpp.nextText());

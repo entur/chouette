@@ -369,27 +369,27 @@ public class NetexParserUtils extends ParserUtils {
 	 * @param obj a versioned NeTEx object.
 	 * @return the NeTEx version as an Integer.
 	 */
-	public static Integer getVersion(EntityInVersionStructure obj) {
+	public static Long getVersion(EntityInVersionStructure obj) {
 		String netexObjectVersion = obj.getVersion();
 		if ("any".equals(netexObjectVersion)) {
-			return 0;
+			return 0L;
 		} else {
 			try {
-				return Integer.parseInt(netexObjectVersion);
+				return Long.parseLong(netexObjectVersion);
 			} catch (NumberFormatException e) {
 				if (log.isTraceEnabled()) {
 					log.trace("Unable to parse version " + netexObjectVersion + " for Entity " + obj.getId() + " to Integer as supported by Neptune, returning 0");
 				}
-				return 0;
+				return 0L;
 			}
 		}
 	}
 
-	public static Integer getVersion(String version) {
+	public static Long getVersion(String version) {
 		try {
-			return Integer.parseInt(version);
+			return Long.parseLong(version);
 		} catch (NumberFormatException e) {
-			return 0;
+			return 0L;
 		}
 	}
 

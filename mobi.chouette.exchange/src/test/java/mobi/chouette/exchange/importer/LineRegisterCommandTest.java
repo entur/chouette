@@ -9,8 +9,8 @@ import mobi.chouette.model.StopPoint;
 import mobi.chouette.model.VehicleJourney;
 import mobi.chouette.model.VehicleJourneyAtStop;
 
-import org.joda.time.LocalDateTime;
-import org.joda.time.LocalTime;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -34,14 +34,14 @@ public class LineRegisterCommandTest implements Constant {
 	    
 	    VehicleJourneyAtStop vjas = new VehicleJourneyAtStop();
 	    vjas.setObjectId("ObjectID");
-	    vjas.setObjectVersion(1);
-	    vjas.setCreationTime(new LocalDateTime(2000,2,1,0,0));
+	    vjas.setObjectVersion(1L);
+	    vjas.setCreationTime(LocalDateTime.of(2000,2,1,0,0));
 	    vjas.setCreatorId("creatorId");
         vjas.setStopPoint(sp);
 	    
-        vjas.setArrivalTime(new LocalTime(23,59,0));
+        vjas.setArrivalTime(LocalTime.of(23,59,0));
         
-        vjas.setDepartureTime(new LocalTime(0,5,0));
+        vjas.setDepartureTime(LocalTime.of(0,5,0));
         vjas.setArrivalDayOffset(0);
         
         vjas.setDepartureDayOffset(1);

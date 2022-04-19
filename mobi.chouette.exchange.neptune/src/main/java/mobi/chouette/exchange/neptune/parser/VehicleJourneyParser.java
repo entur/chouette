@@ -86,7 +86,7 @@ public class VehicleJourneyParser implements Parser, Constant, JsonExtension {
 				vehicleJourney = ObjectFactory.getVehicleJourney(referential, objectId);
 				vehicleJourney.setFilled(true);
 			} else if (xpp.getName().equals("objectVersion")) {
-				Integer version = ParserUtils.getInt(xpp.nextText());
+				Long version = ParserUtils.getLong(xpp.nextText());
 				vehicleJourney.setObjectVersion(version);
 			} else if (xpp.getName().equals("creationTime")) {
 				LocalDateTime creationTime = ParserUtils.getLocalDateTime(xpp.nextText());

@@ -10,7 +10,7 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 import org.testng.annotations.Test;
 
 import javax.annotation.Resource;
@@ -63,8 +63,8 @@ public class DatedServiceJourneyDaoTest extends Arquillian {
 
             DatedServiceJourney dsj = new DatedServiceJourney();
             dsj.setObjectId("TST:DatedServiceJourney:" + UUID.randomUUID());
-            dsj.setObjectVersion(1);
-            dsj.setOperatingDay(new LocalDate());
+            dsj.setObjectVersion(1L);
+            dsj.setOperatingDay(LocalDate.now());
             dsj.setVehicleJourney(vehicleJourney);
 
             trx.begin();

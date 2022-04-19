@@ -69,7 +69,7 @@ public abstract class NeptuneIdentifiedObject extends NeptuneObject implements
 	@Getter
 	@Setter
 	@Column(name = "object_version")
-	protected Integer objectVersion = 1;
+	protected Long objectVersion = 1L;
 
 	/**
 	 * creation time

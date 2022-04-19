@@ -51,7 +51,7 @@ public class AccessLinkParser implements Parser, Constant {
 				accessLink = ObjectFactory.getAccessLink(referential, objectId);
 				accessLink.setFilled(true);
 			} else if (xpp.getName().equals("objectVersion")) {
-				Integer version = ParserUtils.getInt(xpp.nextText());
+				Long version = ParserUtils.getLong(xpp.nextText());
 				accessLink.setObjectVersion(version);
 			} else if (xpp.getName().equals("creationTime")) {
 				LocalDateTime creationTime = ParserUtils.getLocalDateTime(xpp.nextText());
