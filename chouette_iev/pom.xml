@@ -97,26 +97,6 @@
 					</execution>
 				</executions>
 			</plugin>
-         <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <configuration>
-               <finalName>chouette-iev_${project.version}</finalName>
-               <appendAssemblyId>false</appendAssemblyId>
-               <descriptors>
-                  <descriptor>src/main/resources/assemblies/afimb.xml</descriptor>
-               </descriptors>
-            </configuration>
-            <executions>
-               <execution>
-                  <id>make-assembly</id> <!-- this is used for inheritance merges -->
-                  <phase>package</phase> <!-- append to the packaging phase. -->
-                  <goals>
-                     <goal>single</goal> <!-- goals == mojos -->
-                  </goals>
-               </execution>
-            </executions>
-         </plugin>
 		</plugins>
 	</build>
 	<dependencies>
@@ -128,78 +108,30 @@
          <type>ejb</type>
          <version>${project.version}</version>
       </dependency>
-<!-- 		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>mobi.chouette.exchange.neptune</artifactId>
-			<type>ejb</type>
-			<version>${project.version}</version>
-		</dependency> -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>mobi.chouette.exchange.gtfs</artifactId>
 			<type>ejb</type>
 			<version>${project.version}</version>
 		</dependency>
-<!-- 		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>mobi.chouette.exchange.geojson</artifactId>
-			<type>ejb</type>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>mobi.chouette.exchange.netex</artifactId>
-			<type>ejb</type>
-			<version>${project.version}</version>
-		</dependency> -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>mobi.chouette.exchange.netexprofile</artifactId>
 			<type>ejb</type>
 			<version>${project.version}</version>
 		</dependency>
-<!--       <dependency>
-         <groupId>${project.groupId}</groupId>
-         <artifactId>mobi.chouette.exchange.kml</artifactId>
-         <type>ejb</type>
-         <version>${project.version}</version>
-      </dependency>
-      <dependency>
-         <groupId>${project.groupId}</groupId>
-         <artifactId>mobi.chouette.exchange.sig</artifactId>
-         <type>ejb</type>
-         <version>${project.version}</version>
-      </dependency> -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mobi.chouette.exchange.stopplace</artifactId>
             <type>ejb</type>
             <version>${project.version}</version>
         </dependency>
-  <!--     <dependency>
-         <groupId>${project.groupId}</groupId>
-         <artifactId>mobi.chouette.exchange.hub</artifactId>
-         <type>ejb</type>
-         <version>${project.version}</version>
-      </dependency> -->
-        <dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>mobi.chouette.exchange.regtopp</artifactId>
-			<type>ejb</type>
-			<version>${project.version}</version>
-		</dependency>
       <dependency>
          <groupId>${project.groupId}</groupId>
          <artifactId>mobi.chouette.exchange.validator</artifactId>
          <type>ejb</type>
          <version>${project.version}</version>
       </dependency>
- <!--      <dependency>
-         <groupId>${project.groupId}</groupId>
-         <artifactId>mobi.chouette.exchange.converter</artifactId>
-         <type>ejb</type>
-         <version>${project.version}</version>
-      </dependency> -->
       <dependency>
          <groupId>${project.groupId}</groupId>
          <artifactId>mobi.chouette.exchange.transfer</artifactId>
