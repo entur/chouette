@@ -114,7 +114,19 @@ public abstract class 	GenericDAOImpl<T> implements GenericDAO<T> {
 	private List<T> findByObjectId(final Collection<String> objectIds, boolean flush) {
 		List<T> result = null;
 		if (objectIds.isEmpty())
-			return result;
+			return null;
+
+		// using findByObjectId(String objectId) is more efficient than running a Criteria query
+		// since it uses naturalId mapping and can retrieve an object directly from the persistence context
+		// without hitting the database nor flushing the session.
+		if(objectIds.size() == 1) {
+			T entity = findByObjectId(objectIds.stream().findFirst().orElseThrow());
+			if(entity == null) {
+				return Collections.emptyList();
+			} else {
+				return List.of(entity);
+			}
+		}
 
 		Iterable<List<String>> iterator = Iterables.partition(objectIds, 32000);
 		for (List<String> ids : iterator) {
