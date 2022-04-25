@@ -1,6 +1,6 @@
 env: dev
 gcpProjectId: entur-ror-dev
-gcpDatabaseInstance: entur-ror-dev:europe-west1:chouette-db-1=tcp:5432
+gcpDatabaseInstance: entur-ror-dev:europe-west1:chouette-db-pg13=tcp:5432
 gcpBucketName: ror-chouette-dev
 tiamatUrl: http://tiamat.dev.entur.internal
 osrmRailUrl: http://osrm-rail.dev.entur.internal
