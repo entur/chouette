@@ -35,7 +35,7 @@ public class Block extends NeptuneIdentifiedObject {
 
     @Getter
     @Setter
-    @GenericGenerator(name = "blocks_id_seq", strategy = "mobi.chouette.persistence.hibernate.ChouetteIdentifierGenerator", parameters = {
+    @GenericGenerator(name = "blocks_id_seq", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
             @Parameter(name = "sequence_name", value = "blocks_id_seq"),
             @Parameter(name = "increment_size", value = "100")})
     @GeneratedValue(generator = "blocks_id_seq")

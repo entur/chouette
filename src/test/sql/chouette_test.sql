@@ -1,9 +1,9 @@
 --
--- PostgreSQL database dump
+-- chouetteQL database dump
 --
 
--- Dumped from database version 9.6.22
--- Dumped by pg_dump version 9.6.23
+-- Dumped from database version 9.6.11
+-- Dumped by pg_dump version 12.9
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -354,33 +354,31 @@ ALTER TABLE chouette_gui.access_links_id_seq OWNER TO chouette;
 
 SET default_tablespace = '';
 
-SET default_with_oids = false;
-
 --
 -- Name: access_links; Type: TABLE; Schema: chouette_gui; Owner: chouette
 --
 
 CREATE TABLE chouette_gui.access_links (
-                                           id bigint DEFAULT nextval('chouette_gui.access_links_id_seq'::regclass) NOT NULL,
-                                           access_point_id bigint,
-                                           stop_area_id bigint,
-                                           objectid character varying NOT NULL,
-                                           object_version integer,
-                                           creation_time timestamp without time zone,
-                                           creator_id character varying,
-                                           name character varying,
-                                           comment character varying,
-                                           link_distance numeric(19,2),
-                                           lift_availability boolean,
-                                           mobility_restricted_suitability boolean,
-                                           stairs_availability boolean,
-                                           default_duration time without time zone,
-                                           frequent_traveller_duration time without time zone,
-                                           occasional_traveller_duration time without time zone,
-                                           mobility_restricted_traveller_duration time without time zone,
-                                           link_type character varying,
-                                           int_user_needs integer,
-                                           link_orientation character varying
+                                  id bigint DEFAULT nextval('chouette_gui.access_links_id_seq'::regclass) NOT NULL,
+                                  access_point_id bigint,
+                                  stop_area_id bigint,
+                                  objectid character varying NOT NULL,
+                                  object_version integer,
+                                  creation_time timestamp without time zone,
+                                  creator_id character varying,
+                                  name character varying,
+                                  comment character varying,
+                                  link_distance numeric(19,2),
+                                  lift_availability boolean,
+                                  mobility_restricted_suitability boolean,
+                                  stairs_availability boolean,
+                                  default_duration time without time zone,
+                                  frequent_traveller_duration time without time zone,
+                                  occasional_traveller_duration time without time zone,
+                                  mobility_restricted_traveller_duration time without time zone,
+                                  link_type character varying,
+                                  int_user_needs integer,
+                                  link_orientation character varying
 );
 
 
@@ -405,28 +403,28 @@ ALTER TABLE chouette_gui.access_points_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.access_points (
-                                            id bigint DEFAULT nextval('chouette_gui.access_points_id_seq'::regclass) NOT NULL,
-                                            objectid character varying,
-                                            object_version integer,
-                                            creation_time timestamp without time zone,
-                                            creator_id character varying,
-                                            name character varying,
-                                            comment character varying,
-                                            longitude numeric(19,16),
-                                            latitude numeric(19,16),
-                                            long_lat_type character varying,
-                                            country_code character varying,
-                                            street_name character varying,
-                                            contained_in character varying,
-                                            openning_time time without time zone,
-                                            closing_time time without time zone,
-                                            access_type character varying,
-                                            lift_availability boolean,
-                                            mobility_restricted_suitability boolean,
-                                            stairs_availability boolean,
-                                            stop_area_id bigint,
-                                            zip_code character varying,
-                                            city_name character varying
+                                   id bigint DEFAULT nextval('chouette_gui.access_points_id_seq'::regclass) NOT NULL,
+                                   objectid character varying,
+                                   object_version integer,
+                                   creation_time timestamp without time zone,
+                                   creator_id character varying,
+                                   name character varying,
+                                   comment character varying,
+                                   longitude numeric(19,16),
+                                   latitude numeric(19,16),
+                                   long_lat_type character varying,
+                                   country_code character varying,
+                                   street_name character varying,
+                                   contained_in character varying,
+                                   openning_time time without time zone,
+                                   closing_time time without time zone,
+                                   access_type character varying,
+                                   lift_availability boolean,
+                                   mobility_restricted_suitability boolean,
+                                   stairs_availability boolean,
+                                   stop_area_id bigint,
+                                   zip_code character varying,
+                                   city_name character varying
 );
 
 
@@ -451,12 +449,12 @@ ALTER TABLE chouette_gui.api_keys_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.api_keys (
-                                       id bigint DEFAULT nextval('chouette_gui.api_keys_id_seq'::regclass) NOT NULL,
-                                       referential_id bigint,
-                                       token character varying,
-                                       name character varying,
-                                       created_at timestamp without time zone,
-                                       updated_at timestamp without time zone
+                              id bigint DEFAULT nextval('chouette_gui.api_keys_id_seq'::regclass) NOT NULL,
+                              referential_id bigint,
+                              token character varying,
+                              name character varying,
+                              created_at timestamp without time zone,
+                              updated_at timestamp without time zone
 );
 
 
@@ -467,19 +465,19 @@ ALTER TABLE chouette_gui.api_keys OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.blocks (
-                                     id bigint NOT NULL,
-                                     objectid character varying NOT NULL,
-                                     object_version integer,
-                                     creation_time timestamp without time zone,
-                                     creator_id character varying(255),
-                                     private_code character varying,
-                                     name character varying,
-                                     description character varying,
-                                     start_time time without time zone,
-                                     end_time time without time zone,
-                                     end_time_day_offset integer,
-                                     start_point_id integer,
-                                     end_point_id integer
+                            id bigint NOT NULL,
+                            objectid character varying NOT NULL,
+                            object_version integer,
+                            creation_time timestamp without time zone,
+                            creator_id character varying(255),
+                            private_code character varying,
+                            name character varying,
+                            description character varying,
+                            start_time time without time zone,
+                            end_time time without time zone,
+                            end_time_day_offset integer,
+                            start_point_id integer,
+                            end_point_id integer
 );
 
 
@@ -490,9 +488,9 @@ ALTER TABLE chouette_gui.blocks OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.blocks_dead_runs (
-                                               block_id integer NOT NULL,
-                                               dead_run_id integer NOT NULL,
-                                               "position" integer
+                                      block_id integer NOT NULL,
+                                      dead_run_id integer NOT NULL,
+                                      "position" integer
 );
 
 
@@ -504,7 +502,7 @@ ALTER TABLE chouette_gui.blocks_dead_runs OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.blocks_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -524,9 +522,9 @@ ALTER SEQUENCE chouette_gui.blocks_id_seq OWNED BY chouette_gui.blocks.id;
 --
 
 CREATE TABLE chouette_gui.blocks_vehicle_journeys (
-                                                      block_id integer NOT NULL,
-                                                      vehicle_journey_id integer NOT NULL,
-                                                      "position" integer
+                                             block_id integer NOT NULL,
+                                             vehicle_journey_id integer NOT NULL,
+                                             "position" integer
 );
 
 
@@ -537,13 +535,13 @@ ALTER TABLE chouette_gui.blocks_vehicle_journeys OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.booking_arrangements (
-                                                   id bigint NOT NULL,
-                                                   booking_note character varying,
-                                                   booking_access character varying,
-                                                   book_when character varying,
-                                                   latest_booking_time time without time zone,
-                                                   minimum_booking_period time without time zone,
-                                                   booking_contact_id bigint
+                                          id bigint NOT NULL,
+                                          booking_note character varying,
+                                          booking_access character varying,
+                                          book_when character varying,
+                                          latest_booking_time time without time zone,
+                                          minimum_booking_period time without time zone,
+                                          booking_contact_id bigint
 );
 
 
@@ -579,7 +577,7 @@ ALTER TABLE chouette_gui.booking_arrangements_buy_when OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.booking_arrangements_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -599,15 +597,15 @@ ALTER SEQUENCE chouette_gui.booking_arrangements_id_seq OWNED BY chouette_gui.bo
 --
 
 CREATE TABLE chouette_gui.brandings (
-                                        id bigint NOT NULL,
-                                        objectid character varying NOT NULL,
-                                        object_version integer,
-                                        creation_time timestamp without time zone,
-                                        creator_id character varying(255),
-                                        name character varying,
-                                        description character varying,
-                                        url character varying,
-                                        image character varying
+                               id bigint NOT NULL,
+                               objectid character varying NOT NULL,
+                               object_version integer,
+                               creation_time timestamp without time zone,
+                               creator_id character varying(255),
+                               name character varying,
+                               description character varying,
+                               url character varying,
+                               image character varying
 );
 
 
@@ -619,7 +617,7 @@ ALTER TABLE chouette_gui.brandings OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.brandings_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -640,7 +638,7 @@ ALTER SEQUENCE chouette_gui.brandings_id_seq OWNED BY chouette_gui.brandings.id;
 
 CREATE SEQUENCE chouette_gui.codespaces_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -653,11 +651,11 @@ ALTER TABLE chouette_gui.codespaces_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.codespaces (
-                                         id bigint DEFAULT nextval('chouette_gui.codespaces_id_seq'::regclass) NOT NULL,
-                                         xmlns character varying NOT NULL,
-                                         xmlns_url character varying NOT NULL,
-                                         created_at timestamp without time zone,
-                                         updated_at timestamp without time zone
+                                id bigint DEFAULT nextval('chouette_gui.codespaces_id_seq'::regclass) NOT NULL,
+                                xmlns character varying NOT NULL,
+                                xmlns_url character varying NOT NULL,
+                                created_at timestamp without time zone,
+                                updated_at timestamp without time zone
 );
 
 
@@ -669,7 +667,7 @@ ALTER TABLE chouette_gui.codespaces OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.companies_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -682,28 +680,28 @@ ALTER TABLE chouette_gui.companies_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.companies (
-                                        id bigint DEFAULT nextval('chouette_gui.companies_id_seq'::regclass) NOT NULL,
-                                        objectid character varying NOT NULL,
-                                        object_version integer,
-                                        creation_time timestamp without time zone,
-                                        creator_id character varying,
-                                        name character varying,
-                                        short_name character varying,
-                                        organizational_unit character varying,
-                                        operating_department_name character varying,
-                                        code character varying,
-                                        phone character varying,
-                                        fax character varying,
-                                        email character varying,
-                                        registration_number character varying,
-                                        url character varying,
-                                        time_zone character varying,
-                                        organisation_type character varying,
-                                        legal_name character varying,
-                                        public_email character varying,
-                                        public_url character varying,
-                                        public_phone character varying,
-                                        branding_id bigint
+                               id bigint DEFAULT nextval('chouette_gui.companies_id_seq'::regclass) NOT NULL,
+                               objectid character varying NOT NULL,
+                               object_version integer,
+                               creation_time timestamp without time zone,
+                               creator_id character varying,
+                               name character varying,
+                               short_name character varying,
+                               organizational_unit character varying,
+                               operating_department_name character varying,
+                               code character varying,
+                               phone character varying,
+                               fax character varying,
+                               email character varying,
+                               registration_number character varying,
+                               url character varying,
+                               time_zone character varying,
+                               organisation_type character varying,
+                               legal_name character varying,
+                               public_email character varying,
+                               public_url character varying,
+                               public_phone character varying,
+                               branding_id bigint
 );
 
 
@@ -728,25 +726,25 @@ ALTER TABLE chouette_gui.connection_links_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.connection_links (
-                                               id bigint DEFAULT nextval('chouette_gui.connection_links_id_seq'::regclass) NOT NULL,
-                                               departure_id bigint,
-                                               arrival_id bigint,
-                                               objectid character varying NOT NULL,
-                                               object_version integer,
-                                               creation_time timestamp without time zone,
-                                               creator_id character varying,
-                                               name character varying,
-                                               comment character varying,
-                                               link_distance numeric(19,2),
-                                               link_type character varying,
-                                               default_duration time without time zone,
-                                               frequent_traveller_duration time without time zone,
-                                               occasional_traveller_duration time without time zone,
-                                               mobility_restricted_traveller_duration time without time zone,
-                                               mobility_restricted_suitability boolean,
-                                               stairs_availability boolean,
-                                               lift_availability boolean,
-                                               int_user_needs integer
+                                      id bigint DEFAULT nextval('chouette_gui.connection_links_id_seq'::regclass) NOT NULL,
+                                      departure_id bigint,
+                                      arrival_id bigint,
+                                      objectid character varying NOT NULL,
+                                      object_version integer,
+                                      creation_time timestamp without time zone,
+                                      creator_id character varying,
+                                      name character varying,
+                                      comment character varying,
+                                      link_distance numeric(19,2),
+                                      link_type character varying,
+                                      default_duration time without time zone,
+                                      frequent_traveller_duration time without time zone,
+                                      occasional_traveller_duration time without time zone,
+                                      mobility_restricted_traveller_duration time without time zone,
+                                      mobility_restricted_suitability boolean,
+                                      stairs_availability boolean,
+                                      lift_availability boolean,
+                                      int_user_needs integer
 );
 
 
@@ -757,13 +755,13 @@ ALTER TABLE chouette_gui.connection_links OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.contact_structures (
-                                                 id bigint NOT NULL,
-                                                 contact_person character varying,
-                                                 email character varying,
-                                                 phone character varying,
-                                                 fax character varying,
-                                                 url character varying,
-                                                 further_details character varying
+                                        id bigint NOT NULL,
+                                        contact_person character varying,
+                                        email character varying,
+                                        phone character varying,
+                                        fax character varying,
+                                        url character varying,
+                                        further_details character varying
 );
 
 
@@ -775,7 +773,7 @@ ALTER TABLE chouette_gui.contact_structures OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.contact_structures_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -807,14 +805,14 @@ ALTER TABLE chouette_gui.dated_service_journey_refs OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.dated_service_journeys (
-                                                     id bigint NOT NULL,
-                                                     objectid character varying NOT NULL,
-                                                     object_version integer,
-                                                     creation_time timestamp without time zone,
-                                                     creator_id character varying(255),
-                                                     operating_day date NOT NULL,
-                                                     vehicle_journey_id integer NOT NULL,
-                                                     service_alteration character varying
+                                            id bigint NOT NULL,
+                                            objectid character varying NOT NULL,
+                                            object_version integer,
+                                            creation_time timestamp without time zone,
+                                            creator_id character varying(255),
+                                            operating_day date NOT NULL,
+                                            vehicle_journey_id integer NOT NULL,
+                                            service_alteration character varying
 );
 
 
@@ -826,7 +824,7 @@ ALTER TABLE chouette_gui.dated_service_journeys OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.dated_service_journeys_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -847,16 +845,16 @@ ALTER SEQUENCE chouette_gui.dated_service_journeys_id_seq OWNED BY chouette_gui.
 
 CREATE TABLE chouette_gui.dead_run_at_stops (
                                                 id bigint NOT NULL,
-                                                objectid character varying NOT NULL,
-                                                object_version integer,
-                                                creation_time timestamp without time zone,
-                                                creator_id character varying,
-                                                dead_run_id bigint,
-                                                stop_point_id bigint,
-                                                arrival_time time without time zone,
-                                                departure_time time without time zone,
-                                                arrival_day_offset integer,
-                                                departure_day_offset integer
+                                       objectid character varying NOT NULL,
+                                       object_version integer,
+                                       creation_time timestamp without time zone,
+                                       creator_id character varying,
+                                       dead_run_id bigint,
+                                       stop_point_id bigint,
+                                       arrival_time time without time zone,
+                                       departure_time time without time zone,
+                                       arrival_day_offset integer,
+                                       departure_day_offset integer
 );
 
 
@@ -868,7 +866,7 @@ ALTER TABLE chouette_gui.dead_run_at_stops OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.dead_run_at_stops_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -889,11 +887,11 @@ ALTER SEQUENCE chouette_gui.dead_run_at_stops_id_seq OWNED BY chouette_gui.dead_
 
 CREATE TABLE chouette_gui.dead_runs (
                                         id bigint NOT NULL,
-                                        journey_pattern_id bigint,
-                                        objectid character varying NOT NULL,
-                                        object_version integer,
-                                        creation_time timestamp without time zone,
-                                        creator_id character varying
+                               journey_pattern_id bigint,
+                               objectid character varying NOT NULL,
+                               object_version integer,
+                               creation_time timestamp without time zone,
+                               creator_id character varying
 );
 
 
@@ -905,7 +903,7 @@ ALTER TABLE chouette_gui.dead_runs OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.dead_runs_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -939,18 +937,18 @@ ALTER TABLE chouette_gui.delayed_jobs_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.delayed_jobs (
-                                           id bigint DEFAULT nextval('chouette_gui.delayed_jobs_id_seq'::regclass) NOT NULL,
-                                           priority integer DEFAULT 0,
-                                           attempts integer DEFAULT 0,
-                                           handler text,
-                                           last_error text,
-                                           run_at timestamp without time zone,
-                                           locked_at timestamp without time zone,
-                                           failed_at timestamp without time zone,
-                                           locked_by character varying,
-                                           queue character varying,
-                                           created_at timestamp without time zone,
-                                           updated_at timestamp without time zone
+                                  id bigint DEFAULT nextval('chouette_gui.delayed_jobs_id_seq'::regclass) NOT NULL,
+                                  priority integer DEFAULT 0,
+                                  attempts integer DEFAULT 0,
+                                  handler text,
+                                  last_error text,
+                                  run_at timestamp without time zone,
+                                  locked_at timestamp without time zone,
+                                  failed_at timestamp without time zone,
+                                  locked_by character varying,
+                                  queue character varying,
+                                  created_at timestamp without time zone,
+                                  updated_at timestamp without time zone
 );
 
 
@@ -961,11 +959,11 @@ ALTER TABLE chouette_gui.delayed_jobs OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.destination_display_via (
-                                                      destination_display_id bigint NOT NULL,
-                                                      via_id bigint NOT NULL,
-                                                      "position" bigint,
-                                                      created_at timestamp without time zone,
-                                                      updated_at timestamp without time zone
+                                             destination_display_id bigint NOT NULL,
+                                             via_id bigint NOT NULL,
+                                             "position" bigint,
+                                             created_at timestamp without time zone,
+                                             updated_at timestamp without time zone
 );
 
 
@@ -976,14 +974,14 @@ ALTER TABLE chouette_gui.destination_display_via OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.destination_displays (
-                                                   id bigint NOT NULL,
-                                                   name character varying,
-                                                   side_text character varying,
-                                                   front_text character varying NOT NULL,
-                                                   objectid character varying NOT NULL,
-                                                   object_version bigint,
-                                                   creation_time timestamp without time zone,
-                                                   creator_id character varying
+                                          id bigint NOT NULL,
+                                          name character varying,
+                                          side_text character varying,
+                                          front_text character varying NOT NULL,
+                                          objectid character varying NOT NULL,
+                                          object_version bigint,
+                                          creation_time timestamp without time zone,
+                                          creator_id character varying
 );
 
 
@@ -995,7 +993,7 @@ ALTER TABLE chouette_gui.destination_displays OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.destination_displays_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -1029,15 +1027,15 @@ ALTER TABLE chouette_gui.exports_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.exports (
-                                      id bigint DEFAULT nextval('chouette_gui.exports_id_seq'::regclass) NOT NULL,
-                                      referential_id bigint,
-                                      status character varying,
-                                      type character varying,
-                                      options character varying,
-                                      created_at timestamp without time zone,
-                                      updated_at timestamp without time zone,
-                                      references_type character varying,
-                                      reference_ids character varying
+                             id bigint DEFAULT nextval('chouette_gui.exports_id_seq'::regclass) NOT NULL,
+                             referential_id bigint,
+                             status character varying,
+                             type character varying,
+                             options character varying,
+                             created_at timestamp without time zone,
+                             updated_at timestamp without time zone,
+                             references_type character varying,
+                             reference_ids character varying
 );
 
 
@@ -1049,7 +1047,7 @@ ALTER TABLE chouette_gui.exports OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.facilities_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -1062,28 +1060,28 @@ ALTER TABLE chouette_gui.facilities_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.facilities (
-                                         id bigint DEFAULT nextval('chouette_gui.facilities_id_seq'::regclass) NOT NULL,
-                                         stop_area_id bigint,
-                                         line_id bigint,
-                                         connection_link_id bigint,
-                                         stop_point_id bigint,
-                                         objectid character varying NOT NULL,
-                                         object_version integer,
-                                         creation_time timestamp without time zone,
-                                         creator_id character varying,
-                                         name character varying,
-                                         comment character varying,
-                                         description character varying,
-                                         free_access boolean,
-                                         longitude numeric(19,16),
-                                         latitude numeric(19,16),
-                                         long_lat_type character varying,
-                                         x numeric(19,2),
-                                         y numeric(19,2),
-                                         projection_type character varying,
-                                         country_code character varying,
-                                         street_name character varying,
-                                         contained_in character varying
+                                id bigint DEFAULT nextval('chouette_gui.facilities_id_seq'::regclass) NOT NULL,
+                                stop_area_id bigint,
+                                line_id bigint,
+                                connection_link_id bigint,
+                                stop_point_id bigint,
+                                objectid character varying NOT NULL,
+                                object_version integer,
+                                creation_time timestamp without time zone,
+                                creator_id character varying,
+                                name character varying,
+                                comment character varying,
+                                description character varying,
+                                free_access boolean,
+                                longitude numeric(19,16),
+                                latitude numeric(19,16),
+                                long_lat_type character varying,
+                                x numeric(19,2),
+                                y numeric(19,2),
+                                projection_type character varying,
+                                country_code character varying,
+                                street_name character varying,
+                                contained_in character varying
 );
 
 
@@ -1106,15 +1104,15 @@ ALTER TABLE chouette_gui.facilities_features OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.flexible_service_properties (
-                                                          id bigint NOT NULL,
-                                                          objectid character varying NOT NULL,
-                                                          object_version integer,
-                                                          creation_time timestamp without time zone,
-                                                          creator_id character varying(255),
-                                                          flexible_service_type character varying(255),
-                                                          cancellation_possible boolean,
-                                                          change_of_time_possible boolean,
-                                                          booking_arrangement_id bigint
+                                                 id bigint NOT NULL,
+                                                 objectid character varying NOT NULL,
+                                                 object_version integer,
+                                                 creation_time timestamp without time zone,
+                                                 creator_id character varying(255),
+                                                 flexible_service_type character varying(255),
+                                                 cancellation_possible boolean,
+                                                 change_of_time_possible boolean,
+                                                 booking_arrangement_id bigint
 );
 
 
@@ -1126,7 +1124,7 @@ ALTER TABLE chouette_gui.flexible_service_properties OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.flexible_service_properties_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -1146,14 +1144,14 @@ ALTER SEQUENCE chouette_gui.flexible_service_properties_id_seq OWNED BY chouette
 --
 
 CREATE TABLE chouette_gui.footnote_alternative_texts (
-                                                         id bigint NOT NULL,
-                                                         objectid character varying NOT NULL,
-                                                         object_version integer,
-                                                         creation_time timestamp without time zone,
-                                                         creator_id character varying(255),
-                                                         footnote_id integer NOT NULL,
-                                                         text character varying,
-                                                         language character varying
+                                                id bigint NOT NULL,
+                                                objectid character varying NOT NULL,
+                                                object_version integer,
+                                                creation_time timestamp without time zone,
+                                                creator_id character varying(255),
+                                                footnote_id integer NOT NULL,
+                                                text character varying,
+                                                language character varying
 );
 
 
@@ -1165,7 +1163,7 @@ ALTER TABLE chouette_gui.footnote_alternative_texts OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.footnote_alternative_texts_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -1186,7 +1184,7 @@ ALTER SEQUENCE chouette_gui.footnote_alternative_texts_id_seq OWNED BY chouette_
 
 CREATE SEQUENCE chouette_gui.footnotes_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -1199,13 +1197,13 @@ ALTER TABLE chouette_gui.footnotes_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.footnotes (
-                                        id bigint DEFAULT nextval('chouette_gui.footnotes_id_seq'::regclass) NOT NULL,
-                                        code character varying,
-                                        label character varying,
-                                        creation_time timestamp without time zone,
-                                        objectid character varying NOT NULL,
-                                        object_version integer,
-                                        creator_id character varying
+                               id bigint DEFAULT nextval('chouette_gui.footnotes_id_seq'::regclass) NOT NULL,
+                               code character varying,
+                               label character varying,
+                               creation_time timestamp without time zone,
+                               objectid character varying NOT NULL,
+                               object_version integer,
+                               creator_id character varying
 );
 
 
@@ -1240,8 +1238,8 @@ ALTER TABLE chouette_gui.footnotes_lines OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.footnotes_stop_points (
-                                                    stop_point_id bigint,
-                                                    footnote_id bigint
+                                           stop_point_id bigint,
+                                           footnote_id bigint
 );
 
 
@@ -1277,7 +1275,7 @@ ALTER TABLE chouette_gui.footnotes_vehicle_journeys OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.group_of_lines_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -1290,14 +1288,14 @@ ALTER TABLE chouette_gui.group_of_lines_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.group_of_lines (
-                                             id bigint DEFAULT nextval('chouette_gui.group_of_lines_id_seq'::regclass) NOT NULL,
-                                             objectid character varying NOT NULL,
-                                             object_version integer,
-                                             creation_time timestamp without time zone,
-                                             creator_id character varying,
-                                             name character varying,
-                                             comment character varying,
-                                             registration_number character varying
+                                    id bigint DEFAULT nextval('chouette_gui.group_of_lines_id_seq'::regclass) NOT NULL,
+                                    objectid character varying NOT NULL,
+                                    object_version integer,
+                                    creation_time timestamp without time zone,
+                                    creator_id character varying,
+                                    name character varying,
+                                    comment character varying,
+                                    registration_number character varying
 );
 
 
@@ -1320,25 +1318,25 @@ ALTER TABLE chouette_gui.group_of_lines_lines OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.interchanges (
-                                           id bigint NOT NULL,
-                                           objectid character varying NOT NULL,
-                                           object_version integer,
-                                           creation_time timestamp without time zone,
-                                           creator_id character varying,
-                                           name character varying,
-                                           priority integer,
-                                           planned boolean,
-                                           guaranteed boolean,
-                                           advertised boolean,
-                                           maximum_wait_time time without time zone,
-                                           from_point character varying,
-                                           to_point character varying,
-                                           from_vehicle_journey character varying,
-                                           to_vehicle_journey character varying,
-                                           stay_seated boolean,
-                                           minimum_transfer_time time without time zone,
-                                           from_visit_number integer,
-                                           to_visit_number integer
+                                  id bigint NOT NULL,
+                                  objectid character varying NOT NULL,
+                                  object_version integer,
+                                  creation_time timestamp without time zone,
+                                  creator_id character varying,
+                                  name character varying,
+                                  priority integer,
+                                  planned boolean,
+                                  guaranteed boolean,
+                                  advertised boolean,
+                                  maximum_wait_time time without time zone,
+                                  from_point character varying,
+                                  to_point character varying,
+                                  from_vehicle_journey character varying,
+                                  to_vehicle_journey character varying,
+                                  stay_seated boolean,
+                                  minimum_transfer_time time without time zone,
+                                  from_visit_number integer,
+                                  to_visit_number integer
 );
 
 
@@ -1350,7 +1348,7 @@ ALTER TABLE chouette_gui.interchanges OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.interchanges_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -1371,7 +1369,7 @@ ALTER SEQUENCE chouette_gui.interchanges_id_seq OWNED BY chouette_gui.interchang
 
 CREATE SEQUENCE chouette_gui.journey_frequencies_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -1384,15 +1382,15 @@ ALTER TABLE chouette_gui.journey_frequencies_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.journey_frequencies (
-                                                  id bigint DEFAULT nextval('chouette_gui.journey_frequencies_id_seq'::regclass) NOT NULL,
-                                                  vehicle_journey_id bigint,
-                                                  scheduled_headway_interval time without time zone NOT NULL,
-                                                  first_departure_time time without time zone NOT NULL,
-                                                  last_departure_time time without time zone,
-                                                  exact_time boolean DEFAULT false,
-                                                  created_at timestamp without time zone,
-                                                  updated_at timestamp without time zone,
-                                                  timeband_id bigint
+                                         id bigint DEFAULT nextval('chouette_gui.journey_frequencies_id_seq'::regclass) NOT NULL,
+                                         vehicle_journey_id bigint,
+                                         scheduled_headway_interval time without time zone NOT NULL,
+                                         first_departure_time time without time zone NOT NULL,
+                                         last_departure_time time without time zone,
+                                         exact_time boolean DEFAULT false,
+                                         created_at timestamp without time zone,
+                                         updated_at timestamp without time zone,
+                                         timeband_id bigint
 );
 
 
@@ -1417,12 +1415,12 @@ ALTER TABLE chouette_gui.journey_pattern_sections_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.journey_pattern_sections (
-                                                       id bigint DEFAULT nextval('chouette_gui.journey_pattern_sections_id_seq'::regclass) NOT NULL,
-                                                       journey_pattern_id bigint NOT NULL,
-                                                       route_section_id bigint NOT NULL,
-                                                       rank integer NOT NULL,
-                                                       created_at timestamp without time zone,
-                                                       updated_at timestamp without time zone
+                                              id bigint DEFAULT nextval('chouette_gui.journey_pattern_sections_id_seq'::regclass) NOT NULL,
+                                              journey_pattern_id bigint NOT NULL,
+                                              route_section_id bigint NOT NULL,
+                                              rank integer NOT NULL,
+                                              created_at timestamp without time zone,
+                                              updated_at timestamp without time zone
 );
 
 
@@ -1434,7 +1432,7 @@ ALTER TABLE chouette_gui.journey_pattern_sections OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.journey_patterns_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -1447,19 +1445,19 @@ ALTER TABLE chouette_gui.journey_patterns_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.journey_patterns (
-                                               id bigint DEFAULT nextval('chouette_gui.journey_patterns_id_seq'::regclass) NOT NULL,
-                                               route_id bigint,
-                                               objectid character varying NOT NULL,
-                                               object_version integer,
-                                               creation_time timestamp without time zone,
-                                               creator_id character varying,
-                                               name character varying,
-                                               comment character varying,
-                                               registration_number character varying,
-                                               published_name character varying,
-                                               departure_stop_point_id bigint,
-                                               arrival_stop_point_id bigint,
-                                               section_status integer DEFAULT 0 NOT NULL
+                                      id bigint DEFAULT nextval('chouette_gui.journey_patterns_id_seq'::regclass) NOT NULL,
+                                      route_id bigint,
+                                      objectid character varying NOT NULL,
+                                      object_version integer,
+                                      creation_time timestamp without time zone,
+                                      creator_id character varying,
+                                      name character varying,
+                                      comment character varying,
+                                      registration_number character varying,
+                                      published_name character varying,
+                                      departure_stop_point_id bigint,
+                                      arrival_stop_point_id bigint,
+                                      section_status integer DEFAULT 0 NOT NULL
 );
 
 
@@ -1483,7 +1481,7 @@ ALTER TABLE chouette_gui.journey_patterns_stop_points OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.lines_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -1496,29 +1494,29 @@ ALTER TABLE chouette_gui.lines_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.lines (
-                                    id bigint DEFAULT nextval('chouette_gui.lines_id_seq'::regclass) NOT NULL,
-                                    network_id bigint,
-                                    company_id bigint,
-                                    objectid character varying NOT NULL,
-                                    object_version integer,
-                                    creation_time timestamp without time zone,
-                                    creator_id character varying,
-                                    name character varying,
-                                    number character varying,
-                                    published_name character varying,
-                                    transport_mode_name character varying,
-                                    registration_number character varying,
-                                    comment character varying,
-                                    mobility_restricted_suitability boolean,
-                                    int_user_needs integer,
-                                    flexible_service boolean,
-                                    url character varying,
-                                    color character varying(6),
-                                    text_color character varying(6),
-                                    stable_id character varying,
-                                    transport_submode_name character varying,
-                                    flexible_line_type character varying,
-                                    booking_arrangement_id bigint
+                           id bigint DEFAULT nextval('chouette_gui.lines_id_seq'::regclass) NOT NULL,
+                           network_id bigint,
+                           company_id bigint,
+                           objectid character varying NOT NULL,
+                           object_version integer,
+                           creation_time timestamp without time zone,
+                           creator_id character varying,
+                           name character varying,
+                           number character varying,
+                           published_name character varying,
+                           transport_mode_name character varying,
+                           registration_number character varying,
+                           comment character varying,
+                           mobility_restricted_suitability boolean,
+                           int_user_needs integer,
+                           flexible_service boolean,
+                           url character varying,
+                           color character varying(6),
+                           text_color character varying(6),
+                           stable_id character varying,
+                           transport_submode_name character varying,
+                           flexible_line_type character varying,
+                           booking_arrangement_id bigint
 );
 
 
@@ -1530,7 +1528,7 @@ ALTER TABLE chouette_gui.lines OWNER TO chouette;
 
 CREATE TABLE chouette_gui.lines_key_values (
                                                line_id bigint,
-                                               type_of_key character varying,
+                                      type_of_key character varying,
                                                key character varying,
                                                value character varying
 );
@@ -1544,7 +1542,7 @@ ALTER TABLE chouette_gui.lines_key_values OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.networks_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -1557,20 +1555,20 @@ ALTER TABLE chouette_gui.networks_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.networks (
-                                       id bigint DEFAULT nextval('chouette_gui.networks_id_seq'::regclass) NOT NULL,
-                                       objectid character varying NOT NULL,
-                                       object_version integer,
-                                       creation_time timestamp without time zone,
-                                       creator_id character varying,
-                                       version_date date,
-                                       description character varying,
-                                       name character varying,
-                                       registration_number character varying,
-                                       source_name character varying,
-                                       source_type character varying,
-                                       source_identifier character varying,
-                                       comment character varying,
-                                       company_id bigint
+                              id bigint DEFAULT nextval('chouette_gui.networks_id_seq'::regclass) NOT NULL,
+                              objectid character varying NOT NULL,
+                              object_version integer,
+                              creation_time timestamp without time zone,
+                              creator_id character varying,
+                              version_date date,
+                              description character varying,
+                              name character varying,
+                              registration_number character varying,
+                              source_name character varying,
+                              source_type character varying,
+                              source_identifier character varying,
+                              comment character varying,
+                              company_id bigint
 );
 
 
@@ -1595,11 +1593,11 @@ ALTER TABLE chouette_gui.organisations_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.organisations (
-                                            id bigint DEFAULT nextval('chouette_gui.organisations_id_seq'::regclass) NOT NULL,
-                                            name character varying,
-                                            created_at timestamp without time zone,
-                                            updated_at timestamp without time zone,
-                                            data_format character varying DEFAULT 'neptune'::character varying
+                                   id bigint DEFAULT nextval('chouette_gui.organisations_id_seq'::regclass) NOT NULL,
+                                   name character varying,
+                                   created_at timestamp without time zone,
+                                   updated_at timestamp without time zone,
+                                   data_format character varying DEFAULT 'neptune'::character varying
 );
 
 
@@ -1611,7 +1609,7 @@ ALTER TABLE chouette_gui.organisations OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.pt_links_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -1624,17 +1622,17 @@ ALTER TABLE chouette_gui.pt_links_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.pt_links (
-                                       id bigint DEFAULT nextval('chouette_gui.pt_links_id_seq'::regclass) NOT NULL,
-                                       start_of_link_id bigint,
-                                       end_of_link_id bigint,
-                                       route_id bigint,
-                                       objectid character varying NOT NULL,
-                                       object_version integer,
-                                       creation_time timestamp without time zone,
-                                       creator_id character varying,
-                                       name character varying,
-                                       comment character varying,
-                                       link_distance numeric(19,2)
+                              id bigint DEFAULT nextval('chouette_gui.pt_links_id_seq'::regclass) NOT NULL,
+                              start_of_link_id bigint,
+                              end_of_link_id bigint,
+                              route_id bigint,
+                              objectid character varying NOT NULL,
+                              object_version integer,
+                              creation_time timestamp without time zone,
+                              creator_id character varying,
+                              name character varying,
+                              comment character varying,
+                              link_distance numeric(19,2)
 );
 
 
@@ -1645,8 +1643,8 @@ ALTER TABLE chouette_gui.pt_links OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.referential_last_update (
-                                                      id bigint NOT NULL,
-                                                      last_update_timestamp timestamp without time zone
+                                             id bigint NOT NULL,
+                                             last_update_timestamp timestamp without time zone
 );
 
 
@@ -1692,20 +1690,20 @@ ALTER TABLE chouette_gui.referentials_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.referentials (
-                                           id bigint DEFAULT nextval('chouette_gui.referentials_id_seq'::regclass) NOT NULL,
-                                           name character varying,
-                                           slug character varying,
-                                           created_at timestamp without time zone,
-                                           updated_at timestamp without time zone,
-                                           prefix character varying,
-                                           projection_type character varying,
-                                           time_zone character varying,
-                                           bounds character varying,
-                                           organisation_id bigint,
-                                           geographical_bounds text,
-                                           user_id bigint,
-                                           user_name character varying,
-                                           data_format character varying
+                                  id bigint DEFAULT nextval('chouette_gui.referentials_id_seq'::regclass) NOT NULL,
+                                  name character varying,
+                                  slug character varying,
+                                  created_at timestamp without time zone,
+                                  updated_at timestamp without time zone,
+                                  prefix character varying,
+                                  projection_type character varying,
+                                  time_zone character varying,
+                                  bounds character varying,
+                                  organisation_id bigint,
+                                  geographical_bounds text,
+                                  user_id bigint,
+                                  user_name character varying,
+                                  data_format character varying
 );
 
 
@@ -1716,14 +1714,14 @@ ALTER TABLE chouette_gui.referentials OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.route_points (
-                                           id bigint NOT NULL,
-                                           objectid character varying NOT NULL,
-                                           object_version integer,
-                                           creation_time timestamp without time zone,
-                                           creator_id character varying(255),
-                                           scheduled_stop_point_id bigint,
-                                           name character varying,
-                                           boarder_crossing boolean
+                                  id bigint NOT NULL,
+                                  objectid character varying NOT NULL,
+                                  object_version integer,
+                                  creation_time timestamp without time zone,
+                                  creator_id character varying(255),
+                                  scheduled_stop_point_id bigint,
+                                  name character varying,
+                                  boarder_crossing boolean
 );
 
 
@@ -1735,7 +1733,7 @@ ALTER TABLE chouette_gui.route_points OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.route_points_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -1756,7 +1754,7 @@ ALTER SEQUENCE chouette_gui.route_points_id_seq OWNED BY chouette_gui.route_poin
 
 CREATE SEQUENCE chouette_gui.route_sections_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -1769,17 +1767,17 @@ ALTER TABLE chouette_gui.route_sections_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.route_sections (
-                                             id bigint DEFAULT nextval('chouette_gui.route_sections_id_seq'::regclass) NOT NULL,
-                                             input_geometry shared_extensions.geometry(LineString,4326),
-                                             processed_geometry shared_extensions.geometry(LineString,4326),
-                                             objectid character varying NOT NULL,
-                                             object_version integer,
-                                             creation_time timestamp without time zone,
-                                             creator_id character varying,
-                                             distance double precision,
-                                             no_processing boolean DEFAULT false NOT NULL,
-                                             from_scheduled_stop_point_id bigint,
-                                             to_scheduled_stop_point_id bigint
+                                    id bigint DEFAULT nextval('chouette_gui.route_sections_id_seq'::regclass) NOT NULL,
+                                    input_geometry shared_extensions.geometry(LineString,4326),
+                                    processed_geometry shared_extensions.geometry(LineString,4326),
+                                    objectid character varying NOT NULL,
+                                    object_version integer,
+                                    creation_time timestamp without time zone,
+                                    creator_id character varying,
+                                    distance double precision,
+                                    no_processing boolean DEFAULT false NOT NULL,
+                                    from_scheduled_stop_point_id bigint,
+                                    to_scheduled_stop_point_id bigint
 );
 
 
@@ -1791,7 +1789,7 @@ ALTER TABLE chouette_gui.route_sections OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.routes_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -1804,19 +1802,19 @@ ALTER TABLE chouette_gui.routes_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.routes (
-                                     id bigint DEFAULT nextval('chouette_gui.routes_id_seq'::regclass) NOT NULL,
-                                     line_id bigint,
-                                     objectid character varying NOT NULL,
-                                     object_version integer,
-                                     creation_time timestamp without time zone,
-                                     creator_id character varying,
-                                     name character varying,
-                                     comment character varying,
-                                     opposite_route_id bigint,
-                                     published_name character varying,
-                                     number character varying,
-                                     direction character varying,
-                                     wayback character varying
+                            id bigint DEFAULT nextval('chouette_gui.routes_id_seq'::regclass) NOT NULL,
+                            line_id bigint,
+                            objectid character varying NOT NULL,
+                            object_version integer,
+                            creation_time timestamp without time zone,
+                            creator_id character varying,
+                            name character varying,
+                            comment character varying,
+                            opposite_route_id bigint,
+                            published_name character varying,
+                            number character varying,
+                            direction character varying,
+                            wayback character varying
 );
 
 
@@ -1827,10 +1825,10 @@ ALTER TABLE chouette_gui.routes OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.routes_route_points (
-                                                  id bigint NOT NULL,
-                                                  route_id bigint NOT NULL,
-                                                  route_point_id bigint NOT NULL,
-                                                  "position" integer NOT NULL
+                                         id bigint NOT NULL,
+                                         route_id bigint NOT NULL,
+                                         route_point_id bigint NOT NULL,
+                                         "position" integer NOT NULL
 );
 
 
@@ -1888,12 +1886,12 @@ ALTER TABLE chouette_gui.rule_parameter_sets_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.rule_parameter_sets (
-                                                  id bigint DEFAULT nextval('chouette_gui.rule_parameter_sets_id_seq'::regclass) NOT NULL,
-                                                  parameters text,
-                                                  name character varying,
-                                                  created_at timestamp without time zone,
-                                                  updated_at timestamp without time zone,
-                                                  organisation_id bigint
+                                         id bigint DEFAULT nextval('chouette_gui.rule_parameter_sets_id_seq'::regclass) NOT NULL,
+                                         parameters text,
+                                         name character varying,
+                                         created_at timestamp without time zone,
+                                         updated_at timestamp without time zone,
+                                         organisation_id bigint
 );
 
 
@@ -1904,14 +1902,14 @@ ALTER TABLE chouette_gui.rule_parameter_sets OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.scheduled_stop_points (
-                                                    id bigint NOT NULL,
-                                                    objectid character varying NOT NULL,
-                                                    stop_area_objectid_key character varying,
-                                                    object_version integer,
-                                                    creation_time timestamp without time zone,
-                                                    creator_id character varying(255),
-                                                    name character varying,
-                                                    timing_point_status character varying
+                                           id bigint NOT NULL,
+                                           objectid character varying NOT NULL,
+                                           stop_area_objectid_key character varying,
+                                           object_version integer,
+                                           creation_time timestamp without time zone,
+                                           creator_id character varying(255),
+                                           name character varying,
+                                           timing_point_status character varying
 );
 
 
@@ -1923,7 +1921,7 @@ ALTER TABLE chouette_gui.scheduled_stop_points OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.scheduled_stop_points_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -1968,35 +1966,35 @@ ALTER TABLE chouette_gui.stop_areas_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.stop_areas (
-                                         id bigint DEFAULT nextval('chouette_gui.stop_areas_id_seq'::regclass) NOT NULL,
-                                         parent_id bigint,
-                                         objectid character varying NOT NULL,
-                                         object_version integer,
-                                         creation_time timestamp without time zone,
-                                         creator_id character varying,
-                                         name character varying,
-                                         comment character varying,
-                                         area_type character varying,
-                                         registration_number character varying,
-                                         nearest_topic_name character varying,
-                                         fare_code integer,
-                                         longitude numeric(19,16),
-                                         latitude numeric(19,16),
-                                         long_lat_type character varying,
-                                         country_code character varying,
-                                         street_name character varying,
-                                         mobility_restricted_suitability boolean,
-                                         stairs_availability boolean,
-                                         lift_availability boolean,
-                                         int_user_needs integer,
-                                         zip_code character varying,
-                                         city_name character varying,
-                                         url character varying,
-                                         time_zone character varying,
-                                         compass_bearing integer,
-                                         stop_place_type character varying,
-                                         transport_mode character varying,
-                                         transport_sub_mode character varying
+                                id bigint DEFAULT nextval('chouette_gui.stop_areas_id_seq'::regclass) NOT NULL,
+                                parent_id bigint,
+                                objectid character varying NOT NULL,
+                                object_version integer,
+                                creation_time timestamp without time zone,
+                                creator_id character varying,
+                                name character varying,
+                                comment character varying,
+                                area_type character varying,
+                                registration_number character varying,
+                                nearest_topic_name character varying,
+                                fare_code integer,
+                                longitude numeric(19,16),
+                                latitude numeric(19,16),
+                                long_lat_type character varying,
+                                country_code character varying,
+                                street_name character varying,
+                                mobility_restricted_suitability boolean,
+                                stairs_availability boolean,
+                                lift_availability boolean,
+                                int_user_needs integer,
+                                zip_code character varying,
+                                city_name character varying,
+                                url character varying,
+                                time_zone character varying,
+                                compass_bearing integer,
+                                stop_place_type character varying,
+                                transport_mode character varying,
+                                transport_sub_mode character varying
 );
 
 
@@ -2020,7 +2018,7 @@ ALTER TABLE chouette_gui.stop_areas_stop_areas OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.stop_points_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -2033,18 +2031,18 @@ ALTER TABLE chouette_gui.stop_points_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.stop_points (
-                                          id bigint DEFAULT nextval('chouette_gui.stop_points_id_seq'::regclass) NOT NULL,
-                                          route_id bigint,
-                                          objectid character varying NOT NULL,
-                                          object_version integer,
-                                          creation_time timestamp without time zone,
-                                          creator_id character varying,
-                                          "position" integer,
-                                          for_boarding character varying,
-                                          for_alighting character varying,
-                                          destination_display_id bigint,
-                                          scheduled_stop_point_id bigint NOT NULL,
-                                          booking_arrangement_id bigint
+                                 id bigint DEFAULT nextval('chouette_gui.stop_points_id_seq'::regclass) NOT NULL,
+                                 route_id bigint,
+                                 objectid character varying NOT NULL,
+                                 object_version integer,
+                                 creation_time timestamp without time zone,
+                                 creator_id character varying,
+                                 "position" integer,
+                                 for_boarding character varying,
+                                 for_alighting character varying,
+                                 destination_display_id bigint,
+                                 scheduled_stop_point_id bigint NOT NULL,
+                                 booking_arrangement_id bigint
 );
 
 
@@ -2069,14 +2067,14 @@ ALTER TABLE chouette_gui.taggings_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.taggings (
-                                       id bigint DEFAULT nextval('chouette_gui.taggings_id_seq'::regclass) NOT NULL,
-                                       tag_id bigint,
-                                       taggable_id bigint,
-                                       taggable_type character varying,
-                                       tagger_id bigint,
-                                       tagger_type character varying,
-                                       context character varying(128),
-                                       created_at timestamp without time zone
+                              id bigint DEFAULT nextval('chouette_gui.taggings_id_seq'::regclass) NOT NULL,
+                              tag_id bigint,
+                              taggable_id bigint,
+                              taggable_type character varying,
+                              tagger_id bigint,
+                              tagger_type character varying,
+                              context character varying(128),
+                              created_at timestamp without time zone
 );
 
 
@@ -2101,9 +2099,9 @@ ALTER TABLE chouette_gui.tags_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.tags (
-                                   id bigint DEFAULT nextval('chouette_gui.tags_id_seq'::regclass) NOT NULL,
-                                   name character varying,
-                                   taggings_count integer DEFAULT 0
+                          id bigint DEFAULT nextval('chouette_gui.tags_id_seq'::regclass) NOT NULL,
+                          name character varying,
+                          taggings_count integer DEFAULT 0
 );
 
 
@@ -2128,11 +2126,11 @@ ALTER TABLE chouette_gui.time_table_dates_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.time_table_dates (
-                                               time_table_id bigint NOT NULL,
-                                               date date,
-                                               "position" integer NOT NULL,
-                                               id bigint DEFAULT nextval('chouette_gui.time_table_dates_id_seq'::regclass) NOT NULL,
-                                               in_out boolean
+                                      time_table_id bigint NOT NULL,
+                                      date date,
+                                      "position" integer NOT NULL,
+                                      id bigint DEFAULT nextval('chouette_gui.time_table_dates_id_seq'::regclass) NOT NULL,
+                                      in_out boolean
 );
 
 
@@ -2157,11 +2155,11 @@ ALTER TABLE chouette_gui.time_table_periods_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.time_table_periods (
-                                                 time_table_id bigint NOT NULL,
-                                                 period_start date,
-                                                 period_end date,
-                                                 "position" integer NOT NULL,
-                                                 id bigint DEFAULT nextval('chouette_gui.time_table_periods_id_seq'::regclass) NOT NULL
+                                        time_table_id bigint NOT NULL,
+                                        period_start date,
+                                        period_end date,
+                                        "position" integer NOT NULL,
+                                        id bigint DEFAULT nextval('chouette_gui.time_table_periods_id_seq'::regclass) NOT NULL
 );
 
 
@@ -2173,7 +2171,7 @@ ALTER TABLE chouette_gui.time_table_periods OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.time_tables_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -2186,16 +2184,16 @@ ALTER TABLE chouette_gui.time_tables_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.time_tables (
-                                          id bigint DEFAULT nextval('chouette_gui.time_tables_id_seq'::regclass) NOT NULL,
-                                          objectid character varying NOT NULL,
-                                          object_version integer DEFAULT 1,
-                                          creation_time timestamp without time zone,
-                                          creator_id character varying,
-                                          version character varying,
-                                          comment character varying,
-                                          int_day_types integer DEFAULT 0,
-                                          start_date date,
-                                          end_date date
+                                 id bigint DEFAULT nextval('chouette_gui.time_tables_id_seq'::regclass) NOT NULL,
+                                 objectid character varying NOT NULL,
+                                 object_version integer DEFAULT 1,
+                                 creation_time timestamp without time zone,
+                                 creator_id character varying,
+                                 version character varying,
+                                 comment character varying,
+                                 int_day_types integer DEFAULT 0,
+                                 start_date date,
+                                 end_date date
 );
 
 
@@ -2206,8 +2204,8 @@ ALTER TABLE chouette_gui.time_tables OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.time_tables_blocks (
-                                                 block_id integer NOT NULL,
-                                                 time_table_id integer NOT NULL
+                                        block_id integer NOT NULL,
+                                        time_table_id integer NOT NULL
 );
 
 
@@ -2218,8 +2216,8 @@ ALTER TABLE chouette_gui.time_tables_blocks OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.time_tables_dead_runs (
-                                                    dead_run_id integer NOT NULL,
-                                                    time_table_id integer NOT NULL
+                                           dead_run_id integer NOT NULL,
+                                           time_table_id integer NOT NULL
 );
 
 
@@ -2243,7 +2241,7 @@ ALTER TABLE chouette_gui.time_tables_vehicle_journeys OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.timebands_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -2256,16 +2254,16 @@ ALTER TABLE chouette_gui.timebands_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.timebands (
-                                        id bigint DEFAULT nextval('chouette_gui.timebands_id_seq'::regclass) NOT NULL,
-                                        objectid character varying NOT NULL,
-                                        object_version integer,
-                                        creation_time timestamp without time zone,
-                                        creator_id character varying,
-                                        name character varying,
-                                        start_time time without time zone NOT NULL,
-                                        end_time time without time zone NOT NULL,
-                                        created_at timestamp without time zone,
-                                        updated_at timestamp without time zone
+                               id bigint DEFAULT nextval('chouette_gui.timebands_id_seq'::regclass) NOT NULL,
+                               objectid character varying NOT NULL,
+                               object_version integer,
+                               creation_time timestamp without time zone,
+                               creator_id character varying,
+                               name character varying,
+                               start_time time without time zone NOT NULL,
+                               end_time time without time zone NOT NULL,
+                               created_at timestamp without time zone,
+                               updated_at timestamp without time zone
 );
 
 
@@ -2290,39 +2288,39 @@ ALTER TABLE chouette_gui.users_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.users (
-                                    id bigint DEFAULT nextval('chouette_gui.users_id_seq'::regclass) NOT NULL,
-                                    email character varying DEFAULT ''::character varying NOT NULL,
-                                    encrypted_password character varying DEFAULT ''::character varying,
-                                    reset_password_token character varying,
-                                    reset_password_sent_at timestamp without time zone,
-                                    remember_created_at timestamp without time zone,
-                                    sign_in_count integer DEFAULT 0,
-                                    current_sign_in_at timestamp without time zone,
-                                    last_sign_in_at timestamp without time zone,
-                                    current_sign_in_ip character varying,
-                                    last_sign_in_ip character varying,
-                                    created_at timestamp without time zone,
-                                    updated_at timestamp without time zone,
-                                    organisation_id bigint,
-                                    name character varying,
-                                    confirmation_token character varying,
-                                    confirmed_at timestamp without time zone,
-                                    confirmation_sent_at timestamp without time zone,
-                                    unconfirmed_email character varying,
-                                    failed_attempts integer DEFAULT 0,
-                                    unlock_token character varying,
-                                    locked_at timestamp without time zone,
-                                    authentication_token character varying,
-                                    invitation_token character varying,
-                                    invitation_sent_at timestamp without time zone,
-                                    invitation_accepted_at timestamp without time zone,
-                                    invitation_limit integer,
-                                    invited_by_id bigint,
-                                    invited_by_type character varying,
-                                    invitation_created_at timestamp without time zone,
-                                    role integer DEFAULT 1 NOT NULL,
-                                    provider character varying,
-                                    uid character varying
+                           id bigint DEFAULT nextval('chouette_gui.users_id_seq'::regclass) NOT NULL,
+                           email character varying DEFAULT ''::character varying NOT NULL,
+                           encrypted_password character varying DEFAULT ''::character varying,
+                           reset_password_token character varying,
+                           reset_password_sent_at timestamp without time zone,
+                           remember_created_at timestamp without time zone,
+                           sign_in_count integer DEFAULT 0,
+                           current_sign_in_at timestamp without time zone,
+                           last_sign_in_at timestamp without time zone,
+                           current_sign_in_ip character varying,
+                           last_sign_in_ip character varying,
+                           created_at timestamp without time zone,
+                           updated_at timestamp without time zone,
+                           organisation_id bigint,
+                           name character varying,
+                           confirmation_token character varying,
+                           confirmed_at timestamp without time zone,
+                           confirmation_sent_at timestamp without time zone,
+                           unconfirmed_email character varying,
+                           failed_attempts integer DEFAULT 0,
+                           unlock_token character varying,
+                           locked_at timestamp without time zone,
+                           authentication_token character varying,
+                           invitation_token character varying,
+                           invitation_sent_at timestamp without time zone,
+                           invitation_accepted_at timestamp without time zone,
+                           invitation_limit integer,
+                           invited_by_id bigint,
+                           invited_by_type character varying,
+                           invitation_created_at timestamp without time zone,
+                           role integer DEFAULT 1 NOT NULL,
+                           provider character varying,
+                           uid character varying
 );
 
 
@@ -2334,7 +2332,7 @@ ALTER TABLE chouette_gui.users OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.vehicle_journey_at_stops_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -2347,21 +2345,21 @@ ALTER TABLE chouette_gui.vehicle_journey_at_stops_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.vehicle_journey_at_stops (
-                                                       id bigint DEFAULT nextval('chouette_gui.vehicle_journey_at_stops_id_seq'::regclass) NOT NULL,
-                                                       vehicle_journey_id bigint,
-                                                       stop_point_id bigint,
-                                                       connecting_service_id character varying,
-                                                       boarding_alighting_possibility character varying,
-                                                       arrival_time time without time zone,
-                                                       departure_time time without time zone,
-                                                       for_boarding character varying,
-                                                       for_alighting character varying,
-                                                       arrival_day_offset integer DEFAULT 0 NOT NULL,
-                                                       departure_day_offset integer DEFAULT 0 NOT NULL,
-                                                       objectid character varying,
-                                                       object_version integer,
-                                                       creator_id character varying,
-                                                       creation_time timestamp without time zone
+                                              id bigint DEFAULT nextval('chouette_gui.vehicle_journey_at_stops_id_seq'::regclass) NOT NULL,
+                                              vehicle_journey_id bigint,
+                                              stop_point_id bigint,
+                                              connecting_service_id character varying,
+                                              boarding_alighting_possibility character varying,
+                                              arrival_time time without time zone,
+                                              departure_time time without time zone,
+                                              for_boarding character varying,
+                                              for_alighting character varying,
+                                              arrival_day_offset integer DEFAULT 0 NOT NULL,
+                                              departure_day_offset integer DEFAULT 0 NOT NULL,
+                                              objectid character varying,
+                                              object_version integer,
+                                              creator_id character varying,
+                                              creation_time timestamp without time zone
 );
 
 
@@ -2373,7 +2371,7 @@ ALTER TABLE chouette_gui.vehicle_journey_at_stops OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.vehicle_journeys_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 100
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -2386,29 +2384,29 @@ ALTER TABLE chouette_gui.vehicle_journeys_id_seq OWNER TO chouette;
 --
 
 CREATE TABLE chouette_gui.vehicle_journeys (
-                                               id bigint DEFAULT nextval('chouette_gui.vehicle_journeys_id_seq'::regclass) NOT NULL,
-                                               route_id bigint,
-                                               journey_pattern_id bigint,
-                                               company_id bigint,
-                                               objectid character varying NOT NULL,
-                                               object_version integer,
-                                               creation_time timestamp without time zone,
-                                               creator_id character varying,
-                                               comment character varying,
-                                               status_value character varying,
-                                               transport_mode character varying,
-                                               published_journey_name character varying,
-                                               published_journey_identifier character varying,
-                                               facility character varying,
-                                               vehicle_type_identifier character varying,
-                                               number bigint,
-                                               mobility_restricted_suitability boolean,
-                                               flexible_service boolean,
-                                               journey_category integer DEFAULT 0 NOT NULL,
-                                               transport_submode_name character varying,
-                                               private_code character varying,
-                                               service_alteration character varying,
-                                               flexible_service_properties_id bigint,
+                                      id bigint DEFAULT nextval('chouette_gui.vehicle_journeys_id_seq'::regclass) NOT NULL,
+                                      route_id bigint,
+                                      journey_pattern_id bigint,
+                                      company_id bigint,
+                                      objectid character varying NOT NULL,
+                                      object_version integer,
+                                      creation_time timestamp without time zone,
+                                      creator_id character varying,
+                                      comment character varying,
+                                      status_value character varying,
+                                      transport_mode character varying,
+                                      published_journey_name character varying,
+                                      published_journey_identifier character varying,
+                                      facility character varying,
+                                      vehicle_type_identifier character varying,
+                                      number bigint,
+                                      mobility_restricted_suitability boolean,
+                                      flexible_service boolean,
+                                      journey_category integer DEFAULT 0 NOT NULL,
+                                      transport_submode_name character varying,
+                                      private_code character varying,
+                                      service_alteration character varying,
+                                      flexible_service_properties_id bigint,
                                                publication varchar
 );
 
@@ -2421,7 +2419,7 @@ ALTER TABLE chouette_gui.vehicle_journeys OWNER TO chouette;
 
 CREATE TABLE chouette_gui.vehicle_journeys_key_values (
                                                           vehicle_journey_id bigint,
-                                                          type_of_key character varying,
+                                                 type_of_key character varying,
                                                           key character varying,
                                                           value character varying
 );
@@ -5362,6 +5360,14 @@ ALTER TABLE ONLY chouette_gui.footnote_alternative_texts
 
 ALTER TABLE ONLY chouette_gui.footnotes
     ADD CONSTRAINT footnotes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: footnotes_vehicle_journey_at_stops footnotes_vehicle_journey_at_stops_pkey; Type: CONSTRAINT; Schema: chouette_gui; Owner: chouette
+--
+
+ALTER TABLE ONLY chouette_gui.footnotes_vehicle_journey_at_stops
+    ADD CONSTRAINT footnotes_vehicle_journey_at_stops_pkey PRIMARY KEY (footnote_id, vehicle_journey_at_stop_id);
 
 
 --

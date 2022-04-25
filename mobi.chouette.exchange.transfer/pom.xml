@@ -76,7 +76,7 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.wildfly</groupId>
+			<groupId>org.wildfly.core</groupId>
 			<artifactId>wildfly-embedded</artifactId>
 			<scope>test</scope>
 			<exclusions>
@@ -87,7 +87,7 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>org.wildfly</groupId>
+			<groupId>org.wildfly.arquillian</groupId>
 			<artifactId>wildfly-arquillian-container-embedded</artifactId>
 			<scope>test</scope>
 		</dependency>

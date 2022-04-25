@@ -28,7 +28,7 @@ public class FootNoteAlternativeText  extends NeptuneIdentifiedObject {
 
     @Getter
     @Setter
-    @GenericGenerator(name = "footnote_alternative_texts_id_seq", strategy = "mobi.chouette.persistence.hibernate.ChouetteIdentifierGenerator", parameters = {
+    @GenericGenerator(name = "footnote_alternative_texts_id_seq", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
             @Parameter(name = "sequence_name", value = "footnote_alternative_texts_id_seq"),
             @Parameter(name = "increment_size", value = "10") })
     @GeneratedValue(generator = "footnote_alternative_texts_id_seq")

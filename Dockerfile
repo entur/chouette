@@ -1,4 +1,4 @@
-FROM jboss/wildfly:8.2.1.Final
+FROM jboss/wildfly:10.1.0.Final
 
 USER root
 RUN yum -y update && yum -y install wget && yum clean all

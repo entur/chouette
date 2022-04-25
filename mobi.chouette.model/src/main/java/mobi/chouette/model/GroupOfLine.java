@@ -37,7 +37,7 @@ public class GroupOfLine extends NeptuneIdentifiedObject {
 
 	@Getter
 	@Setter
-	@GenericGenerator(name = "group_of_lines_id_seq", strategy = "mobi.chouette.persistence.hibernate.ChouetteIdentifierGenerator", 
+	@GenericGenerator(name = "group_of_lines_id_seq", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", 
 		parameters = {
 			@Parameter(name = "sequence_name", value = "group_of_lines_id_seq"),
 			@Parameter(name = "increment_size", value = "10") })

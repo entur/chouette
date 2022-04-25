@@ -31,7 +31,7 @@ public class FlexibleServiceProperties extends NeptuneIdentifiedObject {
 
 	@Getter
 	@Setter
-	@GenericGenerator(name = "flexible_service_properties_id_seq", strategy = "mobi.chouette.persistence.hibernate.ChouetteIdentifierGenerator", parameters = {
+	@GenericGenerator(name = "flexible_service_properties_id_seq", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
 			@Parameter(name = "sequence_name", value = "flexible_service_properties_id_seq"),
 			@Parameter(name = "increment_size", value = "100")})
 	@GeneratedValue(generator = "flexible_service_properties_id_seq")

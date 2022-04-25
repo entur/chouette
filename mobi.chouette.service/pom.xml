@@ -63,11 +63,6 @@
          <artifactId>jboss-transaction-api_1.2_spec</artifactId>
          <scope>provided</scope>
       </dependency>
-      <dependency>
-         <groupId>org.jboss.resteasy</groupId>
-         <artifactId>jaxrs-api</artifactId>
-         <scope>provided</scope>
-      </dependency>
 
        <dependency>
            <groupId>org.entur.helpers</groupId>
@@ -97,7 +92,7 @@
          <scope>test</scope>
       </dependency>
       <dependency>
-         <groupId>org.wildfly</groupId>
+         <groupId>org.wildfly.core</groupId>
          <artifactId>wildfly-embedded</artifactId>
          <scope>test</scope>
           <exclusions>
@@ -108,7 +103,7 @@
           </exclusions>
       </dependency>
       <dependency>
-         <groupId>org.wildfly</groupId>
+         <groupId>org.wildfly.arquillian</groupId>
          <artifactId>wildfly-arquillian-container-embedded</artifactId>
          <scope>test</scope>
       </dependency>

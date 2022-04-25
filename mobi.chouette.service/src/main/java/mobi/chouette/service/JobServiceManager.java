@@ -46,7 +46,6 @@ import mobi.chouette.model.iev.Job;
 import mobi.chouette.model.iev.Job.STATUS;
 import mobi.chouette.model.iev.Link;
 import mobi.chouette.model.iev.Stat;
-import mobi.chouette.persistence.hibernate.ChouetteIdentifierGenerator;
 import mobi.chouette.scheduler.Scheduler;
 
 import com.google.common.base.Predicate;
@@ -387,9 +386,6 @@ public class JobServiceManager {
 
 		// remove referential from known ones
 		referentials.remove(referential);
-
-		// remove sequences data for this tenant
-		ChouetteIdentifierGenerator.deleteTenant(referential);
 
 	}
 

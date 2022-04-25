@@ -86,6 +86,11 @@
              <groupId>org.apache.struts</groupId>
              <artifactId>struts-tiles</artifactId>
           </exclusion>
+          <exclusion>
+              <groupId>dom4j</groupId>
+              <artifactId>dom4j</artifactId>
+          </exclusion>
+
         </exclusions>
 		</dependency>
         <dependency>
@@ -121,7 +126,7 @@
          <scope>test</scope>
       </dependency>
       <dependency>
-         <groupId>org.wildfly</groupId>
+         <groupId>org.wildfly.core</groupId>
          <artifactId>wildfly-embedded</artifactId>
          <scope>test</scope>
           <exclusions>
@@ -132,7 +137,7 @@
           </exclusions>
       </dependency>
       <dependency>
-         <groupId>org.wildfly</groupId>
+         <groupId>org.wildfly.arquillian</groupId>
          <artifactId>wildfly-arquillian-container-embedded</artifactId>
          <scope>test</scope>
       </dependency>

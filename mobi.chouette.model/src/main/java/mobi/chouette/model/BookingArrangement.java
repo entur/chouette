@@ -41,7 +41,7 @@ public class BookingArrangement extends NeptuneObject {
 
 	@Getter
 	@Setter
-	@GenericGenerator(name = "booking_arrangements_id_seq", strategy = "mobi.chouette.persistence.hibernate.ChouetteIdentifierGenerator", parameters = {
+	@GenericGenerator(name = "booking_arrangements_id_seq", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
 			@Parameter(name = "sequence_name", value = "booking_arrangements_id_seq"),
 			@Parameter(name = "increment_size", value = "100")})
 	@GeneratedValue(generator = "booking_arrangements_id_seq")

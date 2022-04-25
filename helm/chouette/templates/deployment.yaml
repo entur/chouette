@@ -40,7 +40,7 @@ spec:
     spec:
       containers:
         - name: chouette-sql-proxy
-          image: gcr.io/cloudsql-docker/gce-proxy:1.17-alpine
+          image: gcr.io/cloudsql-docker/gce-proxy:1.29.0-alpine
           command:
             - /cloud_sql_proxy
             - -instances={{ .Values.gcpDatabaseInstance}}

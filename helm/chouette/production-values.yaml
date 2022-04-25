@@ -2,5 +2,9 @@ env: production
 gcpProjectId: entur-ror-production
 gcpDatabaseInstance: entur-ror-prod:europe-west1:chouette-db-1=tcp:5432
 gcpBucketName: ror-chouette-production
+tiamatUrl: http://tiamat.prd.entur.internal
+osrmRailUrl: http://osrm-rail.prd.entur.internal
+osrmBusUrl: http://osrm-bus.prd.entur.internal
+osrmWaterUrl: http://osrm-water.prd.entur.internal
 
 

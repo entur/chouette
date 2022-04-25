@@ -19,7 +19,7 @@ public class Codespace extends NeptuneObject {
 
     @Getter
     @Setter
-    @GenericGenerator(name = "codespaces_id_seq", strategy = "mobi.chouette.persistence.hibernate.ChouetteIdentifierGenerator", parameters = {
+    @GenericGenerator(name = "codespaces_id_seq", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
             @Parameter(name = "sequence_name", value = "codespaces_id_seq"),
             @Parameter(name = "increment_size", value = "10")})
     @GeneratedValue(generator = "codespaces_id_seq")

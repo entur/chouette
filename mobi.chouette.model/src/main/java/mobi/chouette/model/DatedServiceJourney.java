@@ -36,7 +36,7 @@ public class DatedServiceJourney extends NeptuneIdentifiedObject {
 
     @Getter
     @Setter
-    @GenericGenerator(name = "dated_service_journeys_id_seq", strategy = "mobi.chouette.persistence.hibernate.ChouetteIdentifierGenerator", parameters = {
+    @GenericGenerator(name = "dated_service_journeys_id_seq", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
             @Parameter(name = "sequence_name", value = "dated_service_journeys_id_seq"),
             @Parameter(name = "increment_size", value = "100")})
     @GeneratedValue(generator = "dated_service_journeys_id_seq")

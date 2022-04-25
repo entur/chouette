@@ -7,6 +7,7 @@
 	<persistence-unit name="public" transaction-type="JTA">
 
 		<jta-data-source>java:jboss/datasources/chouette</jta-data-source>
+		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
 
 		<class>mobi.chouette.model.AccessLink</class>
 		<class>mobi.chouette.model.AccessPoint</class>
@@ -25,12 +26,16 @@
 			<property name="hibernate.order_inserts" value="true" />
 			<property name="hibernate.order_updates" value="true" />
 
+			<property name="hibernate.id.new_generator_mappings" value="false" />
 
 			<property name="hibernate.default_batch_fetch_size" value="100" />
 			<property name="hibernate.connection.datasource" value="java:jboss/datasources/chouette" />
-			<property name="hibernate.cache.use_second_level_cache"
-				value="true" />
+
+			<property name="hibernate.cache.use_second_level_cache" value="true" />
+
+			<property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.JBossTransactionManagerLookup"/>
 			<property name="hibernate.cache.use_query_cache" value="true" />
+
 			<property name="javax.persistence.validation.mode" value="none" />
 			<property name="hibernate.hbm2ddl.auto" value="none" />
 			<property name="hibernate.default_schema" value="public" />
@@ -46,6 +51,8 @@
 	<persistence-unit name="referential" transaction-type="JTA">
 
 		<jta-data-source>java:jboss/datasources/chouette</jta-data-source>
+		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
+
         <class>mobi.chouette.model.BookingArrangement</class>
 		<class>mobi.chouette.model.Branding</class>
 		<class>mobi.chouette.model.CalendarDay</class>
@@ -90,6 +97,7 @@
 			<property name="hibernate.order_inserts" value="true" />
 			<property name="hibernate.order_updates" value="true" />
 
+			<property name="hibernate.id.new_generator_mappings" value="false" />
 
 			<property name="hibernate.default_batch_fetch_size" value="2000" />
 			<property name="hibernate.multiTenancy" value="SCHEMA" />
@@ -98,9 +106,12 @@
 				value="mobi.chouette.persistence.hibernate.DefaultTenantIdentifierResolver" />
 			<property name="hibernate.multi_tenant_connection_provider"
 				value="mobi.chouette.persistence.hibernate.DefaultConnectionProvider" />
-			<property name="hibernate.cache.use_second_level_cache"
-				value="true" />
+
+			<property name="hibernate.cache.use_second_level_cache" value="true" />
+
+			<property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.JBossTransactionManagerLookup"/>
 			<property name="hibernate.cache.use_query_cache" value="true" />
+
          <property name="hibernate.dialect" value="org.hibernate.spatial.dialect.postgis.PostgisDialect" />
 			<property name="javax.persistence.validation.mode" value="none" />
             <property name="jadira.usertype.autoRegisterUserTypes" value="true" />

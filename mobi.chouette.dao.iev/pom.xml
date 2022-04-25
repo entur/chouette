@@ -57,7 +57,20 @@
       <dependency>
          <groupId>org.jadira.usertype</groupId>
          <artifactId>usertype.core</artifactId>
+         <exclusions>
+            <exclusion>
+               <groupId>dom4j</groupId>
+               <artifactId>dom4j</artifactId>
+            </exclusion>
+         </exclusions>
       </dependency>
+      <dependency>
+         <groupId>dom4j</groupId>
+         <artifactId>dom4j</artifactId>
+         <version>1.6.1</version>
+         <scope>provided</scope>
+      </dependency>
+
 
       <!-- Modules -->
       <dependency>
@@ -86,7 +99,7 @@
          <scope>test</scope>
       </dependency>
       <dependency>
-         <groupId>org.wildfly</groupId>
+         <groupId>org.wildfly.core</groupId>
          <artifactId>wildfly-embedded</artifactId>
          <scope>test</scope>
          <exclusions>
@@ -97,7 +110,7 @@
          </exclusions>
       </dependency>
       <dependency>
-         <groupId>org.wildfly</groupId>
+         <groupId>org.wildfly.arquillian</groupId>
          <artifactId>wildfly-arquillian-container-embedded</artifactId>
          <scope>test</scope>
       </dependency>
