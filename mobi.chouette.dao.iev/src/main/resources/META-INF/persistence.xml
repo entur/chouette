@@ -32,7 +32,7 @@
          <property name="javax.persistence.validation.mode" value="none" />
          <property name="hibernate.hbm2ddl.auto" value="update" />
          <property name="hibernate.default_schema" value="public" />
-         <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL9Dialect" />
+         <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL94Dialect" />
          <property name="jadira.usertype.autoRegisterUserTypes" value="true" />
       </properties>
    </persistence-unit>
