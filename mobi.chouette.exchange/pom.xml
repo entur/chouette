@@ -38,7 +38,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.spec</groupId>
-			<artifactId>jboss-javaee-8.0</artifactId>
+			<artifactId>jboss-javaee-7.0</artifactId>
 			<type>pom</type>
 			<scope>provided</scope>
 		</dependency>
@@ -68,7 +68,6 @@
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
 			<artifactId>velocity</artifactId>
-            <version>1.7</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
@@ -88,7 +87,7 @@
              <artifactId>struts-tiles</artifactId>
           </exclusion>
           <exclusion>
-              <groupId>org.dom4j</groupId>
+              <groupId>dom4j</groupId>
               <artifactId>dom4j</artifactId>
           </exclusion>
 

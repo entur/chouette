@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.2"
+<persistence version="2.1"
 	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 
 
 	<persistence-unit name="public" transaction-type="JTA">
 
 		<jta-data-source>java:jboss/datasources/chouette</jta-data-source>
+		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
 
 		<class>mobi.chouette.model.AccessLink</class>
 		<class>mobi.chouette.model.AccessPoint</class>
@@ -14,7 +15,6 @@
 		<class>mobi.chouette.model.StopArea</class>
 
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
-		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
 		<validation-mode>NONE</validation-mode>
 
 		<properties>
@@ -39,9 +39,10 @@
 			<property name="javax.persistence.validation.mode" value="none" />
 			<property name="hibernate.hbm2ddl.auto" value="none" />
 			<property name="hibernate.default_schema" value="public" />
-			<property name="hibernate.dialect" value="org.hibernate.spatial.dialect.postgis.PostgisPG95Dialect" />
+			<property name="hibernate.dialect" value="org.hibernate.spatial.dialect.postgis.PostgisDialect" />
 
-			<property name="hibernate.session_factory.interceptor" value="mobi.chouette.dao.interceptor.StopAreaRelationInterceptor"/>
+			<property name="hibernate.ejb.interceptor" value="mobi.chouette.dao.interceptor.StopAreaRelationInterceptor"/>
+			<property name="jadira.usertype.autoRegisterUserTypes" value="true" />
 		</properties>
 		
 		
@@ -50,6 +51,7 @@
 	<persistence-unit name="referential" transaction-type="JTA">
 
 		<jta-data-source>java:jboss/datasources/chouette</jta-data-source>
+		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
 
         <class>mobi.chouette.model.BookingArrangement</class>
 		<class>mobi.chouette.model.Branding</class>
@@ -82,9 +84,7 @@
 		<class>mobi.chouette.model.DeadRun</class>
 		<class>mobi.chouette.model.DeadRunAtStop</class>
 		<class>mobi.chouette.model.Interchange</class>
-
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
-		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
 		<validation-mode>NONE</validation-mode>
 
 		<properties>
@@ -112,9 +112,10 @@
 			<property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.JBossTransactionManagerLookup"/>
 			<property name="hibernate.cache.use_query_cache" value="true" />
 
-         <property name="hibernate.dialect" value="org.hibernate.spatial.dialect.postgis.PostgisPG95Dialect" />
+         <property name="hibernate.dialect" value="org.hibernate.spatial.dialect.postgis.PostgisDialect" />
 			<property name="javax.persistence.validation.mode" value="none" />
-			<property name="hibernate.session_factory.interceptor" value="mobi.chouette.dao.interceptor.RelationsToStopAreaInterceptor"/>
+            <property name="jadira.usertype.autoRegisterUserTypes" value="true" />
+			<property name="hibernate.ejb.interceptor" value="mobi.chouette.dao.interceptor.RelationsToStopAreaInterceptor"/>
 		</properties>
 	</persistence-unit>
 

@@ -12,10 +12,10 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
 
-		<wildfly.version>15.0.1.Final</wildfly.version>
-		<wildfly.core.version>7.0.0.Final</wildfly.core.version>
-		<jboss-javaee-8.0.version>1.0.4.Final</jboss-javaee-8.0.version>
-		<wildfly-javaee8-with-tools.version>15.0.1.Final</wildfly-javaee8-with-tools.version>
+		<wildfly.version>10.1.0.Final</wildfly.version>
+		<wildfly.core.version>2.2.0.Final</wildfly.core.version>
+		<jboss-javaee-7.0.version>1.0.4.Final</jboss-javaee-7.0.version>
+		<wildfly-javaee7-with-tools.version>10.1.1.Final</wildfly-javaee7-with-tools.version>
 
 		<version.wildfly.maven.plugin>1.2.2.Final</version.wildfly.maven.plugin>
 		<version.compiler.plugin>3.10.0</version.compiler.plugin>
@@ -38,13 +38,12 @@
 
 		<postgresql.version>42.3.3</postgresql.version>
 		<postgis.version>2.5.1</postgis.version>
-		<hibernate.version>5.3.25.Final</hibernate.version>
-		<usertype.core.version>6.0.1.GA</usertype.core.version>
+		<hibernate.version>5.0.12.Final</hibernate.version>
+		<usertype.core.version>5.0.0.GA</usertype.core.version>
 		<jts.version>1.13</jts.version>
 		<geolatte-geom.version>1.0.6</geolatte-geom.version>
 
 		<jaxb-version>2.2.11</jaxb-version>
-		<dom4j.version>2.1.1</dom4j.version>
 		<lombok-version>1.18.22</lombok-version>
 		<lombok-maven-plugin-version>1.18.20.0</lombok-maven-plugin-version>
 		<prometheus.agent.version>0.16.1</prometheus.agent.version>
@@ -56,9 +55,9 @@
 		<rutebanken.helpers.version>1.0.55</rutebanken.helpers.version>
 		<owasp-dependency-check-plugin.version>6.5.3</owasp-dependency-check-plugin.version>
 
-		<shrinkwrap-resolver-bom.version>2.2.6</shrinkwrap-resolver-bom.version>
-		<arquillian-version>1.4.1.Final</arquillian-version>
-		<wildfly-arquillian-container-embedded.version>2.2.0.Final</wildfly-arquillian-container-embedded.version>
+		<shrinkwrap-resolver-bom.version>2.2.4</shrinkwrap-resolver-bom.version>
+		<arquillian-version>1.1.11.Final</arquillian-version>
+		<wildfly-arquillian-container-embedded.version>2.0.0.Final</wildfly-arquillian-container-embedded.version>
 
 
 
@@ -254,6 +253,31 @@
 									</outputDirectory>
 								</artifactItem>
 								<artifactItem>
+									<groupId>org.hibernate</groupId>
+									<artifactId>hibernate-entitymanager</artifactId>
+									<version>${hibernate.version}</version>
+									<outputDirectory>
+										${project.rootDir}/target/wildfly-customized-dependencies/modules/system/layers/base/org/hibernate/main
+									</outputDirectory>
+								</artifactItem>
+								<artifactItem>
+									<groupId>org.hibernate</groupId>
+									<artifactId>hibernate-java8</artifactId>
+									<version>${hibernate.version}</version>
+									<outputDirectory>
+										${project.rootDir}/target/wildfly-customized-dependencies/modules/system/layers/base/org/hibernate/main
+									</outputDirectory>
+								</artifactItem>
+								<artifactItem>
+									<groupId>org.hibernate</groupId>
+									<artifactId>hibernate-infinispan</artifactId>
+									<version>${hibernate.version}</version>
+									<outputDirectory>
+										${project.rootDir}/target/wildfly-customized-dependencies/modules/system/layers/base/org/hibernate/infinispan/main
+									</outputDirectory>
+								</artifactItem>
+
+								<artifactItem>
 									<groupId>com.vividsolutions</groupId>
 									<artifactId>jts</artifactId>
 									<version>${jts.version}</version>
@@ -261,6 +285,7 @@
 										${project.rootDir}/target/wildfly-customized-dependencies/modules/system/layers/base/org/hibernate/main
 									</outputDirectory>
 								</artifactItem>
+
 								<artifactItem>
 									<groupId>org.geolatte</groupId>
 									<artifactId>geolatte-geom</artifactId>
@@ -741,16 +766,16 @@
 			</dependency>
 			<dependency>
 				<groupId>org.jboss.spec</groupId>
-				<artifactId>jboss-javaee-8.0</artifactId>
+				<artifactId>jboss-javaee-7.0</artifactId>
 				<type>pom</type>
-				<version>${jboss-javaee-8.0.version}</version>
+				<version>${jboss-javaee-7.0.version}</version>
 				<scope>provided</scope>
 			</dependency>
 
 			<dependency>
 				<groupId>org.wildfly.bom</groupId>
-				<artifactId>wildfly-javaee8-with-tools</artifactId>
-				<version>${wildfly-javaee8-with-tools.version}</version>
+				<artifactId>wildfly-javaee7-with-tools</artifactId>
+				<version>${wildfly-javaee7-with-tools.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -909,7 +934,7 @@
 			</dependency>
 
 			<!-- Utilities Dependencies -->
-			<dependency>
+            <dependency>
                 <groupId>org.jadira.usertype</groupId>
                 <artifactId>usertype.core</artifactId>
                 <version>${usertype.core.version}</version>
@@ -1116,7 +1141,7 @@
 		<module>mobi.chouette.dao.iev</module>
 		<module>mobi.chouette.exchange</module>
  		<module>mobi.chouette.exchange.neptune</module>
-		<module>mobi.chouette.exchange.netexprofile</module>
+ 		<module>mobi.chouette.exchange.netexprofile</module>
 		<module>mobi.chouette.exchange.gtfs</module>
 		<module>mobi.chouette.exchange.stopplace</module>
 		<module>mobi.chouette.exchange.validator</module>

@@ -23,7 +23,7 @@
         </dependency>
         <dependency>
             <groupId>org.jboss.spec</groupId>
-            <artifactId>jboss-javaee-8.0</artifactId>
+            <artifactId>jboss-javaee-7.0</artifactId>
             <type>pom</type>
             <scope>provided</scope>
         </dependency>
@@ -61,8 +61,8 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>javax.persistence-api</artifactId>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.1-api</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>

@@ -45,7 +45,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.spec</groupId>
-			<artifactId>jboss-javaee-8.0</artifactId>
+			<artifactId>jboss-javaee-7.0</artifactId>
 			<type>pom</type>
 			<scope>provided</scope>
 		</dependency>
@@ -110,6 +110,7 @@
 			<groupId>xpp3</groupId>
 			<artifactId>xpp3</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.codehaus.jettison</groupId>
 			<artifactId>jettison</artifactId>

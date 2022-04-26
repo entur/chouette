@@ -11,6 +11,7 @@ import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.engine.config.spi.ConfigurationService;
 import org.hibernate.engine.jdbc.connections.spi.AbstractMultiTenantConnectionProvider;
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
+import org.hibernate.engine.jndi.spi.JndiService;
 import org.hibernate.service.UnknownUnwrapTypeException;
 import org.hibernate.service.spi.ServiceRegistryAwareService;
 import org.hibernate.service.spi.ServiceRegistryImplementor;
@@ -88,9 +89,32 @@ public class DefaultConnectionProvider implements
 
 	@Override
 	public void injectServices(ServiceRegistryImplementor registry) {
+
 		Map<?, ?> settings = getSettings(registry);
-		_datasource = (DataSource) settings.get(AvailableSettings.DATASOURCE);
+		String datasource = (String) settings.get(AvailableSettings.DATASOURCE);
+
 		ContextHolder.setDefaultSchema(null);
+
+		JndiService jndi = registry.getService(JndiService.class);
+		if (jndi == null) {
+			throw new HibernateException(
+					"Could not locate JndiService from DataSourceBasedMultiTenantConnectionProviderImpl");
+		}
+
+		Object namedObject = jndi.locate(datasource);
+		if (namedObject == null) {
+			throw new HibernateException("JNDI name [" + datasource
+					+ "] could not be resolved");
+		}
+
+		if (DataSource.class.isInstance(namedObject)) {
+			_datasource = (DataSource) namedObject;
+		} else {
+			throw new HibernateException("Unknown object type ["
+					+ namedObject.getClass().getName()
+					+ "] found in JNDI location [" + datasource + "]");
+		}
+
 	}
 
 	private Map<?, ?> getSettings(ServiceRegistryImplementor registry) {

@@ -57,7 +57,7 @@ public class TimetableDAOImpl extends GenericDAOImpl<Timetable>implements Timeta
 				+ "left join vehicle_journeys vj on vjt.vehicle_journey_id=vj.id "
 				+ "left join routes as r on vj.route_id=r.id "
 				+ "right join lines as l on r.line_id=l.id order by line_id");
-		q.unwrap(org.hibernate.query.Query.class).setTimeout(QUERY_TIMEOUT);
+		q.unwrap(org.hibernate.Query.class).setTimeout(QUERY_TIMEOUT);
 
 		List<Object[]> resultList;
 		try {

@@ -59,15 +59,15 @@
          <artifactId>usertype.core</artifactId>
          <exclusions>
             <exclusion>
-               <groupId>org.dom4j</groupId>
+               <groupId>dom4j</groupId>
                <artifactId>dom4j</artifactId>
             </exclusion>
          </exclusions>
       </dependency>
       <dependency>
-         <groupId>org.dom4j</groupId>
+         <groupId>dom4j</groupId>
          <artifactId>dom4j</artifactId>
-         <version>${dom4j.version}</version>
+         <version>1.6.1</version>
          <scope>provided</scope>
       </dependency>
 

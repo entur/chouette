@@ -1,7 +1,7 @@
-FROM jboss/wildfly:15.0.1.Final
+FROM jboss/wildfly:10.1.0.Final
 
 USER root
-RUN yum -y update && yum -y remove java && yum -y install wget java-1.8.0-openjdk java-1.8.0-openjdk-devel  && yum clean all
+RUN yum -y update && yum -y install wget && yum clean all
 USER jboss
 
 
