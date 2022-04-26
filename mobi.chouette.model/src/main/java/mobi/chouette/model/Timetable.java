@@ -32,7 +32,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 
 /**
  * Chouette Timetable
@@ -490,12 +490,12 @@ public class Timetable extends NeptuneIdentifiedObject {
 			return true;
 		}
 		if (startDate == null) {
-			return isActiveBefore(new LocalDate(endDate));
+			return isActiveBefore(endDate);
 		} else {
 			if (endDate == null) {
-				return isActiveAfter(new LocalDate(startDate));
+				return isActiveAfter(startDate);
 			} else {
-				return isActiveBetween(new LocalDate(startDate), new LocalDate(endDate));
+				return isActiveBetween(startDate, endDate);
 			}
 		}
 	}
@@ -516,7 +516,7 @@ public class Timetable extends NeptuneIdentifiedObject {
 		}
 		if (getIntDayTypes() != null && getIntDayTypes().intValue() != 0 && getPeriods() != null) {
 
-			int aDayOfWeek = aDay.getDayOfWeek() - 1; // zero on monday
+			int aDayOfWeek = aDay.getDayOfWeek().getValue() - 1; // zero on monday
 			int aDayOfWeekFlag = buildDayTypeMask(dayTypeByInt[aDayOfWeek]);
 			if ((getIntDayTypes() & aDayOfWeekFlag) == aDayOfWeekFlag) {
 				// check if day is in a period
@@ -657,7 +657,7 @@ public class Timetable extends NeptuneIdentifiedObject {
 
 			while (!date.isAfter(period.getEndDate())) {
 
-				int aDayOfWeek = date.getDayOfWeek() - 1; // zero on
+				int aDayOfWeek = date.getDayOfWeek().getValue() - 1; // zero on
 				// monday
 				int aDayOfWeekFlag = buildDayTypeMask(dayTypeByInt[aDayOfWeek]);
 				if ((getIntDayTypes() & aDayOfWeekFlag) == aDayOfWeekFlag) {

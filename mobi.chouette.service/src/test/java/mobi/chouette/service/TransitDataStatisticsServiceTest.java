@@ -2,12 +2,11 @@ package mobi.chouette.service;
 
 import java.util.*;
 
+import mobi.chouette.common.TimeUtil;
 import mobi.chouette.model.statistics.LineStatistics;
 import mobi.chouette.model.statistics.PublicLine;
 import mobi.chouette.model.statistics.ValidityCategory;
-import org.joda.time.DateMidnight;
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -17,7 +16,7 @@ public class TransitDataStatisticsServiceTest {
 
 	@Test
 	public void categorizeValidityWithInvalidLines() {
-		LocalDate startDate = new LocalDate();
+		LocalDate startDate = LocalDate.now();
 		LineStatistics lineStats = new LineStatistics();
 		lineStats.getPublicLines().add(createPublicLine("invalidNoDate", null,null));
 		lineStats.getPublicLines().add(createPublicLine("invalidHistoricToDate", startDate.plusDays(-5), startDate.plusDays(-2)));
@@ -30,7 +29,7 @@ public class TransitDataStatisticsServiceTest {
 		Map<Integer, String> minDaysValidityCategories=new HashMap<>();
 		minDaysValidityCategories.put(5, "OK");
 		minDaysValidityCategories.put(10,"GOOD");
-		new TransitDataStatisticsService().categorizeValidity(lineStats, startDate.toDate(), minDaysValidityCategories);
+		new TransitDataStatisticsService().categorizeValidity(lineStats, TimeUtil.toDate(startDate), minDaysValidityCategories);
 		Assert.assertEquals(lineStats.getValidityCategories().size(), 4);
 		Assert.assertEquals("INVALID",getCategory(lineStats, -1).getName());
 		Assert.assertEquals("EXPIRING",getCategory(lineStats, 0).getName());
@@ -46,24 +45,24 @@ public class TransitDataStatisticsServiceTest {
 
 	@Test
 	public void categorizeValidityWithHistoricPeriods() {
-		LocalDate startDate = new LocalDate();
+		LocalDate startDate = LocalDate.now();
 		LineStatistics lineStats = new LineStatistics();
 		PublicLine validNowAndInTheFuture= createPublicLine("validNowAndInTheFuture", startDate.minusDays(5),startDate.minusDays(3));
-		validNowAndInTheFuture.getEffectivePeriods().add(new Period(startDate.minusDays(1).toDate(),startDate.plusDays(15).toDate()));
+		validNowAndInTheFuture.getEffectivePeriods().add(new Period(startDate.minusDays(1),startDate.plusDays(15)));
 		lineStats.getPublicLines().add(validNowAndInTheFuture);
 
 		PublicLine validNowAndForSomeDays= createPublicLine("validNowAndForSomeDays", startDate.minusDays(5),startDate.minusDays(3));
-		validNowAndForSomeDays.getEffectivePeriods().add(new Period(startDate.minusDays(1).toDate(),startDate.plusDays(3).toDate()));
+		validNowAndForSomeDays.getEffectivePeriods().add(new Period(startDate.minusDays(1),startDate.plusDays(3)));
 		lineStats.getPublicLines().add(validNowAndForSomeDays);
 
 		PublicLine invalidNowWithHistoricPeriod= createPublicLine("invalidNowWithHistoricPeriod", startDate.minusDays(5),startDate.minusDays(3));
-		invalidNowWithHistoricPeriod.getEffectivePeriods().add(new Period(startDate.plusDays(5).toDate(),startDate.plusDays(15).toDate()));
+		invalidNowWithHistoricPeriod.getEffectivePeriods().add(new Period(startDate.plusDays(5),startDate.plusDays(15)));
 		lineStats.getPublicLines().add(invalidNowWithHistoricPeriod);
 
 		Map<Integer, String> minDaysValidityCategories=new HashMap<>();
 		minDaysValidityCategories.put(5, "OK");
 		minDaysValidityCategories.put(10,"GOOD");
-		new TransitDataStatisticsService().categorizeValidity(lineStats, startDate.toDate(), minDaysValidityCategories);
+		new TransitDataStatisticsService().categorizeValidity(lineStats, TimeUtil.toDate(startDate), minDaysValidityCategories);
 		Assert.assertEquals(lineStats.getValidityCategories().size(), 4);
 		Assert.assertEquals("INVALID",getCategory(lineStats, -1).getName());
 		Assert.assertEquals("EXPIRING",getCategory(lineStats, 0).getName());
@@ -79,7 +78,7 @@ public class TransitDataStatisticsServiceTest {
 	public void testMergeOverlappingPeriods() {
 		List<Period> periods = new ArrayList<Period>();
 
-		LocalDate today = new LocalDate();
+		LocalDate today = LocalDate.now();
 		periods.add(createPeriod(today, 2));
 		periods.add(createPeriod(today.plusDays(1), 2));
 
@@ -94,7 +93,7 @@ public class TransitDataStatisticsServiceTest {
 	public void testMergeMultipleAdjacentPeriods() {
 		List<Period> periods = new ArrayList<Period>();
 
-		LocalDate today = new LocalDate();
+		LocalDate today = LocalDate.now();
 		periods.add(createPeriod(today, 0));
 		periods.add(createPeriod(today.plusDays(1), 0));
 		periods.add(createPeriod(today.plusDays(2), 0));
@@ -107,7 +106,7 @@ public class TransitDataStatisticsServiceTest {
 
 	private Period createPeriod(LocalDate startDate, int days) {
 		LocalDate endDate = startDate.plusDays(days);
-		Period p1 = new Period(startDate.toDate(), endDate.toDate());
+		Period p1 = new Period(startDate, endDate);
 
 		return p1;
 
@@ -127,7 +126,7 @@ public class TransitDataStatisticsServiceTest {
 	private PublicLine createPublicLine(String no, LocalDate startDate, LocalDate endDate) {
 		PublicLine publicLine = new PublicLine(no);
 		if (endDate != null) {
-			publicLine.getEffectivePeriods().add(new Period(startDate.toDate(), endDate.toDate()));
+			publicLine.getEffectivePeriods().add(new Period(startDate, endDate));
 		}
 
 		return publicLine;

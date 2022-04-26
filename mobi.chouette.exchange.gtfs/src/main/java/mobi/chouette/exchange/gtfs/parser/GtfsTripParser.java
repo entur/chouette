@@ -72,8 +72,8 @@ import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.LineSegment;
 import com.vividsolutions.jts.geom.PrecisionModel;
 import org.apache.commons.lang.StringUtils;
-import org.joda.time.Duration;
-import org.joda.time.LocalTime;
+import java.time.Duration;
+import java.time.LocalTime;
 
 @Log4j
 public class GtfsTripParser implements Parser, Validator, Constant {
@@ -630,7 +630,7 @@ public class GtfsTripParser implements Parser, Validator, Constant {
 				Interchange interchange = createInterchange(referential, configuration, gtfsTransfer);
 
 				if (gtfsTransfer.getMinTransferTime() != null && gtfsTransfer.getTransferType() == TransferType.Minimal) {
-					interchange.setMinimumTransferTime(Duration.standardSeconds(gtfsTransfer.getMinTransferTime()));
+					interchange.setMinimumTransferTime(Duration.ofSeconds(gtfsTransfer.getMinTransferTime()));
 					interchange.setGuaranteed(Boolean.FALSE);
 				} else if (gtfsTransfer.getTransferType().equals(TransferType.Timed)) {
 					interchange.setGuaranteed(Boolean.TRUE);
@@ -661,7 +661,7 @@ public class GtfsTripParser implements Parser, Validator, Constant {
 				Interchange interchange = createInterchange(referential, configuration, gtfsTransfer);
 
 				if (gtfsTransfer.getMinTransferTime() != null && gtfsTransfer.getTransferType() == TransferType.Minimal) {
-					interchange.setMinimumTransferTime(Duration.standardSeconds(gtfsTransfer.getMinTransferTime()));
+					interchange.setMinimumTransferTime(Duration.ofSeconds(gtfsTransfer.getMinTransferTime()));
 					interchange.setGuaranteed(Boolean.FALSE);
 				} else if (gtfsTransfer.getTransferType().equals(TransferType.Timed)) {
 					interchange.setGuaranteed(Boolean.TRUE);
@@ -760,7 +760,7 @@ public class GtfsTripParser implements Parser, Validator, Constant {
 			journeyFrequency.setExactTime(frequency.getExactTimes());
 			journeyFrequency.setFirstDepartureTime(frequency.getStartTime().getTime());
 			journeyFrequency.setLastDepartureTime(frequency.getEndTime().getTime());
-			journeyFrequency.setScheduledHeadwayInterval(Duration.standardSeconds(frequency.getHeadwaySecs()));
+			journeyFrequency.setScheduledHeadwayInterval(Duration.ofSeconds(frequency.getHeadwaySecs()));
 			journeyFrequency.setTimeband(timeband);
 			journeyFrequency.setVehicleJourney(vehicleJourney);
 
@@ -769,8 +769,8 @@ public class GtfsTripParser implements Parser, Validator, Constant {
 			LocalTime firstArrivalTime = firstVjas.getArrivalTime();
 			LocalTime firstDepartureTime = firstVjas.getDepartureTime();
 			for (VehicleJourneyAtStop vjas : vjass) {
-				LocalTime arrivalTime = new LocalTime(TimeUtil.subtract(vjas.getArrivalTime(), firstArrivalTime).getMillis());
-				LocalTime departureTime = new LocalTime(TimeUtil.subtract(vjas.getDepartureTime(), firstDepartureTime).getMillis());
+				LocalTime arrivalTime = TimeUtil.toLocalTime(TimeUtil.subtract(vjas.getArrivalTime(), firstArrivalTime).toMillis());
+				LocalTime departureTime = TimeUtil.toLocalTime(TimeUtil.subtract(vjas.getDepartureTime(), firstDepartureTime).toMillis());
 				vjas.setArrivalTime(arrivalTime);
 				vjas.setDepartureTime(departureTime);
 			}
@@ -781,8 +781,8 @@ public class GtfsTripParser implements Parser, Validator, Constant {
 		LocalTime start = frequency.getStartTime().getTime();
 		LocalTime end = frequency.getEndTime().getTime();
 
-		return (start.getHourOfDay() + ":" + start.getMinuteOfHour() + " - "
-				+ end.getHourOfDay() + ":" + end.getMinuteOfHour());
+		return (start.getHour() + ":" + start.getMinute() + " - "
+				+ end.getHour() + ":" + end.getMinute());
 	}
 
 	private JourneyPattern createJourneyPattern(Context context, Referential referential,

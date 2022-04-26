@@ -24,6 +24,7 @@ import javax.inject.Named;
 import lombok.extern.log4j.Log4j;
 import mobi.chouette.common.ContenerChecker;
 import mobi.chouette.common.Pair;
+import mobi.chouette.common.TimeUtil;
 import mobi.chouette.common.file.FileServiceException;
 import mobi.chouette.common.file.FileStore;
 import mobi.chouette.common.file.LocalFileStore;
@@ -31,7 +32,7 @@ import mobi.chouette.model.iev.Job;
 import mobi.chouette.model.iev.Link;
 
 import org.apache.commons.io.IOUtils;
-import org.joda.time.LocalDateTime;
+import java.time.LocalDateTime;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static mobi.chouette.common.Constant.*;
@@ -88,7 +89,7 @@ public class CachingGoogleCloudFileStore implements FileStore {
 			}
 
 			if (cacheHistoryDays == null) {
-				syncedUntil = LocalDateTime.fromDateFields(new Date(0));
+				syncedUntil = TimeUtil.toLocalDateTime(0);
 			} else {
 				syncedUntil = LocalDateTime.now().minusDays(cacheHistoryDays);
 			}

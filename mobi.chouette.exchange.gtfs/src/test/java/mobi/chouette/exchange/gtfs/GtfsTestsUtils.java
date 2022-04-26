@@ -18,7 +18,7 @@ import mobi.chouette.model.StopPoint;
 import mobi.chouette.model.util.Referential;
 
 import org.apache.commons.io.FileUtils;
-import org.joda.time.LocalTime;
+import java.time.LocalTime;
 import org.testng.Assert;
 
 public class GtfsTestsUtils implements Constant, ReportConstant{
@@ -87,7 +87,7 @@ public class GtfsTestsUtils implements Constant, ReportConstant{
 		}
 		Assert.assertEquals(clinks.size(), 2, "line must have 2 connection link");
 		for (ConnectionLink connectionLink : clinks) {
-			Assert.assertEquals(connectionLink.getDefaultDuration().getStandardSeconds(), 4200l, "line must have links duration of 1 hour and 10 minutes");
+			Assert.assertEquals(connectionLink.getDefaultDuration().getSeconds(), 4200l, "line must have links duration of 1 hour and 10 minutes");
 			// Reporter.log(connectionLink.toString("\t", 1));
 
 		}
@@ -96,15 +96,15 @@ public class GtfsTestsUtils implements Constant, ReportConstant{
 		Set<AccessPoint> apoints = new HashSet<AccessPoint>();
 
 		for (AccessLink accessLink : alinks) {
-			Assert.assertEquals(accessLink.getDefaultDuration().getStandardSeconds(), 60l, "line must have links duration of 1 minutes");
+			Assert.assertEquals(accessLink.getDefaultDuration().getSeconds(), 60l, "line must have links duration of 1 minutes");
 			// Reporter.log(accessLink.toString("\t", 1));
 			apoints.add(accessLink.getAccessPoint());
 
 		}
 		Assert.assertEquals(apoints.size(), 1, "line must have 1 access point");
 		for (AccessPoint accessPoint : apoints) {
-			Assert.assertEquals(accessPoint.getOpeningTime(), new LocalTime(6,0,0),"line must have opening time of 6 hours");
-			Assert.assertEquals(accessPoint.getClosingTime(),new LocalTime(22,10,0), "line must have closing time of 22 hours 10");
+			Assert.assertEquals(accessPoint.getOpeningTime(), LocalTime.of(6,0,0),"line must have opening time of 6 hours");
+			Assert.assertEquals(accessPoint.getClosingTime(),LocalTime.of(22,10,0), "line must have closing time of 22 hours 10");
 		}
 
 	}

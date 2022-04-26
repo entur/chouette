@@ -7,8 +7,9 @@ import lombok.ToString;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalTime;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,6 +26,8 @@ import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static mobi.chouette.common.TimeUtil.toLocalDate;
 
 
 @Entity
@@ -203,6 +206,9 @@ public class Block extends NeptuneIdentifiedObject {
     }
 
     public boolean filter(Date startDate, Date endDate) {
-        return hasActiveTimetablesOnPeriod(new LocalDate(startDate), new LocalDate(endDate));
+        return hasActiveTimetablesOnPeriod(toLocalDate(startDate), toLocalDate(endDate));
     }
+
+
+
 }

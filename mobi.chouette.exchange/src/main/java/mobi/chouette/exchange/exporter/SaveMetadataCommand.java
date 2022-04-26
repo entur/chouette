@@ -20,7 +20,9 @@ import mobi.chouette.exchange.parameters.AbstractExportParameter;
 
 import com.jamonapi.Monitor;
 import com.jamonapi.MonitorFactory;
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
+
+import static mobi.chouette.common.TimeUtil.toLocalDate;
 
 @Log4j
 public class SaveMetadataCommand implements Command, Constant {
@@ -47,7 +49,7 @@ public class SaveMetadataCommand implements Command, Constant {
 			if (metadata == null)
 				return SUCCESS;
 			// force time window if asked
-			metadata.getTemporalCoverage().force(new LocalDate(parameters.getStartDate()), new LocalDate(parameters.getEndDate()));
+			metadata.getTemporalCoverage().force(toLocalDate(parameters.getStartDate()), toLocalDate(parameters.getEndDate()));
 			metadata.setCreator(creator);
 			metadata.setPublisher(publisher);
 			String path = jobData.getPathName();

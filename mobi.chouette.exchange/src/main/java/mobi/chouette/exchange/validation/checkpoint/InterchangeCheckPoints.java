@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 import lombok.extern.log4j.Log4j;
 import mobi.chouette.common.Context;
+import mobi.chouette.common.TimeUtil;
 import mobi.chouette.exchange.validation.ValidationData;
 import mobi.chouette.exchange.validation.Validator;
 import mobi.chouette.exchange.validation.parameters.ValidationParameters;
@@ -26,7 +27,7 @@ import mobi.chouette.model.type.BoardingPossibilityEnum;
 import com.google.common.base.Joiner;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.commons.lang3.tuple.Pair;
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 
 @Log4j
 public class InterchangeCheckPoints extends AbstractValidation<Interchange> implements Validator<Interchange> {
@@ -193,7 +194,7 @@ public class InterchangeCheckPoints extends AbstractValidation<Interchange> impl
 			long errorWaitMs = 3 * warnWaitMs;
 
 			int dayOffsetDiff = consumerVJAtStop.getDepartureDayOffset() - feederVJAtStop.getArrivalDayOffset();
-			long msWait = consumerVJAtStop.getDepartureTime().getMillisOfDay() - feederVJAtStop.getArrivalTime().getMillisOfDay();
+			long msWait = TimeUtil.toMillisecondsOfDay(consumerVJAtStop.getDepartureTime())- TimeUtil.toMillisecondsOfDay(feederVJAtStop.getArrivalTime());
 			if (msWait < 0) {
 				msWait = DateUtils.MILLIS_PER_DAY + msWait;
 				dayOffsetDiff--;

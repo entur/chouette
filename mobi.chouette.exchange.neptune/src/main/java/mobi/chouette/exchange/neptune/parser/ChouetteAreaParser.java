@@ -30,7 +30,7 @@ import mobi.chouette.model.util.Referential;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import org.joda.time.LocalDateTime;
+import java.time.LocalDateTime;
 import org.xmlpull.v1.XmlPullParser;
 
 @Log4j

@@ -69,10 +69,10 @@ public class BlockParser extends NetexParser implements Parser {
         }
 
         // start time
-        chouetteBlock.setStartTime(TimeUtil.toJodaLocalTime(netexBlock.getStartTime()));
+        chouetteBlock.setStartTime(netexBlock.getStartTime());
 
         // end time
-        chouetteBlock.setEndTime(TimeUtil.toJodaLocalTime(netexBlock.getEndTime()));
+        chouetteBlock.setEndTime(netexBlock.getEndTime());
 
         // end time day offset
         chouetteBlock.setEndTimeDayOffset(ConversionUtil.asInteger(netexBlock.getEndTimeDayOffset()));

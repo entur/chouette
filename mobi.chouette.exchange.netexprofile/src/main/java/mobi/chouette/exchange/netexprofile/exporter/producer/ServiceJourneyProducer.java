@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import mobi.chouette.common.Context;
-import mobi.chouette.common.TimeUtil;
 import mobi.chouette.exchange.netexprofile.Constant;
 import mobi.chouette.exchange.netexprofile.ConversionUtil;
 import mobi.chouette.exchange.netexprofile.exporter.ExportableData;
@@ -21,7 +20,7 @@ import mobi.chouette.model.VehicleJourney;
 import mobi.chouette.model.VehicleJourneyAtStop;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.joda.time.LocalTime;
+import java.time.LocalTime;
 import org.rutebanken.netex.model.DayTypeRefStructure;
 import org.rutebanken.netex.model.DayTypeRefs_RelStructure;
 import org.rutebanken.netex.model.FlexibleServiceProperties;
@@ -120,7 +119,7 @@ public class ServiceJourneyProducer extends NetexProducer {
 				if (departureTime != null) {
 					if ((i + 1 < vehicleJourneyAtStops.size())) {
 						NetexTimeConversionUtil.populatePassingTimeUtc(timetabledPassingTime, false, vehicleJourneyAtStop);
-						timetabledPassingTime.setDepartureTime(TimeUtil.toLocalTimeFromJoda(departureTime));
+						timetabledPassingTime.setDepartureTime(departureTime);
 						if (vehicleJourneyAtStop.getDepartureDayOffset() > 0) {
 							timetabledPassingTime.setDepartureDayOffset(BigInteger.valueOf(vehicleJourneyAtStop.getDepartureDayOffset()));
 						}
@@ -155,8 +154,8 @@ public class ServiceJourneyProducer extends NetexProducer {
 					if (!CollectionUtils.isEmpty(bookingArrangement.getBookingMethods())) {
 						netexFSP.withBookingMethods(bookingArrangement.getBookingMethods().stream().map(ConversionUtil::toBookingMethod).collect(Collectors.toList()));
 					}
-					netexFSP.setLatestBookingTime(TimeUtil.toLocalTimeFromJoda(bookingArrangement.getLatestBookingTime()));
-					netexFSP.setMinimumBookingPeriod(TimeUtil.toDurationFromJodaDuration(bookingArrangement.getMinimumBookingPeriod()));
+					netexFSP.setLatestBookingTime(bookingArrangement.getLatestBookingTime());
+					netexFSP.setMinimumBookingPeriod(bookingArrangement.getMinimumBookingPeriod());
 
 					netexFSP.setBookingContact(contactStructureProducer.produce(bookingArrangement.getBookingContact()));
 				}

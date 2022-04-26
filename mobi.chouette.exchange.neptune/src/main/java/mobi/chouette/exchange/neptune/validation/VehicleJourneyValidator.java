@@ -19,7 +19,7 @@ import mobi.chouette.model.NeptuneIdentifiedObject;
 import mobi.chouette.model.VehicleJourney;
 import mobi.chouette.model.util.Referential;
 
-import org.joda.time.Duration;
+import java.time.Duration;
 
 public class VehicleJourneyValidator extends AbstractValidator implements Validator<VehicleJourney> , Constant{
 

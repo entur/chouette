@@ -44,7 +44,9 @@ import mobi.chouette.model.util.ObjectIdTypes;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
+
+import static mobi.chouette.common.TimeUtil.toLocalDate;
 
 /**
  * Chouette Line : a group of Routes which is generally known to the public by a
@@ -585,8 +587,8 @@ public class Line extends NeptuneIdentifiedObject implements ObjectIdTypes {
 	 * @return true if there is at least one active route left after filtering.
 	 */
 	public boolean filter(Date startDate, Date endDate) {
-		LocalDate localStartDate = startDate == null ? null : new LocalDate((startDate));
-		LocalDate localEndDate = endDate == null ? null : new LocalDate((endDate));
+		LocalDate localStartDate = startDate == null ? null : toLocalDate(startDate);
+		LocalDate localEndDate = endDate == null ? null : toLocalDate(endDate);
 		return filter(localStartDate,localEndDate);
 	}
 }

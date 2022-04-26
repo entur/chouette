@@ -162,8 +162,8 @@ public class ServiceJourneyParser extends NetexParser implements Parser, Constan
 				bookingArrangement.setBookWhen(NetexParserUtils.toPurchaseWhen(netexFSP.getBookWhen()));
 				bookingArrangement.setBuyWhen(netexFSP.getBuyWhen().stream().map(NetexParserUtils::toPurchaseMoment).collect(Collectors.toList()));
 				bookingArrangement.setBookingMethods(netexFSP.getBookingMethods().stream().map(NetexParserUtils::toBookingMethod).collect(Collectors.toList()));
-				bookingArrangement.setLatestBookingTime(TimeUtil.toJodaLocalTime(netexFSP.getLatestBookingTime()));
-				bookingArrangement.setMinimumBookingPeriod(TimeUtil.toJodaDuration(netexFSP.getMinimumBookingPeriod()));
+				bookingArrangement.setLatestBookingTime(netexFSP.getLatestBookingTime());
+				bookingArrangement.setMinimumBookingPeriod(netexFSP.getMinimumBookingPeriod());
 
 				bookingArrangement.setBookingContact(contactStructureParser.parse(netexFSP.getBookingContact()));
 

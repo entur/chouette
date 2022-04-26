@@ -20,7 +20,7 @@ import mobi.chouette.model.VehicleJourney;
 import mobi.chouette.model.VehicleJourneyAtStop;
 import mobi.chouette.model.util.ObjectIdTypes;
 
-import org.joda.time.LocalTime;
+import java.time.LocalTime;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
@@ -359,7 +359,7 @@ private VehicleJourney buildNeptuneObject(boolean full)
          vjas.setStopPoint(sp);
          vjas.setArrivalDayOffset(current_arrival_offset);
          vjas.setDepartureDayOffset(current_departure_offset);
-         vjas.setArrivalTime(new LocalTime(h,m,0));
+         vjas.setArrivalTime(LocalTime.of(h,m,0));
          
          h = h + 1;
          if (h > 23)
@@ -368,7 +368,7 @@ private VehicleJourney buildNeptuneObject(boolean full)
             
          }
       
-         vjas.setDepartureTime(new LocalTime(h,m,0));
+         vjas.setDepartureTime(LocalTime.of(h,m,0));
          
          if(previous_vjas == null) {
         	 if(vjas.getDepartureTime().isBefore(vjas.getArrivalTime())) {

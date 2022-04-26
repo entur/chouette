@@ -17,7 +17,7 @@ import mobi.chouette.model.type.TransportModeNameEnum;
 
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONObject;
-import org.joda.time.LocalTime;
+import java.time.LocalTime;
 import org.trident.schema.trident.BoardingAlightingPossibilityType;
 import org.trident.schema.trident.TransportModeNameType;
 import org.trident.schema.trident.VehicleJourneyAtStopType;

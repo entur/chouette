@@ -46,7 +46,6 @@ import org.rutebanken.netex.model.TramSubmodeEnumeration;
 import org.rutebanken.netex.model.TransportSubmodeStructure;
 import org.rutebanken.netex.model.WaterSubmodeEnumeration;
 
-import static mobi.chouette.common.TimeUtil.toLocalTimeFromJoda;
 
 @Log4j
 public class ConversionUtil {
@@ -316,9 +315,9 @@ public class ConversionUtil {
 
 	}
 
-	public static OffsetTime toOffsetTimeUtc(org.joda.time.LocalTime time) {
+	public static OffsetTime toOffsetTimeUtc(java.time.LocalTime time) {
 		return time == null ? null
-				: toLocalTimeFromJoda(time).atOffset(ConversionUtil.getZoneOffset(ConversionUtil.LOCAL_ZONE_ID)).withOffsetSameInstant(ZoneOffset.UTC);
+				: time.atOffset(ConversionUtil.getZoneOffset(ConversionUtil.LOCAL_ZONE_ID)).withOffsetSameInstant(ZoneOffset.UTC);
 	}
 
 	public static final ZoneId LOCAL_ZONE_ID = ZoneId.of("Europe/Oslo");

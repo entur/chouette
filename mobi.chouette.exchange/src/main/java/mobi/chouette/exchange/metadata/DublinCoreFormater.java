@@ -5,15 +5,14 @@ package mobi.chouette.exchange.metadata;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.time.temporal.TemporalAccessor;
 import java.util.Locale;
 
 import mobi.chouette.exchange.metadata.Metadata.Box;
 import mobi.chouette.exchange.metadata.Metadata.Period;
 import mobi.chouette.exchange.metadata.Metadata.Resource;
 
-import org.joda.time.ReadablePartial;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author michel
@@ -23,7 +22,7 @@ public class DublinCoreFormater implements Formater
 {
 
    private static DecimalFormat doubleFormat = new DecimalFormat("#.000",DecimalFormatSymbols.getInstance(Locale.US)); 
-   private static DateTimeFormatter dateFormat = DateTimeFormat.forPattern("yyyy-MM-dd");
+   private static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
    /* (non-Javadoc)
     * @see fr.certu.chouette.export.metadata.writer.Formater#format(fr.certu.chouette.export.metadata.model.Metadata.Period)
@@ -31,8 +30,8 @@ public class DublinCoreFormater implements Formater
    @Override
    public String format(Period period)
    {
-      return "start="+dateFormat.print(period.getStart())+
-            "; end="+dateFormat.print(period.getEnd())+
+      return "start="+dateFormat.format(period.getStart())+
+            "; end="+dateFormat.format(period.getEnd())+
             "; scheme=W3C-DTF;";
    }
 
@@ -72,8 +71,8 @@ public class DublinCoreFormater implements Formater
  * @see fr.certu.chouette.export.metadata.writer.Formater#formatDate(java.util.Calendar)
  */
    @Override
-   public synchronized String formatDate(ReadablePartial date)
+   public synchronized String formatDate(TemporalAccessor date)
    {
-      return dateFormat.print(date);
+      return dateFormat.format(date);
    }
 }

@@ -6,7 +6,7 @@ import mobi.chouette.model.CalendarDay;
 import mobi.chouette.model.Timetable;
 import mobi.chouette.model.statistics.LineAndTimetable;
 import org.hibernate.exception.GenericJDBCException;
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -16,12 +16,15 @@ import javax.persistence.Query;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import static mobi.chouette.common.TimeUtil.toLocalDate;
 
 @Stateless
 @Log4j
@@ -136,7 +139,7 @@ public class TimetableDAOImpl extends GenericDAOImpl<Timetable>implements Timeta
 		Map<Long, Collection<LocalDate>> lineToDSJOperatingDaysMap = new HashMap<>();
 		for (Object[] lineOperatingDayPair : resultList) {
 			Long lineId = toLong(lineOperatingDayPair[0]);
-			lineToDSJOperatingDaysMap.computeIfAbsent(lineId, k -> new ArrayList<>()).add(new LocalDate(lineOperatingDayPair[1]));
+			lineToDSJOperatingDaysMap.computeIfAbsent(lineId, k -> new ArrayList<>()).add(toLocalDate((Date) lineOperatingDayPair[1]));
 		}
 
 		return lineToDSJOperatingDaysMap;

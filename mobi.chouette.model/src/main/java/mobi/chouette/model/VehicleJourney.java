@@ -13,7 +13,7 @@ import mobi.chouette.model.type.TransportSubModeNameEnum;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;

@@ -5,7 +5,7 @@ import java.util.Calendar;
 import mobi.chouette.model.Network;
 import mobi.chouette.model.type.PTNetworkSourceTypeEnum;
 
-import org.joda.time.LocalDateTime;
+import java.time.LocalDateTime;
 import org.trident.schema.trident.PTNetworkType;
 
 public class PTNetworkProducer extends

@@ -19,6 +19,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import mobi.chouette.common.TimeUtil;
 import mobi.chouette.exchange.parameters.AbstractParameter;
 import mobi.chouette.model.iev.Job;
 import mobi.chouette.model.iev.Link;
@@ -88,9 +89,9 @@ public class JobInfo implements ServiceConstants {
 		referential = job.getReferential();
 		action = job.getAction();
 		type = job.getType();
-		created = job.getCreated() == null ? null : job.getCreated().toDate();
-		started = job.getStarted() == null ? null : job.getStarted().toDate();
-		updated = job.getUpdated() == null ? null : job.getUpdated().toDate();
+		created = job.getCreated() == null ? null : TimeUtil.toDate(job.getCreated());
+		started = job.getStarted() == null ? null : TimeUtil.toDate(job.getStarted());
+		updated = job.getUpdated() == null ? null : TimeUtil.toDate(job.getUpdated());
 		status = STATUS.valueOf(job.getStatus().name());
 
 		if (addActionParameters) {

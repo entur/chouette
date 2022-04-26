@@ -26,7 +26,7 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
-import org.joda.time.Duration;
+import java.time.Duration;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -74,8 +74,8 @@ public class InterchangeDAOTest extends Arquillian {
 			interchange.setGuaranteed(Boolean.TRUE);
 			interchange.setPlanned(Boolean.TRUE);
 			interchange.setStaySeated(Boolean.TRUE);
-			interchange.setMaximumWaitTime(Duration.standardSeconds(3661));
-			interchange.setMinimumTransferTime(Duration.standardSeconds(7322));
+			interchange.setMaximumWaitTime(Duration.ofSeconds(3661));
+			interchange.setMinimumTransferTime(Duration.ofSeconds(7322));
 			interchange.setName("Test interchange");
 			interchange.setPriority(1);
 

@@ -20,8 +20,8 @@ import mobi.chouette.model.util.ObjectFactory;
 import mobi.chouette.model.util.Referential;
 
 import org.apache.commons.lang3.StringUtils;
-import org.joda.time.Duration;
-import org.joda.time.LocalDateTime;
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 @Log4j
 public class GtfsTransferParser implements Parser, Validator, Constant {
@@ -143,7 +143,7 @@ public class GtfsTransferParser implements Parser, Validator, Constant {
 		connectionLink.setCreationTime(LocalDateTime.now());
 		connectionLink.setLinkType(ConnectionLinkTypeEnum.Overground);
 		if (gtfsTransfer.getMinTransferTime() != null) {
-			connectionLink.setDefaultDuration(Duration.standardSeconds(gtfsTransfer.getMinTransferTime()));
+			connectionLink.setDefaultDuration(Duration.ofSeconds(gtfsTransfer.getMinTransferTime()));
 		}
 		if (gtfsTransfer.getTransferType().equals(TransferType.NoAllowed)) {
 			connectionLink.setName("FORBIDDEN");

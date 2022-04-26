@@ -16,8 +16,8 @@ import mobi.chouette.model.type.AlightingPossibilityEnum;
 import mobi.chouette.model.type.BoardingPossibilityEnum;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -32,9 +32,9 @@ public class InterchangeCheckPointsTest {
 
 	Interchange noRelationsInterchange = interchange("1", "fs1", "cs1", "fvj1", "cvj1");
 
-	LocalDate mar1Sunday = new LocalDate(2020, 3, 1);
-	LocalDate mar2Monday = new LocalDate(2020, 3, 2);
-	LocalDate mar3Tuesday = new LocalDate(2020, 3, 3);
+	LocalDate mar1Sunday = LocalDate.of(2020, 3, 1);
+	LocalDate mar2Monday = LocalDate.of(2020, 3, 2);
+	LocalDate mar3Tuesday = LocalDate.of(2020, 3, 3);
 
 	@Test
 	public void testFindDuplicates() {
@@ -64,8 +64,8 @@ public class InterchangeCheckPointsTest {
 
 	@Test
 	public void checkWaitTime_whenOutsideErrorLimit_thenAddError() {
-		VehicleJourneyAtStop feederPoint = vehicleJourneyAtStop(null, 0, new LocalTime(10, 00), 0, mar1Sunday);
-		VehicleJourneyAtStop consumerPoint = vehicleJourneyAtStop(new LocalTime(9, 59), 0, null, 0, mar1Sunday, mar2Monday);
+		VehicleJourneyAtStop feederPoint = vehicleJourneyAtStop(null, 0, LocalTime.of(10, 00), 0, mar1Sunday);
+		VehicleJourneyAtStop consumerPoint = vehicleJourneyAtStop(LocalTime.of(9, 59), 0, null, 0, mar1Sunday, mar2Monday);
 
 		Context context = createContext();
 
@@ -76,8 +76,8 @@ public class InterchangeCheckPointsTest {
 
 	@Test
 	public void checkWaitTime_whenBetweenWarnAndErrorLimits_thenAddWarning() {
-		VehicleJourneyAtStop feederPoint = vehicleJourneyAtStop(null, 0, new LocalTime(10, 00), 0, mar1Sunday, mar2Monday);
-		VehicleJourneyAtStop consumerPoint = vehicleJourneyAtStop(new LocalTime(11, 30), 0, null, 0, mar2Monday, mar3Tuesday);
+		VehicleJourneyAtStop feederPoint = vehicleJourneyAtStop(null, 0, LocalTime.of(10, 00), 0, mar1Sunday, mar2Monday);
+		VehicleJourneyAtStop consumerPoint = vehicleJourneyAtStop(LocalTime.of(11, 30), 0, null, 0, mar2Monday, mar3Tuesday);
 
 		Context context = createContext();
 		interchangeCheckPoints.checkWaitTime(context, param, noRelationsInterchange, feederPoint, consumerPoint);
@@ -86,8 +86,8 @@ public class InterchangeCheckPointsTest {
 
 	@Test
 	public void checkWaitTime_whenEqualToWarnLimits_thenIgnore() {
-		VehicleJourneyAtStop feederPoint = vehicleJourneyAtStop(null, 0, new LocalTime(10, 00), 0, mar1Sunday);
-		VehicleJourneyAtStop consumerPoint = vehicleJourneyAtStop(new LocalTime(11, 00), 0, null, 0, mar1Sunday, mar2Monday);
+		VehicleJourneyAtStop feederPoint = vehicleJourneyAtStop(null, 0, LocalTime.of(10, 00), 0, mar1Sunday);
+		VehicleJourneyAtStop consumerPoint = vehicleJourneyAtStop(LocalTime.of(11, 00), 0, null, 0, mar1Sunday, mar2Monday);
 
 		Context context = createContext();
 		interchangeCheckPoints.checkWaitTime(context, param, noRelationsInterchange, feederPoint, consumerPoint);
@@ -96,8 +96,8 @@ public class InterchangeCheckPointsTest {
 
 	@Test
 	public void checkWaitTime_whenDepartureAndArrivalOnDifferentDatesBytWaitEqualToWarnLimits_thenIgnore() {
-		VehicleJourneyAtStop feederPoint = vehicleJourneyAtStop(null, 0, new LocalTime(23, 30), 0, mar1Sunday);
-		VehicleJourneyAtStop consumerPoint = vehicleJourneyAtStop(new LocalTime(00, 30), 0, null, 0, mar2Monday);
+		VehicleJourneyAtStop feederPoint = vehicleJourneyAtStop(null, 0, LocalTime.of(23, 30), 0, mar1Sunday);
+		VehicleJourneyAtStop consumerPoint = vehicleJourneyAtStop(LocalTime.of(00, 30), 0, null, 0, mar2Monday);
 
 		Context context = createContext();
 		interchangeCheckPoints.checkWaitTime(context, param, noRelationsInterchange, feederPoint, consumerPoint);
@@ -106,8 +106,8 @@ public class InterchangeCheckPointsTest {
 
 	@Test
 	public void checkWaitTime_whenDepartureDayTypeBeforeArrivalDayOffsetAndWaitEqualToWarnLimits_thenIgnore() {
-		VehicleJourneyAtStop feederPoint = vehicleJourneyAtStop(null, 0, new LocalTime(23, 30), 0, mar1Sunday);
-		VehicleJourneyAtStop consumerPoint = vehicleJourneyAtStop(new LocalTime(00, 30), 1, null, 0, mar1Sunday);
+		VehicleJourneyAtStop feederPoint = vehicleJourneyAtStop(null, 0, LocalTime.of(23, 30), 0, mar1Sunday);
+		VehicleJourneyAtStop consumerPoint = vehicleJourneyAtStop(LocalTime.of(00, 30), 1, null, 0, mar1Sunday);
 
 		Context context = createContext();
 		interchangeCheckPoints.checkWaitTime(context, param, noRelationsInterchange, feederPoint, consumerPoint);
@@ -116,8 +116,8 @@ public class InterchangeCheckPointsTest {
 
 	@Test
 	public void checkWaitTime_whenNotActiveOnSameDay_thenError() {
-		VehicleJourneyAtStop feederPoint = vehicleJourneyAtStop(null, 0, new LocalTime(10, 00), 0, mar1Sunday);
-		VehicleJourneyAtStop consumerPoint = vehicleJourneyAtStop(new LocalTime(10, 05), 0, null, 0, mar2Monday);
+		VehicleJourneyAtStop feederPoint = vehicleJourneyAtStop(null, 0, LocalTime.of(10, 00), 0, mar1Sunday);
+		VehicleJourneyAtStop consumerPoint = vehicleJourneyAtStop(LocalTime.of(10, 05), 0, null, 0, mar2Monday);
 
 		Context context = createContext();
 		interchangeCheckPoints.checkWaitTime(context, param, noRelationsInterchange, feederPoint, consumerPoint);
@@ -126,8 +126,8 @@ public class InterchangeCheckPointsTest {
 
 	@Test
 	public void checkWaitTime_whenDifferentDayOffsetNotActiveOnSameDay_thenError() {
-		VehicleJourneyAtStop feederPoint = vehicleJourneyAtStop(null, 0, new LocalTime(10, 00), 1, mar1Sunday);
-		VehicleJourneyAtStop consumerPoint = vehicleJourneyAtStop(new LocalTime(10, 05), 0, null, 0, mar1Sunday);
+		VehicleJourneyAtStop feederPoint = vehicleJourneyAtStop(null, 0, LocalTime.of(10, 00), 1, mar1Sunday);
+		VehicleJourneyAtStop consumerPoint = vehicleJourneyAtStop(LocalTime.of(10, 05), 0, null, 0, mar1Sunday);
 
 		Context context = createContext();
 		interchangeCheckPoints.checkWaitTime(context, param, noRelationsInterchange, feederPoint, consumerPoint);

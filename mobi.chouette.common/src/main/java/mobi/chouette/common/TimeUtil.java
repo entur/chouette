@@ -2,86 +2,104 @@ package mobi.chouette.common;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 
-import org.joda.time.DateTimeConstants;
-import org.joda.time.Duration;
-import org.joda.time.LocalTime;
-import org.joda.time.Seconds;
+import java.time.Duration;
+import java.time.LocalTime;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.concurrent.TimeUnit;
+
+import org.threeten.extra.Seconds;
+
+import javax.xml.datatype.XMLGregorianCalendar;
 
 public class TimeUtil {
 
     public static Duration subtract(LocalTime thisDeparture, LocalTime firstDeparture) {
-        int seconds;
+        long seconds;
         // Assuming journeys last no more than 24 hours
         if (firstDeparture.isBefore(thisDeparture)) {
-            seconds = Seconds.secondsBetween(firstDeparture, thisDeparture).getSeconds();
+            seconds = Seconds.between(firstDeparture, thisDeparture).getAmount();
         } else {
-            seconds = DateTimeConstants.SECONDS_PER_DAY - Seconds.secondsBetween(thisDeparture, firstDeparture).getSeconds();
+            seconds = TimeUnit.DAYS.toSeconds(1) - Seconds.between(thisDeparture, firstDeparture).getAmount();
         }
 
-        return Duration.standardSeconds(seconds);
+        return Duration.ofSeconds(seconds);
     }
 
-    public static java.time.LocalTime toLocalTimeFromJoda(org.joda.time.LocalTime jodaTime) {
-        if (jodaTime == null) {
-            return null;
-        }
-        return java.time.LocalTime.of(jodaTime.getHourOfDay(), jodaTime.getMinuteOfHour(), jodaTime.getSecondOfMinute());
-    }
-
-    public static org.joda.time.LocalTime toJodaLocalTime(java.time.LocalTime localTime) {
-        if (localTime == null) {
-            return null;
-        }
-        return new org.joda.time.LocalTime(localTime.getHour(), localTime.getMinute(), localTime.getSecond());
-    }
-
-    public static org.joda.time.Duration toJodaDuration(java.time.Duration duration) {
-        if (duration == null) {
-            return null;
-        }
-        return org.joda.time.Duration.millis(duration.toMillis());
-    }
-
-    public static java.time.Duration toDurationFromJodaDuration(Duration jodaDuration) {
-        if (jodaDuration == null) {
-            return null;
-        }
-        return java.time.Duration.ofMillis(jodaDuration.getMillis());
-    }
-
-    public static org.joda.time.LocalDate toJodaLocalDate(LocalDate localDate) {
-        if (localDate == null) {
-            return null;
-        }
-        return new org.joda.time.LocalDate(localDate.getYear(), localDate.getMonthValue(), localDate.getDayOfMonth());
-    }
-
-    public static LocalDate toLocalDateFromJoda(org.joda.time.LocalDate jodaDate) {
-        if (jodaDate == null) {
-            return null;
-        }
-        return LocalDate.of(jodaDate.getYear(), jodaDate.getMonthOfYear(), jodaDate.getDayOfMonth());
-    }
-
-    public static org.joda.time.LocalDateTime toJodaLocalDateTime(java.time.LocalDateTime localDateTime) {
-        if (localDateTime == null) {
-            return null;
-        }
-        return new org.joda.time.LocalDateTime(localDateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
-    }
     /**
-     * Convert localDateTime to joda LocalDate, ignoring time.
+     * Convert localDateTime to LocalDate, ignoring time.
      *
      * This is a bit shady, but necessary as long as incoming data, while semantically a LocalDate, is represented as xs:dateTime.
      */
-    public static org.joda.time.LocalDate toJodaLocalDateIgnoreTime(java.time.LocalDateTime localDateTime) {
-        if (localDateTime == null) {
-            return null;
-        }
-
-        return new org.joda.time.LocalDate(localDateTime.getYear(),localDateTime.getMonthValue(),localDateTime.getDayOfMonth());
+    public static java.time.LocalDate toLocalDateIgnoreTime(java.time.LocalDateTime localDateTime) {
+        return localDateTime.toLocalDate();
     }
 
+    public static LocalDate toLocalDate(Date date) {
+        if(date == null) {
+            return null;
+        }
+        return Instant.ofEpochMilli(date.getTime())
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+    }
+
+    public static Date toDate(LocalDateTime localDateTime) {
+        return java.util.Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    public static long toEpochMilliseconds(LocalDateTime localDateTime) {
+        return localDateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+    }
+
+    public static long toEpochMilliseconds(LocalDate localDate) {
+        return toEpochMilliseconds(localDate.atStartOfDay());
+    }
+
+    public static Date toDate(LocalDate localDate) {
+        return Date.from(localDate.atStartOfDay()
+                .atZone(ZoneId.systemDefault())
+                .toInstant());
+    }
+
+    public static LocalDateTime toLocalDateTime(XMLGregorianCalendar calendar) {
+        return LocalDateTime.ofInstant(Instant.ofEpochMilli(calendar.toGregorianCalendar().getTime().getTime()), ZoneId.systemDefault());
+    }
+
+    public static LocalDateTime toLocalDateTime(Calendar calendar) {
+        return LocalDateTime.ofInstant(calendar.toInstant(), ZoneId.systemDefault());
+    }
+
+    public static GregorianCalendar toCalendar(LocalDateTime localDateTime) {
+        return GregorianCalendar.from(localDateTime.atZone(ZoneId.systemDefault()));
+    }
+
+    public static LocalTime toLocalTime(Calendar calendar) {
+        return toLocalDateTime(calendar).toLocalTime();
+    }
+
+    public static LocalDate toLocalDate(Calendar calendar) {
+        return toLocalDateTime(calendar).toLocalDate();
+    }
+
+    public static LocalDateTime toLocalDateTime(long instant) {
+        return LocalDateTime.ofInstant(Instant.ofEpochMilli(instant), ZoneId.systemDefault());
+    }
+
+    public static LocalTime toLocalTime(long instant) {
+        return toLocalDateTime(instant).toLocalTime();
+    }
+
+    public static LocalDate toLocalDate(long instant) {
+        return toLocalDateTime(instant).toLocalDate();
+    }
+
+
+    public static long toMillisecondsOfDay(LocalTime localTime) {
+        return localTime.toNanoOfDay()/1000000;
+    }
 }

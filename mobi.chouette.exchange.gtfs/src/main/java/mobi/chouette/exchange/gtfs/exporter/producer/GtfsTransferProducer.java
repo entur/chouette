@@ -34,8 +34,8 @@ public class GtfsTransferProducer extends AbstractProducer {
       transfer
             .setToStopId(toGtfsId(neptuneObject.getEndOfLink().getObjectId(),prefix, keepOriginalId));
       if (neptuneObject.getDefaultDuration() != null
-            && neptuneObject.getDefaultDuration().getStandardSeconds() > 1) {
-         transfer.setMinTransferTime((int)neptuneObject.getDefaultDuration().getStandardSeconds());
+            && neptuneObject.getDefaultDuration().getSeconds() > 1) {
+         transfer.setMinTransferTime((int)neptuneObject.getDefaultDuration().getSeconds());
          transfer.setTransferType(GtfsTransfer.TransferType.Minimal);
       } else
       {
@@ -65,7 +65,7 @@ public class GtfsTransferProducer extends AbstractProducer {
 			transfer.setTransferType(GtfsTransfer.TransferType.Timed);
 		} else if (neptuneObject.getMinimumTransferTime() !=null){
          transfer.setTransferType(GtfsTransfer.TransferType.Minimal);
-         transfer.setMinTransferTime(Integer.valueOf((int) (neptuneObject.getMinimumTransferTime().getStandardSeconds())));
+         transfer.setMinTransferTime(Integer.valueOf((int) (neptuneObject.getMinimumTransferTime().getSeconds())));
 		} else if (neptuneObject.getPriority() != null && neptuneObject.getPriority() < 0){
 			transfer.setTransferType(GtfsTransfer.TransferType.NoAllowed);
 		} else {

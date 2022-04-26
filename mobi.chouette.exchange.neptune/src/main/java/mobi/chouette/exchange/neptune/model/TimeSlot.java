@@ -11,7 +11,7 @@ import mobi.chouette.model.NeptuneIdentifiedObject;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
-import org.joda.time.LocalTime;
+import java.time.LocalTime;
 
 /**
  * Chouette TimeSlot a peroid for vehicleJourney with frequency

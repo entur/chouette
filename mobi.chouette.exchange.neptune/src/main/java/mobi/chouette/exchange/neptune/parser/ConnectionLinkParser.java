@@ -20,8 +20,8 @@ import mobi.chouette.model.type.UserNeedEnum;
 import mobi.chouette.model.util.ObjectFactory;
 import mobi.chouette.model.util.Referential;
 
-import org.joda.time.Duration;
-import org.joda.time.LocalDateTime;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import org.xmlpull.v1.XmlPullParser;
 
 @Log4j

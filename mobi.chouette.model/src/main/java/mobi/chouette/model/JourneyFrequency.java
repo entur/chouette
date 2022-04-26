@@ -18,8 +18,8 @@ import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
-import org.joda.time.Duration;
-import org.joda.time.LocalTime;
+import java.time.Duration;
+import java.time.LocalTime;
 
 /**
  * Models the frequencies for journeys in timesheet category.

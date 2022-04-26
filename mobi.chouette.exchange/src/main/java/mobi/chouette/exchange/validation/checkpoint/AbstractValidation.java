@@ -40,9 +40,9 @@ import com.vividsolutions.jts.geom.Polygon;
 import com.vividsolutions.jts.geom.PrecisionModel;
 import org.apache.log4j.Logger;
 import org.codehaus.jettison.json.JSONArray;
-import org.joda.time.Duration;
-import org.joda.time.LocalTime;
-import org.joda.time.Seconds;
+import java.time.Duration;
+import java.time.LocalTime;
+import org.threeten.extra.Seconds;
 
 /**
  * @author michel
@@ -406,7 +406,7 @@ public abstract class AbstractValidation<T extends NeptuneIdentifiedObject> impl
 	protected void checkLinkSpeed(Context context, NeptuneIdentifiedObject object, Duration duration, double distance,
 								  int maxDefaultSpeed, String testCode, String resultCode) {
 		if (duration != null) {
-			long time = duration.getStandardSeconds(); // in seconds
+			long time = duration.getSeconds(); // in seconds
 
 			if (time > 0) {
 				int speed = (int) (distance / (double) time * 36 / 10 + 0.5); // (km/h)
@@ -458,7 +458,7 @@ public abstract class AbstractValidation<T extends NeptuneIdentifiedObject> impl
 					if (objVal instanceof LocalTime) {
 						// use value in seconds
 						LocalTime t = (LocalTime) objVal;
-						value = Long.toString(Seconds.secondsBetween(new LocalTime(0, 0, 0), t).getSeconds());
+						value = Long.toString(Seconds.between(LocalTime.of(0, 0, 0), t).getAmount());
 					} else {
 						value = objVal.toString();
 					}

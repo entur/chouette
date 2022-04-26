@@ -10,13 +10,14 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.Duration;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import mobi.chouette.common.TimeUtil;
 import mobi.chouette.model.NeptuneIdentifiedObject;
 import mobi.chouette.model.Route;
 
 import org.apache.log4j.Logger;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
-import org.joda.time.LocalTime;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import org.trident.schema.trident.ObjectFactory;
 import org.trident.schema.trident.RegistrationType;
 import org.trident.schema.trident.TridentObjectType;
@@ -92,17 +93,17 @@ public abstract class AbstractJaxbNeptuneProducer<T extends TridentObjectType, U
 		return (value == null || value.isEmpty());
 	}
 
-	protected Duration toDuration(org.joda.time.Duration duration) {
+	protected Duration toDuration(java.time.Duration duration) {
 		if (duration == null)
 			return null;
-		Duration xmlDuration = typeFactory.newDuration(duration.getMillis());
+		Duration xmlDuration = typeFactory.newDuration(duration.toMillis());
 		return xmlDuration;
 	}
 
 	protected XMLGregorianCalendar toCalendar(LocalDateTime date) {
 		if (date == null)
 			return null;
-		GregorianCalendar cal = date.toDateTime().toGregorianCalendar();
+		GregorianCalendar cal = TimeUtil.toCalendar(date);
 		XMLGregorianCalendar c = typeFactory.newXMLGregorianCalendar(cal);
 		c.setTimezone(DatatypeConstants.FIELD_UNDEFINED);
 		c.setMillisecond(DatatypeConstants.FIELD_UNDEFINED);
@@ -112,7 +113,7 @@ public abstract class AbstractJaxbNeptuneProducer<T extends TridentObjectType, U
 	protected XMLGregorianCalendar toCalendar(LocalDate date) {
 		if (date == null)
 			return null;
-		GregorianCalendar cal = date.toDateTimeAtStartOfDay().toGregorianCalendar();
+		GregorianCalendar cal = TimeUtil.toCalendar(date.atStartOfDay());
 		XMLGregorianCalendar c = typeFactory.newXMLGregorianCalendar(cal);
 		c.setTimezone(DatatypeConstants.FIELD_UNDEFINED);
 		c.setMillisecond(DatatypeConstants.FIELD_UNDEFINED);
@@ -123,7 +124,7 @@ public abstract class AbstractJaxbNeptuneProducer<T extends TridentObjectType, U
 		if (time == null)
 			return null;
 		GregorianCalendar cal = new GregorianCalendar();
-		cal.setTimeInMillis(time.getMillisOfDay());
+		cal.setTimeInMillis(TimeUtil.toMillisecondsOfDay(time));
 		XMLGregorianCalendar c = typeFactory.newXMLGregorianCalendar(cal);
 		c.setTimezone(DatatypeConstants.FIELD_UNDEFINED);
 		c.setMillisecond(DatatypeConstants.FIELD_UNDEFINED);

@@ -16,10 +16,9 @@ import mobi.chouette.model.Timetable;
 import mobi.chouette.model.VehicleJourney;
 import mobi.chouette.model.type.DayTypeEnum;
 
-import org.joda.time.DateTimeConstants;
-import org.joda.time.LocalDate;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public abstract class NamingUtil {
 
@@ -154,7 +153,7 @@ public abstract class NamingUtil {
 	public static void setDefaultName(Timetable timetable) {
 		if (isFilled(timetable.getComment()))
 			return;
-		DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd");
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		String monday = (timetable.getDayTypes().contains(DayTypeEnum.Monday)) ? "Mo" : "..";
 		String tuesday = (timetable.getDayTypes().contains(DayTypeEnum.Tuesday)) ? "Tu" : "..";
 		String wednesday = (timetable.getDayTypes().contains(DayTypeEnum.Wednesday)) ? "We" : "..";
@@ -176,19 +175,19 @@ public abstract class NamingUtil {
 		if (timetable.getCalendarDays() != null && !timetable.getCalendarDays().isEmpty()) {
 
 			for (LocalDate date : timetable.getPeculiarDates()) {
-				if (date.getDayOfWeek() == DateTimeConstants.MONDAY)
+				if (date.getDayOfWeek() == DayOfWeek.MONDAY)
 					monday = "Mo";
-				if (date.getDayOfWeek() == DateTimeConstants.TUESDAY)
+				if (date.getDayOfWeek() == DayOfWeek.TUESDAY)
 					tuesday = "Tu";
-				if (date.getDayOfWeek() == DateTimeConstants.WEDNESDAY)
+				if (date.getDayOfWeek() == DayOfWeek.WEDNESDAY)
 					wednesday = "We";
-				if (date.getDayOfWeek() == DateTimeConstants.THURSDAY)
+				if (date.getDayOfWeek() == DayOfWeek.THURSDAY)
 					thursday = "Th";
-				if (date.getDayOfWeek() == DateTimeConstants.FRIDAY)
+				if (date.getDayOfWeek() == DayOfWeek.FRIDAY)
 					friday = "Fr";
-				if (date.getDayOfWeek() == DateTimeConstants.SATURDAY)
+				if (date.getDayOfWeek() == DayOfWeek.SATURDAY)
 					saturday = "Sa";
-				if (date.getDayOfWeek() == DateTimeConstants.SUNDAY)
+				if (date.getDayOfWeek() == DayOfWeek.SUNDAY)
 					sunday = "Su";
 				if (firstDate == null || date.isBefore(firstDate))
 					firstDate = date;
@@ -199,8 +198,8 @@ public abstract class NamingUtil {
 
 		// security if timetable is empty
 		if (firstDate != null && lastDate != null) {
-			String comment = timetable.objectIdSuffix() + " : " + format.print(firstDate) + " -> "
-					+ format.print(lastDate) + " : " + monday + tuesday + wednesday + thursday + friday + saturday
+			String comment = timetable.objectIdSuffix() + " : " + format.format(firstDate) + " -> "
+					+ format.format(lastDate) + " : " + monday + tuesday + wednesday + thursday + friday + saturday
 					+ sunday;
 			timetable.setComment(comment);
 		} else {

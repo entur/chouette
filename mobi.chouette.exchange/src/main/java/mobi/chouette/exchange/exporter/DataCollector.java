@@ -15,7 +15,7 @@ import mobi.chouette.model.StopArea;
 import mobi.chouette.model.StopPoint;
 import mobi.chouette.model.VehicleJourney;
 import mobi.chouette.model.VehicleJourneyAtStop;
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 
 import java.util.List;
 import java.util.stream.Collectors;

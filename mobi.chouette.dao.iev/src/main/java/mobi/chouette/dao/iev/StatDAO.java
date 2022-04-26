@@ -12,7 +12,7 @@ import javax.persistence.TypedQuery;
 import lombok.extern.log4j.Log4j;
 import mobi.chouette.model.iev.Stat;
 
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 
 @Stateless
 @Log4j

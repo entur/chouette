@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 
 import lombok.Getter;
 import lombok.Setter;
+import mobi.chouette.common.TimeUtil;
 import mobi.chouette.model.AccessLink;
 import mobi.chouette.model.AccessPoint;
 import mobi.chouette.model.CalendarDay;
@@ -35,8 +36,8 @@ import mobi.chouette.model.type.DayTypeEnum;
 import com.tobedevoured.modelcitizen.CreateModelException;
 import com.tobedevoured.modelcitizen.ModelFactory;
 import com.tobedevoured.modelcitizen.RegisterBlueprintException;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  * 
@@ -489,8 +490,8 @@ public class ComplexModelFactory
             vjas.setStopPoint(journeyPattern.getStopPoints().get(i));
             vjas.setVehicleJourney(vehicle);
 
-            vjas.setArrivalTime(LocalTime.fromCalendarFields(calendar));
-            vjas.setDepartureTime(LocalTime.fromCalendarFields(calendar));
+            vjas.setArrivalTime(TimeUtil.toLocalTime(calendar));
+            vjas.setDepartureTime(TimeUtil.toLocalTime(calendar));
             calendar.add(Calendar.MINUTE, 3);
             vjas = modelFactory.createModel(vjas);
 
@@ -504,5 +505,6 @@ public class ComplexModelFactory
       assert vehicle.getJourneyPattern() != null;
       return vehicle;
    }
+
 
 }

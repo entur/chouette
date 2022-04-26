@@ -1,7 +1,6 @@
 package mobi.chouette.exchange.netexprofile.exporter.producer;
 
 import mobi.chouette.common.Context;
-import mobi.chouette.common.TimeUtil;
 import mobi.chouette.exchange.netexprofile.Constant;
 import mobi.chouette.exchange.netexprofile.exporter.ExportableData;
 import mobi.chouette.exchange.netexprofile.exporter.ExportableNetexData;
@@ -12,7 +11,7 @@ import mobi.chouette.model.Line;
 import mobi.chouette.model.StopPoint;
 import mobi.chouette.model.Timetable;
 import org.apache.commons.collections.CollectionUtils;
-import org.joda.time.LocalTime;
+import java.time.LocalTime;
 import org.rutebanken.netex.model.DayTypeRefStructure;
 import org.rutebanken.netex.model.DayTypeRefs_RelStructure;
 import org.rutebanken.netex.model.JourneyPatternRefStructure;
@@ -84,7 +83,7 @@ public class DeadRunProducer extends NetexProducer {
                 if (departureTime != null) {
                     if ((i + 1 < deadRunAtStops.size())) {
                         NetexTimeConversionUtil.populatePassingTimeUtc(timetabledPassingTime, false, deadRunAtStop);
-                        timetabledPassingTime.setDepartureTime(TimeUtil.toLocalTimeFromJoda(departureTime));
+                        timetabledPassingTime.setDepartureTime(departureTime);
                         if (deadRunAtStop.getDepartureDayOffset() > 0) {
                             timetabledPassingTime.setDepartureDayOffset(BigInteger.valueOf(deadRunAtStop.getDepartureDayOffset()));
                         }

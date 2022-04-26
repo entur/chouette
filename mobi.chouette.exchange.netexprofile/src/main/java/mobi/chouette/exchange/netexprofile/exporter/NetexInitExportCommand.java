@@ -20,7 +20,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import mobi.chouette.dao.ReferentialLastUpdateDAO;
-import org.joda.time.LocalDateTime;
+import java.time.LocalDateTime;
 
 import com.jamonapi.Monitor;
 import com.jamonapi.MonitorFactory;

@@ -3,6 +3,7 @@ package mobi.chouette.model.blueprint;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+import mobi.chouette.common.TimeUtil;
 import mobi.chouette.model.AccessPoint;
 import mobi.chouette.model.type.AccessPointTypeEnum;
 import mobi.chouette.model.type.LongLatTypeEnum;
@@ -10,7 +11,7 @@ import mobi.chouette.model.type.LongLatTypeEnum;
 import com.tobedevoured.modelcitizen.annotation.Blueprint;
 import com.tobedevoured.modelcitizen.annotation.Default;
 import com.tobedevoured.modelcitizen.field.FieldCallback;
-import org.joda.time.LocalTime;
+import java.time.LocalTime;
 
 @SuppressWarnings("deprecation")
 @Blueprint(AccessPoint.class)
@@ -52,9 +53,9 @@ public class AccessPointBlueprint
    AccessPointTypeEnum type = AccessPointTypeEnum.InOut;
 
    @Default
-   LocalTime openingTime = new LocalTime(173335738);
+   LocalTime openingTime = TimeUtil.toLocalTime(173335738);
 
    @Default
-   LocalTime closingTime = new LocalTime(173335738);
+   LocalTime closingTime = TimeUtil.toLocalTime(173335738);
 
 }

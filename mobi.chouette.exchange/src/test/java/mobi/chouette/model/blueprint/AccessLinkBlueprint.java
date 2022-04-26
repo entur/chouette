@@ -11,7 +11,7 @@ import com.tobedevoured.modelcitizen.annotation.Blueprint;
 import com.tobedevoured.modelcitizen.annotation.Default;
 import com.tobedevoured.modelcitizen.annotation.Mapped;
 import com.tobedevoured.modelcitizen.field.FieldCallback;
-import org.joda.time.Duration;
+import java.time.Duration;
 
 @SuppressWarnings("deprecation")
 @Blueprint(AccessLink.class)
@@ -46,13 +46,13 @@ public class AccessLinkBlueprint
    BigDecimal linkDistance = new BigDecimal(2);
 
    @Default
-   Duration defaultDuration = new Duration(173335738);
+   Duration defaultDuration = Duration.ofMillis(173335738);
 
    @Default
-   Duration frequentTravellerDuration = new Duration(173335738);
+   Duration frequentTravellerDuration = Duration.ofMillis(173335738);
 
    @Default
-   Duration occasionalTravellerDuration = new Duration(173335738);
+   Duration occasionalTravellerDuration = Duration.ofMillis(173335738);
 
    @Mapped
    boolean mobilityRestrictedSuitable = true;

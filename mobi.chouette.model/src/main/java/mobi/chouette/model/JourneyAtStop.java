@@ -1,14 +1,14 @@
 package mobi.chouette.model;
 
-import org.joda.time.LocalTime;
+import java.time.LocalTime;
 
 public interface JourneyAtStop {
 
-    void setArrivalTime(LocalTime toJodaLocalTime);
+    void setArrivalTime(LocalTime localTime);
 
     void setArrivalDayOffset(int intValue);
 
-    void setDepartureTime(LocalTime toJodaLocalTime);
+    void setDepartureTime(LocalTime localTime);
 
     void setDepartureDayOffset(int intValue);
 

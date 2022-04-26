@@ -47,9 +47,8 @@ import mobi.chouette.model.util.Referential;
 import com.jamonapi.Monitor;
 import com.jamonapi.MonitorFactory;
 import org.jboss.ejb3.annotation.TransactionTimeout;
-import org.joda.time.LocalDate;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Log4j
 @Stateless(name = LineRegisterCommand.COMMAND)
@@ -244,15 +243,15 @@ public class LineRegisterCommand implements Command {
 		// VehicleJourneyAtStop newValue)
 		
 
-		DateTimeFormatter timeFormat = DateTimeFormat.forPattern("HH:mm:ss");
-		DateTimeFormatter dateTimeFormat = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss");
+		DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
+		DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 		
 		buffer.write(vehicleJourneyAtStop.getObjectId().replace('|', '_'));
 		buffer.append(SEP);
 		buffer.write(vehicleJourneyAtStop.getObjectVersion().toString());
 		buffer.append(SEP);
 		if(vehicleJourneyAtStop.getCreationTime() != null) {
-			buffer.write(dateTimeFormat.print(vehicleJourneyAtStop.getCreationTime()));
+			buffer.write(dateTimeFormat.format(vehicleJourneyAtStop.getCreationTime()));
 		} else {
 			buffer.write(NULL);
 		}
@@ -268,12 +267,12 @@ public class LineRegisterCommand implements Command {
 		buffer.write(stopPoint.getId().toString());
 		buffer.append(SEP);
 		if (vehicleJourneyAtStop.getArrivalTime() != null)
-			buffer.write(timeFormat.print(vehicleJourneyAtStop.getArrivalTime()));
+			buffer.write(timeFormat.format(vehicleJourneyAtStop.getArrivalTime()));
 		else
 			buffer.write(NULL);
 		buffer.append(SEP);
 		if (vehicleJourneyAtStop.getDepartureTime() != null)
-			buffer.write(timeFormat.print(vehicleJourneyAtStop.getDepartureTime()));
+			buffer.write(timeFormat.format(vehicleJourneyAtStop.getDepartureTime()));
 		else
 			buffer.write(NULL);
 		buffer.append(SEP);

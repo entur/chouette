@@ -141,8 +141,8 @@ public class LineProducer extends NetexProducer implements NetexEntityProducer<o
 				if (!CollectionUtils.isEmpty(bookingArrangement.getBookingMethods())) {
 					flexibleLine.withBookingMethods(bookingArrangement.getBookingMethods().stream().map(ConversionUtil::toBookingMethod).collect(Collectors.toList()));
 				}
-				flexibleLine.setLatestBookingTime(TimeUtil.toLocalTimeFromJoda(bookingArrangement.getLatestBookingTime()));
-				flexibleLine.setMinimumBookingPeriod(TimeUtil.toDurationFromJodaDuration(bookingArrangement.getMinimumBookingPeriod()));
+				flexibleLine.setLatestBookingTime(bookingArrangement.getLatestBookingTime());
+				flexibleLine.setMinimumBookingPeriod(bookingArrangement.getMinimumBookingPeriod());
 
 				flexibleLine.setBookingContact(contactStructureProducer.produce(bookingArrangement.getBookingContact()));
 			}

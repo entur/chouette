@@ -52,7 +52,7 @@ public class DatedServiceJourneyParser extends NetexParser implements Parser, Co
         NetexReferential netexReferential = (NetexReferential) context.get(NETEX_REFERENTIAL);
         String operatingDayRefId = netexDatedServiceJourney.getOperatingDayRef().getRef();
         OperatingDay operatingDay = NetexObjectUtil.getOperatingDay(netexReferential, operatingDayRefId);
-        datedServiceJourney.setOperatingDay(TimeUtil.toJodaLocalDateIgnoreTime(operatingDay.getCalendarDate()));
+        datedServiceJourney.setOperatingDay(TimeUtil.toLocalDateIgnoreTime(operatingDay.getCalendarDate()));
 
         // service journey and derived from dated service journey
         for (JAXBElement<? extends JourneyRefStructure> jaxbJourneyRefStructure : netexDatedServiceJourney.getJourneyRef()) {

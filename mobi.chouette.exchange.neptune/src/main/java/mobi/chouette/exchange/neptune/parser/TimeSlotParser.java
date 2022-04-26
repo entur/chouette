@@ -16,15 +16,16 @@ import mobi.chouette.model.Timeband;
 import mobi.chouette.model.util.ObjectFactory;
 import mobi.chouette.model.util.Referential;
 
-import org.joda.time.LocalDateTime;
-import org.joda.time.LocalTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
+import java.time.format.DateTimeFormatter;
 import org.xmlpull.v1.XmlPullParser;
 
 @Log4j
 public class TimeSlotParser implements Parser, Constant {
 
+	public static final DateTimeFormatter DATE_TIME_FORMATTER_HH_MM = DateTimeFormatter.ofPattern("HH:mm");
 	private static final String CHILD_TAG = "TimeSlot";
 
 	@Override
@@ -83,8 +84,7 @@ public class TimeSlotParser implements Parser, Constant {
 				XPPUtil.skipSubTree(log, xpp);
 			}
 		}
-		DateTimeFormatter timeFormatter = DateTimeFormat.forPattern("HH:MM");
-		timeband.setName(timeFormatter.print(timeband.getStartTime())+"->"+timeFormatter.print(timeband.getEndTime()));
+		timeband.setName(DATE_TIME_FORMATTER_HH_MM.format(timeband.getStartTime())+"->"+ DATE_TIME_FORMATTER_HH_MM.format(timeband.getEndTime()));
 		validator.addLocation(context, timeSlot, lineNumber, columnNumber);
 	}
 

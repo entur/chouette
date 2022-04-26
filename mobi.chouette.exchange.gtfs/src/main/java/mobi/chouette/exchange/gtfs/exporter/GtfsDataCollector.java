@@ -8,7 +8,7 @@ import mobi.chouette.model.Network;
 import mobi.chouette.model.StopArea;
 import mobi.chouette.model.type.ChouetteAreaEnum;
 import mobi.chouette.model.type.OrganisationTypeEnum;
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 
 @Log4j
 public class GtfsDataCollector extends DataCollector {

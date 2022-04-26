@@ -1,7 +1,6 @@
 package mobi.chouette.exchange.netexprofile.exporter.producer;
 
 import mobi.chouette.common.Context;
-import mobi.chouette.common.TimeUtil;
 import mobi.chouette.exchange.netexprofile.Constant;
 import mobi.chouette.exchange.netexprofile.ConversionUtil;
 import mobi.chouette.exchange.netexprofile.exporter.ExportableData;
@@ -53,12 +52,12 @@ public class BlockProducer extends NetexProducer {
 
         // start time
         if(block.getStartTime() != null) {
-            netexBlock.setStartTime(TimeUtil.toLocalTimeFromJoda(block.getStartTime()));
+            netexBlock.setStartTime(block.getStartTime());
         }
 
         // end time
         if(block.getEndTime() != null) {
-            netexBlock.setEndTime(TimeUtil.toLocalTimeFromJoda(block.getEndTime()));
+            netexBlock.setEndTime(block.getEndTime());
         }
 
         // end time day offset

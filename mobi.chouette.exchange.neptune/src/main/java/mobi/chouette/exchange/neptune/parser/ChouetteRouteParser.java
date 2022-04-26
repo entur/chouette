@@ -20,7 +20,7 @@ import mobi.chouette.model.type.PTDirectionEnum;
 import mobi.chouette.model.util.ObjectFactory;
 import mobi.chouette.model.util.Referential;
 
-import org.joda.time.LocalDateTime;
+import java.time.LocalDateTime;
 import org.xmlpull.v1.XmlPullParser;
 
 @Log4j

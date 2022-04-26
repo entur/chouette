@@ -7,7 +7,6 @@ import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 
 import lombok.extern.log4j.Log4j;
 import mobi.chouette.common.Context;
-import mobi.chouette.common.TimeUtil;
 import mobi.chouette.exchange.importer.Parser;
 import mobi.chouette.exchange.importer.ParserFactory;
 import mobi.chouette.exchange.netexprofile.Constant;
@@ -123,8 +122,8 @@ public class LineParser implements Parser, Constant {
 				bookingArrangement.setBookWhen(NetexParserUtils.toPurchaseWhen(flexibleLine.getBookWhen()));
 				bookingArrangement.setBuyWhen(flexibleLine.getBuyWhen().stream().map(NetexParserUtils::toPurchaseMoment).collect(Collectors.toList()));
 				bookingArrangement.setBookingMethods(flexibleLine.getBookingMethods().stream().map(NetexParserUtils::toBookingMethod).collect(Collectors.toList()));
-				bookingArrangement.setLatestBookingTime(TimeUtil.toJodaLocalTime(flexibleLine.getLatestBookingTime()));
-				bookingArrangement.setMinimumBookingPeriod(TimeUtil.toJodaDuration(flexibleLine.getMinimumBookingPeriod()));
+				bookingArrangement.setLatestBookingTime(flexibleLine.getLatestBookingTime());
+				bookingArrangement.setMinimumBookingPeriod(flexibleLine.getMinimumBookingPeriod());
 
 				bookingArrangement.setBookingContact(contactStructureParser.parse(flexibleLine.getBookingContact()));
 

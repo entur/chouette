@@ -142,8 +142,8 @@ public class JourneyPatternProducer extends NetexProducer implements NetexEntity
 					if (!CollectionUtils.isEmpty(bookingArrangement.getBookingMethods())) {
 						netexBookingArrangement.withBookingMethods(bookingArrangement.getBookingMethods().stream().map(ConversionUtil::toBookingMethod).collect(Collectors.toList()));
 					}
-					netexBookingArrangement.setLatestBookingTime(TimeUtil.toLocalTimeFromJoda(bookingArrangement.getLatestBookingTime()));
-					netexBookingArrangement.setMinimumBookingPeriod(TimeUtil.toDurationFromJodaDuration(bookingArrangement.getMinimumBookingPeriod()));
+					netexBookingArrangement.setLatestBookingTime(bookingArrangement.getLatestBookingTime());
+					netexBookingArrangement.setMinimumBookingPeriod(bookingArrangement.getMinimumBookingPeriod());
 
 					netexBookingArrangement.setBookingContact(contactStructureProducer.produce(bookingArrangement.getBookingContact()));
 					stopPointInJourneyPattern.setBookingArrangements(netexBookingArrangement);

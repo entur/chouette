@@ -35,6 +35,7 @@ import lombok.extern.log4j.Log4j;
 import mobi.chouette.common.Constant;
 import mobi.chouette.common.ContenerChecker;
 import mobi.chouette.common.PropertyNames;
+import mobi.chouette.common.TimeUtil;
 import mobi.chouette.common.file.FileServiceException;
 import mobi.chouette.common.file.FileStore;
 import mobi.chouette.common.file.FileStoreFactory;
@@ -52,8 +53,8 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.ObjectUtils;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Singleton(name = JobServiceManager.BEAN_NAME)
 @ConcurrencyManagement(ConcurrencyManagementType.BEAN)
@@ -531,7 +532,7 @@ public class JobServiceManager {
 				// filter on update time if given, otherwise don't return
 				// deleted jobs
 				boolean versionZeroCondition = (version == 0) && job.getStatus().ordinal() < STATUS.DELETED.ordinal();
-				boolean versionNonZeroCondition = (version > 0) && version < job.getUpdated().toDate().getTime();
+				boolean versionNonZeroCondition = (version > 0) && version < TimeUtil.toEpochMilliseconds(job.getUpdated());
 
 				return versionZeroCondition || versionNonZeroCondition;
 			}

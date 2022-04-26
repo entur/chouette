@@ -5,7 +5,9 @@ import java.io.IOException;
 import javax.naming.InitialContext;
 import javax.xml.bind.MarshalException;
 
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
+
+import mobi.chouette.common.TimeUtil;
 import org.xml.sax.SAXParseException;
 
 import com.jamonapi.Monitor;
@@ -66,12 +68,12 @@ public class NetexLineProducerCommand implements Command, Constant {
 
             LocalDate startDate = null;
             if (configuration.getStartDate() != null) {
-                startDate = new LocalDate(configuration.getStartDate());
+                startDate = TimeUtil.toLocalDate(configuration.getStartDate());
             }
 
             LocalDate endDate = null;
             if (configuration.getEndDate() != null) {
-                endDate = new LocalDate(configuration.getEndDate());
+                endDate = TimeUtil.toLocalDate(configuration.getEndDate());
             }
 
             NetexDataCollector collector = new NetexDataCollector(collection, line, startDate, endDate, !configuration.isExportBlocks());

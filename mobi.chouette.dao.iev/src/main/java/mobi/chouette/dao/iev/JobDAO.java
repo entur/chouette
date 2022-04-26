@@ -21,7 +21,7 @@ import mobi.chouette.model.iev.Job;
 import mobi.chouette.model.iev.Job_;
 import mobi.chouette.model.iev.Link;
 
-import org.joda.time.LocalDateTime;
+import java.time.LocalDateTime;
 
 @Stateless
 @Log4j

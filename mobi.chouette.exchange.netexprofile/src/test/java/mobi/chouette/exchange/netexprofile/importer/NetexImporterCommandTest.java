@@ -72,7 +72,7 @@ import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
-import org.joda.time.Duration;
+import java.time.Duration;
 import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
@@ -1126,7 +1126,7 @@ public class NetexImporterCommandTest extends Arquillian implements Constant, Re
 		assertEquals(i.getGuaranteed(),Boolean.FALSE);
 		assertEquals(i.getAdvertised(),Boolean.TRUE);
 		
-		assertEquals(i.getMaximumWaitTime(), Duration.standardMinutes(30));
+		assertEquals(i.getMaximumWaitTime(), Duration.ofMinutes(30));
 		assertNotNull(i.getName());
 		Assert.assertNull(i.getMinimumTransferTime());
 		
@@ -1208,7 +1208,7 @@ public class NetexImporterCommandTest extends Arquillian implements Constant, Re
 		assertEquals(i.getGuaranteed(),Boolean.FALSE);
 		assertEquals(i.getAdvertised(), Boolean.TRUE);
 
-		assertEquals(i.getMaximumWaitTime(), Duration.standardMinutes(30));
+		assertEquals(i.getMaximumWaitTime(), Duration.ofMinutes(30));
 		assertNotNull(i.getName());
 		Assert.assertNull(i.getMinimumTransferTime());
 		

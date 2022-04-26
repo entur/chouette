@@ -16,8 +16,8 @@ import mobi.chouette.model.util.NeptuneUtil;
 import mobi.chouette.model.util.ObjectFactory;
 import mobi.chouette.model.util.Referential;
 
-import org.joda.time.Duration;
-import org.joda.time.LocalDateTime;
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 @Log4j
 public class ConnectionLinkGenerator extends AbstractGenerator {
@@ -88,9 +88,9 @@ public class ConnectionLinkGenerator extends AbstractGenerator {
 							continue;
 						if (excludedLinkMap.containsKey(reverseId))
 							continue;
-						double durationInMillis = distance * 900; // speed of 4
+						long durationInMillis = (long) (distance * 900); // speed of 4
 						// km/h
-						Duration defaultDuration = new Duration(durationInMillis);
+						Duration defaultDuration = Duration.ofMillis(durationInMillis);
 
 						if (fixedLinkMap.containsKey(objectId) || fixedLinkMap.containsKey(reverseId)) {
 							ConnectionLink link = fixedLinkMap.get(objectId);

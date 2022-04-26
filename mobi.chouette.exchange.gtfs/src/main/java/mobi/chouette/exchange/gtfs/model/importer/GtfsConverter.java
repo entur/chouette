@@ -17,14 +17,14 @@ import mobi.chouette.exchange.gtfs.model.GtfsTrip.DirectionType;
 import mobi.chouette.exchange.gtfs.model.GtfsTrip.WheelchairAccessibleType;
 import mobi.chouette.exchange.gtfs.model.RouteTypeEnum;
 
-import org.joda.time.LocalDate;
-import org.joda.time.LocalTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+import java.time.format.DateTimeFormatter;
 
 public interface GtfsConverter {
 
-	public static DateTimeFormatter BASIC_ISO_DATE =  DateTimeFormat.forPattern("yyyyMMdd");
+	public static DateTimeFormatter BASIC_ISO_DATE =  DateTimeFormatter.ofPattern("yyyyMMdd");
 
 	public static DefaultFieldConverter<String> STRING_CONVERTER = new DefaultFieldConverter<String>() {
 
@@ -132,7 +132,7 @@ public interface GtfsConverter {
 
 		@Override
 		protected String convertTo(LocalDate input) throws Exception {
-			return (input != null) ? BASIC_ISO_DATE.print(input) : "";
+			return (input != null) ? BASIC_ISO_DATE.format(input) : "";
 		}
 
 	};
@@ -217,7 +217,7 @@ public interface GtfsConverter {
 				throw new java.lang.IllegalArgumentException();
 			}
 
-			result.setTime(new LocalTime(hour, minute, second));
+			result.setTime(LocalTime.of(hour, minute, second));
 			result.setDay(day);
 
 			return result;
@@ -231,11 +231,11 @@ public interface GtfsConverter {
 
 				LocalTime value = input.getTime();
 
-				int hour = value.getHourOfDay() + (input.getDay() * 24);
-				if (value.getHourOfDay() > 23) throw new IllegalArgumentException("hour > 23 : "+value.getHourOfDay());
+				int hour = value.getHour() + (input.getDay() * 24);
+				if (value.getHour() > 23) throw new IllegalArgumentException("hour > 23 : "+value.getHour());
 				if (input.getDay() < 0 ) throw new IllegalArgumentException("time day < 0 : "+input.getDay());
-				int minute = value.getMinuteOfHour();
-				int second = value.getSecondOfMinute();
+				int minute = value.getMinute();
+				int second = value.getSecond();
 				String hourString;
 				String minuteString;
 				String secondString;

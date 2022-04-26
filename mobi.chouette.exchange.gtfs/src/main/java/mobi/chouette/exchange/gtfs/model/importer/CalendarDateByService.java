@@ -6,10 +6,11 @@ import java.util.Map;
 import java.util.Set;
 
 import mobi.chouette.common.HTMLTagValidator;
+import mobi.chouette.common.TimeUtil;
 import mobi.chouette.exchange.gtfs.model.GtfsCalendarDate;
 
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+
+import java.time.format.DateTimeFormatter;
 
 public class CalendarDateByService extends IndexImpl<GtfsCalendarDate>
 		implements GtfsConverter {
@@ -128,11 +129,11 @@ public class CalendarDateByService extends IndexImpl<GtfsCalendarDate>
 		boolean result = true;
 		
 		if (bean.getDate() != null && bean.getServiceId() != null)
-			result = hashCodes.add(bean.getServiceId()+"#"+bean.getDate().toDate().getTime());
+			result = hashCodes.add(bean.getServiceId()+"#"+ TimeUtil.toEpochMilliseconds(bean.getDate()));
 		if (!result)
 		{
-			DateTimeFormatter dateFormatter = DateTimeFormat.forPattern("yyyyMMdd");
-			bean.getErrors().add(new GtfsException(_path, bean.getId(), getIndex(FIELDS.service_id.name()), FIELDS.service_id.name()+","+FIELDS.date.name(), GtfsException.ERROR.DUPLICATE_DOUBLE_KEY, null, bean.getServiceId()+","+dateFormatter.print(bean.getDate())));
+			DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+			bean.getErrors().add(new GtfsException(_path, bean.getId(), getIndex(FIELDS.service_id.name()), FIELDS.service_id.name()+","+FIELDS.date.name(), GtfsException.ERROR.DUPLICATE_DOUBLE_KEY, null, bean.getServiceId()+","+dateFormatter.format(bean.getDate())));
 		}
 		
 		return result;

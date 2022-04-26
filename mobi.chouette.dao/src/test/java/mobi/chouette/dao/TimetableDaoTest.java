@@ -14,7 +14,7 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -129,7 +129,7 @@ public class TimetableDaoTest extends Arquillian {
 
 		DatedServiceJourney dsj = new DatedServiceJourney();
 		dsj.setObjectId("TST:DatedServiceJourney:"+uuid);
-		dsj.setOperatingDay(new LocalDate());
+		dsj.setOperatingDay(LocalDate.now());
 
 
 		// Wire together

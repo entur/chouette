@@ -28,7 +28,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
-import org.joda.time.Duration;
+import java.time.Duration;
 
 /**
  * Chouette ConnectionLink : relation between 2 StopAreas

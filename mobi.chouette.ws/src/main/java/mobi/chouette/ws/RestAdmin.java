@@ -27,6 +27,7 @@ import mobi.chouette.common.Color;
 import mobi.chouette.common.Constant;
 import mobi.chouette.common.ContenerChecker;
 import mobi.chouette.common.PropertyNames;
+import mobi.chouette.common.TimeUtil;
 import mobi.chouette.exchange.TestDescription;
 import mobi.chouette.model.iev.Job;
 import mobi.chouette.model.iev.Stat;
@@ -209,7 +210,7 @@ public class RestAdmin implements Constant {
 			for (Stat stat : lstStat) {
 				JSONObject result = new JSONObject();
 				result.put("id", stat.getId());
-				result.put("date", stat.getDate().toDate());
+				result.put("date", TimeUtil.toDate(stat.getDate()));
 				result.put("referential", stat.getReferential());
 				result.put("action", stat.getAction());
 				if (stat.getFormat() != null)

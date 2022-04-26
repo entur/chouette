@@ -11,7 +11,7 @@ import com.tobedevoured.modelcitizen.annotation.Blueprint;
 import com.tobedevoured.modelcitizen.annotation.Default;
 import com.tobedevoured.modelcitizen.annotation.Mapped;
 import com.tobedevoured.modelcitizen.field.FieldCallback;
-import org.joda.time.Duration;
+import java.time.Duration;
 
 @SuppressWarnings("deprecation")
 @Blueprint(ConnectionLink.class)
@@ -45,13 +45,13 @@ public class ConnectionLinkBlueprint
    BigDecimal linkDistance = new BigDecimal(2);
 
    @Default
-   Duration defaultDuration = new Duration(173335738);
+   Duration defaultDuration = Duration.ofMillis(173335738);
 
    @Default
-   Duration frequentTravellerDuration = new Duration(173335738);
+   Duration frequentTravellerDuration = Duration.ofMillis(173335738);
 
    @Default
-   Duration occasionalTravellerDuration = new Duration(173335738);
+   Duration occasionalTravellerDuration = Duration.ofMillis(173335738);
 
    @Default
    int objectVersion = 1;
@@ -60,7 +60,7 @@ public class ConnectionLinkBlueprint
    ConnectionLinkTypeEnum linkType = ConnectionLinkTypeEnum.Mixed;
 
    @Default
-   Duration mobilityRestrictedTravellerDuration = new Duration(1908888);
+   Duration mobilityRestrictedTravellerDuration = Duration.ofMillis(1908888);
 
    @Mapped
    boolean mobilityRestrictedSuitable = true;

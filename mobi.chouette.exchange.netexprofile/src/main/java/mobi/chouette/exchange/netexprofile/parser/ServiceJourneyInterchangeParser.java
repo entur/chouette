@@ -5,7 +5,6 @@ import org.rutebanken.netex.model.JourneyInterchangesInFrame_RelStructure;
 import org.rutebanken.netex.model.ServiceJourneyInterchange;
 import lombok.extern.log4j.Log4j;
 import mobi.chouette.common.Context;
-import mobi.chouette.common.TimeUtil;
 import mobi.chouette.exchange.importer.Parser;
 import mobi.chouette.exchange.importer.ParserFactory;
 import mobi.chouette.exchange.netexprofile.Constant;
@@ -42,8 +41,8 @@ public class ServiceJourneyInterchangeParser implements Parser, Constant {
 				interchange.setAdvertised(netexInterchange.isAdvertised());
 				interchange.setGuaranteed(netexInterchange.isGuaranteed());
 
-				interchange.setMaximumWaitTime(TimeUtil.toJodaDuration(netexInterchange.getMaximumWaitTime()));
-				interchange.setMinimumTransferTime(TimeUtil.toJodaDuration(netexInterchange.getMinimumTransferTime()));
+				interchange.setMaximumWaitTime(netexInterchange.getMaximumWaitTime());
+				interchange.setMinimumTransferTime(netexInterchange.getMinimumTransferTime());
 
 				// Parse journeys
 				String feederVehicleJourneyObjectId = netexInterchange.getFromJourneyRef().getRef();

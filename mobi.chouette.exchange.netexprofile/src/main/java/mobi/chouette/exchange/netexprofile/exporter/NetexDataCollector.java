@@ -3,7 +3,7 @@ package mobi.chouette.exchange.netexprofile.exporter;
 import lombok.extern.log4j.Log4j;
 import mobi.chouette.exchange.exporter.DataCollector;
 import mobi.chouette.model.Line;
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 
 @Log4j
 public class NetexDataCollector extends DataCollector {

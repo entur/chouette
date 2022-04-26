@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 
 /**
  * Period : date period for Timetables

@@ -7,7 +7,7 @@ import lombok.ToString;
 import mobi.chouette.model.type.ServiceAlterationEnum;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

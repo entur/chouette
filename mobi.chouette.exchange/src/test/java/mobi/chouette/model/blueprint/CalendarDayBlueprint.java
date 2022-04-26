@@ -4,7 +4,7 @@ import mobi.chouette.model.CalendarDay;
 
 import com.tobedevoured.modelcitizen.annotation.Blueprint;
 import com.tobedevoured.modelcitizen.annotation.Default;
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 
 @Blueprint(CalendarDay.class)
 public class CalendarDayBlueprint

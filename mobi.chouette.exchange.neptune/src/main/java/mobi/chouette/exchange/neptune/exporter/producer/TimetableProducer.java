@@ -4,7 +4,7 @@ import mobi.chouette.model.Period;
 import mobi.chouette.model.Timetable;
 import mobi.chouette.model.type.DayTypeEnum;
 
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 import org.trident.schema.trident.DayTypeType;
 import org.trident.schema.trident.PeriodType;
 import org.trident.schema.trident.TimetableType;

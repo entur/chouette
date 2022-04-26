@@ -59,8 +59,8 @@ import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.PrecisionModel;
 import org.apache.commons.io.FileUtils;
 import org.jboss.arquillian.testng.Arquillian;
-import org.joda.time.LocalTime;
-import org.joda.time.Seconds;
+import java.time.LocalTime;
+import org.threeten.extra.Seconds;
 import org.testng.Assert;
 
 @Log4j
@@ -275,7 +275,7 @@ public abstract class AbstractTestValidation  extends Arquillian implements Cons
 	{
 		if (first == null || last == null)
 			return Long.MIN_VALUE; // TODO
-		long diff = Seconds.secondsBetween(first, last).getSeconds();
+		long diff = Seconds.between(first, last).getAmount();
 		if (diff < 0)
 			diff += 86400L; // step upon midnight : add one day in seconds
 		return diff;

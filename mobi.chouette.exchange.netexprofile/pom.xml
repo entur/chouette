@@ -22,11 +22,6 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>org.entur</groupId>
 			<artifactId>netex-java-model</artifactId>
 		</dependency>
