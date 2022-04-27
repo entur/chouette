@@ -617,7 +617,7 @@ ALTER TABLE chouette_gui.brandings OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.brandings_id_seq
     START WITH 1
-    INCREMENT BY 100
+    INCREMENT BY 10
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -638,7 +638,7 @@ ALTER SEQUENCE chouette_gui.brandings_id_seq OWNED BY chouette_gui.brandings.id;
 
 CREATE SEQUENCE chouette_gui.codespaces_id_seq
     START WITH 1
-    INCREMENT BY 100
+    INCREMENT BY 10
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -667,7 +667,7 @@ ALTER TABLE chouette_gui.codespaces OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.companies_id_seq
     START WITH 1
-    INCREMENT BY 100
+    INCREMENT BY 10
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -993,7 +993,7 @@ ALTER TABLE chouette_gui.destination_displays OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.destination_displays_id_seq
     START WITH 1
-    INCREMENT BY 100
+    INCREMENT BY 10
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -1163,7 +1163,7 @@ ALTER TABLE chouette_gui.footnote_alternative_texts OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.footnote_alternative_texts_id_seq
     START WITH 1
-    INCREMENT BY 100
+    INCREMENT BY 10
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -1184,7 +1184,7 @@ ALTER SEQUENCE chouette_gui.footnote_alternative_texts_id_seq OWNED BY chouette_
 
 CREATE SEQUENCE chouette_gui.footnotes_id_seq
     START WITH 1
-    INCREMENT BY 100
+    INCREMENT BY 10
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -1275,7 +1275,7 @@ ALTER TABLE chouette_gui.footnotes_vehicle_journeys OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.group_of_lines_id_seq
     START WITH 1
-    INCREMENT BY 100
+    INCREMENT BY 10
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -1432,7 +1432,7 @@ ALTER TABLE chouette_gui.journey_pattern_sections OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.journey_patterns_id_seq
     START WITH 1
-    INCREMENT BY 100
+    INCREMENT BY 20
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -1481,7 +1481,7 @@ ALTER TABLE chouette_gui.journey_patterns_stop_points OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.lines_id_seq
     START WITH 1
-    INCREMENT BY 100
+    INCREMENT BY 10
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -1542,7 +1542,7 @@ ALTER TABLE chouette_gui.lines_key_values OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.networks_id_seq
     START WITH 1
-    INCREMENT BY 100
+    INCREMENT BY 10
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
