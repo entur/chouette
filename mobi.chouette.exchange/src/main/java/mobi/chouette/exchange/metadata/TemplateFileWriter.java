@@ -36,10 +36,6 @@ public abstract class TemplateFileWriter {
 		velocityEngine.addProperty("resource.loader", "classpath");
 		velocityEngine.addProperty("classpath.resource.loader.class",
 				"org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
-		velocityEngine.setProperty(RuntimeConstants.RUNTIME_LOG_LOGSYSTEM_CLASS,
-				"org.apache.velocity.runtime.log.Log4JLogChute");
-		velocityEngine.setProperty("runtime.log.logsystem.log4j.logger",
-                LOGGER_NAME);
 	}
 
 	protected ZipEntry writeZipEntry(String entryName, String templateName, ZipOutputStream zipFile)
