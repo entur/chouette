@@ -3,6 +3,7 @@ package mobi.chouette.dao;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.persistence.Cache;
 import javax.persistence.EntityManager;
@@ -114,7 +115,17 @@ public abstract class 	GenericDAOImpl<T> implements GenericDAO<T> {
 	private List<T> findByObjectId(final Collection<String> objectIds, boolean flush) {
 		List<T> result = null;
 		if (objectIds.isEmpty())
-			return result;
+			return null;
+
+		// When there is only one objectId, it is faster to lookup by natural id as done in the findByObjectId() method.
+		if(objectIds.size() == 1) {
+			T entity = findByObjectId(objectIds.stream().findFirst().orElseThrow(NoSuchElementException::new));
+			if(entity == null) {
+				return Collections.emptyList();
+			} else {
+				return Collections.singletonList(entity);
+			}
+		}
 
 		Iterable<List<String>> iterator = Iterables.partition(objectIds, 32000);
 		for (List<String> ids : iterator) {
