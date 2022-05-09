@@ -38,7 +38,7 @@
 
 		<postgresql.version>42.3.3</postgresql.version>
 		<postgis.version>2.5.1</postgis.version>
-		<hibernate.version>5.3.25.Final</hibernate.version>
+		<hibernate.version>5.4.24.Final</hibernate.version>
 		<usertype.core.version>6.0.1.GA</usertype.core.version>
 		<jts.version>1.13</jts.version>
 		<geolatte-geom.version>1.0.6</geolatte-geom.version>
