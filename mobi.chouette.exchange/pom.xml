@@ -100,6 +100,14 @@
             <scope>provided</scope>
         </dependency>
 
+        <!--Required for Hibernate bytecode enhancement-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
 
 		<!-- Modules -->
 		<dependency>
