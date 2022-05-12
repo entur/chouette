@@ -57,7 +57,7 @@
 		<rutebanken.helpers.version>1.0.55</rutebanken.helpers.version>
 		<owasp-dependency-check-plugin.version>6.5.3</owasp-dependency-check-plugin.version>
 
-		<shrinkwrap-resolver-bom.version>2.2.6</shrinkwrap-resolver-bom.version>
+		<shrinkwrap-resolver-bom.version>2.2.7</shrinkwrap-resolver-bom.version>
 		<arquillian-version>1.4.1.Final</arquillian-version>
 		<wildfly-arquillian-container-embedded.version>2.2.0.Final</wildfly-arquillian-container-embedded.version>
 
