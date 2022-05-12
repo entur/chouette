@@ -57,7 +57,11 @@ public class NetexInitImportCommand implements Command, Constant {
 			
 			NetexXMLProcessingHelperFactory importer = new NetexXMLProcessingHelperFactory();
 			context.put(IMPORTER, importer);
-			context.put(NETEX_XPATH_COMPILER, importer.getXPathCompiler());
+
+			if(parameters.isValidateAgainstProfile()) {
+				context.put(NETEX_XPATH_COMPILER, importer.getXPathCompiler());
+			}
+
 			context.put(REFERENTIAL, new Referential());
 			context.put(NETEX_REFERENTIAL, new NetexReferential());
 			context.put(VALIDATION_DATA, new ValidationData());

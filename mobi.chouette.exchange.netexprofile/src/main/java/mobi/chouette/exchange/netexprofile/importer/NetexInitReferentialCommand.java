@@ -73,13 +73,15 @@ public class NetexInitReferentialCommand implements Command, Constant {
 			}
 
 			NetexXMLProcessingHelperFactory importer = (NetexXMLProcessingHelperFactory) context.get(IMPORTER);
-			
 
-			XdmNode netexDom = importer.parseFileToXdmNode(file, elementsToSkip);
+			if(parameters.isValidateAgainstProfile()) {
+				XdmNode netexDom = importer.parseFileToXdmNode(file, elementsToSkip);
+				context.put(NETEX_DATA_DOM, netexDom);
+			}
+
 			PublicationDeliveryStructure netexJava = importer.unmarshal(file,elementsToSkip);
 
 			context.put(NETEX_DATA_JAVA, netexJava);
-			context.put(NETEX_DATA_DOM, netexDom);
 
 			if (lineFile) {
 				context.put(NETEX_WITH_COMMON_DATA, Boolean.FALSE);
