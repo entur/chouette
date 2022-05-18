@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 
 @XmlRootElement(name = "period")
@@ -16,7 +17,11 @@ import lombok.Getter;
 @Getter
 public class Period implements Comparable<Period> {
 	// Use sql date for reliable serialization of date only (Should have been java.time.LocalDate)
+
+
+	@JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private java.sql.Date from;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private java.sql.Date to;
 
 	public Period(Date from, Date to) {
