@@ -7,9 +7,10 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
+import mobi.chouette.model.util.DateAdapter;
 
 @XmlRootElement(name = "period")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -19,9 +20,9 @@ public class Period implements Comparable<Period> {
 	// Use sql date for reliable serialization of date only (Should have been java.time.LocalDate)
 
 
-	@JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	@XmlJavaTypeAdapter(DateAdapter.class)
 	private java.sql.Date from;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	@XmlJavaTypeAdapter(DateAdapter.class)
 	private java.sql.Date to;
 
 	public Period(Date from, Date to) {

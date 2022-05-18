@@ -124,11 +124,6 @@
          <groupId>org.geotools</groupId>
          <artifactId>gt-epsg-hsql</artifactId>
       </dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-annotations</artifactId>
-			<scope>provided</scope>
-		</dependency>
 
 
 		<!-- Modules -->
