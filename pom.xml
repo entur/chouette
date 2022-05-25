@@ -47,7 +47,7 @@
 		<geotools.version>19.3</geotools.version>
 
 		<jaxb-api-version>2.3.3</jaxb-api-version>
-		<jaxb-impl-version>2.3.3</jaxb-impl-version>
+		<jaxb-impl-version>3.0.2</jaxb-impl-version>
 		<dom4j.version>2.1.3</dom4j.version>
 		<jettison.version>1.4.0</jettison.version>
 
