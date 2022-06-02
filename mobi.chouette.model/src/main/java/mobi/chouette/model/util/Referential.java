@@ -283,9 +283,6 @@ public class Referential implements java.io.Serializable {
 			for (StopArea area : sharedStopAreas.values()) {
 				area.getContainedScheduledStopPoints().clear();
 			}
-			for (DestinationDisplay display : sharedDestinationDisplays.values()) {
-				display.getVias().clear();
-			}
 		}
 		accessLinks.clear();
 		accessPoints.clear();

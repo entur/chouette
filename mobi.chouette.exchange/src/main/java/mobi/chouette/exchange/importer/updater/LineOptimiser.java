@@ -2,6 +2,9 @@ package mobi.chouette.exchange.importer.updater;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -15,6 +18,7 @@ import mobi.chouette.dao.JourneyPatternDAO;
 import mobi.chouette.dao.LineDAO;
 import mobi.chouette.dao.NetworkDAO;
 import mobi.chouette.dao.RouteDAO;
+import mobi.chouette.dao.ScheduledStopPointDAO;
 import mobi.chouette.dao.StopAreaDAO;
 import mobi.chouette.dao.StopPointDAO;
 import mobi.chouette.dao.TimebandDAO;
@@ -27,8 +31,12 @@ import mobi.chouette.model.ConnectionLink;
 import mobi.chouette.model.GroupOfLine;
 import mobi.chouette.model.JourneyPattern;
 import mobi.chouette.model.Line;
+import mobi.chouette.model.NeptuneIdentifiedObject;
 import mobi.chouette.model.Network;
+import mobi.chouette.model.ObjectReference;
 import mobi.chouette.model.Route;
+import mobi.chouette.model.RoutePoint;
+import mobi.chouette.model.ScheduledStopPoint;
 import mobi.chouette.model.StopArea;
 import mobi.chouette.model.StopPoint;
 import mobi.chouette.model.Timeband;
@@ -80,6 +88,10 @@ public class LineOptimiser {
 	private StopPointDAO stopPointDAO;
 
 	@EJB
+	private ScheduledStopPointDAO scheduledStopPointDAO;
+
+
+	@EJB
 	private TimebandDAO timebandDAO;
 
 	public void initialize(Referential cache, Referential referential) {
@@ -99,6 +111,7 @@ public class LineOptimiser {
 		initializeLine(cache, referential.getLines().values());
 		initializeRoute(cache, referential.getRoutes().values());
 		initializeStopPoint(cache, referential.getStopPoints().values());
+		initializeReferencedStopAreas(cache, referential.getStopPoints().values(), referential.getRoutePoints().values());
 		initializeJourneyPattern(cache, referential.getJourneyPatterns().values());
 		initializeVehicleJourney(cache, referential.getVehicleJourneys().values());
 
@@ -293,6 +306,31 @@ public class LineOptimiser {
 			}
 		}
 	}
+
+	private void initializeReferencedStopAreas(Referential cache, Collection<StopPoint> stopPoints, Collection<RoutePoint> routePoints) {
+
+		Set<String> stopPointReferencedStopAreasObjectIds = stopPoints.stream()
+				.map(StopPoint::getScheduledStopPoint)
+				.distinct()
+				.filter(Objects::nonNull)
+				.map(ScheduledStopPoint::getContainedInStopAreaRef)
+				.filter(Objects::nonNull)
+				.map(ObjectReference::getObject)
+				.filter(Objects::nonNull)
+				.map(NeptuneIdentifiedObject::getObjectId)
+				.filter(Objects::nonNull)
+				.collect(Collectors.toSet());
+
+		List<StopArea> referencedStopAreas = stopAreaDAO.findByObjectId(stopPointReferencedStopAreasObjectIds);
+		for (StopArea referencedStopArea : referencedStopAreas) {
+			cache.getStopAreas().put(referencedStopArea.getObjectId(), referencedStopArea);
+			for (ScheduledStopPoint scheduledStopPoint : referencedStopArea.getContainedScheduledStopPoints()) {
+				cache.getScheduledStopPoints().put(scheduledStopPoint.getObjectId(), scheduledStopPoint);
+			}
+		}
+
+	}
+
 
 	private void initializeJourneyPattern(Referential cache, Collection<JourneyPattern> list) {
 		if (list != null && !list.isEmpty()) {
