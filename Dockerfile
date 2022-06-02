@@ -1,5 +1,5 @@
 # Adapted from https://github.com/jboss-dockerfiles/base/blob/master/Dockerfile
-FROM redhat/ubi8:8.5
+FROM redhat/ubi8:8.6
 
 RUN yum update -y && yum clean all
 
@@ -22,8 +22,8 @@ ENV JAVA_HOME /usr/lib/jvm/java
 # Adapted from https://github.com/jboss-dockerfiles/wildfly/blob/26.1.0.Final/Dockerfile
 
 # Set the WILDFLY_VERSION env variable
-ENV WILDFLY_VERSION 26.1.0.Final
-ENV WILDFLY_SHA1 1c593ee622556656b3aa842033769efa82878de5
+ENV WILDFLY_VERSION 26.1.1.Final
+ENV WILDFLY_SHA1 c11076dd0ea3bb554c5336eeafdfcee18d94551d
 ENV JBOSS_HOME /opt/jboss/wildfly
 
 USER root
