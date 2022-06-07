@@ -12,7 +12,6 @@
    <properties>
       <project.rootDir>${project.basedir}/..</project.rootDir>
       <skipInitDb>true</skipInitDb>
-
    </properties>
 	<dependencies>
 
