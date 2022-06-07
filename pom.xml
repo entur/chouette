@@ -55,6 +55,7 @@
 		<lombok-maven-plugin-version>1.18.20.0</lombok-maven-plugin-version>
 		<prometheus.agent.version>0.17.0</prometheus.agent.version>
 		<guava.version>31.1-jre</guava.version>
+		<zt-zip.version>1.15</zt-zip.version>
 
 		<project.rootDir>${project.basedir}</project.rootDir>
 
@@ -847,6 +848,12 @@
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
 				<version>${guava.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.zeroturnaround</groupId>
+				<artifactId>zt-zip</artifactId>
+				<version>${zt-zip.version}</version>
+				<type>jar</type>
 			</dependency>
 			<dependency>
 				<groupId>commons-pool</groupId>

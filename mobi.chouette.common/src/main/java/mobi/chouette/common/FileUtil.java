@@ -22,6 +22,7 @@ import org.apache.commons.compress.archivers.ArchiveInputStream;
 import org.apache.commons.compress.archivers.ArchiveStreamFactory;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
+import org.zeroturnaround.zip.ZipUtil;
 
 public class FileUtil {
 
@@ -76,30 +77,10 @@ public class FileUtil {
 		return result;
 	}
 
-	public static void uncompress(String filename, String path) throws IOException, ArchiveException {
-		ArchiveInputStream in = new ArchiveStreamFactory().createArchiveInputStream(new BufferedInputStream(
-				new FileInputStream(new File(filename))));
-		ArchiveEntry entry = null;
-		while ((entry = in.getNextEntry()) != null) {
-
-			String name = FilenameUtils.getName(entry.getName());
-			File file = new File(path, name);
-			if (entry.isDirectory()) {
-				// if (!file.exists()) {
-				// file.mkdirs();
-				// }
-			} else {
-				if (file.exists()) {
-					file.delete();
-				}
-				file.createNewFile();
-				OutputStream out = new FileOutputStream(file);
-				IOUtils.copy(in, out);
-				IOUtils.closeQuietly(out);
-			}
+	public static void uncompress(String filename, String path) throws IOException {
+		try(BufferedInputStream is = new BufferedInputStream(new FileInputStream(filename))) {
+			ZipUtil.unpack(is, new File(path), FilenameUtils::getName);
 		}
-		IOUtils.closeQuietly(in);
-
 	}
 
 	public static void compress(String path, String filename) throws IOException {

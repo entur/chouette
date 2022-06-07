@@ -12,6 +12,7 @@
    <properties>
       <project.rootDir>${project.basedir}/..</project.rootDir>
       <skipInitDb>true</skipInitDb>
+
    </properties>
 	<dependencies>
 
@@ -20,6 +21,12 @@
 			<artifactId>mobi.chouette.jdbc</artifactId>
 			<version>${project.version}</version>
 			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.zeroturnaround</groupId>
+			<artifactId>zt-zip</artifactId>
+			<type>jar</type>
 		</dependency>
 
 
