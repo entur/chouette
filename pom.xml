@@ -60,7 +60,7 @@
 		<project.rootDir>${project.basedir}</project.rootDir>
 
  	    <netex-java-model.version>1.0.13</netex-java-model.version>
-		<rutebanken.helpers.version>1.0.71</rutebanken.helpers.version>
+		<rutebanken.helpers.version>1.0.76</rutebanken.helpers.version>
 		<owasp-dependency-check-plugin.version>6.5.3</owasp-dependency-check-plugin.version>
 
 		<wildfly-arquillian-container-embedded.version>3.0.1.Final</wildfly-arquillian-container-embedded.version>
