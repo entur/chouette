@@ -62,6 +62,8 @@ public class NeptuneSAXParserCommand implements Command, Constant {
 		if (schema == null) {
 			SchemaFactory factory = SchemaFactory
 					.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+
+			factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
 			schema = factory.newSchema(getClass().getResource(SCHEMA_FILE));
 			context.put(SCHEMA, schema);
 		}

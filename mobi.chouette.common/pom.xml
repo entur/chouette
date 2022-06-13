@@ -22,6 +22,12 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.zeroturnaround</groupId>
+			<artifactId>zt-zip</artifactId>
+			<type>jar</type>
+		</dependency>
+
 
 		<!-- Default Dependencies -->
 		<dependency>

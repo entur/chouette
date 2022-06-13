@@ -55,11 +55,12 @@
 		<lombok-maven-plugin-version>1.18.20.0</lombok-maven-plugin-version>
 		<prometheus.agent.version>0.17.0</prometheus.agent.version>
 		<guava.version>31.1-jre</guava.version>
+		<zt-zip.version>1.15</zt-zip.version>
 
 		<project.rootDir>${project.basedir}</project.rootDir>
 
  	    <netex-java-model.version>1.0.13</netex-java-model.version>
-		<rutebanken.helpers.version>1.0.71</rutebanken.helpers.version>
+		<rutebanken.helpers.version>1.0.76</rutebanken.helpers.version>
 		<owasp-dependency-check-plugin.version>6.5.3</owasp-dependency-check-plugin.version>
 
 		<wildfly-arquillian-container-embedded.version>3.0.1.Final</wildfly-arquillian-container-embedded.version>
@@ -847,6 +848,12 @@
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
 				<version>${guava.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.zeroturnaround</groupId>
+				<artifactId>zt-zip</artifactId>
+				<version>${zt-zip.version}</version>
+				<type>jar</type>
 			</dependency>
 			<dependency>
 				<groupId>commons-pool</groupId>
