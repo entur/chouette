@@ -19,7 +19,7 @@
 
 		<slf4j.version>1.7.36</slf4j.version>
 
-		<version.wildfly.maven.plugin>3.0.0.Final</version.wildfly.maven.plugin>
+		<version.wildfly.maven.plugin>3.0.1.Final</version.wildfly.maven.plugin>
 		<version.compiler.plugin>3.10.0</version.compiler.plugin>
 		<version.jaxb2.plugin>1.5</version.jaxb2.plugin>
 		<version.jar.plugin>3.2.2</version.jar.plugin>
