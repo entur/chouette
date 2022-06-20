@@ -540,6 +540,7 @@ public class Line extends NeptuneIdentifiedObject implements ObjectIdTypes {
 							log.trace("Removing VJ with no valid timetables nor valid dated service journeys: " + vehicleJourney.getObjectId());
 						}
 						vjI.remove();
+						continue;
 					}
 					if(onlyPublicData && !vehicleJourney.isPublic()) {
 						if (log.isTraceEnabled()) {
@@ -563,6 +564,7 @@ public class Line extends NeptuneIdentifiedObject implements ObjectIdTypes {
 			}
 		}
 		if(log.isDebugEnabled()) {
+			if()
 			log.debug("Filtered line " + getObjectId() +  " for validity interval " + startDate + " to " + endDate);
 		}
 		return !getRoutes().isEmpty();
