@@ -564,7 +564,6 @@ public class Line extends NeptuneIdentifiedObject implements ObjectIdTypes {
 			}
 		}
 		if(log.isDebugEnabled()) {
-			if()
 			log.debug("Filtered line " + getObjectId() +  " for validity interval " + startDate + " to " + endDate);
 		}
 		return !getRoutes().isEmpty();
