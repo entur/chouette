@@ -27,7 +27,7 @@
 			<artifactId>netex-java-model</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.entur.helpers</groupId>
+			<groupId>org.entur.ror.helpers</groupId>
 			<artifactId>calendar-helper</artifactId>
 		</dependency>
 <dependency>

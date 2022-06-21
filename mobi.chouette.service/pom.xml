@@ -61,9 +61,9 @@
       </dependency>
 
        <dependency>
-           <groupId>org.entur.helpers</groupId>
+           <groupId>org.entur.ror.helpers</groupId>
            <artifactId>gcp-storage</artifactId>
-           <version>${rutebanken.helpers.version}</version>
+           <version>${entur.helpers.version}</version>
            <exclusions>
                <exclusion>
                    <groupId>javax.servlet</groupId>
@@ -119,11 +119,11 @@
          <artifactId>jettison</artifactId>
       </dependency>
        <dependency>
-           <groupId>org.entur.helpers</groupId>
+           <groupId>org.entur.ror.helpers</groupId>
            <artifactId>calendar-helper</artifactId>
        </dependency>
        <dependency>
-           <groupId>org.entur.helpers</groupId>
+           <groupId>org.entur.ror.helpers</groupId>
            <artifactId>hazelcast4-helper</artifactId>
            <exclusions>
                <exclusion>
