@@ -42,7 +42,7 @@
 		<postgis.version>2.5.1</postgis.version>
 		<hibernate.version>5.3.25.Final</hibernate.version>
 		<usertype.core.version>6.0.1.GA</usertype.core.version>
-		<jts.version>1.14</jts.version>
+		<jts.version>1.14.0</jts.version>
 		<geolatte-geom.version>1.3.0</geolatte-geom.version>
 		<geotools.version>19.3</geotools.version>
 
@@ -67,19 +67,6 @@
 
 
 	</properties>
-	<distributionManagement>
-		<snapshotRepository>
-			<id>chouette-snapshot-repository</id>
-			<name>Chouette Snapshot Repository</name>
-			<url>scp://chouette.marseille.cityway.fr/var/lib/tomcat6/webapps/maven-snapshot</url>
-		</snapshotRepository>
-		<repository>
-			<id>chouette-repository</id>
-			<name>Chouette Repository</name>
-			<url>scp://chouette.marseille.cityway.fr/var/lib/tomcat6/webapps/maven</url>
-		</repository>
-		<downloadUrl>http://maven.chouette.mobi</downloadUrl>
-	</distributionManagement>
 	<repositories>
 		<repository>
 			<id>jboss</id>
@@ -90,8 +77,8 @@
 		</repository>
 		<repository>
 			<id>osgeo</id>
-			<name>Open Source Geospatial Foundation Repository</name>
-			<url>https://download.osgeo.org/webdav/geotools/</url>
+			<name>OSGeo Release Repository</name>
+			<url>https://repo.osgeo.org/repository/release/</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
@@ -247,7 +234,7 @@
 								</artifactItem>
 								<artifactItem>
 									<groupId>com.vividsolutions</groupId>
-									<artifactId>jts</artifactId>
+									<artifactId>jts-core</artifactId>
 									<version>${jts.version}</version>
 									<outputDirectory>
 										${project.rootDir}/target/wildfly-customized-dependencies/modules/system/layers/base/org/hibernate/main
