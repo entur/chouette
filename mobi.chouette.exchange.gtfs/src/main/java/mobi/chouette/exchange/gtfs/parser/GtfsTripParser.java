@@ -1000,7 +1000,7 @@ public class GtfsTripParser implements Parser, Validator, Constant {
 					section.setToScheduledStopPoint(stop.getScheduledStopPoint());
 					inputCoords[1] = new Coordinate(location.getLongitude().doubleValue(), location.getLatitude()
 							.doubleValue());
-					section.setProcessedGeometry(factory.createLineString(coords.toArray(new Coordinate[coords.size()])));
+					section.setProcessedGeometry(factory.createLineString(coords.toArray(new Coordinate[0])));
 					section.setInputGeometry(factory.createLineString(inputCoords));
 					section.setNoProcessing(false);
 					try {
@@ -1213,6 +1213,7 @@ public class GtfsTripParser implements Parser, Validator, Constant {
 	}
 
 	@AllArgsConstructor
+	static
 	class VehicleJourneyAtStopWrapper extends VehicleJourneyAtStop {
 
 		private static final long serialVersionUID = 5052093726657799027L;
@@ -1233,7 +1234,7 @@ public class GtfsTripParser implements Parser, Validator, Constant {
 		}
 	};
 
-	class OrderedCoordinate extends Coordinate {
+	static class OrderedCoordinate extends Coordinate {
 		private static final long serialVersionUID = 1L;
 		public int order;
 

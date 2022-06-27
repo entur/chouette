@@ -1,4 +1,4 @@
-FROM quay.io/wildfly/wildfly:26.1.0.Final
+FROM quay.io/wildfly/wildfly:26.1.1.Final
 
 USER root
 RUN yum -y update && yum clean all

@@ -63,7 +63,7 @@ public class GoogleCloudFileStore implements FileStore {
 
 	@Override
 	public void writeFile(Path filePath, InputStream content) {
-		BlobStoreHelper.uploadBlobWithRetry(storage, containerName, toGCSPath(filePath), content, false);
+		BlobStoreHelper.createOrReplace(storage, containerName, toGCSPath(filePath), content, false);
 	}
 
 	@Override

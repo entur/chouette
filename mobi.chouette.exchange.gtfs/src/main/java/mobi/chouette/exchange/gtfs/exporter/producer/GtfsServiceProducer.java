@@ -327,7 +327,7 @@ AbstractProducer
       return key;
    }
 
-   private class TimetableSorter implements Comparator<Timetable>
+   private static class TimetableSorter implements Comparator<Timetable>
    {
       @Override
       public int compare(Timetable arg0, Timetable arg1)

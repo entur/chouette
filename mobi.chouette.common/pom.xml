@@ -22,6 +22,12 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.zeroturnaround</groupId>
+			<artifactId>zt-zip</artifactId>
+			<type>jar</type>
+		</dependency>
+
 
 		<!-- Default Dependencies -->
 		<dependency>
@@ -73,7 +79,7 @@
 
 		<dependency>
 			<groupId>com.vividsolutions</groupId>
-			<artifactId>jts</artifactId>
+			<artifactId>jts-core</artifactId>
 			<version>${jts.version}</version>
 		</dependency>
 

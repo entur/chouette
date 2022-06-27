@@ -34,10 +34,10 @@ public class NetexIdExtractorHelper {
 		filterClause.append("//n:*[");
 		if (ignorableElementNames != null) {
 			for (String elementName : ignorableElementNames) {
-				filterClause.append("not(local-name(.)='" + elementName + "') and ");
+				filterClause.append("not(local-name(.)='").append(elementName).append("') and ");
 			}
 		}
-		filterClause.append("@" + attributeName + "]");
+		filterClause.append("@").append(attributeName).append("]");
 
 		XPathSelector selector = xpath.compile(filterClause.toString()).load();
 		selector.setContextItem(dom);

@@ -102,7 +102,7 @@ public class Metadata {
 	 * spatial coverage
 	 * 
 	 */
-	public class Box {
+	public static class Box {
 		/**
 		 * north limit of data
 		 */
@@ -168,7 +168,7 @@ public class Metadata {
 	 * tempral coverage
 	 * 
 	 */
-	public class Period {
+	public static class Period {
 		/**
 		 * minimum date covered by data
 		 */
@@ -219,7 +219,7 @@ public class Metadata {
 	 * 
 	 */
 	@AllArgsConstructor
-	public class Resource {
+	public static class Resource {
 		/**
 		 * exported resource localization, if resources are in separate files
 		 */

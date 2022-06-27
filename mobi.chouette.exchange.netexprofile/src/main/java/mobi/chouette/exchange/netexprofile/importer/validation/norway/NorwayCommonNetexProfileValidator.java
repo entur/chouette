@@ -41,7 +41,7 @@ public class NorwayCommonNetexProfileValidator extends AbstractNorwayNetexProfil
 
 
         // Find id-fields and to check for duplicates later
-		Set<IdVersion> localIdsInCommonFile = new HashSet<>(NetexIdExtractorHelper.collectEntityIdentificators(context, xpath, commonDom, new HashSet<>(Arrays.asList("Codespace"))));
+		Set<IdVersion> localIdsInCommonFile = new HashSet<>(NetexIdExtractorHelper.collectEntityIdentificators(context, xpath, commonDom, Set.of("Codespace")));
         ValidationData data = (ValidationData) context.get(VALIDATION_DATA);
 		for(IdVersion id : localIdsInCommonFile) {
             data.getDataLocations().put(id.getId(), DataLocationHelper.findDataLocation(id));

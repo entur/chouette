@@ -540,6 +540,7 @@ public class Line extends NeptuneIdentifiedObject implements ObjectIdTypes {
 							log.trace("Removing VJ with no valid timetables nor valid dated service journeys: " + vehicleJourney.getObjectId());
 						}
 						vjI.remove();
+						continue;
 					}
 					if(onlyPublicData && !vehicleJourney.isPublic()) {
 						if (log.isTraceEnabled()) {

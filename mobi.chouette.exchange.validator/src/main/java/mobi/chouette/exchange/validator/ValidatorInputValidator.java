@@ -105,9 +105,8 @@ public class ValidatorInputValidator extends AbstractInputValidator {
 
 	@Override
 	public List<TestDescription> getTestList() {
-		List<TestDescription> lstResults = new ArrayList<TestDescription>();
-		
-		lstResults.addAll(AbstractValidation.getTestLevel3DatabaseList());
+
+		List<TestDescription> lstResults = new ArrayList<TestDescription>(AbstractValidation.getTestLevel3DatabaseList());
 		
 		return lstResults;
 	}

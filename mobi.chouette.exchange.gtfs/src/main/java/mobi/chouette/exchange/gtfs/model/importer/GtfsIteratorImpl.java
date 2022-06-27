@@ -245,6 +245,7 @@ public class GtfsIteratorImpl implements Iterator<Boolean>, GtfsIterator, Consta
 	}
 
 	@ToString
+	static
 	class Field {
 		int offset;
 		int length;

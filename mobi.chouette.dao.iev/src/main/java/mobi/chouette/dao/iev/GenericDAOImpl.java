@@ -166,10 +166,9 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 	
 	@Override
 	public int truncate() {
-		String query = new StringBuilder("TRUNCATE TABLE ")
-        .append(type.getAnnotation(Table.class).name())
-        .append(" CASCADE")
-        .toString();        
+		String query = "TRUNCATE TABLE " +
+				type.getAnnotation(Table.class).name() +
+				" CASCADE";
         return em.createNativeQuery(query).executeUpdate();
 	}
 

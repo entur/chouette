@@ -147,9 +147,9 @@ public abstract class AbstractValidator implements Constant {
 			if (object instanceof PTLink) {
 				try {
 					List<DataLocation.Path> path = loc.getPath();
-					path.add(loc.new Path(object));
-					path.add(loc.new Path(((PTLink) object).getRoute()));
-					path.add(loc.new Path(((PTLink) object).getRoute().getLine()));
+					path.add(new DataLocation.Path(object));
+					path.add(new DataLocation.Path(((PTLink) object).getRoute()));
+					path.add(new DataLocation.Path(((PTLink) object).getRoute().getLine()));
 
 //					Line line = ((PTLink) object).getRoute().getLine();
 //					if (line != null)
@@ -160,8 +160,8 @@ public abstract class AbstractValidator implements Constant {
 			} else if (object instanceof AreaCentroid) {
 				try {
 					List<DataLocation.Path> path = loc.getPath();
-					path.add(loc.new Path(object));
-					path.add(loc.new Path(((AreaCentroid) object).getContainedIn()));
+					path.add(new DataLocation.Path(object));
+					path.add(new DataLocation.Path(((AreaCentroid) object).getContainedIn()));
 				} catch (NullPointerException e) {
 
 				}

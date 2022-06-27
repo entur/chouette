@@ -293,9 +293,9 @@ public class ChouettePTNetworkProducer implements Constant {
 		reporter.addFileReport(context, fileName, IO_TYPE.OUTPUT);
 
 		if (metadata != null)
-			metadata.getResources().add(metadata.new Resource(fileName, 
-					NeptuneObjectPresenter.getName(collection.getLine().getNetwork()), 
-					NeptuneObjectPresenter.getName(collection.getLine())));
+			metadata.getResources().add(new Metadata.Resource(fileName,
+                    NeptuneObjectPresenter.getName(collection.getLine().getNetwork()),
+                    NeptuneObjectPresenter.getName(collection.getLine())));
 	}
 
 

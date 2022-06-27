@@ -1,4 +1,4 @@
-env: production
+env: prod
 gcpProjectId: entur-ror-production
 gcpDatabaseInstance: entur-ror-prod:europe-west1:chouette-db-pg13=tcp:5432
 gcpBucketName: ror-chouette-production

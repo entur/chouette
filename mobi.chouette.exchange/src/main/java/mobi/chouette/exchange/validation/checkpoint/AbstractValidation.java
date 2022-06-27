@@ -321,7 +321,7 @@ public abstract class AbstractValidation<T extends NeptuneIdentifiedObject> impl
 	}
 
 	protected static String toCamelCase(String underscore) {
-		StringBuffer b = new StringBuffer();
+		StringBuilder b = new StringBuilder();
 		boolean underChar = false;
 		for (char c : underscore.toCharArray()) {
 			if (c == '_') {
