@@ -50,6 +50,7 @@
 		<jaxb-impl-version>2.3.3</jaxb-impl-version>
 		<dom4j.version>2.1.3</dom4j.version>
 		<jettison.version>1.4.0</jettison.version>
+		<jakarta.annotation-api.version>1.3.3</jakarta.annotation-api.version>
 
 		<lombok-version>1.18.22</lombok-version>
 		<lombok-maven-plugin-version>1.18.20.0</lombok-maven-plugin-version>
@@ -908,9 +909,9 @@
 
 
 			<dependency>
-				<groupId>javax.annotation</groupId>
-				<artifactId>javax.annotation-api</artifactId>
-				<version>1.3.2</version>
+				<groupId>jakarta.annotation</groupId>
+				<artifactId>jakarta.annotation-api</artifactId>
+				<version>${jakarta.annotation-api.version}</version>
 			</dependency>
 
 		</dependencies>
