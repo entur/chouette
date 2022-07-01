@@ -70,6 +70,10 @@
                    <artifactId>servlet-api</artifactId>
                </exclusion>
                <exclusion>
+                   <groupId>javax.annotation</groupId>
+                   <artifactId>javax.annotation-api</artifactId>
+               </exclusion>
+               <exclusion>
                    <groupId>io.netty</groupId>
                    <artifactId>netty-codec-http2</artifactId>
                </exclusion>
@@ -129,6 +133,10 @@
                <exclusion>
                    <groupId>javax.xml.bind</groupId>
                    <artifactId>jaxb-api</artifactId>
+               </exclusion>
+               <exclusion>
+                   <groupId>javax.annotation</groupId>
+                   <artifactId>javax.annotation-api</artifactId>
                </exclusion>
            </exclusions>
        </dependency>
