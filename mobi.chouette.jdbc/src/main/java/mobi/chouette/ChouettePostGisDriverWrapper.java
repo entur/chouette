@@ -1,7 +1,7 @@
 package mobi.chouette;
 
 
-import org.postgis.DriverWrapper;
+import net.postgis.jdbc.DriverWrapper;
 import org.postgresql.PGConnection;
 
 import java.sql.Connection;
@@ -14,7 +14,7 @@ import java.util.logging.Level;
  * Chouette uses PostGIS JDBC (https://github.com/postgis/postgis-java/tree/master/jdbc) for transparently mapping
  * PostGIS geometries into Java objects.
  * The mapping is performed by the PostGIS JDBC driver wrapper
- * (@see {@link DriverWrapper.TypesAdder80#addGeometries(Connection)})
+ * (@see {@link net.postgis.jdbc.DriverWrapper.TypesAdder80#addGeometries(Connection)})
  * However the wrapper assumes that the PostGIS types are defined either in the public schema or the current schema.
  * Since Chouette2 requires that the PostGIS extension is installed in a separate schema named "shared_extensions"
  * (see https://github.com/influitive/apartment/issues/22 , https://github.com/influitive/apartment/issues/534
@@ -37,8 +37,8 @@ public class ChouettePostGisDriverWrapper extends DriverWrapper {
         public void addGeometries(Connection conn) throws SQLException {
             super.addGeometries(conn);
             PGConnection pgconn = (PGConnection) conn;
-            pgconn.addDataType("shared_extensions.geometry", org.postgis.PGgeometry.class);
-            pgconn.addDataType("\"shared_extensions\".\"geometry\"", org.postgis.PGgeometry.class);
+            pgconn.addDataType("shared_extensions.geometry", net.postgis.jdbc.PGgeometry.class);
+            pgconn.addDataType("\"shared_extensions\".\"geometry\"", net.postgis.jdbc.PGgeometry.class);
         }
     }
 
