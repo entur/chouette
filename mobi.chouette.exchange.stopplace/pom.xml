@@ -44,12 +44,6 @@
 
         <!-- Jakarta EE -->
         <dependency>
-            <groupId>org.jboss.spec</groupId>
-            <artifactId>jboss-jakartaee-8.0</artifactId>
-            <type>pom</type>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>org.jboss.spec.javax.ejb</groupId>
             <artifactId>jboss-ejb-api_3.2_spec</artifactId>
             <scope>provided</scope>
@@ -95,6 +89,11 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.logmanager</groupId>
+            <artifactId>log4j-jboss-logmanager</artifactId>
             <scope>test</scope>
         </dependency>
 

@@ -14,8 +14,6 @@
 
 		<wildfly.version>26.1.1.Final</wildfly.version>
 		<wildfly.core.version>18.1.1.Final</wildfly.core.version>
-		<jboss-jakartaee-8.0.version>1.0.1.Final</jboss-jakartaee-8.0.version>
-		<wildfly-jakartaee8-with-tools.version>26.1.1.Final</wildfly-jakartaee8-with-tools.version>
 
 		<slf4j.version>1.7.36</slf4j.version>
 
@@ -690,7 +688,7 @@
 			<dependency>
 				<groupId>org.wildfly.bom</groupId>
 				<artifactId>wildfly-jakartaee8-with-tools</artifactId>
-				<version>${wildfly-jakartaee8-with-tools.version}</version>
+				<version>${wildfly.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -700,13 +698,6 @@
 				<version>${wildfly.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.jboss.spec</groupId>
-				<artifactId>jboss-jakartaee-8.0</artifactId>
-				<version>${jboss-jakartaee-8.0.version}</version>
-				<type>pom</type>
-				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>jakarta.xml.bind</groupId>

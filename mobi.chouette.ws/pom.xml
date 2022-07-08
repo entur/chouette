@@ -28,10 +28,8 @@
 
         <!-- Jakarta EE -->
         <dependency>
-            <groupId>org.jboss.spec</groupId>
-            <artifactId>jboss-jakartaee-8.0</artifactId>
-            <type>pom</type>
-            <scope>provided</scope>
+            <groupId>org.jboss.spec.javax.servlet</groupId>
+            <artifactId>jboss-servlet-api_4.0_spec</artifactId>
         </dependency>
 
         <!-- Other dependencies -->

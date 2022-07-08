@@ -33,14 +33,14 @@
 
 		<!-- Jakarta EE-->
 		<dependency>
-			<groupId>org.jboss.spec</groupId>
-			<artifactId>jboss-jakartaee-8.0</artifactId>
-			<type>pom</type>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.jboss.spec.javax.ejb</groupId>
 			<artifactId>jboss-ejb-api_3.2_spec</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!--Jakarta EE-->
+		<dependency>
+			<groupId>org.jboss.spec.javax.annotation</groupId>
+			<artifactId>jboss-annotations-api_1.3_spec</artifactId>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -71,6 +71,11 @@
 		<dependency>
 			<groupId>org.jboss.spec.javax.transaction</groupId>
 			<artifactId>jboss-transaction-api_1.3_spec</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.enterprise</groupId>
+			<artifactId>jakarta.enterprise.cdi-api</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
