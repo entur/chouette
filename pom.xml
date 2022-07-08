@@ -686,7 +686,14 @@
 			</dependency>
 
 
-			<!-- Default Dependencies -->
+			<!-- Jakarta EE -->
+			<dependency>
+				<groupId>org.wildfly.bom</groupId>
+				<artifactId>wildfly-jakartaee8-with-tools</artifactId>
+				<version>${wildfly-jakartaee8-with-tools.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 			<dependency>
 				<groupId>org.wildfly</groupId>
 				<artifactId>wildfly-spec-api</artifactId>
@@ -697,32 +704,38 @@
 			<dependency>
 				<groupId>org.jboss.spec</groupId>
 				<artifactId>jboss-jakartaee-8.0</artifactId>
-				<type>pom</type>
 				<version>${jboss-jakartaee-8.0.version}</version>
+				<type>pom</type>
 				<scope>provided</scope>
 			</dependency>
-
 			<dependency>
-				<groupId>org.wildfly.bom</groupId>
-				<artifactId>wildfly-jakartaee8-with-tools</artifactId>
-				<version>${wildfly-jakartaee8-with-tools.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
+				<groupId>jakarta.xml.bind</groupId>
+				<artifactId>jakarta.xml.bind-api</artifactId>
+				<version>${jaxb-api-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>jakarta.annotation</groupId>
+				<artifactId>jakarta.annotation-api</artifactId>
+				<version>${jakarta.annotation-api.version}</version>
 			</dependency>
 
+			<!-- Default Dependencies -->
+			<dependency>
+				<groupId>com.sun.xml.bind</groupId>
+				<artifactId>jaxb-impl</artifactId>
+				<version>${jaxb-impl-version}</version>
+			</dependency>
 			<dependency>
 				<groupId>org.codehaus.jettison</groupId>
 				<artifactId>jettison</artifactId>
 				<version>${jettison.version}</version>
 			</dependency>
 
-
-
 			<dependency>
-  			<groupId>org.entur</groupId>
-  			<artifactId>netex-java-model</artifactId>
-  			<version>${netex-java-model.version}</version>
-  		</dependency>
+				<groupId>org.entur</groupId>
+				<artifactId>netex-java-model</artifactId>
+				<version>${netex-java-model.version}</version>
+			</dependency>
 
 			<dependency>
 				<groupId>org.entur.ror.helpers</groupId>
@@ -887,25 +900,6 @@
 				<groupId>org.geotools</groupId>
 				<artifactId>gt-epsg-hsql</artifactId>
 				<version>${geotools.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>jakarta.xml.bind</groupId>
-				<artifactId>jakarta.xml.bind-api</artifactId>
-				<version>${jaxb-api-version}</version>
-			</dependency>
-
-			<dependency>
- 				<groupId>com.sun.xml.bind</groupId>
- 	            <artifactId>jaxb-impl</artifactId>
-				<version>${jaxb-impl-version}</version>
-			</dependency>
-
-
-			<dependency>
-				<groupId>jakarta.annotation</groupId>
-				<artifactId>jakarta.annotation-api</artifactId>
-				<version>${jakarta.annotation-api.version}</version>
 			</dependency>
 
 		</dependencies>

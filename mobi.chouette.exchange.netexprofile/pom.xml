@@ -13,31 +13,27 @@
 		<project.rootDir>${project.basedir}/..</project.rootDir>
 		<skipInitDb>true</skipInitDb>
 	</properties>
+
 	<dependencies>
 
-		<!-- Default Dependencies -->
+		<!-- Modules -->
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>mobi.chouette.exchange</artifactId>
+			<type>ejb</type>
+			<version>${project.version}</version>
 		</dependency>
 
+		<!-- Jakarta EE -->
 		<dependency>
-			<groupId>org.entur</groupId>
-			<artifactId>netex-java-model</artifactId>
+			<groupId>org.jboss.spec.javax.ejb</groupId>
+			<artifactId>jboss-ejb-api_3.2_spec</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.entur.ror.helpers</groupId>
-			<artifactId>calendar-helper</artifactId>
-		</dependency>
-<dependency>
-    <groupId>net.sf.saxon</groupId>
-    <artifactId>Saxon-HE</artifactId>
-    <version>9.9.1-8</version>
-</dependency>
-		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-impl</artifactId>
+			<groupId>org.jboss.ejb3</groupId>
+			<artifactId>jboss-ejb3-ext-api</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>jakarta.xml.bind</groupId>
@@ -48,7 +44,39 @@
 			<artifactId>jakarta.annotation-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>jakarta.persistence</groupId>
+			<artifactId>jakarta.persistence-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
+		<!-- Others Dependencies -->
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.entur</groupId>
+			<artifactId>netex-java-model</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.entur.ror.helpers</groupId>
+			<artifactId>calendar-helper</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.saxon</groupId>
+			<artifactId>Saxon-HE</artifactId>
+			<version>9.9.1-8</version>
+		</dependency>
 		<!--Required for Hibernate bytecode enhancement-->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -101,35 +129,8 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- Others Dependencies -->
-		<dependency>
-			<groupId>org.jboss.spec.javax.ejb</groupId>
-			<artifactId>jboss-ejb-api_3.2_spec</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>jakarta.persistence</groupId>
-			<artifactId>jakarta.persistence-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.ejb3</groupId>
-			<artifactId>jboss-ejb3-ext-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>commons-beanutils</groupId>
-			<artifactId>commons-beanutils</artifactId>
-		</dependency>
+	</dependencies>
 
-		<!-- Modules -->
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>mobi.chouette.exchange</artifactId>
-			<type>ejb</type>
-			<version>${project.version}</version>
-		</dependency>
-    </dependencies>
 	<build>
 		<plugins>
 			<plugin>

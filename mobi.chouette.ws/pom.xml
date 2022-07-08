@@ -14,15 +14,19 @@
         <project.rootDir>${project.basedir}/..</project.rootDir>
         <skipInitDb>true</skipInitDb>
     </properties>
+
     <dependencies>
 
-        <!-- Default Dependencies -->
+        <!-- Modules -->
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>mobi.chouette.service</artifactId>
+            <type>ejb</type>
+            <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
 
+        <!-- Jakarta EE -->
         <dependency>
             <groupId>org.jboss.spec</groupId>
             <artifactId>jboss-jakartaee-8.0</artifactId>
@@ -30,12 +34,16 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Others Dependencies -->
+        <!-- Other dependencies -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>org.codehaus.jettison</groupId>
             <artifactId>jettison</artifactId>
         </dependency>
-
         <!-- JBoss RESTEasy -->
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
@@ -52,26 +60,12 @@
             <artifactId>resteasy-multipart-provider</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!-- 		<dependency> -->
-        <!-- 			<groupId>org.jboss.resteasy</groupId> -->
-        <!-- 			<artifactId>resteasy-cache-core</artifactId> -->
-        <!-- 			<scope>provided</scope> -->
-        <!-- 		</dependency> -->
         <dependency>
             <groupId>org.jboss.marshalling</groupId>
             <artifactId>jboss-marshalling-river</artifactId>
             <scope>provided</scope>
         </dependency>
 
-
-        <!-- Modules -->
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>mobi.chouette.service</artifactId>
-            <type>ejb</type>
-            <version>${project.version}</version>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
 
     <build>

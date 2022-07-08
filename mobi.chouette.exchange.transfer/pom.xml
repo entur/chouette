@@ -13,25 +13,8 @@
 		<project.rootDir>${project.basedir}/..</project.rootDir>
 		<skipInitDb>false</skipInitDb>
 	</properties>
-	<dependencies>
-  		<!-- Default Dependencies -->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.spec</groupId>
-			<artifactId>jboss-jakartaee-8.0</artifactId>
-			<type>pom</type>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.ejb3</groupId>
-			<artifactId>jboss-ejb3-ext-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
 
+	<dependencies>
 
 		<!-- Modules -->
 		<dependency>
@@ -60,15 +43,36 @@
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			  <artifactId>mobi.chouette.service</artifactId>
+			<artifactId>mobi.chouette.service</artifactId>
 			<type>ejb</type>
 			<version>${project.version}</version>
+		</dependency>
+
+		<!-- Jakarta EE -->
+		<dependency>
+			<groupId>org.jboss.spec</groupId>
+			<artifactId>jboss-jakartaee-8.0</artifactId>
+			<type>pom</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.ejb3</groupId>
+			<artifactId>jboss-ejb3-ext-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Default Dependencies -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<scope>provided</scope>
 		</dependency>
+
 		<!-- Test Dependencies -->
 		<dependency>
 			<groupId>org.testng</groupId>
@@ -112,7 +116,6 @@
 			<artifactId>modelcitizen</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- Test Dependencies -->
 		<dependency>
 			<groupId>org.jboss.spec.javax.transaction</groupId>
 			<artifactId>jboss-transaction-api_1.3_spec</artifactId>

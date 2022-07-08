@@ -13,36 +13,50 @@
 	<properties>
 		<project.rootDir>${project.basedir}/..</project.rootDir>
 	</properties>
+
 	<dependencies>
 
-		<!-- Default Dependencies -->
+		<!-- Modules -->
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>mobi.chouette.model</artifactId>
+			<type>ejb</type>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>mobi.chouette.persistence.hibernate</artifactId>
+			<type>ejb</type>
+			<version>${project.version}</version>
 		</dependency>
 
-		<!-- Others Dependencies -->
+		<!-- Jakarta EE -->
 		<dependency>
-			<groupId>org.jboss.spec.javax.ejb</groupId>
-			<artifactId>jboss-ejb-api_3.2_spec</artifactId>
+			<groupId>org.jboss.spec</groupId>
+			<artifactId>jboss-jakartaee-8.0</artifactId>
+			<type>pom</type>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<scope>provided</scope>
-		</dependency>
-
 		<dependency>
 			<groupId>org.jboss.spec.javax.transaction</groupId>
 			<artifactId>jboss-transaction-api_1.3_spec</artifactId>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.jboss.spec</groupId>
-			<artifactId>jboss-jakartaee-8.0</artifactId>
-			<type>pom</type>
+			<groupId>org.jboss.spec.javax.ejb</groupId>
+			<artifactId>jboss-ejb-api_3.2_spec</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Others Dependencies -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -70,26 +84,6 @@
 			<artifactId>dom4j</artifactId>
 			<version>${dom4j.version}</version>
 			<scope>provided</scope>
-		</dependency>
-
-		<!-- Modules -->
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>mobi.chouette.model</artifactId>
-			<type>ejb</type>
-			<version>${project.version}</version>
-		</dependency>
-<!-- 		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>mobi.chouette.model.iev</artifactId>
-			<type>ejb</type>
-			<version>${project.version}</version>
-		</dependency>
- -->		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>mobi.chouette.persistence.hibernate</artifactId>
-			<type>ejb</type>
-			<version>${project.version}</version>
 		</dependency>
 
 		<!-- Test Dependencies -->
@@ -132,6 +126,7 @@
 		</dependency>
 
 	</dependencies>
+
 	<build>
 		<plugins>
 			<plugin>
