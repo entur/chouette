@@ -31,7 +31,7 @@ import mobi.chouette.model.iev.Job;
 import mobi.chouette.model.iev.Link;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 @Data
 @Log4j

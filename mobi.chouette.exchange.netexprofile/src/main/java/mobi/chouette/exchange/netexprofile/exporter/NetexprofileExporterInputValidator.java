@@ -16,7 +16,7 @@ import mobi.chouette.exchange.parameters.AbstractParameter;
 import mobi.chouette.exchange.validation.parameters.ValidationParameters;
 
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 @Log4j
 public class NetexprofileExporterInputValidator extends AbstractInputValidator {
