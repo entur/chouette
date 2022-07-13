@@ -90,14 +90,14 @@ public class FileReport extends AbstractReport{
 		switch (severity) {
 			case INFO:
 				if (checkPointInfoCount < MAX_INFOS_PER_CHECKPOINT) {
-					checkPointInfoKeys.add(new Integer(checkPointErrorId));
+					checkPointInfoKeys.add(checkPointErrorId);
 					ret = true;
 				}
 				checkPointInfoCount++;
 				break;
 		case WARNING:
 			if (checkPointWarningCount < MAX_WARNINGS_PER_CHECKPOINT) {
-				checkPointWarningKeys.add(new Integer(checkPointErrorId));
+				checkPointWarningKeys.add(checkPointErrorId);
 				ret = true;
 			}
 			checkPointWarningCount++;
@@ -105,7 +105,7 @@ public class FileReport extends AbstractReport{
 
 		default: // ERROR
 			if (checkPointErrorCount < MAX_ERRORS_PER_CHECKPOINT) {
-				checkPointErrorKeys.add(new Integer(checkPointErrorId));
+				checkPointErrorKeys.add(checkPointErrorId);
 				ret = true;
 			}
 			checkPointErrorCount++;

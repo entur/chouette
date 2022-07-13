@@ -136,7 +136,7 @@ public class CompassBearingGenerator {
 
 			// 1 to 360 degrees, not 0 to 359
 
-			return new Integer((int) bearing + 1);
+			return (int) bearing + 1;
 		} else {
 			if(fromArea == null) {
 				log.warn("StopPoint "+from.getObjectId()+" in route "+from.getRoute().getObjectId()+" and line "+from.getRoute().getLine().getObjectId()+"/" +from.getRoute().getLine().getName()+" has no StopArea");

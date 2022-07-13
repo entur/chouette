@@ -64,7 +64,7 @@ public class GtfsException extends RuntimeException {
 	@Getter
 	private Integer id;
 	@Getter
-	private Integer column = new Integer(-1);
+	private Integer column = -1;
 	@Getter
 	private String field;
 	@Getter

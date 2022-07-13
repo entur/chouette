@@ -52,9 +52,9 @@ public class ObjectCollectionReport  extends AbstractReport {
 	 */
 	protected void addStatTypeToObject(ActionReporter.OBJECT_TYPE type, int count) {
 		if (stats.containsKey(type)) {
-			stats.put(type, new Integer(stats.get(type).intValue() + count));
+			stats.put(type, stats.get(type).intValue() + count);
 		} else {
-			stats.put(type, new Integer(count));
+			stats.put(type, count);
 		}
 	}
 
