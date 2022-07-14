@@ -24,7 +24,7 @@ import lombok.Setter;
 import lombok.ToString;
 import mobi.chouette.model.type.AccessPointTypeEnum;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import java.time.LocalTime;
