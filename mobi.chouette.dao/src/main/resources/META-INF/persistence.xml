@@ -26,7 +26,9 @@
 			<property name="hibernate.order_inserts" value="true" />
 			<property name="hibernate.order_updates" value="true" />
 
+			<property name="hibernate.batch_fetch_style" value="padded" />
 			<property name="hibernate.default_batch_fetch_size" value="100" />
+
 			<property name="hibernate.connection.datasource" value="java:jboss/datasources/chouette" />
 
 			<property name="hibernate.cache.use_second_level_cache" value="true" />
@@ -106,7 +108,9 @@
 			<property name="hibernate.order_inserts" value="true" />
 			<property name="hibernate.order_updates" value="true" />
 
+			<property name="hibernate.batch_fetch_style" value="padded" />
 			<property name="hibernate.default_batch_fetch_size" value="2000" />
+
 			<property name="hibernate.multiTenancy" value="SCHEMA" />
 			<property name="hibernate.connection.datasource" value="java:jboss/datasources/chouette" />
 			<property name="hibernate.tenant_identifier_resolver"
