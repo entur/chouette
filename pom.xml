@@ -33,7 +33,7 @@
 		<version.assembly.plugin>3.3.0</version.assembly.plugin>
 		<version.build.helper.plugin>3.3.0</version.build.helper.plugin>
 		<version.clean.plugin>3.1.0</version.clean.plugin>
-		<version.install.plugin>2.5.2</version.install.plugin>
+		<version.install.plugin>3.0.0</version.install.plugin>
 		<version.processor.plugin>2.2.4</version.processor.plugin>
 
 		<postgresql.version>42.3.6</postgresql.version>
