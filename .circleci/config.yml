@@ -59,7 +59,7 @@ jobs:
         auth:
           username: $DOCKERHUB_LOGIN
           password: $DOCKERHUB_PASSWORD
-      - image: postgis/postgis:13-3.1
+      - image: postgis/postgis:14-3.1
         auth:
           username: $DOCKERHUB_LOGIN
           password: $DOCKERHUB_PASSWORD
