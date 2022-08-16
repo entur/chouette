@@ -10,7 +10,7 @@ import java.util.Set;
 
 import javax.xml.xpath.XPathExpressionException;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.rutebanken.netex.model.DataManagedObjectStructure;
 
 import mobi.chouette.common.Context;

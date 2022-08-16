@@ -63,7 +63,7 @@ public class CheckPointReport extends AbstractReport {
 
 
 			if (checkPointErrorCount < getMaxErrorCount()) {
-				checkPointErrorsKeys.add(new Integer(checkPointErrorId));
+				checkPointErrorsKeys.add(checkPointErrorId);
 				ret = true;
 			}
 		}

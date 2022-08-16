@@ -428,7 +428,7 @@ public class GtfsExportTests extends Arquillian implements Constant, ReportConst
 				exptectedInterchanges = 1;
 			}
 
- 			Assert.assertEquals(report.getCollections().get(ActionReporter.OBJECT_TYPE.LINE).getObjectReports().get(i).getStats().get(OBJECT_TYPE.INTERCHANGE), new Integer(exptectedInterchanges), "interchange status");
+ 			Assert.assertEquals(report.getCollections().get(ActionReporter.OBJECT_TYPE.LINE).getObjectReports().get(i).getStats().get(OBJECT_TYPE.INTERCHANGE), Integer.valueOf(exptectedInterchanges), "interchange status");
  		}
  		Reporter.log("validation report size :" + vreport.getCheckPoints().size(), true);
  		Assert.assertFalse(vreport.getCheckPoints().isEmpty(),"validation report should not be empty");

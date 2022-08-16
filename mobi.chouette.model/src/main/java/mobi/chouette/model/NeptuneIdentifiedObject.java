@@ -20,7 +20,6 @@ import lombok.Setter;
 import lombok.ToString;
 import mobi.chouette.model.util.ObjectIdTypes;
 
-import org.apache.commons.lang.StringUtils;
 import org.hibernate.annotations.NaturalId;
 import java.time.LocalDateTime;
 

@@ -23,7 +23,7 @@ public class DummyReport extends AbstractReport{
 		out.print(addLevel(ret, level).append('{'));
 		out.print(toJsonString(ret, level+1, "chaine", "dummy string", true));
 		out.print(toJsonString(ret, level+1, "enum", DUMMY_ENUM.NO_DATA_FOUND, false));
-		out.print(toJsonString(ret, level+1, "number", new Integer(1), false));
+		out.print(toJsonString(ret, level+1, "number", 1, false));
 		out.print(toJsonString(ret, level+1, "boolean", true, false));
 		ret.setLength(0);
 		out.print(addLevel(ret.append('\n'), level).append('}'));	

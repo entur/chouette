@@ -18,7 +18,7 @@ import mobi.chouette.model.StopPoint;
 import mobi.chouette.model.VehicleJourney;
 import mobi.chouette.model.util.ObjectIdTypes;
 
-import org.apache.commons.lang.reflect.FieldUtils;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import java.time.Duration;
 import org.testng.Assert;
 import org.testng.Reporter;

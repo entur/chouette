@@ -12,7 +12,7 @@ import javax.xml.xpath.XPathExpressionException;
 
 import net.sf.saxon.s9api.QName;
 import net.sf.saxon.s9api.XPathSelector;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import lombok.extern.log4j.Log4j;
 import mobi.chouette.common.Context;

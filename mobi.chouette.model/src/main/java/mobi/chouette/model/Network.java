@@ -30,7 +30,7 @@ import lombok.Setter;
 import lombok.ToString;
 import mobi.chouette.model.type.PTNetworkSourceTypeEnum;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import java.time.LocalDate;

@@ -41,7 +41,7 @@ import mobi.chouette.model.type.UserNeedEnum;
 import mobi.chouette.model.util.NeptuneUtil;
 import mobi.chouette.model.util.ObjectIdTypes;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import java.time.LocalDate;

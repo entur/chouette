@@ -52,7 +52,7 @@ import mobi.chouette.scheduler.Scheduler;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.ObjectUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 

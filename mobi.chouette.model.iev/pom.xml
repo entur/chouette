@@ -37,16 +37,23 @@
          </plugin>
       </plugins>
    </build>
+
    <dependencies>
 
-      <!-- Default Dependencies -->
+      <!-- Modules -->
+      <dependency>
+         <groupId>${project.groupId}</groupId>
+         <artifactId>mobi.chouette.common</artifactId>
+         <type>ejb</type>
+         <version>${project.version}</version>
+      </dependency>
+
+      <!-- Other dependencies -->
       <dependency>
          <groupId>org.projectlombok</groupId>
          <artifactId>lombok</artifactId>
          <scope>provided</scope>
       </dependency>
-
-      <!-- Others Dependencies -->
       <dependency>
          <groupId>org.hibernate</groupId>
          <artifactId>hibernate-core</artifactId>
@@ -65,26 +72,18 @@
          <artifactId>gt-epsg-hsql</artifactId>
       </dependency>
 
-      <!-- Modules -->
-      <dependency>
-         <groupId>${project.groupId}</groupId>
-         <artifactId>mobi.chouette.common</artifactId>
-         <type>ejb</type>
-         <version>${project.version}</version>
-      </dependency>
-
-      <!-- tests -->
+      <!-- Test dependencies -->
       <dependency>
          <groupId>org.testng</groupId>
          <artifactId>testng</artifactId>
          <scope>test</scope>
       </dependency>
-            <dependency>
+      <dependency>
          <groupId>org.jboss.logmanager</groupId>
          <artifactId>log4j-jboss-logmanager</artifactId>
          <scope>test</scope>
       </dependency>
 
-
    </dependencies>
+
 </project>

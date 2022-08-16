@@ -35,8 +35,8 @@ import mobi.chouette.model.statistics.Timetable;
 import mobi.chouette.model.statistics.ValidityCategory;
 import mobi.chouette.persistence.hibernate.ContextHolder;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.time.DateUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import java.time.LocalDate;
 import org.rutebanken.helper.calendar.CalendarPattern;
 import org.rutebanken.helper.calendar.CalendarPatternAnalyzer;
