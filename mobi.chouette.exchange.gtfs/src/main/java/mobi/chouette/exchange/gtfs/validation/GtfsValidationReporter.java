@@ -99,33 +99,33 @@ public class GtfsValidationReporter implements Constant{
 				GtfsImportParameters configuration = (GtfsImportParameters) context.get(CONFIGURATION);
 				String lineId = AbstractConverter.composeObjectId(configuration, Line.LINE_KEY,
 						gtfsRouteId, log);
-			    loc.getPath().add(loc.new Path(Line.class.getSimpleName(),lineId));
+			    loc.getPath().add(new DataLocation.Path(Line.class.getSimpleName(), lineId));
 			}
 		}
 		else if (fileName.equals(AgencyById.FILENAME))
 		{
-			loc.getPath().add(loc.new Path(Company.class.getSimpleName(),""));
+			loc.getPath().add(new DataLocation.Path(Company.class.getSimpleName(), ""));
 		}
 		else if (fileName.equals(StopById.FILENAME))
 		{
-			loc.getPath().add(loc.new Path(StopArea.class.getSimpleName(),""));
+			loc.getPath().add(new DataLocation.Path(StopArea.class.getSimpleName(), ""));
 			
 		}
 		else if (fileName.equals(TripById.FILENAME))
 		{
-			loc.getPath().add(loc.new Path(VehicleJourney.class.getSimpleName(),""));
+			loc.getPath().add(new DataLocation.Path(VehicleJourney.class.getSimpleName(), ""));
 			if (gtfsRouteId != null)
 			{
 				GtfsImportParameters configuration = (GtfsImportParameters) context.get(CONFIGURATION);
 				String lineId = AbstractConverter.composeObjectId(configuration, Line.LINE_KEY,
 						gtfsRouteId, log);
-			    loc.getPath().add(loc.new Path(Line.class.getSimpleName(),lineId));	
+			    loc.getPath().add(new DataLocation.Path(Line.class.getSimpleName(), lineId));
 			}
 			
 		}
 		else if (fileName.equals(CalendarByService.FILENAME) || fileName.equals(CalendarDateByService.FILENAME))
 		{
-			loc.getPath().add(loc.new Path(Timetable.class.getSimpleName(),""));
+			loc.getPath().add(new DataLocation.Path(Timetable.class.getSimpleName(), ""));
 			
 		}
 		else if (fileName.equals(ShapeById.FILENAME))
@@ -135,13 +135,13 @@ public class GtfsValidationReporter implements Constant{
 				GtfsImportParameters configuration = (GtfsImportParameters) context.get(CONFIGURATION);
 				String lineId = AbstractConverter.composeObjectId(configuration, Line.LINE_KEY,
 						gtfsRouteId, log);
-			    loc.getPath().add(loc.new Path(Line.class.getSimpleName(),lineId));	
+			    loc.getPath().add(new DataLocation.Path(Line.class.getSimpleName(), lineId));
 			}
 			
 		}
 		else if (fileName.equals(TransferByFromStop.FILENAME))
 		{
-			loc.getPath().add(loc.new Path(ConnectionLink.class.getSimpleName(),""));
+			loc.getPath().add(new DataLocation.Path(ConnectionLink.class.getSimpleName(), ""));
 			
 		}
 		return loc;

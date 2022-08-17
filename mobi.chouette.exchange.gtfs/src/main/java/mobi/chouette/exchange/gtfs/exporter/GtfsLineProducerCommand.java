@@ -171,8 +171,8 @@ public class GtfsLineProducerCommand implements Command, Constant {
 				hasLine = true;
 				if (metadata != null) {
 					metadata.getResources().add(
-							metadata.new Resource(NeptuneObjectPresenter.getName(line.getNetwork()),
-									NeptuneObjectPresenter.getName(line)));
+                            new Metadata.Resource(NeptuneObjectPresenter.getName(line.getNetwork()),
+                                    NeptuneObjectPresenter.getName(line)));
 				}
 			}
 		}

@@ -4,12 +4,15 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.Embeddable;
 
@@ -33,7 +36,7 @@ public class HibernateDeproxynator<T> {
 		HashSet<Object> visited = new HashSet<>(1000000);
 		HashSet<Object> moreObjectsToFollow = new HashSet<>(1000000);
 
-		List<T> results = new ArrayList<T>();
+		List<T> results = new ArrayList<>(maybeProxy.size());
 		for (Object x : maybeProxy) {
 			T ret = deepDeproxy(x, visited, moreObjectsToFollow);
 			results.add(ret);
@@ -104,24 +107,15 @@ public class HibernateDeproxynator<T> {
 			// Deproxy elements of collection
 			if (ret instanceof Object[]) {
 				Object[] valueArray = (Object[]) ret;
-				for (int i = 0; i < valueArray.length; i++) {
-					valueArray[i] = deepDeproxy(valueArray[i], visited, moreObjectsToFollow);
-				}
+				Arrays.setAll(valueArray, i -> deepDeproxy(valueArray[i], visited, moreObjectsToFollow));
 			} else if (ret instanceof Set) {
-				Set valueSet = (Set) ret;
-				Set result = new HashSet();
-				for (Object o : valueSet) {
-					result.add(deepDeproxy(o, visited, moreObjectsToFollow));
-				}
+				Set<?> valueSet = (Set) ret;
+				Collection result = valueSet.stream().map(o -> deepDeproxy(o, visited, moreObjectsToFollow)).collect(Collectors.toList());
 				valueSet.clear();
 				valueSet.addAll(result);
 			} else if (ret instanceof Map) {
-				Map valueMap = (Map) ret;
-				Map result = new HashMap();
-				for (Object o : valueMap.keySet()) {
-					result.put(deepDeproxy(o, visited, moreObjectsToFollow),
-							deepDeproxy(valueMap.get(o), visited, moreObjectsToFollow));
-				}
+				Map<?,?> valueMap = (Map) ret;
+				Map result = valueMap.entrySet().stream().collect(Collectors.toMap(entry -> deepDeproxy(entry.getKey(), visited, moreObjectsToFollow), entry -> deepDeproxy(entry.getValue(), visited, moreObjectsToFollow)));
 				valueMap.clear();
 				valueMap.putAll(result);
 			} else if (ret instanceof List) {
@@ -158,64 +152,37 @@ public class HibernateDeproxynator<T> {
 						if (value instanceof Object[]) {
 							Object[] valueArray = (Object[]) value;
 							Object[] result = (Object[]) Array.newInstance(value.getClass(), valueArray.length);
-							for (int i = 0; i < valueArray.length; i++) {
-								result[i] = valueArray[i];
-								// result[i] = deepDeproxy(valueArray[i],
-								// visited, moreObjectsToFollow);
-							}
+							System.arraycopy(valueArray, 0, result, 0, valueArray.length);
 							value = result;
 							needToSetProperty = true;
-							moreObjectsToFollow.add(result);
 							if (result.length > 0) {
 								moreObjectsToFollow.add(result);
 							}
 						} else if (value instanceof Set) {
 							Set valueSet = (Set) value;
-							Set result = new HashSet();
-							for (Object o : valueSet) {
-								// result.add(deepDeproxy(o, visited,
-								// moreObjectsToFollow));
-								result.add(o);
-							}
+							Set result = new HashSet(valueSet);
 							value = result;
 							needToSetProperty = true;
 							valueSet.clear();
-							if (result.size() > 0) {
+							if (!result.isEmpty()) {
 								moreObjectsToFollow.add(result);
 							}
 						} else if (value instanceof Map) {
 							Map valueMap = (Map) value;
-							Map result = new HashMap();
-							for (Object o : valueMap.keySet()) {
-								// result.put(deepDeproxy(o, visited,
-								// moreObjectsToFollow),
-								// deepDeproxy(valueMap.get(o), visited,
-								// moreObjectsToFollow));
-								result.put(o, valueMap.get(o));
-							}
+							Map result = new HashMap(valueMap);
 							value = result;
 							needToSetProperty = true;
 							valueMap.clear();
-							if (result.size() > 0) {
+							if (!result.isEmpty()) {
 								moreObjectsToFollow.add(result);
 							}
 						} else if (value instanceof List) {
 							List valueList = (List) value;
-							List result = new ArrayList(valueList.size());
-							// Iterating over collection creates a new iterator
-							// which gives ConcurrentModificationException when
-							// traversing the Chouette graph
-							Object[] array = valueList.toArray();
-
-							for (Object o : array) {
-								result.add(o);
-								// result.add(deepDeproxy(o, visited,
-								// moreObjectsToFollow));
-							}
+							List result = new ArrayList(valueList);
 							value = result;
 							needToSetProperty = true;
 							valueList.clear();
-							if (result.size() > 0) {
+							if (!result.isEmpty()) {
 								moreObjectsToFollow.add(result);
 							}
 						}
@@ -254,13 +221,7 @@ public class HibernateDeproxynator<T> {
 	}
 
 	private <T> T deepDeproxy(Object maybeProxy, Class<T> baseClass) throws ClassCastException {
-		if (maybeProxy == null)
-			return null;
-		if (maybeProxy instanceof HibernateProxy) {
-			return baseClass.cast(((HibernateProxy) maybeProxy).getHibernateLazyInitializer().getImplementation());
-		} else {
-			return baseClass.cast(maybeProxy);
-		}
+		return baseClass.cast(Hibernate.unproxy(maybeProxy));
 	}
 
 }

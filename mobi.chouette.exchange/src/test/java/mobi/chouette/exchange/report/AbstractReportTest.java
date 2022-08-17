@@ -24,7 +24,7 @@ public class AbstractReportTest implements Constant{
 			PrintStream stream = new PrintStream(oStream);
 			StringBuilder sb = new StringBuilder();
 			List<Number> lstNumber = new ArrayList<Number>();
-			lstNumber.add(new Integer(1));
+			lstNumber.add(1);
 			stream.print(dummyReport.addLevel(sb, 1).append('{'));
 			dummyReport.printIntArray(stream, sb, 1, "int_array_test", lstNumber, true);
 			stream.print(dummyReport.addLevel(sb.append('\n'), 1).append('}'));
@@ -42,9 +42,9 @@ public class AbstractReportTest implements Constant{
 			StringBuilder sb = new StringBuilder();
 			List<Number> lstNumber = new ArrayList<Number>();
 			
-			lstNumber.add(new Integer(2));
-			lstNumber.add(new Integer(3));
-			lstNumber.add(new Integer(4));
+			lstNumber.add(2);
+			lstNumber.add(3);
+			lstNumber.add(4);
 			
 			stream.print(dummyReport.addLevel(sb, 1).append('{'));
 			dummyReport.printIntArray(stream, sb, 1, "int_array_test", lstNumber, true);
@@ -64,7 +64,7 @@ public class AbstractReportTest implements Constant{
 			StringBuilder sb = new StringBuilder();
 			List<Number> lstNumber = new ArrayList<Number>();
 			
-			lstNumber.add(new Integer(1));
+			lstNumber.add(1);
 			stream.print(dummyReport.addLevel(sb, 1).append('{'));
 			dummyReport.printObject(stream, sb, 1, "first", dummyReport, true);
 

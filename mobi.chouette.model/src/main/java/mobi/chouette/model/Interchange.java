@@ -77,13 +77,13 @@ public class Interchange extends NeptuneIdentifiedObject {
 	@Getter
 	@Setter
 	@Column(name = "maximum_wait_time")
-	@Type(type = "mobi.chouette.jadira.PersistentDurationAsSqlTime")
+	@Type(type = "mobi.chouette.type.PersistentDurationAsSqlTime")
 	private Duration maximumWaitTime;
 
 	@Getter
 	@Setter
 	@Column(name = "minimum_transfer_time")
-	@Type(type = "mobi.chouette.jadira.PersistentDurationAsSqlTime")
+	@Type(type = "mobi.chouette.type.PersistentDurationAsSqlTime")
 	private Duration minimumTransferTime;
 
 	// Field mapped twice in order to handle that the to_vehicle_journey

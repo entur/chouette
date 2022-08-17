@@ -27,7 +27,7 @@
         <resource-root path="hibernate-core-${hibernate.version}.jar"/>
         <resource-root path="hibernate-envers-${hibernate.version}.jar"/>
         <resource-root path="hibernate-spatial-${hibernate.version}.jar"/>
-        <resource-root path="jts-${jts.version}.jar"/>
+        <resource-root path="jts-core-${jts.version}.jar"/>
         <resource-root path="geolatte-geom-${geolatte-geom.version}.jar"/>
     </resources>
 

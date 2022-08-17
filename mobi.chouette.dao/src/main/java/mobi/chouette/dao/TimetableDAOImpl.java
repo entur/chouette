@@ -83,7 +83,7 @@ public class TimetableDAOImpl extends GenericDAOImpl<Timetable>implements Timeta
 		}
 		Map<Long, LineAndTimetable> lineToTimetablesMap = new HashMap<>();
 
-		if (timetableIds.size() > 0) {
+		if (!timetableIds.isEmpty()) {
 			List<Timetable> timetables = findAll(timetableIds);
 
 			Map<Long, Timetable> timetableIdToTimetable = new HashMap<>();
@@ -109,12 +109,12 @@ public class TimetableDAOImpl extends GenericDAOImpl<Timetable>implements Timeta
 
 		// For lines that define DatedServiceJourneys: create an additional TimeTable that collects the operating days for the DatedServiceJourneys
 		Map<Long, Collection<LocalDate>> dsjOperatingDays = getDSJOperatingDaysPerLine();
-		for (Long lineID : dsjOperatingDays.keySet()) {
+		for (Map.Entry<Long, Collection<LocalDate>> dsjOperatingDayMapping : dsjOperatingDays.entrySet()) {
 			Timetable dsjTimeTable = new Timetable();
 			dsjTimeTable.setId(-1L);
 			dsjTimeTable.setObjectId("Dated Service Journeys");
-			dsjTimeTable.setCalendarDays(dsjOperatingDays.get(lineID).stream().map(operatingDay -> new CalendarDay(operatingDay, true)).collect(Collectors.toList()));
-			lineToTimetablesMap.computeIfAbsent(lineID, k -> new LineAndTimetable(k, new ArrayList<>())).getTimetables().add(dsjTimeTable);
+			dsjTimeTable.setCalendarDays(dsjOperatingDayMapping.getValue().stream().map(operatingDay -> new CalendarDay(operatingDay, true)).collect(Collectors.toList()));
+			lineToTimetablesMap.computeIfAbsent(dsjOperatingDayMapping.getKey(), k -> new LineAndTimetable(k, new ArrayList<>())).getTimetables().add(dsjTimeTable);
 		}
 
 		return lineToTimetablesMap.values();
@@ -147,7 +147,7 @@ public class TimetableDAOImpl extends GenericDAOImpl<Timetable>implements Timeta
 
 
 	private Long toLong(Object o){
-		return Long.valueOf(((BigInteger) o).longValue());
+		return ((BigInteger) o).longValue();
 	}
 
 }

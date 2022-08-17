@@ -15,7 +15,7 @@ import javax.ejb.Singleton;
 
 import lombok.extern.log4j.Log4j;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.rutebanken.netex.model.StopTypeEnumeration;
 
 // TODO replace local cache in StopPlaceRegistryIdValidator with this

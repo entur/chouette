@@ -91,10 +91,10 @@ public class DublinCoreMetadataTest
 	{
 		Metadata data = initMetadata();
 		data.setDescription("the description");
-		data.getResources().add(data.new Resource(null, "ligne 1"));
-		data.getResources().add(data.new Resource("réseau 1", "ligne 2"));
-		data.getResources().add(data.new Resource("fichier1.xml", "réseau 2", "ligne 3"));
-		data.getResources().add(data.new Resource("fichier2.xml", null, "ligne 4"));
+		data.getResources().add(new Metadata.Resource(null, "ligne 1"));
+		data.getResources().add(new Metadata.Resource("réseau 1", "ligne 2"));
+		data.getResources().add(new Metadata.Resource("fichier1.xml", "réseau 2", "ligne 3"));
+		data.getResources().add(new Metadata.Resource("fichier2.xml", null, "ligne 4"));
 
 		fileWriter.writePlainFile(data, Paths.get(d.toURI()));
 

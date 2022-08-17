@@ -71,9 +71,7 @@ public class NetexProducerUtils {
 	@SuppressWarnings("unchecked")
 	public static List<DayOfWeekEnumeration> toDayOfWeekEnumeration(List<DayTypeEnum> dayTypeEnums) {
 		EnumSet actualDaysOfWeek = EnumSet.noneOf(DayTypeEnum.class);
-		for (DayTypeEnum dayTypeEnum : dayTypeEnums) {
-			actualDaysOfWeek.add(dayTypeEnum);
-		}
+		actualDaysOfWeek.addAll(dayTypeEnums);
 
 		if (actualDaysOfWeek.isEmpty()) {
 			return Collections.EMPTY_LIST;

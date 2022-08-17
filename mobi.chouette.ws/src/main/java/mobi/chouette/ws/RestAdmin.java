@@ -252,7 +252,7 @@ public class RestAdmin implements Constant {
 		return null;
 	}
 
-	private class JobStat {
+	private static class JobStat {
 		String key;
 		int jobCount = 0;
 		int scheduledJobCount = 0;
@@ -264,9 +264,9 @@ public class RestAdmin implements Constant {
 
 		public String toString() {
 			StringBuilder builder = new StringBuilder();
-			builder.append(key + ".jobCount=" + jobCount + "\n");
-			builder.append(key + ".scheduledJobCount=" + scheduledJobCount + "\n");
-			builder.append(key + ".startedJobCount=" + startedJobCount + "\n");
+			builder.append(key).append(".jobCount=").append(jobCount).append("\n");
+			builder.append(key).append(".scheduledJobCount=").append(scheduledJobCount).append("\n");
+			builder.append(key).append(".startedJobCount=").append(startedJobCount).append("\n");
 			return builder.toString();
 		}
 

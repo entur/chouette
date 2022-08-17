@@ -78,7 +78,7 @@ public class BookingArrangement extends NeptuneObject {
 	@Getter
 	@Setter
 	@Column(name = "minimum_booking_period")
-	@Type(type = "mobi.chouette.jadira.PersistentDurationAsSqlTime")
+	@Type(type = "mobi.chouette.type.PersistentDurationAsSqlTime")
 	private Duration minimumBookingPeriod;
 
 

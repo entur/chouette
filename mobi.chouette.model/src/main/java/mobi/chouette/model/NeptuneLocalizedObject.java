@@ -22,7 +22,7 @@ import mobi.chouette.model.type.LongLatTypeEnum;
 import mobi.chouette.model.util.Coordinate;
 import mobi.chouette.model.util.CoordinateUtil;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Abstract object used for all Localized Chouette Objects

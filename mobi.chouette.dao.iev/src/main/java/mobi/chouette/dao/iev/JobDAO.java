@@ -61,7 +61,7 @@ public class JobDAO extends GenericDAOImpl<Job> {
 			predicates.add(referentialPredicate);
 		}
 
-		criteria.where(builder.and(predicates.toArray(new Predicate[predicates.size()])));
+		criteria.where(builder.and(predicates.toArray(new Predicate[0])));
 
 		criteria.orderBy(builder.asc(root.get(Job_.created)));
 		TypedQuery<Job> query = em.createQuery(criteria);
@@ -98,7 +98,7 @@ public class JobDAO extends GenericDAOImpl<Job> {
 			predicates.add(referentialPredicate);
 		}
 
-		criteria.where(builder.and(predicates.toArray(new Predicate[predicates.size()])));
+		criteria.where(builder.and(predicates.toArray(new Predicate[0])));
 
 		criteria.orderBy(builder.asc(root.get(Job_.created)));
 		TypedQuery<Job> query = em.createQuery(criteria);

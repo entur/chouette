@@ -12,7 +12,7 @@ import javax.xml.xpath.XPathExpressionException;
 
 import net.sf.saxon.s9api.QName;
 import net.sf.saxon.s9api.XPathSelector;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import lombok.extern.log4j.Log4j;
 import mobi.chouette.common.Context;
@@ -155,7 +155,7 @@ public class NorwayLineNetexProfileValidator extends AbstractNorwayNetexProfileV
 		@SuppressWarnings("unchecked")
 		Map<IdVersion, List<String>> commonIds = (Map<IdVersion, List<String>>) context.get(NETEX_COMMON_FILE_IDENTIFICATORS);
 
-		List<IdVersion> localIdList = NetexIdExtractorHelper.collectEntityIdentificators(context, xpath, dom, new HashSet<>(Arrays.asList("Codespace")));
+		List<IdVersion> localIdList = NetexIdExtractorHelper.collectEntityIdentificators(context, xpath, dom, Set.of("Codespace"));
 		Set<IdVersion> localIds = new HashSet<>(localIdList);
 		List<IdVersion> localRefs = NetexIdExtractorHelper.collectEntityReferences(context, xpath, dom, null);
 

@@ -104,7 +104,7 @@ public class ObjectReport extends AbstractReport {
 		switch (severity) {
 			case INFO:
 				if (checkPointInfoCount < MAX_INFOS_PER_CHECKPOINT) {
-					checkPointInfoKeys.add(new Integer(checkPointErrorId));
+					checkPointInfoKeys.add(checkPointErrorId);
 					ret = true;
 				}
 				checkPointInfoCount++;
@@ -112,7 +112,7 @@ public class ObjectReport extends AbstractReport {
 
 		case WARNING:
 			if (checkPointWarningCount < MAX_WARNINGS_PER_CHECKPOINT) {
-				checkPointWarningKeys.add(new Integer(checkPointErrorId));
+				checkPointWarningKeys.add(checkPointErrorId);
 				ret = true;
 			}
 			checkPointWarningCount++;
@@ -120,7 +120,7 @@ public class ObjectReport extends AbstractReport {
 
 		default: // ERROR
 			if (checkPointErrorCount < MAX_ERRORS_PER_CHECKPOINT) {
-				checkPointErrorKeys.add(new Integer(checkPointErrorId));
+				checkPointErrorKeys.add(checkPointErrorId);
 				ret = true;
 			}
 			checkPointErrorCount++;
@@ -139,9 +139,9 @@ public class ObjectReport extends AbstractReport {
 	protected void addStatTypeToObject(OBJECT_TYPE type, int count) {
 
 		if (stats.containsKey(type)) {
-			stats.put(type, new Integer(stats.get(type).intValue() + count));
+			stats.put(type, stats.get(type).intValue() + count);
 		} else {
-			stats.put(type, new Integer(count));
+			stats.put(type, count);
 		}
 
 	}
@@ -159,7 +159,7 @@ public class ObjectReport extends AbstractReport {
 		if (stats.containsKey(type)) {
 			oldvalue = stats.get(type).intValue();
 		}
-		stats.put(type, new Integer(count));
+		stats.put(type, count);
 		return oldvalue;
 
 	}
