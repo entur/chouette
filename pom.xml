@@ -15,7 +15,7 @@
 		<wildfly.version>26.1.1.Final</wildfly.version>
 		<wildfly.core.version>18.1.1.Final</wildfly.core.version>
 
-		<slf4j.version>1.7.36</slf4j.version>
+		<slf4j.version>2.0.0</slf4j.version>
 
 		<version.wildfly.maven.plugin>3.0.0.Final</version.wildfly.maven.plugin>
 		<version.compiler.plugin>3.10.0</version.compiler.plugin>
