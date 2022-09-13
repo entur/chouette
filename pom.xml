@@ -48,7 +48,7 @@
 
 		<lombok-version>1.18.24</lombok-version>
 		<lombok-maven-plugin-version>1.18.20.0</lombok-maven-plugin-version>
-		<prometheus.agent.version>0.17.0</prometheus.agent.version>
+		<prometheus.agent.version>0.17.1</prometheus.agent.version>
 		<guava.version>31.1-jre</guava.version>
 		<commons-lang3.version>3.12.0</commons-lang3.version>
 		<zt-zip.version>1.15</zt-zip.version>
