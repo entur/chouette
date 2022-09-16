@@ -3,10 +3,10 @@ package mobi.chouette.exchange.importer;
 import com.jamonapi.Monitor;
 import com.jamonapi.MonitorFactory;
 import lombok.extern.log4j.Log4j;
-import mobi.chouette.common.Color;
 import mobi.chouette.common.Context;
 import mobi.chouette.common.chain.Command;
 import mobi.chouette.common.chain.CommandFactory;
+import mobi.chouette.common.monitor.JamonUtils;
 import mobi.chouette.dao.AccessLinkDAO;
 import mobi.chouette.dao.AccessPointDAO;
 import mobi.chouette.dao.ConnectionLinkDAO;
@@ -56,7 +56,7 @@ public class CleanStopAreaRepositoryCommand implements Command {
             log.error(e);
             throw e;
         }
-        log.info(Color.MAGENTA + monitor.stop() + Color.NORMAL);
+        JamonUtils.logMagenta(log, monitor);
         return result;
     }
 

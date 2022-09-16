@@ -21,6 +21,7 @@ import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Validator;
 
+import mobi.chouette.common.monitor.JamonUtils;
 import org.rutebanken.netex.validation.NeTExValidator;
 import org.rutebanken.netex.validation.NeTExValidator.NetexVersion;
 import org.xml.sax.ErrorHandler;
@@ -32,7 +33,6 @@ import com.jamonapi.MonitorFactory;
 
 import lombok.Getter;
 import lombok.extern.log4j.Log4j;
-import mobi.chouette.common.Color;
 import mobi.chouette.common.Context;
 import mobi.chouette.common.chain.Command;
 import mobi.chouette.common.chain.CommandFactory;
@@ -109,7 +109,7 @@ public class NetexSchemaValidationCommand implements Command, Constant {
 			throw e;
 		} finally {
 			executor.shutdown();
-			log.info(Color.MAGENTA + monitor.stop() + Color.NORMAL);
+			JamonUtils.logMagenta(log, monitor);
 		}
 		
 		if(result == SUCCESS) {
@@ -204,8 +204,8 @@ public class NetexSchemaValidationCommand implements Command, Constant {
 				Monitor monitor = MonitorFactory.start("SchemaValidation");
 				log.info("Schema validating "+fileName);
 				validator.validate(xmlSource);
-				log.info("Schema validation finished "+fileName+ " "+monitor.stop());
-
+				log.info("Schema validation finished "+fileName);
+				JamonUtils.logYellow(log, monitor);
 			} catch (SAXException e) {
 				log.warn(e);
 				fileValidationResult = ERROR;

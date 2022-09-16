@@ -7,6 +7,7 @@ import mobi.chouette.common.Color;
 import mobi.chouette.common.Context;
 import mobi.chouette.common.chain.Command;
 import mobi.chouette.common.chain.CommandFactory;
+import mobi.chouette.common.monitor.JamonUtils;
 import mobi.chouette.exchange.netexprofile.Constant;
 import mobi.chouette.exchange.netexprofile.importer.validation.AbstractNetexProfileValidator;
 import mobi.chouette.exchange.netexprofile.importer.validation.NetexProfileValidator;
@@ -37,7 +38,8 @@ public class NetexValidationCommand implements Command, Constant {
             throw e;
         } finally {
             AbstractNetexProfileValidator.resetContext(context);
-            log.info(Color.MAGENTA + "Profile validation finished " + fileName + " " + monitor.stop() + Color.NORMAL);
+            log.info(Color.MAGENTA + "Profile validation finished " + fileName + Color.NORMAL);
+            JamonUtils.logMagenta(log, monitor);
         }
         if (result == ERROR) {
             log.info("NeTEx validation failed for file: " + fileName);

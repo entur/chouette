@@ -86,7 +86,7 @@ public class StopAreaRegisterBlocCommand implements Command {
 			log.error(e);
 			throw e;
 			// } finally {
-			// log.info(Color.MAGENTA + monitor.stop() + Color.NORMAL);
+			// JamonUtils.logMagenta(log, monitor);
 		}
 		return result;
 

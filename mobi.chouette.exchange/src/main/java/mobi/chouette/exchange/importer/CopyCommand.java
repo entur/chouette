@@ -17,12 +17,12 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import lombok.extern.log4j.Log4j;
-import mobi.chouette.common.Color;
 import mobi.chouette.common.ContenerChecker;
 import mobi.chouette.common.Context;
 import mobi.chouette.common.PropertyNames;
 import mobi.chouette.common.chain.Command;
 import mobi.chouette.common.chain.CommandFactory;
+import mobi.chouette.common.monitor.JamonUtils;
 import mobi.chouette.dao.VehicleJourneyDAO;
 import mobi.chouette.persistence.hibernate.ContextHolder;
 
@@ -108,7 +108,7 @@ public class CopyCommand implements Command {
 			Monitor monitor = MonitorFactory.start(COMMAND);
 			ContextHolder.setContext(schema);
 			vehicleJourneyDAO.copy(buffer);
-			log.info(Color.MAGENTA + monitor.stop() + Color.NORMAL);
+			JamonUtils.logMagenta(log, monitor);
 			ContextHolder.setContext(null);
 			return null;
 		}

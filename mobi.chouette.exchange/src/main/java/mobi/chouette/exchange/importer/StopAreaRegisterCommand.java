@@ -8,10 +8,10 @@ import java.util.List;
 import javax.naming.InitialContext;
 
 import lombok.extern.log4j.Log4j;
-import mobi.chouette.common.Color;
 import mobi.chouette.common.Context;
 import mobi.chouette.common.chain.Command;
 import mobi.chouette.common.chain.CommandFactory;
+import mobi.chouette.common.monitor.JamonUtils;
 import mobi.chouette.exchange.report.ActionReporter;
 import mobi.chouette.model.ConnectionLink;
 import mobi.chouette.model.StopArea;
@@ -91,7 +91,7 @@ public class StopAreaRegisterCommand implements Command {
 			}
 
 		} finally {
-			log.info(Color.MAGENTA + monitor.stop() + Color.NORMAL);
+			JamonUtils.logMagenta(log, monitor);
 		}
 		return result;
 

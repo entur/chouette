@@ -12,11 +12,11 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import lombok.extern.log4j.Log4j;
-import mobi.chouette.common.Color;
 import mobi.chouette.common.Constant;
 import mobi.chouette.common.Context;
 import mobi.chouette.common.chain.Command;
 import mobi.chouette.common.chain.CommandFactory;
+import mobi.chouette.common.monitor.JamonUtils;
 import mobi.chouette.dao.JourneyPatternDAO;
 import mobi.chouette.dao.RouteSectionDAO;
 import mobi.chouette.exchange.importer.geometry.RouteSectionGenerator;
@@ -61,7 +61,7 @@ public class GenerateRouteSectionsCommand implements Command, Constant {
 		} catch (Exception e) {
 			log.warn("Route section generation failed with exception for " + configuration.getReferentialName() + " : " + e.getMessage(), e);
 		} finally {
-			log.info(Color.YELLOW + monitor.stop() + Color.NORMAL);
+			JamonUtils.logYellow(log, monitor);
 		}
 
 		return SUCCESS;

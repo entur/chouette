@@ -102,7 +102,7 @@ public class VehicleJourneyDAOImpl extends GenericDAOImpl<VehicleJourney> implem
 				} catch (IOException e) {
 					log.error(e);
 				}
-				// log.info(Color.MAGENTA + monitor.stop() + Color.NORMAL);
+				// JamonUtils.logMagenta(log, monitor);
 			}
 		});
 	}

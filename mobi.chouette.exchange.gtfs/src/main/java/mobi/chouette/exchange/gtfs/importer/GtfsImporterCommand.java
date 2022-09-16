@@ -5,10 +5,10 @@ import java.io.IOException;
 import javax.naming.InitialContext;
 
 import lombok.extern.log4j.Log4j;
-import mobi.chouette.common.Color;
 import mobi.chouette.common.Context;
 import mobi.chouette.common.chain.Command;
 import mobi.chouette.common.chain.CommandFactory;
+import mobi.chouette.common.monitor.JamonUtils;
 import mobi.chouette.exchange.CommandCancelledException;
 import mobi.chouette.exchange.ProcessingCommands;
 import mobi.chouette.exchange.ProcessingCommandsFactory;
@@ -62,7 +62,7 @@ public class GtfsImporterCommand extends AbstractImporterCommand implements Comm
 			reporter.setActionError(context, ERROR_CODE.INTERNAL_ERROR,"Fatal :" + e);
 		} finally {
 			progression.dispose(context);
-			log.info(Color.YELLOW + monitor.stop() + Color.NORMAL);
+			JamonUtils.logYellow(log, monitor);
 		}
 
 		

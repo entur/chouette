@@ -105,7 +105,7 @@ public class RouteCheckPoints extends AbstractValidation<Route> implements Valid
 			}
 
 		}
-		// log.info(Color.CYAN + monitor.stop() + Color.NORMAL);
+		// JamonUtils.logCyan(log, monitor);
 		return;
 	}
 

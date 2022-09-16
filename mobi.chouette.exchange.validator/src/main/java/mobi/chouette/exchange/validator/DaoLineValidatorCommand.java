@@ -20,10 +20,10 @@ import javax.ejb.TransactionAttributeType;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import mobi.chouette.common.monitor.JamonUtils;
 import org.jboss.ejb3.annotation.TransactionTimeout;
 
 import lombok.extern.log4j.Log4j;
-import mobi.chouette.common.Color;
 import mobi.chouette.common.Constant;
 import mobi.chouette.common.Context;
 import mobi.chouette.common.chain.Command;
@@ -79,7 +79,7 @@ public class DaoLineValidatorCommand implements Command, Constant {
 			// daoContext.setRollbackOnly();
 
 		} finally {
-			log.info(Color.MAGENTA + monitor.stop() + Color.NORMAL);
+			JamonUtils.logMagenta(log, monitor);
 		}
 
 		return result;

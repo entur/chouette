@@ -7,6 +7,7 @@ import mobi.chouette.common.Color;
 import mobi.chouette.common.Context;
 import mobi.chouette.common.chain.Command;
 import mobi.chouette.common.chain.CommandFactory;
+import mobi.chouette.common.monitor.JamonUtils;
 import mobi.chouette.dao.BlockDAO;
 import mobi.chouette.exchange.importer.updater.BlockUpdater;
 import mobi.chouette.exchange.importer.updater.Updater;
@@ -90,7 +91,7 @@ public class BlocksRegisterCommand implements Command {
                 reporter.setActionError(context, ActionReporter.ERROR_CODE.INTERNAL_ERROR, ex.getMessage());
             }
         } finally {
-            log.info(Color.MAGENTA + monitor.stop() + Color.NORMAL);
+            JamonUtils.logMagenta(log, monitor);
             log.info(Color.LIGHT_GREEN + monitor.toString() + Color.NORMAL);
         }
 
