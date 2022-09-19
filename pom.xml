@@ -24,7 +24,7 @@
 		<version.war.plugin>3.3.2</version.war.plugin>
 		<version.ejb.plugin>3.1.0</version.ejb.plugin>
 		<version.ear.plugin>3.2.0</version.ear.plugin>
-		<version.resources.plugin>3.2.0</version.resources.plugin>
+		<version.resources.plugin>3.3.0</version.resources.plugin>
 		<version.dependency.plugin>3.2.0</version.dependency.plugin>
 		<version.source.plugin>3.2.1</version.source.plugin>
 		<version.javadoc.plugin>3.3.2</version.javadoc.plugin>
