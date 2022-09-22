@@ -85,7 +85,7 @@
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
 				<artifactId>wagon-ssh</artifactId>
-				<version>1.0</version>
+				<version>3.5.2</version>
 			</extension>
 		</extensions>
 		<plugins>
@@ -102,7 +102,7 @@
 					<dependency><!-- add support for ssh/scp -->
 						<groupId>org.apache.maven.wagon</groupId>
 						<artifactId>wagon-ssh</artifactId>
-						<version>1.0</version>
+						<version>3.5.2</version>
 					</dependency>
 				</dependencies>
 			</plugin>
