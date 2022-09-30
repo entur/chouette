@@ -1,5 +1,4 @@
-FROM quay.io/wildfly/wildfly:26.1.1.Final-2
-
+FROM quay.io/wildfly/wildfly:26.1.2.Final
 USER root
 RUN yum -y update && yum clean all
 USER jboss
