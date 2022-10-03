@@ -5,10 +5,10 @@ import java.io.IOException;
 import javax.naming.InitialContext;
 
 import lombok.extern.log4j.Log4j;
-import mobi.chouette.common.Color;
 import mobi.chouette.common.Context;
 import mobi.chouette.common.chain.Command;
 import mobi.chouette.common.chain.CommandFactory;
+import mobi.chouette.common.monitor.JamonUtils;
 import mobi.chouette.exchange.neptune.Constant;
 import mobi.chouette.exchange.neptune.validation.AbstractValidator;
 import mobi.chouette.exchange.neptune.validation.AccessLinkValidator;
@@ -158,7 +158,7 @@ public class NeptuneValidationCommand implements Command, Constant {
 			throw e;
 		} finally {
 			AbstractValidator.resetContext(context);
-			log.info(Color.MAGENTA + monitor.stop() + Color.NORMAL);
+			JamonUtils.logMagenta(log, monitor);
 		}
 		if (result == ERROR) {
 			reporter.addFileErrorInReport(context, fileName, ActionReporter.FILE_ERROR_CODE.INVALID_FORMAT,

@@ -6,11 +6,11 @@ import javax.naming.InitialContext;
 import javax.xml.bind.MarshalException;
 
 import lombok.extern.log4j.Log4j;
-import mobi.chouette.common.Color;
 import mobi.chouette.common.Context;
 import mobi.chouette.common.TimeUtil;
 import mobi.chouette.common.chain.Command;
 import mobi.chouette.common.chain.CommandFactory;
+import mobi.chouette.common.monitor.JamonUtils;
 import mobi.chouette.exchange.exporter.SharedDataKeys;
 import mobi.chouette.exchange.neptune.Constant;
 import mobi.chouette.exchange.report.ActionReporter;
@@ -134,7 +134,7 @@ public class NeptuneLineProducerCommand implements Command, Constant {
 			}
 
 		} finally {
-			log.info(Color.MAGENTA + monitor.stop() + Color.NORMAL);
+			JamonUtils.logMagenta(log, monitor);
 		}
 
 		return result;

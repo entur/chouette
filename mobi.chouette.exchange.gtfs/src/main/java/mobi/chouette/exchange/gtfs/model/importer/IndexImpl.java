@@ -102,7 +102,7 @@ public abstract class IndexImpl<T> extends AbstractIndex<T> {
 			}
 		} finally {
 			file.close();
-			//log.info(Color.BLUE + monitor.stop() + Color.NORMAL);
+			//JamonUtils.logBlue(log, monitor);
 		}
 	}
 	

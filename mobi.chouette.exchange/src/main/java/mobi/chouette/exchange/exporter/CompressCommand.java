@@ -8,7 +8,6 @@ import java.nio.file.Paths;
 import javax.naming.InitialContext;
 
 import lombok.extern.log4j.Log4j;
-import mobi.chouette.common.Color;
 import mobi.chouette.common.Constant;
 import mobi.chouette.common.Context;
 import mobi.chouette.common.FileUtil;
@@ -19,6 +18,7 @@ import mobi.chouette.common.file.FileStoreFactory;
 
 import com.jamonapi.Monitor;
 import com.jamonapi.MonitorFactory;
+import mobi.chouette.common.monitor.JamonUtils;
 import org.apache.commons.io.FileUtils;
 
 @Log4j
@@ -61,7 +61,7 @@ public class CompressCommand implements Command, Constant {
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		} finally {
-			log.info(Color.MAGENTA + monitor.stop() + Color.NORMAL);
+			JamonUtils.logMagenta(log, monitor);
 		}
 
 		return result;

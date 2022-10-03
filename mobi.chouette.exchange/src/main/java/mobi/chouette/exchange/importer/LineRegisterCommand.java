@@ -15,12 +15,12 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import lombok.extern.log4j.Log4j;
-import mobi.chouette.common.Color;
 import mobi.chouette.common.ContenerChecker;
 import mobi.chouette.common.Context;
 import mobi.chouette.common.PropertyNames;
 import mobi.chouette.common.chain.Command;
 import mobi.chouette.common.chain.CommandFactory;
+import mobi.chouette.common.monitor.JamonUtils;
 import mobi.chouette.dao.LineDAO;
 import mobi.chouette.dao.VehicleJourneyDAO;
 import mobi.chouette.exchange.importer.updater.LineOptimiser;
@@ -167,7 +167,7 @@ public class LineRegisterCommand implements Command {
 				}
 				throw ex;
 			} finally {
-				log.info(Color.MAGENTA + monitor.stop() + Color.NORMAL);
+				JamonUtils.logMagenta(log, monitor);
 				
 	//			monitor = MonitorFactory.getTimeMonitor("LineOptimiser");
 	//			if (monitor != null)
@@ -208,7 +208,7 @@ public class LineRegisterCommand implements Command {
 			}
 		} else {
 			log.info("skipping obsolete line : " + newValue.getObjectId());
-			log.info(Color.MAGENTA + monitor.stop() + Color.NORMAL);
+			JamonUtils.logMagenta(log, monitor);
 		}
 		return result;
 	}

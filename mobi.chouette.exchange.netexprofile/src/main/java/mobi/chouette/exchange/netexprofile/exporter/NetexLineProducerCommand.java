@@ -8,13 +8,13 @@ import javax.xml.bind.MarshalException;
 import java.time.LocalDate;
 
 import mobi.chouette.common.TimeUtil;
+import mobi.chouette.common.monitor.JamonUtils;
 import org.xml.sax.SAXParseException;
 
 import com.jamonapi.Monitor;
 import com.jamonapi.MonitorFactory;
 
 import lombok.extern.log4j.Log4j;
-import mobi.chouette.common.Color;
 import mobi.chouette.common.Context;
 import mobi.chouette.common.chain.Command;
 import mobi.chouette.common.chain.CommandFactory;
@@ -125,7 +125,7 @@ public class NetexLineProducerCommand implements Command, Constant {
                 result = ERROR;
             }
         } finally {
-            log.info(Color.MAGENTA + monitor.stop() + Color.NORMAL);
+            JamonUtils.logMagenta(log, monitor);
         }
 
         return result;

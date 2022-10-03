@@ -9,7 +9,6 @@ import java.nio.file.Paths;
 import javax.naming.InitialContext;
 
 import lombok.extern.log4j.Log4j;
-import mobi.chouette.common.Color;
 import mobi.chouette.common.Context;
 import mobi.chouette.common.FileUtil;
 import mobi.chouette.common.JobData;
@@ -17,6 +16,7 @@ import mobi.chouette.common.chain.Command;
 import mobi.chouette.common.chain.CommandFactory;
 import mobi.chouette.common.file.FileStore;
 import mobi.chouette.common.file.FileStoreFactory;
+import mobi.chouette.common.monitor.JamonUtils;
 import mobi.chouette.exchange.report.ActionReporter;
 import mobi.chouette.exchange.report.IO_TYPE;
 import mobi.chouette.exchange.report.ReportConstant;
@@ -83,7 +83,7 @@ public class UncompressCommand implements Command, ReportConstant {
 			result = SUCCESS;
 		}
 
-		log.info(Color.MAGENTA + monitor.stop() + Color.NORMAL);
+		JamonUtils.logMagenta(log, monitor);
 		return result;
 	}
 

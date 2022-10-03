@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -23,7 +24,7 @@ public class JSONUtilTest {
 		model.setChild(childModel);
 		
 		String json = JSONUtil.toJSON(model);
-		Assert.assertEquals(json, "{\"json_model\": {\n" +
+		assertEqualsIgnoreSpace(json, "{\"json_model\": {\n" +
 				"  \"name\": \"theName\",\n" +
 				"  \"user_name\": \"theUserName\",\n" +
 				"  \"value\": 12,\n" +
@@ -54,7 +55,7 @@ public class JSONUtilTest {
 		
 		JSONUtil.toJSON(path, model);
 		String json = FileUtils.readFileToString(f);
-		Assert.assertEquals(json, "{\"json_model\": {\n" +
+		assertEqualsIgnoreSpace(json, "{\"json_model\": {\n" +
 				"  \"name\": \"theName\",\n" +
 				"  \"user_name\": \"theUserName\",\n" +
 				"  \"value\": 12\n" +
@@ -66,6 +67,10 @@ public class JSONUtilTest {
 		Assert.assertEquals(model2.getValue(),model.getValue(),"value");
 		
 		f.delete();
+	}
+
+	private static void assertEqualsIgnoreSpace(String json, String expected, String json_string) {
+		Assert.assertEquals(StringUtils.deleteWhitespace(json), StringUtils.deleteWhitespace(expected), json_string);
 	}
 
 }

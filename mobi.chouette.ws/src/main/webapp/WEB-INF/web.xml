@@ -12,6 +12,9 @@
 	<listener>
 		<listener-class>mobi.chouette.ws.Application</listener-class>
 	</listener>
+	<listener>
+		<listener-class>mobi.chouette.ws.startup.ChouetteJamonServletContextListener</listener-class>
+	</listener>
    <context-param>
       <param-name>resteasy.providers</param-name>
       <param-value>
