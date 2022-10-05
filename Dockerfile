@@ -22,8 +22,8 @@ ENV JAVA_HOME /usr/lib/jvm/java
 # Adapted from https://github.com/jboss-dockerfiles/wildfly/blob/26.1.0.Final/Dockerfile
 
 # Set the WILDFLY_VERSION env variable
-ENV WILDFLY_VERSION 26.1.1.Final
-ENV WILDFLY_SHA1 c11076dd0ea3bb554c5336eeafdfcee18d94551d
+ENV WILDFLY_VERSION 26.1.2.Final
+ENV WILDFLY_SHA1 3dda0f3795c00cedf8b14c83f8c341244e7cad4
 ENV JBOSS_HOME /opt/jboss/wildfly
 
 USER root
