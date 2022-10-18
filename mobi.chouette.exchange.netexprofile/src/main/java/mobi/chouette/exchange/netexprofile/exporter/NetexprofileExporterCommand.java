@@ -6,6 +6,7 @@ import lombok.extern.log4j.Log4j;
 import mobi.chouette.common.Context;
 import mobi.chouette.common.chain.Command;
 import mobi.chouette.common.chain.CommandFactory;
+import mobi.chouette.common.metrics.CommandTimer;
 import mobi.chouette.common.monitor.JamonUtils;
 import mobi.chouette.exchange.CommandCancelledException;
 import mobi.chouette.exchange.ProcessingCommands;
@@ -15,10 +16,12 @@ import mobi.chouette.exchange.exporter.AbstractExporterCommand;
 import mobi.chouette.exchange.netexprofile.Constant;
 import mobi.chouette.exchange.report.ActionReporter;
 import mobi.chouette.exchange.report.ReportConstant;
+import org.eclipse.microprofile.metrics.MetricRegistry;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.inject.Inject;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import java.io.IOException;
@@ -28,6 +31,9 @@ import java.io.IOException;
 public class NetexprofileExporterCommand extends AbstractExporterCommand implements Command, Constant, ReportConstant {
 
     public static final String COMMAND = "NetexprofileExporterCommand";
+
+    @Inject
+    protected MetricRegistry metricRegistry;
 
     @Override
     @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
@@ -63,7 +69,9 @@ public class NetexprofileExporterCommand extends AbstractExporterCommand impleme
 
             ProcessingCommands commands = ProcessingCommandsFactory.create(NetexExporterProcessingCommands.class.getName());
 
-            result = process(context, commands, progression, true, Mode.line);
+            result = new CommandTimer(metricRegistry, "netex_export", "NeTEx export timer")
+                    .timed(() -> process(context, commands, progression, true, Mode.line), parameters.getDefaultCodespacePrefix());
+
         } catch (CommandCancelledException e) {
             reporter.setActionError(context, ActionReporter.ERROR_CODE.INTERNAL_ERROR, "Command cancelled");
             log.error(e.getMessage());
