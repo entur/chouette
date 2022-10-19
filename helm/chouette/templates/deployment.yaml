@@ -20,8 +20,8 @@ spec:
   template:
     metadata:
       annotations:
-        prometheus.io/path: /
-        prometheus.io/port: "9001"
+        prometheus.io/path: /metrics
+        prometheus.io/port: "9990"
         prometheus.io/scrape: "true"
         scheduler.alpha.kubernetes.io/affinity: |
           {

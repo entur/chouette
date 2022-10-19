@@ -14,8 +14,6 @@ COPY chouette_iev/target/chouette.ear /opt/jboss/wildfly/standalone/deployments/
 COPY target/docker/wildfly /opt/jboss/wildfly/
 # Copy customized Wildfly configuration file
 COPY docker/files/wildfly/standalone.conf /opt/jboss/wildfly/bin
-# Copy Prometheus agent configuration file
-COPY docker/files/jmx_exporter_config.yml /opt/jboss/wildfly/prometheus
 
 # From http://stackoverflow.com/questions/20965737/docker-jboss7-war-commit-server-boot-failed-in-an-unrecoverable-manner
 RUN rm -rf /opt/jboss/wildfly/standalone/configuration/standalone_xml_history \
