@@ -432,7 +432,7 @@ public abstract class AbstractValidation<T extends NeptuneIdentifiedObject> impl
 		List<String> columnNames = ValidationParametersUtil.getFields(object);
 		String objectKey = toUnderscore(object.getClass().getSimpleName());
 		if (columnNames == null || columnNames.isEmpty()) {
-			log.info("no columns parameters for " + object.getClass().getSimpleName());
+			log.debug("no columns parameters for " + object.getClass().getSimpleName());
 			return;
 		}
 

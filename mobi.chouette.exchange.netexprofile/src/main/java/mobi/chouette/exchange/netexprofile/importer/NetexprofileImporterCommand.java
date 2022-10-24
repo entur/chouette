@@ -6,6 +6,7 @@ import lombok.extern.log4j.Log4j;
 import mobi.chouette.common.Context;
 import mobi.chouette.common.chain.Command;
 import mobi.chouette.common.chain.CommandFactory;
+import mobi.chouette.common.metrics.CommandTimer;
 import mobi.chouette.common.monitor.JamonUtils;
 import mobi.chouette.exchange.CommandCancelledException;
 import mobi.chouette.exchange.ProcessingCommands;
@@ -15,16 +16,27 @@ import mobi.chouette.exchange.importer.AbstractImporterCommand;
 import mobi.chouette.exchange.netexprofile.Constant;
 import mobi.chouette.exchange.report.ActionReporter;
 import mobi.chouette.model.util.Referential;
+import org.eclipse.microprofile.metrics.MetricRegistry;
 
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.inject.Inject;
 import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import java.io.IOException;
 
 @Log4j
+@Stateless(name = NetexprofileImporterCommand.COMMAND)
 public class NetexprofileImporterCommand extends AbstractImporterCommand implements Command, Constant {
 
-	public static final String COMMAND = "NetextImporterCommand";
+	public static final String COMMAND = "NetexprofileImporterCommand";
+
+	@Inject
+	protected MetricRegistry metricRegistry;
 
 	@Override
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public boolean execute(Context context) throws Exception {
 		boolean result = SUCCESS;
 		Monitor monitor = MonitorFactory.start(COMMAND);
@@ -49,7 +61,9 @@ public class NetexprofileImporterCommand extends AbstractImporterCommand impleme
 		}
 
 		ProcessingCommands commands = ProcessingCommandsFactory.create(NetexImporterProcessingCommands.class.getName());
-		result = process(context, commands, progression, true, Mode.line);
+
+		result = new CommandTimer(metricRegistry, "netex_import", "NeTEx import timer")
+				.timed(() -> process(context, commands, progression, true, Mode.line), ((NetexprofileImportParameters) configuration).getObjectIdPrefix());
 
 		} catch (CommandCancelledException e) {
 			actionReporter.setActionError(context, ActionReporter.ERROR_CODE.INTERNAL_ERROR, "Command cancelled");
@@ -70,7 +84,18 @@ public class NetexprofileImporterCommand extends AbstractImporterCommand impleme
 
 		@Override
 		protected Command create(InitialContext context) throws IOException {
-			Command result = new NetexprofileImporterCommand();
+			Command result = null;
+			try {
+				String name = "java:app/mobi.chouette.exchange.netexprofile/" + COMMAND;
+				result = (Command) context.lookup(name);
+			} catch (NamingException e) {
+				String name = "java:module/" + COMMAND;
+				try {
+					result = (Command) context.lookup(name);
+				} catch (NamingException e1) {
+					log.error(e);
+				}
+			}
 			return result;
 		}
 	}
