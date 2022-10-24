@@ -62,7 +62,6 @@ spec:
             - name: JAVA_OPTS
               value: -server -Xms2048m -Xmx{{ .Values.resources.xmx }} -XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
                 -XX:MinHeapFreeRatio=20 -XX:MaxHeapFreeRatio=40 -XX:ActiveProcessorCount={{ .Values.resources.cpuRequest }}
-                --add-opens java.base/com.sun.net.ssl.internal.ssl=ALL-UNNAMED
                 --add-opens java.base/sun.nio.ch=ALL-UNNAMED
                 -Djava.net.preferIPv4Stack=true -Djava.awt.headless=true
                 -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 -Dconfig.location=/etc/application-config/application.properties
