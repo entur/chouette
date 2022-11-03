@@ -226,15 +226,6 @@
 				<configuration>
 					<clearOutputDir>false</clearOutputDir>
 					<generateEpisode>false</generateEpisode>
-					<!-- <sources>
-						<source>src/main/xsd/neptune.xsd</source>
-				  </sources> -->
-					<arguments>
-						<argument>-extension</argument>
-						<argument>-Xlocator</argument>
-						<!-- <argument>-b</argument>
-						<argument>src/main/xsd/bindings.xml</argument> -->
-					</arguments>
 				</configuration>
 			</plugin>
 			<plugin>
