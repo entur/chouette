@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 import mobi.chouette.common.Context;
 import mobi.chouette.exchange.validation.ValidationData;
@@ -47,7 +46,9 @@ public class JourneyPatternCheckPoints extends AbstractValidation<JourneyPattern
 		if (!sourceFile)
 			initCheckPoint(context, JOURNEY_PATTERN_2, SEVERITY.E);
 		initCheckPoint(context, ROUTE_SECTION_2_1, SEVERITY.W);
+		initCheckPoint(context, ROUTE_SECTION_2_11, SEVERITY.W);
 		initCheckPoint(context, ROUTE_SECTION_2_2, SEVERITY.W);
+		initCheckPoint(context, ROUTE_SECTION_2_22, SEVERITY.W);
 		initCheckPoint(context, ROUTE_SECTION_2_3, SEVERITY.W);
 		prepareCheckPoint(context, JOURNEY_PATTERN_3);
 		initCheckPoint(context, JOURNEY_PATTERN_3, SEVERITY.W);
@@ -196,7 +197,9 @@ public class JourneyPatternCheckPoints extends AbstractValidation<JourneyPattern
 	private void check3RouteSection1(Context context, JourneyPattern jp, ValidationParameters parameters) {
 
 		prepareCheckPoint(context, ROUTE_SECTION_2_1);
+		prepareCheckPoint(context, ROUTE_SECTION_2_11);
 		prepareCheckPoint(context, ROUTE_SECTION_2_2);
+		prepareCheckPoint(context, ROUTE_SECTION_2_22);
 
 		String modeKey = jp.getRoute().getLine().getTransportModeName().toString();
 		TransportModeParameters mode = getModeParameters(parameters, modeKey, log);
@@ -209,8 +212,9 @@ public class JourneyPatternCheckPoints extends AbstractValidation<JourneyPattern
 				mode = modeDefault;
 			}
 		}
+		double distanceWarning = mode.getRouteSectionStopAreaDistanceWarning();
 		double distanceMax = mode.getRouteSectionStopAreaDistanceMax();
-		if (distanceMax <= 0) {
+		if (distanceWarning <= 0) {
 			// No use unless max distance has been specified
 			return;
 		}
@@ -249,13 +253,19 @@ public class JourneyPatternCheckPoints extends AbstractValidation<JourneyPattern
 				distance = quickDistanceFromCoordinates(fromStopArea.getLatitude().doubleValue(), plotFirstLat,
 						fromStopArea.getLongitude().doubleValue(), plotFirstLong);
 				// If route section distance doesn't exceed gap as parameter
-				if (distance > distanceMax) {
+				if (distance > distanceWarning) {
 					DataLocation location = buildLocation(context, rs);
 					DataLocation targetLocation = buildLocation(context, fromStopArea);
-
 					ValidationReporter reporter = ValidationReporter.Factory.getInstance();
-					reporter.addCheckPointReportError(context, ROUTE_SECTION_2_1, location, String.valueOf(distance),
-							String.valueOf(distanceMax), targetLocation);
+
+					if(distance > distanceMax) {
+						reporter.addCheckPointReportError(context, ROUTE_SECTION_2_1, location, String.valueOf(distance),
+								String.valueOf(distanceMax), targetLocation);
+					} else {
+						reporter.addCheckPointReportError(context, ROUTE_SECTION_2_11, location, String.valueOf(distance),
+								String.valueOf(distanceWarning), targetLocation);
+					}
+
 				}
 			}
 
@@ -269,13 +279,18 @@ public class JourneyPatternCheckPoints extends AbstractValidation<JourneyPattern
 				distance = quickDistanceFromCoordinates(toStopArea.getLatitude().doubleValue(), plotLastLat,
 						toStopArea.getLongitude().doubleValue(), plotLastLong);
 				// If route section distance doesn't exceed gap as parameter
-				if (distance > distanceMax) {
+				if (distance > distanceWarning) {
 					DataLocation location = buildLocation(context, rs);
 					DataLocation targetLocation = buildLocation(context, toStopArea);
-
 					ValidationReporter reporter = ValidationReporter.Factory.getInstance();
-					reporter.addCheckPointReportError(context, ROUTE_SECTION_2_2, location, String.valueOf(distance),
-							String.valueOf(distanceMax), targetLocation);
+
+					if(distance > distanceMax) {
+						reporter.addCheckPointReportError(context, ROUTE_SECTION_2_2, location, String.valueOf(distance),
+								String.valueOf(distanceMax), targetLocation);
+					} else {
+						reporter.addCheckPointReportError(context, ROUTE_SECTION_2_22, location, String.valueOf(distance),
+								String.valueOf(distanceWarning), targetLocation);
+					}
 				}
 			}
 		}

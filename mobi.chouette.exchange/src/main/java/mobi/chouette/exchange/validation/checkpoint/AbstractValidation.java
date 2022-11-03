@@ -93,7 +93,9 @@ public abstract class AbstractValidation<T extends NeptuneIdentifiedObject> impl
 	protected static final String ROUTE_RB_4 = "3-Route-rutebanken-4";
 	protected static final String ROUTE_SECTION_1 = "3-RouteSection-1";
 	protected static final String ROUTE_SECTION_2_1 = "3-RouteSection-2-1";
+	protected static final String ROUTE_SECTION_2_11 = "3-RouteSection-2-11";
 	protected static final String ROUTE_SECTION_2_2 = "3-RouteSection-2-2";
+	protected static final String ROUTE_SECTION_2_22 = "3-RouteSection-2-22";
 	protected static final String ROUTE_SECTION_2_3 = "3-RouteSection-2-3";
 	protected static final String JOURNEY_PATTERN_1 = "3-JourneyPattern-1";
 	protected static final String JOURNEY_PATTERN_2 = "3-JourneyPattern-2";
@@ -190,7 +192,7 @@ public abstract class AbstractValidation<T extends NeptuneIdentifiedObject> impl
 	protected static final String MIN_SIZE = "min_size";
 	protected static final String MAX_SIZE = "max_size";
 
-	protected static final TransportModeParameters modeDefault = new TransportModeParameters(1, 300, 30000, 50, 40,10, 10, 20);
+	protected static final TransportModeParameters modeDefault = new TransportModeParameters(1, 300, 30000, 50, 40,10, 10, 20, 100);
 
 	protected static final String DEFAULT_ENVELOPPE = "[[-5.2,42.25],[-5.2,51.1],[8.23,51.1],[8.23,42.25],[-5.2,42.25]]";
 	private GeometryFactory geometryFactory;
