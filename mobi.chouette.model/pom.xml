@@ -124,6 +124,12 @@
 		<dependency>
 			<groupId>org.geotools</groupId>
 			<artifactId>gt-jts-wrapper</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.geotools</groupId>
@@ -142,7 +148,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.logmanager</groupId>
-			<artifactId>log4j-jboss-logmanager</artifactId>
+			<artifactId>jboss-logmanager</artifactId>
 			<scope>test</scope>
 		</dependency>
 

@@ -129,7 +129,13 @@
                     <groupId>org.dom4j</groupId>
                     <artifactId>dom4j</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
             </exclusions>
+
+
         </dependency>
         <!--Required for Hibernate bytecode enhancement-->
         <dependency>
@@ -181,6 +187,12 @@
             <groupId>com.tobedevoured</groupId>
             <artifactId>modelcitizen</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 
