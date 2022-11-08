@@ -50,7 +50,6 @@
 
 		<lombok-version>1.18.24</lombok-version>
 		<lombok-maven-plugin-version>1.18.20.0</lombok-maven-plugin-version>
-		<prometheus.agent.version>0.17.2</prometheus.agent.version>
 		<guava.version>31.1-jre</guava.version>
 		<commons-lang3.version>3.12.0</commons-lang3.version>
 		<zt-zip.version>1.15</zt-zip.version>
@@ -246,28 +245,6 @@
 									</outputDirectory>
 								</artifactItem>
 
-							</artifactItems>
-						</configuration>
-					</execution>
-
-					<execution>
-						<id>copy-prometheus-agent</id>
-						<phase>package</phase>
-						<goals>
-							<goal>copy</goal>
-						</goals>
-						<configuration>
-							<verbose>true</verbose>
-							<artifactItems>
-								<artifactItem>
-									<groupId>io.prometheus.jmx</groupId>
-									<artifactId>jmx_prometheus_javaagent</artifactId>
-									<version>${prometheus.agent.version}</version>
-									<outputDirectory>
-										${project.rootDir}/target/docker/wildfly/prometheus
-									</outputDirectory>
-									<destFileName>jmx_prometheus_javaagent.jar</destFileName>
-								</artifactItem>
 							</artifactItems>
 						</configuration>
 					</execution>

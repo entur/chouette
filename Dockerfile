@@ -60,7 +60,7 @@ RUN chmod a+w /opt/jboss/wildfly/build.log
 
 # Copy EAR
 COPY chouette_iev/target/chouette.ear /opt/jboss/wildfly/standalone/deployments/
-# Copy customized Wildfly modules and Prometheus agent
+# Copy customized Wildfly modules
 COPY target/docker/wildfly /opt/jboss/wildfly/
 # Copy customized Wildfly configuration file
 COPY docker/files/wildfly/standalone.conf /opt/jboss/wildfly/bin
