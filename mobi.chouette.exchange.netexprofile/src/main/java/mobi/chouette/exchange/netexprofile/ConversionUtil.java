@@ -481,13 +481,11 @@ public class ConversionUtil {
 	}
 
 	public static PublicationEnumeration toPublicationEnumeration(PublicationEnum chouetteType) {
-		if (chouetteType == null) {
+		if (chouetteType == null || chouetteType == PublicationEnum.Public) {
 			return null;
 		}
 
 		switch (chouetteType) {
-			case Public:
-				return PublicationEnumeration.PUBLIC;
 			case Authorised:
 				return PublicationEnumeration.AUTHORISED;
 			case Confidential:

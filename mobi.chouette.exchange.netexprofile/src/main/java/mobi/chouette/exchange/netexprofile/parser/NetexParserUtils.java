@@ -536,13 +536,11 @@ public class NetexParserUtils extends ParserUtils {
 	}
 
 	public static PublicationEnum toPublicationEnum(PublicationEnumeration netexType) {
-		if (netexType == null) {
+		if (netexType == null || netexType == PublicationEnumeration.PUBLIC ) {
 			return null;
 		}
 
 		switch (netexType) {
-			case PUBLIC:
-				return PublicationEnum.Public;
 			case AUTHORISED:
 				return PublicationEnum.Authorised;
 			case CONFIDENTIAL:
