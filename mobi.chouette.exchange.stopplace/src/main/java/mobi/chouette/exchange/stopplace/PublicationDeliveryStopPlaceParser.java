@@ -3,16 +3,11 @@ package mobi.chouette.exchange.stopplace;
 import java.io.InputStream;
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -22,10 +17,9 @@ import lombok.Getter;
 import lombok.extern.log4j.Log4j;
 import mobi.chouette.common.Constant;
 import mobi.chouette.common.Context;
+import mobi.chouette.common.JAXBUtil;
 import mobi.chouette.exchange.importer.ParserFactory;
 import mobi.chouette.exchange.netexprofile.parser.StopPlaceParser;
-import mobi.chouette.model.StopArea;
-import mobi.chouette.model.type.ChouetteAreaEnum;
 import mobi.chouette.model.util.Referential;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -36,7 +30,6 @@ import org.rutebanken.netex.model.Quay;
 import org.rutebanken.netex.model.Site_VersionFrameStructure;
 import org.rutebanken.netex.model.StopPlace;
 
-import static javax.xml.bind.JAXBContext.newInstance;
 import static mobi.chouette.exchange.netexprofile.Constant.NETEX_LINE_DATA_CONTEXT;
 
 @Log4j
@@ -139,8 +132,7 @@ public class PublicationDeliveryStopPlaceParser {
     }
 
     private PublicationDeliveryStructure unmarshal(InputStream inputStream) throws JAXBException {
-        JAXBContext jaxbContext = newInstance(PublicationDeliveryStructure.class);
-        Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+        Unmarshaller jaxbUnmarshaller = JAXBUtil.getJAXBContext(PublicationDeliveryStructure.class).createUnmarshaller();
 
         JAXBElement<PublicationDeliveryStructure> jaxbElement = jaxbUnmarshaller.unmarshal(new StreamSource(inputStream), PublicationDeliveryStructure.class);
         PublicationDeliveryStructure publicationDeliveryStructure = jaxbElement.getValue();

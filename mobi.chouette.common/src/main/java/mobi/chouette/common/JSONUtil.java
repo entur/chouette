@@ -11,7 +11,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
@@ -39,18 +38,16 @@ public class JSONUtil {
 	public static <T> T fromJSON(String text, Class<T> type) throws JAXBException, JSONException, XMLStreamException {
 
 		if (text == null || text.isEmpty() ) return null;
-		JAXBContext context = JAXBContext.newInstance(type);
 		JSONObject object = new JSONObject(text);
 		Configuration config = new Configuration();
 		MappedNamespaceConvention convention = new MappedNamespaceConvention(config);
 		XMLStreamReader reader = new MappedXMLStreamReader(object, convention);
-		Unmarshaller unmarshaller = context.createUnmarshaller();
+		Unmarshaller unmarshaller = JAXBUtil.getJAXBContext(type).createUnmarshaller();
 		return (T) unmarshaller.unmarshal(reader);
 
 	}
 
 	public static <T> String toJSON(T payload) throws JAXBException, JSONException {
-		JAXBContext context = JAXBContext.newInstance(payload.getClass());
 		Configuration config = new Configuration();
 		config.setAttributeKey("");
 		MappedNamespaceConvention convention = new MappedNamespaceConvention(config);
@@ -62,7 +59,7 @@ public class JSONUtil {
 			writer.serializeAsArray(lists.get(iCount));
 		}
 
-		Marshaller marshaller = context.createMarshaller();
+		Marshaller marshaller = JAXBUtil.getJAXBContext(payload.getClass()).createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 		marshaller.marshal(payload, writer);
 		JSONObject json = new JSONObject(out.toString());
