@@ -42,7 +42,6 @@
 			<property name="hibernate.session_factory.interceptor" value="mobi.chouette.dao.interceptor.StopAreaRelationInterceptor"/>
 
 			<!-- Force legacy options to maintain existing application behavior -->
-			<property name="hibernate.id.new_generator_mappings" value="false" />
 			<property name="hibernate.allow_update_outside_transaction" value="true"/>
 			<!--Disable JPA compliance options to maintain existing application behavior: these options are set to 'true' by Wildfly -->
 			<property name="hibernate.jpa.compliance.transaction" value="false"/>
@@ -126,7 +125,6 @@
 			<property name="hibernate.session_factory.interceptor" value="mobi.chouette.dao.interceptor.RelationsToStopAreaInterceptor"/>
 
 			<!-- Force legacy options to maintain existing application behavior -->
-			<property name="hibernate.id.new_generator_mappings" value="false" />
 			<property name="hibernate.allow_update_outside_transaction" value="true"/>
 			<!--Disable JPA compliance options to maintain existing application behavior: these options are set to 'true' by Wildfly -->
 			<property name="hibernate.jpa.compliance.transaction" value="false"/>
