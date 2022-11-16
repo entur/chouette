@@ -1,5 +1,5 @@
 # Adapted from https://github.com/jboss-dockerfiles/base/blob/master/Dockerfile
-FROM redhat/ubi8:8.6
+FROM redhat/ubi8:8.7-929
 
 RUN yum update -y && yum clean all
 
