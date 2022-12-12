@@ -601,4 +601,10 @@ public class VehicleJourney extends NeptuneIdentifiedObject {
 	public boolean isPublic() {
 		return publication == PublicationEnum.Public || publication == null;
 	}
+
+	public void addTimetable(Timetable timetable) {
+		if (timetable != null && !timetables.contains(timetable)) {
+			timetables.add(timetable);
+		}
+	}
 }

@@ -265,12 +265,6 @@ public class Referential implements java.io.Serializable {
 				dr.getDeadRunAtStops().clear();
 				dr.getTimetables().clear();
 			}
-			for (Timetable timetable : timetables.values()) {
-				timetable.getVehicleJourneys().clear();
-			}
-			for (Timetable timetable : sharedTimetables.values()) {
-				timetable.getVehicleJourneys().clear();
-			}
 			for (Timeband timeband : sharedTimebands.values()) {
 				timeband.getJourneyFrequencies().clear();
 			}

@@ -558,7 +558,7 @@ public class GtfsTripParser implements Parser, Validator, Constant {
 //				timetableId += GtfsCalendarParser.AFTER_MIDNIGHT_SUFFIX;
 //			}
 			Timetable timetable = ObjectFactory.getTimetable(referential, timetableId);
-			vehicleJourney.getTimetables().add(timetable);
+			vehicleJourney.addTimetable(timetable);
 
 			// JourneyPattern
 			String journeyKey = gtfsTrip.getRouteId() + "_" + gtfsTrip.getDirectionId().ordinal();

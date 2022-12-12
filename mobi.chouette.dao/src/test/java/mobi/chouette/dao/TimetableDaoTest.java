@@ -87,7 +87,7 @@ public class TimetableDaoTest extends Arquillian {
 
 		r.setLine(l);
 		vj.setRoute(r);
-		t.addVehicleJourney(vj);
+		vj.addTimetable(t);
 		
 		lineDao.create(l);
 		vjDao.create(vj);

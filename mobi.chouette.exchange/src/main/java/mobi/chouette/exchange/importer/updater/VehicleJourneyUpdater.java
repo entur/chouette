@@ -351,7 +351,7 @@ public class VehicleJourneyUpdater implements Updater<VehicleJourney> {
 			if (timetable == null) {
 				timetable = ObjectFactory.getTimetable(cache, item.getObjectId());
 			}
-			timetable.addVehicleJourney(oldValue);
+			oldValue.addTimetable(timetable);
 		}
 
 		Collection<Pair<Timetable, Timetable>> modifiedTimetable = CollectionUtil.intersection(
@@ -363,7 +363,7 @@ public class VehicleJourneyUpdater implements Updater<VehicleJourney> {
 		Collection<Timetable> removedTimetable = CollectionUtil.substract(oldValue.getTimetables(),
 				newValue.getTimetables(), NeptuneIdentifiedObjectComparator.INSTANCE);
 		for (Timetable timetable : removedTimetable) {
-			timetable.removeVehicleJourney(oldValue);
+			oldValue.getTimetables().remove(timetable);
 		}
 
 		// journey frequency

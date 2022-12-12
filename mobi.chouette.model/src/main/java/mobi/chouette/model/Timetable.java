@@ -44,7 +44,7 @@ import java.time.LocalDate;
 @Table(name = "time_tables")
 @Cacheable
 @NoArgsConstructor
-@ToString(callSuper = true, exclude = { "vehicleJourneys" })
+@ToString(callSuper = true)
 public class Timetable extends NeptuneIdentifiedObject {
 	private static final long serialVersionUID = -1598554061982685113L;
 	public static final long ONE_DAY = 3600000 * 24;
@@ -221,17 +221,6 @@ public class Timetable extends NeptuneIdentifiedObject {
 	@OrderColumn(name = "position", nullable = false)
 	private List<Period> periods = new ArrayList<Period>(0);
 
-	/**
-	 * list of vehicleJourneys
-	 * 
-	 * @param vehicleJourneys
-	 *            New value
-	 * @return The actual value
-	 */
-	@Getter
-	@Setter
-	@ManyToMany(mappedBy = "timetables", fetch = FetchType.LAZY)
-	private List<VehicleJourney> vehicleJourneys = new ArrayList<VehicleJourney>(0);
 
 	/**
 	 * list of deadRuns
@@ -309,31 +298,6 @@ public class Timetable extends NeptuneIdentifiedObject {
 			periods.remove(period);
 		}
 	}
-
-	/**
-	 * add a vehicle journey if not already present
-	 * 
-	 * @param vehicleJourney
-	 */
-	public void addVehicleJourney(VehicleJourney vehicleJourney) {
-		if (!getVehicleJourneys().contains(vehicleJourney)) {
-			getVehicleJourneys().add(vehicleJourney);
-		}
-		if (!vehicleJourney.getTimetables().contains(this)) {
-			vehicleJourney.getTimetables().add(this);
-		}
-	}
-
-	/**
-	 * remove a vehicle journey
-	 * 
-	 * @param deadRun
-	 */
-	public void removeVehicleJourney(VehicleJourney deadRun) {
-		getVehicleJourneys().remove(deadRun);
-		deadRun.getTimetables().remove(this);
-	}
-
 
 	/**
 	 * add a dead run if not already present

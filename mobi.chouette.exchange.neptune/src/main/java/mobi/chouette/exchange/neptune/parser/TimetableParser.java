@@ -85,7 +85,7 @@ public class TimetableParser implements Parser, Constant {
 				String vehicleJourneyId = ParserUtils.getText(xpp.nextText());
 				VehicleJourney vehicleJourney = ObjectFactory
 						.getVehicleJourney(referential, vehicleJourneyId);
-				timetable.addVehicleJourney(vehicleJourney);
+				vehicleJourney.addTimetable(timetable);
 				validator.addVehicleJourneyId(context, objectId, vehicleJourneyId);
 			} else {
 				XPPUtil.skipSubTree(log, xpp);

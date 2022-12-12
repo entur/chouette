@@ -60,7 +60,7 @@ public class VehicleJourneyTest {
 				.withDayTypes(DayTypeEnum.Monday)
 				.build();
 
-		vehicleJourney.getTimetables().add(timetable);
+		vehicleJourney.addTimetable(timetable);
 
 		VehicleJourneyAtStop departureVehicleJourneyAtStop = new VehicleJourneyAtStop();
 		departureVehicleJourneyAtStop.setVehicleJourney(vehicleJourney);
@@ -92,7 +92,7 @@ public class VehicleJourneyTest {
 				.withDayTypes(DayTypeEnum.Monday)
 				.build();
 
-		vehicleJourney.getTimetables().add(timetable);
+		vehicleJourney.addTimetable(timetable);
 
 		VehicleJourneyAtStop departureVehicleJourneyAtStop = new VehicleJourneyAtStop();
 		departureVehicleJourneyAtStop.setVehicleJourney(vehicleJourney);
@@ -125,7 +125,7 @@ public class VehicleJourneyTest {
 				.withDayTypes(DayTypeEnum.Monday)
 				.build();
 
-		vehicleJourney.getTimetables().add(timetable);
+		vehicleJourney.addTimetable(timetable);
 
 		VehicleJourneyAtStop departureVehicleJourneyAtStop = new VehicleJourneyAtStop();
 		departureVehicleJourneyAtStop.setVehicleJourney(vehicleJourney);
@@ -158,7 +158,7 @@ public class VehicleJourneyTest {
 				.withDayTypes(DayTypeEnum.Monday, DayTypeEnum.Tuesday, DayTypeEnum.Wednesday, DayTypeEnum.Thursday, DayTypeEnum.Friday, DayTypeEnum.Saturday, DayTypeEnum.Sunday)
 				.build();
 
-		vehicleJourney.getTimetables().add(timetable);
+		vehicleJourney.addTimetable(timetable);
 
 		VehicleJourneyAtStop departureVehicleJourneyAtStop = new VehicleJourneyAtStop();
 		departureVehicleJourneyAtStop.setVehicleJourney(vehicleJourney);
@@ -193,7 +193,7 @@ public class VehicleJourneyTest {
 				.withDayTypes(DayTypeEnum.Monday, DayTypeEnum.Tuesday, DayTypeEnum.Wednesday, DayTypeEnum.Thursday, DayTypeEnum.Friday, DayTypeEnum.Saturday, DayTypeEnum.Sunday)
 				.build();
 
-		vehicleJourney.getTimetables().add(timetable);
+		vehicleJourney.addTimetable(timetable);
 
 		VehicleJourneyAtStop departureVehicleJourneyAtStop = new VehicleJourneyAtStop();
 		departureVehicleJourneyAtStop.setVehicleJourney(vehicleJourney);

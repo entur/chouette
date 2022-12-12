@@ -76,7 +76,7 @@ public class ServiceJourneyParser extends NetexParser implements Parser, Constan
 				for (JAXBElement<? extends DayTypeRefStructure> dayType : dayTypes.getDayTypeRef()) {
 					String timetableId = dayType.getValue().getRef();
 					Timetable timetable = ObjectFactory.getTimetable(referential, timetableId);
-					timetable.addVehicleJourney(vehicleJourney);
+					vehicleJourney.addTimetable(timetable);
 				}
 			}
 
