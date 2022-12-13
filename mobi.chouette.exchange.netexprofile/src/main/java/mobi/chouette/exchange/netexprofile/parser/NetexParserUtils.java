@@ -25,6 +25,7 @@ import mobi.chouette.model.type.ServiceAlterationEnum;
 import mobi.chouette.model.type.TransportModeNameEnum;
 import mobi.chouette.model.type.TransportSubModeNameEnum;
 
+import org.apache.commons.lang3.math.NumberUtils;
 import org.rutebanken.netex.model.AirSubmodeEnumeration;
 import org.rutebanken.netex.model.BookingAccessEnumeration;
 import org.rutebanken.netex.model.BookingMethodEnumeration;
@@ -373,15 +374,21 @@ public class NetexParserUtils extends ParserUtils {
 		String netexObjectVersion = obj.getVersion();
 		if ("any".equals(netexObjectVersion)) {
 			return 0L;
-		} else {
-			try {
-				return Long.parseLong(netexObjectVersion);
-			} catch (NumberFormatException e) {
-				if (log.isTraceEnabled()) {
-					log.trace("Unable to parse version " + netexObjectVersion + " for Entity " + obj.getId() + " to Integer as supported by Neptune, returning 0");
-				}
-				return 0L;
+		}
+		// testing with NumberUtils.isParsable() is more efficient than throwing a NumberFormatException
+		if (!NumberUtils.isParsable(netexObjectVersion)) {
+			if (log.isTraceEnabled()) {
+				log.trace("Unable to parse version " + netexObjectVersion + " for Entity " + obj.getId() + " to Integer as supported by Neptune, returning 0");
 			}
+			return 0L;
+		}
+		try {
+			return Long.parseLong(netexObjectVersion);
+		} catch (NumberFormatException e) {
+			if (log.isTraceEnabled()) {
+				log.trace("Unable to parse version " + netexObjectVersion + " for Entity " + obj.getId() + " to Integer as supported by Neptune, returning 0");
+			}
+			return 0L;
 		}
 	}
 
