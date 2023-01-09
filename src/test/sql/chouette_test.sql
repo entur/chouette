@@ -2618,7 +2618,7 @@ ALTER TABLE public.vehicle_journey_at_stops OWNER TO chouette;
 
 CREATE SEQUENCE public.vehicle_journey_at_stops_id_seq
     START WITH 1
-    INCREMENT BY 100
+    INCREMENT BY 1000
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
@@ -4708,7 +4708,7 @@ ALTER TABLE chouette_gui.users OWNER TO chouette;
 
 CREATE SEQUENCE chouette_gui.vehicle_journey_at_stops_id_seq
     START WITH 1
-    INCREMENT BY 100
+    INCREMENT BY 1000
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
