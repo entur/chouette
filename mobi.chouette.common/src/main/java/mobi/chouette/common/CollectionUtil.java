@@ -9,7 +9,7 @@ public class CollectionUtil {
 	public static <T> Collection<Pair<T, T>> intersection(
 			Collection<T> oldList, Collection<T> newList,
 			java.util.Comparator comparator) {
-		Collection<Pair<T, T>> result = new ArrayList<Pair<T, T>>();
+		Collection<Pair<T, T>> result = new ArrayList<>(Math.min(oldList.size(), newList.size()));
 		for (T oldValue : oldList) {
 			for (T newValue : newList) {
 				if (comparator.compare(oldValue, newValue) == 0) {
@@ -23,7 +23,7 @@ public class CollectionUtil {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static <T> Collection<T> substract(Collection<T> oldList,
 			Collection<T> newList, java.util.Comparator comparator) {
-		Collection<T> result = new ArrayList<T>(oldList);
+		Collection<T> result = new ArrayList<>(oldList);
 		for (T oldValue : oldList) {
 			for (T newValue : newList) {
 				if (comparator.compare(oldValue, newValue) == 0) {
