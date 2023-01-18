@@ -58,7 +58,7 @@
 
  	    <netex-java-model.version>1.0.13</netex-java-model.version>
 		<entur.helpers.version>1.86</entur.helpers.version>
-		<owasp-dependency-check-plugin.version>7.4.4</owasp-dependency-check-plugin.version>
+		<owasp-dependency-check-plugin.version>8.0.1</owasp-dependency-check-plugin.version>
 
 		<wildfly-arquillian-container-embedded.version>3.0.1.Final</wildfly-arquillian-container-embedded.version>
 
