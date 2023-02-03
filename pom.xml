@@ -49,7 +49,7 @@
 		<dom4j.version>2.1.3</dom4j.version>
 		<jettison.version>1.5.3</jettison.version>
 
-		<lombok-version>1.18.24</lombok-version>
+		<lombok-version>1.18.26</lombok-version>
 		<lombok-maven-plugin-version>1.18.20.0</lombok-maven-plugin-version>
 		<guava.version>31.1-jre</guava.version>
 		<commons-lang3.version>3.12.0</commons-lang3.version>
