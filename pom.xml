@@ -58,7 +58,7 @@
 		<project.rootDir>${project.basedir}</project.rootDir>
 
  	    <netex-java-model.version>1.0.14</netex-java-model.version>
-		<entur.helpers.version>1.91</entur.helpers.version>
+		<entur.helpers.version>1.92</entur.helpers.version>
 		<google.cloud.bom-version>26.7.0</google.cloud.bom-version>
 		<owasp-dependency-check-plugin.version>8.1.0</owasp-dependency-check-plugin.version>
 
