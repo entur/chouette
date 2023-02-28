@@ -39,7 +39,7 @@
 		<version.processor.plugin>2.2.4</version.processor.plugin>
 
 		<postgresql.version>42.5.1</postgresql.version>
-		<postgres-socket-factory.version>1.10.0</postgres-socket-factory.version>
+		<postgres-socket-factory.version>1.11.0</postgres-socket-factory.version>
 		<postgis.version>2021.1.0</postgis.version>
 		<hibernate.version>5.3.28.Final</hibernate.version>
 		<jts.version>1.14.0</jts.version>
