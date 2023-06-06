@@ -786,6 +786,8 @@ public class VehicleJourneyCheckPoints extends AbstractValidation<VehicleJourney
 				(TransportModeNameEnum.Bus == vehicleJourneyTransportMode && TransportModeNameEnum.Coach == stopMode)) {
 			// Coach and bus are interchangeable
 			return true;
+		} else if (TransportModeNameEnum.Taxi == vehicleJourneyTransportMode && (stopMode == TransportModeNameEnum.Bus || stopMode == TransportModeNameEnum.Coach)) {
+			return true;
 		} else if (vehicleJourneyTransportMode != stopMode) {
 			return false;
 		} else if (TransportSubModeNameEnum.RailReplacementBus == stopSubMode && vehicleJourneyTransportSubMode != null && TransportSubModeNameEnum.RailReplacementBus != vehicleJourneyTransportSubMode) {
