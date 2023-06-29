@@ -28,6 +28,7 @@ import mobi.chouette.model.util.ObjectFactory;
 import mobi.chouette.model.util.ObjectIdTypes;
 import mobi.chouette.model.util.Referential;
 
+import org.apache.commons.lang3.StringUtils;
 import org.rutebanken.netex.model.AllVehicleModesOfTransportEnumeration;
 import org.rutebanken.netex.model.DayTypeRefStructure;
 import org.rutebanken.netex.model.DayTypeRefs_RelStructure;
@@ -147,7 +148,12 @@ public class ServiceJourneyParser extends NetexParser implements Parser, Constan
 				mobi.chouette.model.FlexibleServiceProperties chouetteFSP = new mobi.chouette.model.FlexibleServiceProperties();
 				FlexibleServiceProperties netexFSP = serviceJourney.getFlexibleServiceProperties();
 
-				chouetteFSP.setObjectId(netexFSP.getId());
+				String netexFSPId = netexFSP.getId();
+				if(StringUtils.isEmpty(netexFSPId)) {
+					// fallback to ServiceJourney id if the FlexibleServiceProperties does not have an object id
+					netexFSPId = serviceJourney.getId().replace("ServiceJourney", "FlexibleServiceProperties");
+				}
+				chouetteFSP.setObjectId(netexFSPId);
 				chouetteFSP.setObjectVersion(NetexParserUtils.getVersion(netexFSP));
 
 				chouetteFSP.setChangeOfTimePossible(netexFSP.isChangeOfTimePossible());
