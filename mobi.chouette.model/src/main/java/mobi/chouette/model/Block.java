@@ -206,7 +206,11 @@ public class Block extends NeptuneIdentifiedObject {
     }
 
     public boolean filter(Date startDate, Date endDate) {
-        return hasActiveTimetablesOnPeriod(toLocalDate(startDate), toLocalDate(endDate));
+        return filter(toLocalDate(startDate), toLocalDate(endDate));
+    }
+
+    public boolean filter(LocalDate startDate, LocalDate endDate) {
+        return hasActiveTimetablesOnPeriod(startDate, endDate);
     }
 
 
