@@ -17,6 +17,7 @@ import mobi.chouette.model.VehicleJourney;
 import mobi.chouette.model.VehicleJourneyAtStop;
 import java.time.LocalDate;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -105,7 +106,7 @@ public class DataCollector {
 	private void collectVehicleJourney(VehicleJourney vehicleJourney) {
 		collection.getTimetables().addAll(vehicleJourney.getTimetables());
 		collection.getDatedServiceJourneys().addAll(vehicleJourney.getDatedServiceJourneys());
-		collection.getBlocks().addAll(vehicleJourney.getBlocks());
+		collectBlocks(vehicleJourney.getBlocks());
 		collection.getTimetables().addAll(vehicleJourney.getBlocks().stream().map(Block::getTimetables).flatMap(List::stream).collect(Collectors.toList()));
 		collection.getVehicleJourneys().add(vehicleJourney);
 		collectInterchanges(collection, vehicleJourney, skipNoCoordinate, followLinks, startDate, endDate);
@@ -120,9 +121,14 @@ public class DataCollector {
 
 	private void collectDeadRun(DeadRun deadRun) {
 		collection.getTimetables().addAll(deadRun.getTimetables());
-		collection.getBlocks().addAll(deadRun.getBlocks());
+		collectBlocks(deadRun.getBlocks());
 		collection.getTimetables().addAll(deadRun.getBlocks().stream().map(Block::getTimetables).flatMap(List::stream).collect(Collectors.toList()));
 		collection.getDeadRuns().add(deadRun);
+	}
+
+	private boolean collectBlocks(List<Block> blocks) {
+		List<Block> activeBlocKs = blocks.stream().filter(block -> block.filter(startDate, endDate)).toList();
+		return collection.getBlocks().addAll(activeBlocKs);
 	}
 
 	private void collectInterchanges(ExportableData collection, VehicleJourney vehicleJourney, boolean skipNoCoordinate, boolean followLinks, LocalDate startDate, LocalDate endDate) {
