@@ -125,9 +125,9 @@ public class DataCollector {
 		collection.getDeadRuns().add(deadRun);
 	}
 
-	private boolean collectBlocks(List<Block> blocks) {
+	private void collectBlocks(List<Block> blocks) {
 		List<Block> activeBlocks = blocks.stream().filter(block -> block.filter(startDate, endDate)).toList();
-		return collection.getBlocks().addAll(activeBlocks);
+		collection.getBlocks().addAll(activeBlocks);
 	}
 
 	private void collectInterchanges(ExportableData collection, VehicleJourney vehicleJourney, boolean skipNoCoordinate, boolean followLinks, LocalDate startDate, LocalDate endDate) {
