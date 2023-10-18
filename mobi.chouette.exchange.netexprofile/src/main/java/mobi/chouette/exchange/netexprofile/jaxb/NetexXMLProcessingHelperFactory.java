@@ -95,6 +95,8 @@ public class NetexXMLProcessingHelperFactory {
 					return NetexVersion.v1_13;
 				case "1.14":
 					return NetexVersion.v1_14;
+				case "1.15":
+					return NetexVersion.v1_15;
 				default:
 
 			}

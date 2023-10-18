@@ -24,11 +24,7 @@ import mobi.chouette.model.util.Referential;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.rutebanken.netex.model.Common_VersionFrameStructure;
-import org.rutebanken.netex.model.PublicationDeliveryStructure;
-import org.rutebanken.netex.model.Quay;
-import org.rutebanken.netex.model.Site_VersionFrameStructure;
-import org.rutebanken.netex.model.StopPlace;
+import org.rutebanken.netex.model.*;
 
 import static mobi.chouette.exchange.netexprofile.Constant.NETEX_LINE_DATA_CONTEXT;
 
@@ -85,7 +81,9 @@ public class PublicationDeliveryStopPlaceParser {
                     stopPlaceParser.parse(context);
 
 
-                    for (StopPlace stopPlace : siteFrame.getStopPlaces().getStopPlace()) {
+                    for (JAXBElement<? extends Site_VersionStructure> jaxbStopPlace : siteFrame.getStopPlaces().getStopPlace_()) {
+
+                        StopPlace stopPlace = (StopPlace) jaxbStopPlace.getValue();
 
                         if (!isActive(stopPlace, now)) {
                             updateContext.getInactiveStopAreaIds().add(stopPlace.getId());
@@ -102,9 +100,9 @@ public class PublicationDeliveryStopPlaceParser {
         updateContext.getActiveStopAreas().addAll(referential.getStopAreas().values().stream().filter(sa -> sa.getParent() == null).collect(Collectors.toSet()));
     }
 
-    private void collectMergedIdForQuay(Object quayObj) {
-        if (quayObj instanceof Quay) {
-            Quay quay = (Quay) quayObj;
+    private void collectMergedIdForQuay(JAXBElement<?> jaxbQuay) {
+
+        if (jaxbQuay.getValue() instanceof Quay quay) {
             if (quay.getKeyList() != null && quay.getKeyList().getKeyValue() != null) {
                 quay.getKeyList().getKeyValue().stream().filter(kv -> MERGED_ID_KEY.equals(kv.getKey())).forEach(kv -> addMergedIds(quay.getId(), kv.getValue()));
                 quay.getKeyList().getKeyValue().stream().filter(kv -> IMPORT_ID_KEY.equals(kv.getKey())).forEach(kv -> addMergedIds(quay.getId(), kv.getValue()));

@@ -2,31 +2,23 @@ package mobi.chouette.exchange.netexprofile.exporter.producer;
 
 import static mobi.chouette.exchange.netexprofile.Constant.NETEX_REFERENTIAL;
 import static mobi.chouette.exchange.netexprofile.exporter.producer.NetexProducerUtils.isSet;
-import static org.rutebanken.netex.model.VehicleModeEnumeration.AIR;
-import static org.rutebanken.netex.model.VehicleModeEnumeration.BUS;
-import static org.rutebanken.netex.model.VehicleModeEnumeration.CABLEWAY;
-import static org.rutebanken.netex.model.VehicleModeEnumeration.COACH;
-import static org.rutebanken.netex.model.VehicleModeEnumeration.FERRY;
-import static org.rutebanken.netex.model.VehicleModeEnumeration.FUNICULAR;
-import static org.rutebanken.netex.model.VehicleModeEnumeration.METRO;
-import static org.rutebanken.netex.model.VehicleModeEnumeration.OTHER;
-import static org.rutebanken.netex.model.VehicleModeEnumeration.RAIL;
-import static org.rutebanken.netex.model.VehicleModeEnumeration.TRAM;
-import static org.rutebanken.netex.model.VehicleModeEnumeration.TROLLEY_BUS;
-import static org.rutebanken.netex.model.VehicleModeEnumeration.WATER;
+import static org.rutebanken.netex.model.AllVehicleModesOfTransportEnumeration.AIR;
+import static org.rutebanken.netex.model.AllVehicleModesOfTransportEnumeration.BUS;
+import static org.rutebanken.netex.model.AllVehicleModesOfTransportEnumeration.CABLEWAY;
+import static org.rutebanken.netex.model.AllVehicleModesOfTransportEnumeration.COACH;
+import static org.rutebanken.netex.model.AllVehicleModesOfTransportEnumeration.FERRY;
+import static org.rutebanken.netex.model.AllVehicleModesOfTransportEnumeration.FUNICULAR;
+import static org.rutebanken.netex.model.AllVehicleModesOfTransportEnumeration.METRO;
+import static org.rutebanken.netex.model.AllVehicleModesOfTransportEnumeration.OTHER;
+import static org.rutebanken.netex.model.AllVehicleModesOfTransportEnumeration.RAIL;
+import static org.rutebanken.netex.model.AllVehicleModesOfTransportEnumeration.TRAM;
+import static org.rutebanken.netex.model.AllVehicleModesOfTransportEnumeration.TROLLEY_BUS;
+import static org.rutebanken.netex.model.AllVehicleModesOfTransportEnumeration.WATER;
 
 import mobi.chouette.model.type.TransportModeNameEnum;
 import mobi.chouette.model.type.TransportSubModeNameEnum;
 import org.apache.commons.collections.CollectionUtils;
-import org.rutebanken.netex.model.LocationStructure;
-import org.rutebanken.netex.model.PrivateCodeStructure;
-import org.rutebanken.netex.model.Quay;
-import org.rutebanken.netex.model.Quays_RelStructure;
-import org.rutebanken.netex.model.SimplePoint_VersionStructure;
-import org.rutebanken.netex.model.StopPlace;
-import org.rutebanken.netex.model.TransportSubmodeStructure;
-import org.rutebanken.netex.model.VehicleModeEnumeration;
-import org.rutebanken.netex.model.ZoneRefStructure;
+import org.rutebanken.netex.model.*;
 
 import mobi.chouette.common.Context;
 import mobi.chouette.exchange.netexprofile.ConversionUtil;
@@ -109,7 +101,7 @@ public class StopPlaceProducer extends NetexProducer implements NetexEntityProdu
 					quay.setCentroid(pointStruct);
 				}
 
-				quayStruct.getQuayRefOrQuay().add(quay);
+				quayStruct.getQuayRefOrQuay().add(netexFactory.createQuay(quay));
 			}
 
 			stopPlace.setQuays(quayStruct);
@@ -119,7 +111,7 @@ public class StopPlaceProducer extends NetexProducer implements NetexEntityProdu
 		return stopPlace;
 	}
 
-	private static VehicleModeEnumeration mapTransportMode(TransportModeNameEnum transportModeNameEnum) {
+	private static AllVehicleModesOfTransportEnumeration mapTransportMode(TransportModeNameEnum transportModeNameEnum) {
 		if (transportModeNameEnum == null) {
 			return null;
 		}

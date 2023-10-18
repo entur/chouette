@@ -232,7 +232,7 @@ public class ServiceCalendarFrameParser extends NetexParser implements Parser, C
 				}
 
 			} else if (dayTypeAssignment.getOperatingPeriodRef() != null) {
-				String operatingPeriodIdRef = dayTypeAssignment.getOperatingPeriodRef().getRef();
+				String operatingPeriodIdRef = dayTypeAssignment.getOperatingPeriodRef().getValue().getRef();
 				OperatingPeriod operatingPeriod = NetexObjectUtil.getOperatingPeriod(netexReferential, operatingPeriodIdRef);
 
 				java.time.LocalDate startDate;
