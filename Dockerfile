@@ -1,5 +1,5 @@
 # Adapted from https://github.com/jboss-dockerfiles/base/blob/master/Dockerfile
-FROM debian:11-slim
+FROM debian:12-slim
 
 RUN apt-get -y update && apt-get -y upgrade && apt-get install -y openjdk-17-jdk curl \
 && rm -rf /var/lib/apt/lists/*
