@@ -62,7 +62,7 @@ public class CalendarProducer extends NetexProducer {
 					// Assign operatingperiod to daytype
 					DayTypeAssignment dayTypeAssignment = netexFactory.createDayTypeAssignment()
 							.withId(NetexProducerUtils.translateObjectId(netexDaytypeId, "DayTypeAssignment") + "-" + counter).withVersion(NETEX_DEFAULT_OBJECT_VERSION)
-							.withOrder(BigInteger.ONE).withDayTypeRef(netexFactory.createDayTypeRef(dayTypeRef)).withOperatingPeriodRef(operatingPeriodRef);
+							.withOrder(BigInteger.ONE).withDayTypeRef(netexFactory.createDayTypeRef(dayTypeRef)).withOperatingPeriodRef(netexFactory.createOperatingPeriodRef(operatingPeriodRef));
 					exportableNetexData.getSharedDayTypeAssignments().add(dayTypeAssignment);
 
 				}

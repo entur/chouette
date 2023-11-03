@@ -24,24 +24,7 @@ import mobi.chouette.model.util.Referential;
 
 import net.opengis.gml._3.DirectPositionType;
 import org.apache.commons.lang3.StringUtils;
-import org.rutebanken.netex.model.LocationStructure;
-import org.rutebanken.netex.model.PostalAddress;
-import org.rutebanken.netex.model.PrivateCodeStructure;
-import org.rutebanken.netex.model.Quay;
-import org.rutebanken.netex.model.Quays_RelStructure;
-import org.rutebanken.netex.model.RelationshipStructure;
-import org.rutebanken.netex.model.SimplePoint_VersionStructure;
-import org.rutebanken.netex.model.SiteRefStructure;
-import org.rutebanken.netex.model.StopPlace;
-import org.rutebanken.netex.model.StopPlacesInFrame_RelStructure;
-import org.rutebanken.netex.model.StopTypeEnumeration;
-import org.rutebanken.netex.model.TariffZone;
-import org.rutebanken.netex.model.TariffZoneRef;
-import org.rutebanken.netex.model.TariffZoneRefs_RelStructure;
-import org.rutebanken.netex.model.TariffZonesInFrame_RelStructure;
-import org.rutebanken.netex.model.VehicleModeEnumeration;
-import org.rutebanken.netex.model.ZoneRefStructure;
-import org.rutebanken.netex.model.Zone_VersionStructure;
+import org.rutebanken.netex.model.*;
 
 import javax.xml.bind.JAXBElement;
 
@@ -68,11 +51,11 @@ public class StopPlaceParser implements Parser, Constant {
             }
         } else if (relationshipStruct instanceof StopPlacesInFrame_RelStructure) {
             StopPlacesInFrame_RelStructure stopPlacesStruct = (StopPlacesInFrame_RelStructure) relationshipStruct;
-            List<StopPlace> stopPlaces = stopPlacesStruct.getStopPlace();
+            List<JAXBElement<? extends Site_VersionStructure>> stopPlaces = stopPlacesStruct.getStopPlace_();
             Map<String, String> parentZoneMap = new HashMap<>();
             Map<String, String> parentSiteMap = new HashMap<>();
-            for (StopPlace stopPlace : stopPlaces) {
-                parseStopPlace(context, stopPlace, parentZoneMap, parentSiteMap);
+            for (JAXBElement<? extends Site_VersionStructure> stopPlace : stopPlaces) {
+                parseStopPlace(context, (StopPlace) stopPlace.getValue(), parentZoneMap, parentSiteMap);
             }
 
 
@@ -159,9 +142,9 @@ public class StopPlaceParser implements Parser, Constant {
 
         Quays_RelStructure quaysStruct = stopPlace.getQuays();
         if (quaysStruct != null) {
-            List<Object> quayObjects = quaysStruct.getQuayRefOrQuay();
-            for (Object quayObject : quayObjects) {
-                parseQuay(context, stopArea, (Quay) quayObject);
+            for (JAXBElement<?> jaxbQuayObject : quaysStruct.getQuayRefOrQuay()) {
+                Quay quay = (Quay) jaxbQuayObject.getValue();
+                parseQuay(context, stopArea, quay);
             }
         }
 
@@ -224,7 +207,7 @@ public class StopPlaceParser implements Parser, Constant {
     }
 
 
-    TransportModeNameEnum mapTransportModeName(VehicleModeEnumeration netexMode) {
+    TransportModeNameEnum mapTransportModeName(AllVehicleModesOfTransportEnumeration netexMode) {
         if (netexMode == null) {
             return null;
         }
@@ -344,10 +327,10 @@ public class StopPlaceParser implements Parser, Constant {
     }
 
     private void parseTariffZoneRefs(TariffZoneRefs_RelStructure tariffZonesStruct, StopArea stopArea) throws Exception {
-        List<TariffZoneRef> tariffZoneRefs = tariffZonesStruct.getTariffZoneRef();
+        List<JAXBElement<? extends ZoneRefStructure>> tariffZoneRefs = tariffZonesStruct.getTariffZoneRef_();
 
-        for (TariffZoneRef tariffZoneRef : tariffZoneRefs) {
-            Properties properties = tariffZoneProperties.get(tariffZoneRef.getRef());
+        for (JAXBElement<? extends ZoneRefStructure> tariffZoneRef : tariffZoneRefs) {
+            Properties properties = tariffZoneProperties.get(tariffZoneRef.getValue().getRef());
 
             if (properties != null) {
                 String tariffName = properties.getProperty(NAME);

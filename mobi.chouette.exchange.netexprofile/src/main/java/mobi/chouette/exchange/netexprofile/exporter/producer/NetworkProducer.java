@@ -4,6 +4,7 @@ import static mobi.chouette.exchange.netexprofile.exporter.producer.NetexProduce
 
 import java.time.LocalDateTime;
 
+import org.rutebanken.netex.model.AuthorityRef;
 import org.rutebanken.netex.model.AuthorityRefStructure;
 import org.rutebanken.netex.model.KeyValueStructure;
 import org.rutebanken.netex.model.PrivateCodeStructure;
@@ -35,7 +36,7 @@ public class NetworkProducer extends NetexProducer implements NetexEntityProduce
         netexNetwork.setDescription(ConversionUtil.getMultiLingualString(neptuneNetwork.getDescription()));
 
         if(neptuneNetwork.getCompany() != null) {
-            AuthorityRefStructure authorityRefStruct = netexFactory.createAuthorityRefStructure();
+            AuthorityRef authorityRefStruct = netexFactory.createAuthorityRef();
         	NetexProducerUtils.populateReference(neptuneNetwork.getCompany(), authorityRefStruct, true);
             netexNetwork.setTransportOrganisationRef(netexFactory.createAuthorityRef(authorityRefStruct));
         }
