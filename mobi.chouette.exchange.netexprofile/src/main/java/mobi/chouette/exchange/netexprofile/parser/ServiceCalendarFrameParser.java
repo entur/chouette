@@ -94,8 +94,8 @@ public class ServiceCalendarFrameParser extends NetexParser implements Parser, C
 				}
 			}
 			if (serviceCalendar.getOperatingPeriods() != null) {
-				for (Object genericOperatingPeriod : serviceCalendar.getOperatingPeriods().getOperatingPeriodRefOrOperatingPeriodOrUicOperatingPeriod()) {
-					OperatingPeriod operatingPeriod = (OperatingPeriod) genericOperatingPeriod;
+				for (JAXBElement<?> genericOperatingPeriod : serviceCalendar.getOperatingPeriods().getOperatingPeriodRefOrOperatingPeriodOrUicOperatingPeriod()) {
+					OperatingPeriod operatingPeriod = (OperatingPeriod) genericOperatingPeriod.getValue();
 					NetexObjectUtil.addOperatingPeriodRef(netexReferential, operatingPeriod.getId(), operatingPeriod);
 				}
 			}
