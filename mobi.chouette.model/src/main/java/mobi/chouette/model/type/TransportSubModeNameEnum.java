@@ -79,7 +79,14 @@ public enum TransportSubModeNameEnum {
 	 */
 	InternationalCoach,
 	NationalCoach,
-	TouristCoach;
+	TouristCoach,
+
+
+    /**
+     * Taxi submodes
+     */
+    CharterTaxi,
+    CommunalTaxi;
 
     public static final EnumSet<TransportSubModeNameEnum> CABELWAY_SUB_MODES = EnumSet.of(TransportSubModeNameEnum.Telecabin);
     public static final EnumSet<TransportSubModeNameEnum> FUNICULAR_SUB_MODES = EnumSet.of(TransportSubModeNameEnum.Funicular);

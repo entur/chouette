@@ -26,27 +26,7 @@ import mobi.chouette.model.type.TransportModeNameEnum;
 import mobi.chouette.model.type.TransportSubModeNameEnum;
 
 import org.apache.commons.lang3.math.NumberUtils;
-import org.rutebanken.netex.model.AirSubmodeEnumeration;
-import org.rutebanken.netex.model.BookingAccessEnumeration;
-import org.rutebanken.netex.model.BookingMethodEnumeration;
-import org.rutebanken.netex.model.BusSubmodeEnumeration;
-import org.rutebanken.netex.model.CoachSubmodeEnumeration;
-import org.rutebanken.netex.model.DayOfWeekEnumeration;
-import org.rutebanken.netex.model.EntityInVersionStructure;
-import org.rutebanken.netex.model.FlexibleLineTypeEnumeration;
-import org.rutebanken.netex.model.FlexibleServiceEnumeration;
-import org.rutebanken.netex.model.FunicularSubmodeEnumeration;
-import org.rutebanken.netex.model.MetroSubmodeEnumeration;
-import org.rutebanken.netex.model.OrganisationTypeEnumeration;
-import org.rutebanken.netex.model.PublicationEnumeration;
-import org.rutebanken.netex.model.PurchaseMomentEnumeration;
-import org.rutebanken.netex.model.PurchaseWhenEnumeration;
-import org.rutebanken.netex.model.RailSubmodeEnumeration;
-import org.rutebanken.netex.model.ServiceAlterationEnumeration;
-import org.rutebanken.netex.model.TelecabinSubmodeEnumeration;
-import org.rutebanken.netex.model.TramSubmodeEnumeration;
-import org.rutebanken.netex.model.TransportSubmodeStructure;
-import org.rutebanken.netex.model.WaterSubmodeEnumeration;
+import org.rutebanken.netex.model.*;
 
 @Log4j
 public class NetexParserUtils extends ParserUtils {
@@ -177,6 +157,16 @@ public class NetexParserUtils extends ParserUtils {
 						return TransportSubModeNameEnum.AirportLinkRail;
 					default:
 						log.warn("Unsupported rail sub mode " + mode);
+				}
+			} else if (subModeStructure.getTaxiSubmode() != null) {
+				TaxiSubmodeEnumeration mode = subModeStructure.getTaxiSubmode();
+				switch (mode) {
+					case CHARTER_TAXI:
+						return TransportSubModeNameEnum.CharterTaxi;
+					case COMMUNAL_TAXI:
+						return TransportSubModeNameEnum.CommunalTaxi;
+					default:
+						log.warn("Unsupported telecabin sub mode " + mode);
 				}
 			} else if (subModeStructure.getTelecabinSubmode() != null) {
 				TelecabinSubmodeEnumeration mode = subModeStructure.getTelecabinSubmode();
