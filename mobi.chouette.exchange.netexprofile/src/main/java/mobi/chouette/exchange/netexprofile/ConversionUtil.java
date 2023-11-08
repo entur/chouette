@@ -24,27 +24,7 @@ import mobi.chouette.model.type.TransportModeNameEnum;
 import mobi.chouette.model.type.TransportSubModeNameEnum;
 
 import org.apache.commons.lang3.StringUtils;
-import org.rutebanken.netex.model.AirSubmodeEnumeration;
-import org.rutebanken.netex.model.AllVehicleModesOfTransportEnumeration;
-import org.rutebanken.netex.model.BookingAccessEnumeration;
-import org.rutebanken.netex.model.BookingMethodEnumeration;
-import org.rutebanken.netex.model.BusSubmodeEnumeration;
-import org.rutebanken.netex.model.CoachSubmodeEnumeration;
-import org.rutebanken.netex.model.DayOfWeekEnumeration;
-import org.rutebanken.netex.model.FlexibleLineTypeEnumeration;
-import org.rutebanken.netex.model.FlexibleServiceEnumeration;
-import org.rutebanken.netex.model.MetroSubmodeEnumeration;
-import org.rutebanken.netex.model.MultilingualString;
-import org.rutebanken.netex.model.PublicationEnumeration;
-import org.rutebanken.netex.model.PurchaseMomentEnumeration;
-import org.rutebanken.netex.model.PurchaseWhenEnumeration;
-import org.rutebanken.netex.model.RailSubmodeEnumeration;
-import org.rutebanken.netex.model.ServiceAlterationEnumeration;
-import org.rutebanken.netex.model.TelecabinSubmodeEnumeration;
-import org.rutebanken.netex.model.TimingPointStatusEnumeration;
-import org.rutebanken.netex.model.TramSubmodeEnumeration;
-import org.rutebanken.netex.model.TransportSubmodeStructure;
-import org.rutebanken.netex.model.WaterSubmodeEnumeration;
+import org.rutebanken.netex.model.*;
 
 
 @Log4j
@@ -270,6 +250,15 @@ public class ConversionUtil {
 				 */
 				case Telecabin:
 					return new TransportSubmodeStructure().withTelecabinSubmode(TelecabinSubmodeEnumeration.TELECABIN);
+
+				/**
+				 * Taxi sub modes
+				 */
+				case CharterTaxi:
+					return new TransportSubmodeStructure().withTaxiSubmode(TaxiSubmodeEnumeration.CHARTER_TAXI);
+				case CommunalTaxi:
+					return new TransportSubmodeStructure().withTaxiSubmode(TaxiSubmodeEnumeration.COMMUNAL_TAXI);
+
 
 				/**
 				 * Funicular sub modes
