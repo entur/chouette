@@ -369,10 +369,12 @@ public class NetexLineDataProducer extends NetexProducer implements Constant {
 
 			exportableNetexData.getSharedDestinationDisplays().put(dd.getObjectId(), netexDestinationDisplay);
 
-			if (dd.getVias() != null && dd.getVias().size() > 0) {
-				Vias_RelStructure vias = netexFactory.createVias_RelStructure();
-				netexDestinationDisplay.setVias(vias);
-				for (mobi.chouette.model.DestinationDisplay via : dd.getVias()) {
+			// TODO temporary fix for integrity error in vias list
+			List<mobi.chouette.model.DestinationDisplay> vias = dd.getVias() == null ? List.of() : dd.getVias().stream().filter(Objects::nonNull).toList();
+			if (!vias.isEmpty() ) {
+				Vias_RelStructure viasRelStructure = netexFactory.createVias_RelStructure();
+				netexDestinationDisplay.setVias(viasRelStructure);
+				for (mobi.chouette.model.DestinationDisplay via : vias) {
 
 					// Recurse into vias, create if missing
 					addDestinationDisplay(via, exportableNetexData);
