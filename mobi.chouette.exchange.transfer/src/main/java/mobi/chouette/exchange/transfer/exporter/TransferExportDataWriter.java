@@ -4,29 +4,12 @@ import lombok.extern.log4j.Log4j;
 import mobi.chouette.common.Context;
 import mobi.chouette.common.chain.Command;
 import mobi.chouette.common.chain.CommandFactory;
-import mobi.chouette.dao.BlockDAO;
-import mobi.chouette.dao.DeadRunDAO;
-import mobi.chouette.dao.InterchangeDAO;
-import mobi.chouette.dao.LineDAO;
-import mobi.chouette.dao.RouteSectionDAO;
-import mobi.chouette.dao.ScheduledStopPointDAO;
-import mobi.chouette.dao.TimetableDAO;
-import mobi.chouette.dao.VehicleJourneyDAO;
+import mobi.chouette.dao.*;
 import mobi.chouette.exchange.ProgressionCommand;
 import mobi.chouette.exchange.importer.CleanRepositoryCommand;
 import mobi.chouette.exchange.netexprofile.importer.UpdateReferentialLastUpdateTimestampCommand;
 import mobi.chouette.exchange.transfer.Constant;
-import mobi.chouette.model.Block;
-import mobi.chouette.model.DeadRun;
-import mobi.chouette.model.Interchange;
-import mobi.chouette.model.JourneyPattern;
-import mobi.chouette.model.Line;
-import mobi.chouette.model.Route;
-import mobi.chouette.model.RouteSection;
-import mobi.chouette.model.StopPoint;
-import mobi.chouette.model.Timetable;
-import mobi.chouette.model.VehicleJourney;
-import mobi.chouette.model.VehicleJourneyAtStop;
+import mobi.chouette.model.*;
 import mobi.chouette.model.util.Referential;
 import org.jboss.ejb3.annotation.TransactionTimeout;
 
@@ -39,10 +22,7 @@ import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -76,6 +56,9 @@ public class TransferExportDataWriter implements Command, Constant {
 	private InterchangeDAO interchangeDAO;
 
 	@EJB
+	private DestinationDisplayDAO destinationDisplayDAO;
+
+	@EJB
 	private ScheduledStopPointDAO scheduledStopPointDAO;
 
 	@PersistenceContext(unitName = "referential")
@@ -104,6 +87,7 @@ public class TransferExportDataWriter implements Command, Constant {
 		// Persist
 
 		List<Interchange> interchanges=new ArrayList<>();
+		Set<DestinationDisplay> allDestinationDisplays=new HashSet<>();
 		Set<String> vehicleJourneyIds=new HashSet<>();
 
 		Referential referential = new Referential();
@@ -116,6 +100,20 @@ public class TransferExportDataWriter implements Command, Constant {
 						for(RouteSection rs : jp.getRouteSections()) {
 							referential.getRouteSections().putIfAbsent(rs.getObjectId(), rs);
 						}
+
+						// collect destination displays referenced in stop points
+						Set<DestinationDisplay> destinationDisplays = jp.getStopPoints().stream()
+								.map(StopPoint::getDestinationDisplay)
+								.filter(Objects::nonNull).collect(Collectors.toSet());
+						allDestinationDisplays.addAll(destinationDisplays);
+
+						// collect destination displays referenced by via
+						allDestinationDisplays.addAll(destinationDisplays.stream()
+								.map(DestinationDisplay::getVias)
+								.flatMap(Collection::stream)
+								.collect(Collectors.toSet()));
+
+
 
 						// Make sure interchanges do not point to vehicle journeys or stops in other lines (reset id to wipe object ref)
 						for (VehicleJourney vj : jp.getVehicleJourneys()) {
@@ -140,8 +138,12 @@ public class TransferExportDataWriter implements Command, Constant {
 			for (RouteSection sa : referential.getRouteSections().values()) {
 				routeSectionDAO.create(sa);
 			}
-			log.info("Flushing " + referential.getRouteSections().size() + " route sections");
+
+			fixDestinationDisplayVias(allDestinationDisplays);
+
+			log.info("Flushing interchanges, route sections and via destination displays");
 			routeSectionDAO.flush();
+
 			progression.execute(context);
 
 			referential.clear(true);
@@ -213,6 +215,21 @@ public class TransferExportDataWriter implements Command, Constant {
 			referential.clear(true);
 			lineToTransfer.clear();
 			blocksToTransfer.clear();
+		}
+	}
+
+	/**
+	 * This fixes stale data in the persistent collections of destination display vias (Hibernate bug?)
+	 * All destination displays are persisted to the database, and their vias collections are recreated by
+	 * querying the database by object ids.
+	 */
+	private void fixDestinationDisplayVias(Set<DestinationDisplay> allDestinationDisplays) {
+		for(DestinationDisplay destinationDisplay : allDestinationDisplays) {
+			destinationDisplayDAO.create(destinationDisplay);
+			if(!destinationDisplay.getVias().isEmpty()) {
+				List<DestinationDisplay> vias = destinationDisplayDAO.findByObjectId(destinationDisplay.getVias().stream().map(NeptuneIdentifiedObject::getObjectId).toList());
+				destinationDisplay.setVias(vias);
+			}
 		}
 	}
 
