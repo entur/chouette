@@ -17,22 +17,8 @@ import mobi.chouette.model.VehicleJourney;
 import mobi.chouette.model.VehicleJourneyAtStop;
 import org.apache.commons.collections.CollectionUtils;
 import java.time.LocalDate;
-import org.rutebanken.netex.model.DatedServiceJourneyRefStructure;
-import org.rutebanken.netex.model.DayTypeRefStructure;
-import org.rutebanken.netex.model.DayTypeRefs_RelStructure;
-import org.rutebanken.netex.model.FlexibleServiceProperties;
-import org.rutebanken.netex.model.JourneyPatternRefStructure;
-import org.rutebanken.netex.model.MultilingualString;
-import org.rutebanken.netex.model.OperatingDay;
-import org.rutebanken.netex.model.OperatingDayRefStructure;
-import org.rutebanken.netex.model.OperatorRefStructure;
-import org.rutebanken.netex.model.PrivateCodeStructure;
-import org.rutebanken.netex.model.ServiceAlterationEnumeration;
-import org.rutebanken.netex.model.ServiceJourney;
-import org.rutebanken.netex.model.ServiceJourneyRefStructure;
-import org.rutebanken.netex.model.StopPointInJourneyPatternRefStructure;
-import org.rutebanken.netex.model.TimetabledPassingTime;
-import org.rutebanken.netex.model.TimetabledPassingTimes_RelStructure;
+
+import org.rutebanken.netex.model.*;
 
 import javax.xml.bind.JAXBElement;
 import java.math.BigInteger;
@@ -71,16 +57,17 @@ public class DatedServiceJourneyProducer extends NetexProducer {
 		NetexProducerUtils.populateReference(datedServiceJourney.getVehicleJourney(), serviceJourneyRefStructure, true);
 		JAXBElement<ServiceJourneyRefStructure> serviceJourneyRef = netexFactory.createServiceJourneyRef(serviceJourneyRefStructure);
 		serviceJourneyRef.setValue(serviceJourneyRefStructure);
-		netexDatedServiceJourney.getJourneyRef().add(serviceJourneyRef);
+		netexDatedServiceJourney.setJourneyRef(serviceJourneyRef);
 
 
 		// derived from dated service journey
 		if (!datedServiceJourney.getOriginalDatedServiceJourneys().isEmpty()) {
+			netexDatedServiceJourney.setReplacedJourneys(netexFactory.createReplacedJourneys_RelStructure());
 			for (DatedServiceJourney originalDatedServiceJourney : datedServiceJourney.getOriginalDatedServiceJourneys()) {
-				DatedServiceJourneyRefStructure originalDatedServiceJourneyRefStructure = netexFactory.createDatedServiceJourneyRefStructure();
+				DatedVehicleJourneyRefStructure originalDatedServiceJourneyRefStructure = netexFactory.createDatedVehicleJourneyRefStructure();
 				NetexProducerUtils.populateReference(originalDatedServiceJourney, originalDatedServiceJourneyRefStructure, true);
-				JAXBElement<DatedServiceJourneyRefStructure> originalDatedServiceJourneyRefStructureJAXBElement = netexFactory.createDatedServiceJourneyRef(originalDatedServiceJourneyRefStructure);
-				netexDatedServiceJourney.getJourneyRef().add(originalDatedServiceJourneyRefStructureJAXBElement);
+				JAXBElement<VehicleJourneyRefStructure> originalDatedServiceJourneyRefStructureJAXBElement = netexFactory.createDatedVehicleJourneyRef(originalDatedServiceJourneyRefStructure);
+				netexDatedServiceJourney.getReplacedJourneys().getDatedVehicleJourneyRefOrNormalDatedVehicleJourneyRef().add(originalDatedServiceJourneyRefStructureJAXBElement);
 			}
 		}
 
