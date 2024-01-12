@@ -11,13 +11,7 @@ import mobi.chouette.exchange.netexprofile.util.NetexReferential;
 import mobi.chouette.model.VehicleJourney;
 import mobi.chouette.model.util.ObjectFactory;
 import mobi.chouette.model.util.Referential;
-import org.rutebanken.netex.model.DatedServiceJourney;
-import org.rutebanken.netex.model.DatedServiceJourneyRefStructure;
-import org.rutebanken.netex.model.JourneyRefStructure;
-import org.rutebanken.netex.model.Journey_VersionStructure;
-import org.rutebanken.netex.model.JourneysInFrame_RelStructure;
-import org.rutebanken.netex.model.OperatingDay;
-import org.rutebanken.netex.model.ServiceJourneyRefStructure;
+import org.rutebanken.netex.model.*;
 
 import javax.xml.bind.JAXBElement;
 import java.util.List;
@@ -56,18 +50,17 @@ public class DatedServiceJourneyParser extends NetexParser implements Parser, Co
         OperatingDay operatingDay = NetexObjectUtil.getOperatingDay(netexReferential, operatingDayRefId);
         datedServiceJourney.setOperatingDay(TimeUtil.toLocalDateIgnoreTime(operatingDay.getCalendarDate()));
 
-        // service journey and derived from dated service journey
-        for (JAXBElement<? extends JourneyRefStructure> jaxbJourneyRefStructure : netexDatedServiceJourney.getJourneyRef()) {
-            JourneyRefStructure journeyRefStructure = jaxbJourneyRefStructure.getValue();
+        // service journey
+        JAXBElement<? extends JourneyRefStructure> journeyRef = netexDatedServiceJourney.getJourneyRef();
+        VehicleJourney vehicleJourney = ObjectFactory.getVehicleJourney(referential, journeyRef.getValue().getRef());
+        datedServiceJourney.setVehicleJourney(vehicleJourney);
 
-            if (journeyRefStructure instanceof DatedServiceJourneyRefStructure) {
-                DatedServiceJourneyRefStructure datedServiceJourneyRefStructure = (DatedServiceJourneyRefStructure) journeyRefStructure;
-                mobi.chouette.model.DatedServiceJourney originalDatedServiceJourney = ObjectFactory.getDatedServiceJourney(referential, datedServiceJourneyRefStructure.getRef());
+        // dated service journeys replaced by this dated service journey
+        if(netexDatedServiceJourney.getReplacedJourneys() != null) {
+            for (JAXBElement<VehicleJourneyRefStructure> jaxbJourneyRefStructure : netexDatedServiceJourney.getReplacedJourneys().getDatedVehicleJourneyRefOrNormalDatedVehicleJourneyRef()) {
+                VehicleJourneyRefStructure vehicleJourneyRefStructure = jaxbJourneyRefStructure.getValue();
+                 mobi.chouette.model.DatedServiceJourney originalDatedServiceJourney = ObjectFactory.getDatedServiceJourney(referential, vehicleJourneyRefStructure.getRef());
                 datedServiceJourney.addOriginalDatedServiceJourney(originalDatedServiceJourney);
-            } else if (journeyRefStructure instanceof ServiceJourneyRefStructure) {
-                ServiceJourneyRefStructure serviceJourneyRefStructure = (ServiceJourneyRefStructure) journeyRefStructure;
-                VehicleJourney vehicleJourney = ObjectFactory.getVehicleJourney(referential, serviceJourneyRefStructure.getRef());
-                datedServiceJourney.setVehicleJourney(vehicleJourney);
             }
         }
 
