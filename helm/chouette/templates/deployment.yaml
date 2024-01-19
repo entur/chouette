@@ -30,6 +30,11 @@ spec:
         - name: chouette
           image: {{ .Values.image.identifier }}
           imagePullPolicy: Always
+          envFrom:
+            - secretRef:
+                name: chouette-iev-credentials
+            - secretRef:
+                name: chouette-psql-credentials
           env:
             - name: JAVA_OPTS
               value: -server -Xms2048m -Xmx{{ .Values.resources.xmx }} -XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
@@ -44,36 +49,6 @@ spec:
               value: Europe/Oslo
             - name: CHOUETTE_DATABASE_INSTANCE
               value: {{ .Values.gcpDatabaseInstance }}
-            - name: CHOUETTE_DATABASE_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  key: chouette-db-username
-                  name: ror-chouette-secret
-            - name: CHOUETTE_DATABASE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  key: chouette-db-password
-                  name: ror-chouette-secret
-            - name: CHOUETTE_IEV_DATABASE_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  key: chouette-iev-db-username
-                  name: ror-chouette-secret
-            - name: CHOUETTE_IEV_DATABASE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  key: chouette-iev-db-password
-                  name: ror-chouette-secret
-            - name: IEV_REFERENTIAL_ADMIN_INITIAL_ENCRYPTED_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  key: chouette-admin-initial-encrypted-password
-                  name: ror-chouette-secret
-            - name: IEV_REFERENTIAL_USER_INITIAL_ENCRYPTED_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  key: chouette-user-initial-encrypted-password
-                  name: ror-chouette-secret
           lifecycle:
             preStop:
               exec:

@@ -1,6 +1,6 @@
 replicas: 3
 image:
-  identifier: ${artifact.metadata.image}
+  identifier: <+artifacts.primary.image>
 
 service:
   http:
@@ -13,3 +13,13 @@ resources:
   cpuRequest: "2"
   memRequest: 22000Mi
   xmx: 18g
+
+secrets:
+  chouette-psql-credentials:
+    - CHOUETTE_DATABASE_USERNAME
+    - CHOUETTE_DATABASE_PASSWORD
+    - CHOUETTE_IEV_DATABASE_USERNAME
+    - CHOUETTE_IEV_DATABASE_PASSWORD
+  chouette-iev-credentials:
+    - IEV_REFERENTIAL_ADMIN_INITIAL_ENCRYPTED_PASSWORD
+    - IEV_REFERENTIAL_USER_INITIAL_ENCRYPTED_PASSWORD

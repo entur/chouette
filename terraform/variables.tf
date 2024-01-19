@@ -4,7 +4,7 @@ variable "gcp_resources_project" {
 
 variable "kube_namespace" {
   description = "The Kubernetes namespace"
-  default = "chouette"
+  default     = "chouette"
 }
 
 variable "labels" {
@@ -20,7 +20,7 @@ variable "labels" {
 
 variable "bucket_location" {
   description = "GCP bucket location"
-  default = "europe-west1"
+  default     = "europe-west1"
 }
 
 variable "bucket_instance_suffix" {
@@ -42,46 +42,23 @@ variable "bucket_retention_period" {
   default     = "105"
 }
 
-variable "ror-chouette-db-username" {
-  description = "chouette database username"
-}
-
-variable "ror-chouette-db-password" {
-  description = "chouette database password"
-}
-
-variable "ror-chouette-iev-db-username" {
-  description = "chouette IEV database username"
-}
-
-variable "ror-chouette-iev-db-password" {
-  description = "chouette IEV database password"
-}
-
-variable "ror-chouette-admin-initial-encrypted-password" {
-  description = "chouette admin initial encrypted password"
-}
-
-variable "ror-chouette-user-initial-encrypted-password" {
-  description = "chouette user initial encrypted password"
-}
-
 variable "db_region" {
   description = "GCP  region"
-  default = "europe-west1"
+  default     = "europe-west1"
 }
 
 variable "db_zone" {
   description = "GCP zone letter"
-  default = "europe-west1-b"
+  default     = "europe-west1-b"
 }
 
 variable "db_tier" {
   description = "Database instance tier"
-  default = "db-custom-4-19200"
+  default     = "db-custom-4-19200"
 }
 
 variable "db_availability" {
   description = "Database availablity"
-  default = "ZONAL"
+  default     = "ZONAL"
 }
+
