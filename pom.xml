@@ -36,7 +36,7 @@
 		<version.build.helper.plugin>3.3.0</version.build.helper.plugin>
 		<version.clean.plugin>3.1.0</version.clean.plugin>
 		<version.install.plugin>2.5.2</version.install.plugin>
-		<version.processor.plugin>2.2.4</version.processor.plugin>
+		<version.processor.plugin>5.0-jdk8</version.processor.plugin>
 
 		<postgresql.version>42.7.1</postgresql.version>
 		<postgres-socket-factory.version>1.11.2</postgres-socket-factory.version>
