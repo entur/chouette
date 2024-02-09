@@ -35,12 +35,12 @@ public class ServiceCalendarFrameWriter extends AbstractNetexWriter {
                 writeDayTypesElement(writer, exportableNetexData, marshaller);
             }
 
-            if (MapUtils.isNotEmpty(exportableNetexData.getSharedOperatingPeriods())) {
-                writeOperatingPeriodsElement(writer, exportableNetexData,marshaller);
-            }
-
             if (MapUtils.isNotEmpty(exportableNetexData.getSharedOperatingDays())) {
                 writeOperatingDaysElement(writer, exportableNetexData,marshaller);
+            }
+
+            if (MapUtils.isNotEmpty(exportableNetexData.getSharedOperatingPeriods())) {
+                writeOperatingPeriodsElement(writer, exportableNetexData,marshaller);
             }
 
             if (!exportableNetexData.getSharedDayTypeAssignments().isEmpty()) {
