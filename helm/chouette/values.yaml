@@ -9,10 +9,10 @@ service:
 
 resources:
   cpuLimit: "3"
-  memLimit: 22000Mi
+  memLimit: 25000Mi
   cpuRequest: "2"
-  memRequest: 22000Mi
-  xmx: 18g
+  memRequest: 25000Mi
+  xmx: 20g
 
 secrets:
   chouette-psql-credentials:
