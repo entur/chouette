@@ -20,7 +20,7 @@
 		<logstash-logback-encoder.version>7.4</logstash-logback-encoder.version>
 
 		<version.wildfly.maven.plugin>3.0.2.Final</version.wildfly.maven.plugin>
-		<version.compiler.plugin>3.10.0</version.compiler.plugin>
+		<version.compiler.plugin>3.13.0</version.compiler.plugin>
 		<version.jaxb2.plugin>1.5</version.jaxb2.plugin>
 		<version.jar.plugin>3.2.2</version.jar.plugin>
 		<version.war.plugin>3.3.2</version.war.plugin>
