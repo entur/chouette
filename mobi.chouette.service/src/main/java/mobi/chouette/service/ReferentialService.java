@@ -153,7 +153,8 @@ public class ReferentialService {
 
         String schemaName = referentialInfo.getSchemaName();
         if (!referentialDAO.getReferentials().contains(schemaName)) {
-            throw new ServiceException(ServiceExceptionCode.INVALID_REQUEST, "Cannot delete referential: referential not found: " + referentialInfo);
+            log.info("Ignoring deletion request for referential '" + referentialInfo + "':  Referential not found");
+            return;
         }
 
         if (referentialInfo.getUserEmail() == null) {
