@@ -52,6 +52,7 @@ public class DaoNetexLineProducerCommand implements Command, Constant {
 
         } catch (Exception e) {
             log.error(e.getMessage(), e);
+            throw e;
         } finally {
             JamonUtils.logMagenta(log, monitor);
         }

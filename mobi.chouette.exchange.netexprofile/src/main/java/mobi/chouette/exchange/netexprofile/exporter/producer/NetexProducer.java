@@ -18,15 +18,7 @@ public class NetexProducer {
 
 	public static final String NETEX_DEFAULT_OBJECT_VERSION = "1";
 
-	public static ObjectFactory netexFactory = null;
-
-	static {
-		try {
-			netexFactory = new ObjectFactory();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	public static ObjectFactory netexFactory = new ObjectFactory();
 
 	protected AvailabilityCondition createAvailabilityCondition(Context context) {
 
