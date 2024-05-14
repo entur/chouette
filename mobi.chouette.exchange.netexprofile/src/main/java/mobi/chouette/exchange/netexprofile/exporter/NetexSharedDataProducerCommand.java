@@ -48,6 +48,7 @@ public class NetexSharedDataProducerCommand implements Command, Constant {
             result = SUCCESS;
         } catch (Exception e) {
             log.error(e.getMessage(), e);
+            throw e;
         } finally {
             JamonUtils.logMagenta(log, monitor);
         }
