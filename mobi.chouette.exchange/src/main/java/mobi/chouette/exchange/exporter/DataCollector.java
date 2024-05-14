@@ -119,15 +119,19 @@ public class DataCollector {
 	}
 
 	private void collectDeadRun(DeadRun deadRun) {
-		collection.getTimetables().addAll(deadRun.getTimetables());
-		collectBlocks(deadRun.getBlocks());
-		collection.getTimetables().addAll(deadRun.getBlocks().stream().map(Block::getTimetables).flatMap(List::stream).collect(Collectors.toList()));
-		collection.getDeadRuns().add(deadRun);
+		if(!onlyPublicData) {
+			collection.getTimetables().addAll(deadRun.getTimetables());
+			collectBlocks(deadRun.getBlocks());
+			collection.getTimetables().addAll(deadRun.getBlocks().stream().map(Block::getTimetables).flatMap(List::stream).collect(Collectors.toList()));
+			collection.getDeadRuns().add(deadRun);
+		}
 	}
 
 	private void collectBlocks(List<Block> blocks) {
-		List<Block> activeBlocks = blocks.stream().filter(block -> block.filter(startDate, endDate)).toList();
-		collection.getBlocks().addAll(activeBlocks);
+		if(!onlyPublicData) {
+			List<Block> activeBlocks = blocks.stream().filter(block -> block.filter(startDate, endDate)).toList();
+			collection.getBlocks().addAll(activeBlocks);
+		}
 	}
 
 	private void collectInterchanges(ExportableData collection, VehicleJourney vehicleJourney, boolean skipNoCoordinate, boolean followLinks, LocalDate startDate, LocalDate endDate) {
@@ -150,12 +154,14 @@ public class DataCollector {
 			collectStopAreas(collection, link.getStartOfLink(), false, false);
 			collectStopAreas(collection, link.getEndOfLink(), false, false);
 		}
-		for(Block block: collection.getBlocks()) {
-			if(block.getStartPoint() != null &&  block.getStartPoint().getContainedInStopAreaRef().getObject() != null) {
-				collectStopAreas(collection, block.getStartPoint().getContainedInStopAreaRef().getObject(), false, false);
-			}
-			if(block.getEndPoint() != null && block.getEndPoint().getContainedInStopAreaRef().getObject() != null) {
-				collectStopAreas(collection, block.getEndPoint().getContainedInStopAreaRef().getObject(), false, false);
+		if(!onlyPublicData) {
+			for(Block block: collection.getBlocks()) {
+				if(block.getStartPoint() != null &&  block.getStartPoint().getContainedInStopAreaRef().getObject() != null) {
+					collectStopAreas(collection, block.getStartPoint().getContainedInStopAreaRef().getObject(), false, false);
+				}
+				if(block.getEndPoint() != null && block.getEndPoint().getContainedInStopAreaRef().getObject() != null) {
+					collectStopAreas(collection, block.getEndPoint().getContainedInStopAreaRef().getObject(), false, false);
+				}
 			}
 		}
 	}
