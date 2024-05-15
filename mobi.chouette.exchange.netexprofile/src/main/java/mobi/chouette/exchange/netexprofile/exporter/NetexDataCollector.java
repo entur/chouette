@@ -9,7 +9,12 @@ import java.time.LocalDate;
 public class NetexDataCollector extends DataCollector {
 
 	public NetexDataCollector(mobi.chouette.exchange.exporter.ExportableData collection, Line line, LocalDate startDate, LocalDate endDate, boolean onlyPublicData) {
-		super(collection, line, startDate, endDate, false, false, onlyPublicData);
+        this(collection,line, startDate, endDate,onlyPublicData,true);
+
+    }
+
+	public NetexDataCollector(mobi.chouette.exchange.exporter.ExportableData collection, Line line, LocalDate startDate, LocalDate endDate, boolean onlyPublicData, boolean exportStops) {
+		super(collection, line, startDate, endDate, false, false, onlyPublicData, exportStops);
 	}
 
 	@Override

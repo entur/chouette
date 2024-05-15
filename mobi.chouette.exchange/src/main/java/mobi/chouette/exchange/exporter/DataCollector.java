@@ -28,11 +28,16 @@ public class DataCollector {
 	protected boolean skipNoCoordinate;
 	protected boolean followLinks;
 	protected boolean onlyPublicData;
+	private final boolean exportStops;
 
 	protected ExportableData collection;
 	protected Line line;
 
 	public DataCollector(ExportableData collection, Line line, LocalDate startDate, LocalDate endDate, boolean skipNoCoordinate, boolean followLinks, boolean onlyPublicData) {
+		this(collection, line, startDate, endDate, skipNoCoordinate, followLinks, onlyPublicData, true);
+	}
+
+	public DataCollector( ExportableData collection, Line line, LocalDate startDate, LocalDate endDate, boolean skipNoCoordinate, boolean followLinks, boolean onlyPublicData, boolean exportStops) {
 		this.collection = collection;
 		this.line = line;
 		this.startDate = startDate;
@@ -40,6 +45,7 @@ public class DataCollector {
 		this.skipNoCoordinate = skipNoCoordinate;
 		this.followLinks = followLinks;
 		this.onlyPublicData = onlyPublicData;
+		this.exportStops = exportStops;
 	}
 
 	public boolean collect() {
@@ -168,6 +174,11 @@ public class DataCollector {
 
 	protected void collectStopAreas(ExportableData collection, StopArea stopArea, boolean skipNoCoordinate,
 			boolean followLinks) {
+
+		if(!exportStops) {
+			return;
+		}
+
 		if (collection.getStopAreas().contains(stopArea))
 			return;
 		if (!skipNoCoordinate || stopArea.hasCoordinates()) {
