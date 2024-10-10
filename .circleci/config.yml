@@ -149,7 +149,7 @@ jobs:
       - attach_workspace:
           at: ~/project
       - run: *jfrog-login
-      - run: *sonar-scan
+
 
   deploy-docker:
     <<: *google-sdk-container-config
