@@ -145,8 +145,7 @@ public class VehicleJourneyCheckPoints extends AbstractValidation<VehicleJourney
 
 			// 3-VehicleJourney-5 : check if time progress correctly with offset
 			// on each stop and between two stops
-			// TODO: Commenting out rule for supporting the transition from summer time to winter time
-//			check3VehicleJourney5(context, vj);
+			check3VehicleJourney5(context, vj);
 
 			//3-VehicleJourney-6 : check if two journey frequencies are overlapping on same vehicle journey
 			check3VehicleJourney6(context, vj);
