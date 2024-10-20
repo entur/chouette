@@ -301,8 +301,7 @@ public class VehicleJourneyCheckPoints extends AbstractValidation<VehicleJourney
 					DataLocation target2 = buildLocation(context, vjas1.getStopPoint().getScheduledStopPoint().getContainedInStopAreaRef().getObject());
 	
 					ValidationReporter reporter = ValidationReporter.Factory.getInstance();
-					// TODO: Commenting out rule for supporting the transition from summer time to winter time
-					// reporter.addCheckPointReportError(context, VEHICLE_JOURNEY_2_1, null, source, null, null, target1, target2);
+					reporter.addCheckPointReportError(context, VEHICLE_JOURNEY_2_1, null, source, null, null, target1, target2);
 				} else {
 					
 					double distance = getDistance(vjas0.getStopPoint().getScheduledStopPoint().getContainedInStopAreaRef().getObject(), vjas1.getStopPoint().getScheduledStopPoint()
