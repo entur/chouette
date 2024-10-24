@@ -28,13 +28,6 @@ public class PublicationDeliveryStopPlaceParserTest {
         Assert.assertEquals(inactiveStopAreas.size(), expectedRemovedIds.size());
         Assert.assertTrue(inactiveStopAreas.stream().allMatch(id -> expectedRemovedIds.remove(id)));
 
-        Map<String, Set<String>> mergedQueys = parser.getUpdateContext().getMergedQuays();
-        Assert.assertEquals(mergedQueys.size(), 4);
-        Assert.assertEquals(mergedQueys.get("NSR:Quay:11001a"), Sets.newHashSet("NSR:Quay:11002", "NSR:Quay:11003", "SKY:Quay:12348413"), "Quays should have been merged");
-        Assert.assertEquals(mergedQueys.get("NSR:Quay:11001b"), Sets.newHashSet("NSR:Quay:11004", "SKY:Quay:12348413"), "Quays should have been merged");
-        Assert.assertEquals(mergedQueys.get("NSR:Quay:87131"), Sets.newHashSet("TRO:Quay:1903530601"), "Quays should have been merged");
-        Assert.assertEquals(mergedQueys.get("NSR:Quay:87130"), Sets.newHashSet("TRO:Quay:19035306","TRO:Quay:1903530602"), "Quays should have been merged");
-
 
     }
 }

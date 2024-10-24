@@ -88,9 +88,7 @@ public class PublicationDeliveryStopPlaceParser {
                         if (!isActive(stopPlace, now)) {
                             updateContext.getInactiveStopAreaIds().add(stopPlace.getId());
                             referential.getStopAreas().remove(stopPlace.getId());
-                        } else if (stopPlace.getQuays() != null && !CollectionUtils.isEmpty(stopPlace.getQuays().getQuayRefOrQuay())) {
-                            stopPlace.getQuays().getQuayRefOrQuay().forEach(quay -> collectMergedIdForQuay(quay));
-                        }
+                        } 
                     }
 
                 }
@@ -100,25 +98,7 @@ public class PublicationDeliveryStopPlaceParser {
         updateContext.getActiveStopAreas().addAll(referential.getStopAreas().values().stream().filter(sa -> sa.getParent() == null).collect(Collectors.toSet()));
     }
 
-    private void collectMergedIdForQuay(JAXBElement<?> jaxbQuay) {
 
-        if (jaxbQuay.getValue() instanceof Quay quay) {
-            if (quay.getKeyList() != null && quay.getKeyList().getKeyValue() != null) {
-                quay.getKeyList().getKeyValue().stream().filter(kv -> MERGED_ID_KEY.equals(kv.getKey())).forEach(kv -> addMergedIds(quay.getId(), kv.getValue()));
-                quay.getKeyList().getKeyValue().stream().filter(kv -> IMPORT_ID_KEY.equals(kv.getKey())).forEach(kv -> addMergedIds(quay.getId(), kv.getValue()));
-            }
-        }
-    }
-
-    private void addMergedIds(String mergedToId, String mergedFromIdsAsString) {
-        Set<String> mergedFromIds = Arrays.asList(mergedFromIdsAsString.split(ID_VALUE_SEPARATOR)).stream().filter(id -> !StringUtils.isEmpty(id)).collect(Collectors.toSet());
-
-        if (updateContext.getMergedQuays().get(mergedToId) != null) {
-            updateContext.getMergedQuays().get(mergedToId).addAll(mergedFromIds);
-        } else {
-            updateContext.getMergedQuays().put(mergedToId, mergedFromIds);
-        }
-    }
 
     private boolean isActive(StopPlace stopPlace, Instant atTime) {
         if (CollectionUtils.isEmpty(stopPlace.getValidBetween()) || stopPlace.getValidBetween().get(0) == null) {

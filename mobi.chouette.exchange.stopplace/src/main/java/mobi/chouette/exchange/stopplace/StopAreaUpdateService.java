@@ -101,17 +101,6 @@ public class StopAreaUpdateService {
 		log.info("Finished deleting unused stop areas. Cnt: " + deletedStopAreasCnt.get());
 	}
 
-	/**
-	 * Update stop area references in seperate transaction in order to iterate over all referentials
-	 */
-	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-	public int updateStopAreaReferences(Map<String, Set<String>> replacementMap) {
-		final AtomicInteger updatedStopPoints = new AtomicInteger();
-		replacementMap.forEach((newStopAreaId, oldStopAreaIds) -> updatedStopPoints.addAndGet(scheduledStopPointDAO.replaceContainedInStopAreaReferences(oldStopAreaIds, newStopAreaId)));
-		return updatedStopPoints.get();
-	}
-
-
 	private int deleteBatchOfUnusedStopAreas(Collection<String> unusedBoardingPositionObjectIdBatch, Set<String> allUnusedBoardingPositionObjectIds) {
 		Set<StopArea> unusedBoardingPositions = new HashSet<>(stopAreaDAO.findByObjectId(unusedBoardingPositionObjectIdBatch));
 
