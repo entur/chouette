@@ -53,9 +53,8 @@ public class StopAreaService {
 			t.setPriority(Thread.MIN_PRIORITY);
 			return t;
 		};
-		int processors = Runtime.getRuntime().availableProcessors();
-		executor = Executors.newFixedThreadPool(processors, threadFactory);
-		;
+		int nbThreads =  3 * Runtime.getRuntime().availableProcessors();
+		executor = Executors.newFixedThreadPool(nbThreads, threadFactory);
 
 	}
 
