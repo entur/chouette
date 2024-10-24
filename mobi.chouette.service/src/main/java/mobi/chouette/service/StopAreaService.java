@@ -71,35 +71,9 @@ public class StopAreaService {
 			ContextHolder.clear();
 			stopAreaUpdateService.createOrUpdateStopAreas(context, updateContext);
 			log.info("Updated " + changedStopCnt + " stop areas");
-			updateStopAreaReferencesPerReferential(updateContext.getMergedQuays());
 		} else {
 			log.debug("Received update without any stop areas. Doing nothing");
 		}
-	}
-
-	private void updateStopAreaReferencesPerReferential(Map<String, Set<String>> replacementMap) {
-		int updatedStopPointCnt = 0;
-
-		if (!replacementMap.isEmpty()) {
-			List<Future<Integer>> futures = new ArrayList();
-
-			for (String referential : referentialDAO.getReferentials()) {
-				StopAreaUpdateTask updateTask = new StopAreaUpdateTask(referential, replacementMap);
-				futures.add(executor.submit(updateTask));
-			}
-			try {
-				for (Future<Integer> future : futures) {
-					updatedStopPointCnt += future.get();
-				}
-			} catch (ExecutionException e) {
-				throw new RuntimeException("Exception while updating StopArea references: " + e.getMessage(), e);
-			} catch (InterruptedException ie) {
-				throw new RuntimeException("Interrupted while waiting for StopArea reference update", ie);
-			}
-		}
-
-
-		log.info("Updated stop area references for " + updatedStopPointCnt + " stop points");
 	}
 
 	public void deleteStopArea(String objectId) {
@@ -123,28 +97,4 @@ public class StopAreaService {
 		return context;
 	}
 
-
-	class StopAreaUpdateTask implements Callable<Integer> {
-
-		private final String referential;
-		private final Map<String, Set<String>> replacementMap;
-
-		public StopAreaUpdateTask(String referential, Map<String, Set<String>> replacementMap) {
-			this.referential = referential;
-			this.replacementMap = replacementMap;
-		}
-
-		@Override
-		public Integer call() throws Exception {
-			ContextHolder.setContext(referential);
-			if(log.isDebugEnabled()) {
-				log.debug("Updating stop area references for stop points for referential " + referential);
-			}
-			int updatedCnt = stopAreaUpdateService.updateStopAreaReferences(replacementMap);
-			if(log.isDebugEnabled()) {
-				log.debug("Updated stop area references for " + updatedCnt + " stop points for referential " + referential);
-			}
-			return updatedCnt;
-		}
-	}
 }
