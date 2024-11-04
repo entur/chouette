@@ -12,6 +12,7 @@ import lombok.extern.log4j.Log4j;
 import mobi.chouette.common.Context;
 import mobi.chouette.exchange.validation.ValidationData;
 import mobi.chouette.exchange.validation.Validator;
+import mobi.chouette.exchange.validation.parameters.SamtrafikenValidation;
 import mobi.chouette.exchange.validation.parameters.TransportModeParameters;
 import mobi.chouette.exchange.validation.parameters.ValidationParameters;
 import mobi.chouette.exchange.validation.report.DataLocation;
@@ -34,22 +35,32 @@ public class JourneyPatternCheckPoints extends AbstractValidation<JourneyPattern
 	public void validate(Context context, JourneyPattern target) {
 		ValidationData data = (ValidationData) context.get(VALIDATION_DATA);
 		List<JourneyPattern> beans = new ArrayList<>(data.getJourneyPatterns());
-		ValidationParameters parameters = (ValidationParameters) context.get(VALIDATION);
+		ValidationParameters validationParameters = (ValidationParameters) context.get(VALIDATION);
 		if (isEmpty(beans))
 			return;
 		boolean sourceFile = context.get(SOURCE).equals(SOURCE_FILE);
+		String codespace = String.valueOf(context.get(CODE_SPACE));
 
 		// init checkPoints : add here all defined check points for this kind of
 		// object
 
+		SamtrafikenValidation samtrafikenValidationConfiguration = validationParameters.getSamtrafikenValidation();
+		boolean ignoreRouteSectionValidation = codespace.equals("sam")
+											   && samtrafikenValidationConfiguration != null
+											   && samtrafikenValidationConfiguration.getCheckRouteSection() == 0;
+
 		initCheckPoint(context, JOURNEY_PATTERN_1, SEVERITY.W);
 		if (!sourceFile)
 			initCheckPoint(context, JOURNEY_PATTERN_2, SEVERITY.E);
-		initCheckPoint(context, ROUTE_SECTION_2_1, SEVERITY.E);
-		initCheckPoint(context, ROUTE_SECTION_2_11, SEVERITY.W);
-		initCheckPoint(context, ROUTE_SECTION_2_2, SEVERITY.E);
-		initCheckPoint(context, ROUTE_SECTION_2_22, SEVERITY.W);
-		initCheckPoint(context, ROUTE_SECTION_2_3, SEVERITY.W);
+
+		if (!ignoreRouteSectionValidation) {
+			initCheckPoint(context, ROUTE_SECTION_2_1, SEVERITY.E);
+			initCheckPoint(context, ROUTE_SECTION_2_11, SEVERITY.W);
+			initCheckPoint(context, ROUTE_SECTION_2_2, SEVERITY.E);
+			initCheckPoint(context, ROUTE_SECTION_2_22, SEVERITY.W);
+			initCheckPoint(context, ROUTE_SECTION_2_3, SEVERITY.W);
+		}
+
 		prepareCheckPoint(context, JOURNEY_PATTERN_3);
 		initCheckPoint(context, JOURNEY_PATTERN_3, SEVERITY.W);
 		prepareCheckPoint(context, JOURNEY_PATTERN_4);
@@ -68,7 +79,7 @@ public class JourneyPatternCheckPoints extends AbstractValidation<JourneyPattern
 		// 3-RouteSection-1 : Check if route section distance doesn't exceed gap
 		// as parameter
 
-		boolean test4_1 = (parameters.getCheckJourneyPattern() != 0);
+		boolean test4_1 = (validationParameters.getCheckJourneyPattern() != 0);
 		if (test4_1) {
 			initCheckPoint(context, L4_JOURNEY_PATTERN_1, SEVERITY.E);
 			prepareCheckPoint(context, L4_JOURNEY_PATTERN_1);
@@ -87,26 +98,29 @@ public class JourneyPatternCheckPoints extends AbstractValidation<JourneyPattern
 				check3JourneyPattern2(context, jp);
 				check3JourneyPatternRb4(context, jp);
 			}
-			// 3-RouteSection-1 : Check if route section distance doesn't exceed
-			// gap as parameter
-			check3RouteSection1(context, jp, parameters);
 
-            // 3-RouteSection-2 : Check if the scheduled stop points on the route section are part of the journey pattern
-			check3RouteSection2(context, jp, parameters);
+			if(!ignoreRouteSectionValidation) {
+				// 3-RouteSection-1 : Check if route section distance doesn't exceed
+				// gap as parameter
+				check3RouteSection1(context, jp, validationParameters);
+
+				// 3-RouteSection-2 : Check if the scheduled stop points on the route section are part of the journey pattern
+				check3RouteSection2(context, jp, validationParameters);
+			}
 
 			// 3-JourneyPattern-3: Check that Line.TransportMode matches StopArea.TransportMode
 			check3JourneyPattern3(context, jp);
 
 			// 4-JourneyPattern-1 : check columns constraints
 			if (test4_1)
-				check4Generic1(context, jp, L4_JOURNEY_PATTERN_1, parameters, log);
+				check4Generic1(context, jp, L4_JOURNEY_PATTERN_1, validationParameters, log);
 
 			check3JourneyPattern4(context, jp);
 
 			check3JourneyPattern5(context, jp);
 
 			// 3-JourneyPattern-RB-1 : check distance between stops
-			check3JourneyPatternRb1(context, jp, parameters);
+			check3JourneyPatternRb1(context, jp, validationParameters);
 
 			// 3-JourneyPattern-RB-2 : check if two successive stops are in same area
 			check3JourneyPatternRb2(context, jp);
@@ -117,9 +131,8 @@ public class JourneyPatternCheckPoints extends AbstractValidation<JourneyPattern
 			}
 
 		}
-		return;
 
-	}
+    }
 
 	private void check3JourneyPattern1(Context context, List<JourneyPattern> beans, int jpRank, JourneyPattern jp) {
 		// 3-JourneyPattern-1 : check if two journey patterns use same stops

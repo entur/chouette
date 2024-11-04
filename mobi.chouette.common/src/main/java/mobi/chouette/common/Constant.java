@@ -2,66 +2,67 @@ package mobi.chouette.common;
 
 public interface Constant {
 
-	public static final boolean ERROR = false;
-	public static final boolean SUCCESS = true;
+	boolean ERROR = false;
+	boolean SUCCESS = true;
 
-	public static final String INITIAL_CONTEXT = "initial_context";
-	public static final String BASE_URI = "base_uri";
-	public static final String JOB_ID = "job_id";
-	public static final String JOB_DATA = "job_data";
-	public static final String ROOT_PATH = "referentials";
-	public static final String CONFIGURATION = "configuration";
-	public static final String VALIDATION = "validation";
-	public static final String SOURCE = "source";
-	public static final String SOURCE_FILE = "source_file";
-	public static final String SOURCE_DATABASE = "source_database";
+	String INITIAL_CONTEXT = "initial_context";
+	String BASE_URI = "base_uri";
+	String JOB_ID = "job_id";
+	String JOB_DATA = "job_data";
+	String ROOT_PATH = "referentials";
+	String CONFIGURATION = "configuration";
+	String VALIDATION = "validation";
+	String SOURCE = "source";
+	String SOURCE_FILE = "source_file";
+	String SOURCE_DATABASE = "source_database";
+	String CODE_SPACE = "code_space";
 
-	public static final String OPTIMIZED = "optimized";
-	public static final String COPY_IN_PROGRESS = "copy_in_progress";
-	public static final String FILE_URL = "file_url";
-	public static final String FILE_NAME = "file_name";
-	public static final String SCHEMA = "schema";
-	public static final String IMPORTER = "importer";
-	public static final String EXPORTER = "exporter";
-	public static final String VALIDATOR = "validator";	
-	public static final String INPUT = "input";
-	public static final String OUTPUT = "output";
-	public static final String PARAMETERS_FILE = "parameters.json";
-	public static final String ACTION_PARAMETERS_FILE = "action_parameters.json";
-	public static final String VALIDATION_PARAMETERS_FILE = "validation_parameters.json";
-	public static final String REPORT = "report";
-	public static final String SAVE_MAIN_VALIDATION_REPORT = "save_main_validation_report";
-	public static final String VALIDATION_REPORT = "validation_report";
-	public static final String REPORT_FILE = "action_report.json";
-	public static final String VALIDATION_FILE = "validation_report.json";
-	public static final String CANCEL_ASKED = "cancel_asked";
-	public static final String COMMAND_CANCELLED = "command_cancelled";
+	String OPTIMIZED = "optimized";
+	String COPY_IN_PROGRESS = "copy_in_progress";
+	String FILE_URL = "file_url";
+	String FILE_NAME = "file_name";
+	String SCHEMA = "schema";
+	String IMPORTER = "importer";
+	String EXPORTER = "exporter";
+	String VALIDATOR = "validator";
+	String INPUT = "input";
+	String OUTPUT = "output";
+	String PARAMETERS_FILE = "parameters.json";
+	String ACTION_PARAMETERS_FILE = "action_parameters.json";
+	String VALIDATION_PARAMETERS_FILE = "validation_parameters.json";
+	String REPORT = "report";
+	String SAVE_MAIN_VALIDATION_REPORT = "save_main_validation_report";
+	String VALIDATION_REPORT = "validation_report";
+	String REPORT_FILE = "action_report.json";
+	String VALIDATION_FILE = "validation_report.json";
+	String CANCEL_ASKED = "cancel_asked";
+	String COMMAND_CANCELLED = "command_cancelled";
 
-	public static final String COLUMN_NUMBER = "column_number";
-	public static final String LINE_NUMBER = "line_number";
+	String COLUMN_NUMBER = "column_number";
+	String LINE_NUMBER = "line_number";
 	// public static final String OBJECT_LOCALISATION = "object_localisation";
-	public static final String VALIDATION_CONTEXT = "validation_context";
+    String VALIDATION_CONTEXT = "validation_context";
 
-	public static final String REFERENTIAL = "referential";
-	public static final String CACHE = "cache";
-	public static final String PARSER = "parser";
-	public static final String AREA_BLOC = "area_bloc";
-	public static final String CONNECTION_LINK_BLOC = "connection_link_bloc";
+	String REFERENTIAL = "referential";
+	String CACHE = "cache";
+	String PARSER = "parser";
+	String AREA_BLOC = "area_bloc";
+	String CONNECTION_LINK_BLOC = "connection_link_bloc";
 
 	
-	public static final String VALIDATION_DATA = "validation_data";
-	public static final String EXPORTABLE_DATA = "exportable_data";
-	public static final String SHARED_DATA_KEYS = "shared_data_keys";
-	public static final String SHARED_DATA = "shared_data";
-	public static final String METADATA = "metadata";
-	public static final String LINE = "line";
-	public static final String LINE_ID = "line_id";
+	String VALIDATION_DATA = "validation_data";
+	String EXPORTABLE_DATA = "exportable_data";
+	String SHARED_DATA_KEYS = "shared_data_keys";
+	String SHARED_DATA = "shared_data";
+	String METADATA = "metadata";
+	String LINE = "line";
+	String LINE_ID = "line_id";
 
-	public static final char SEP = '|';
-	public static final String NULL = "\\N";
+	char SEP = '|';
+	String NULL = "\\N";
 	
-	public static final String BUFFER = "buffer";
+	String BUFFER = "buffer";
 
-	public static final String REFERENTIAL_LAST_UPDATE_TIMESTAMP = "REFERENTIAL_LAST_UPDATE_TIMESTAMP";
+	String REFERENTIAL_LAST_UPDATE_TIMESTAMP = "REFERENTIAL_LAST_UPDATE_TIMESTAMP";
 	
 }

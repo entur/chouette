@@ -33,7 +33,7 @@ public class MainCommand implements Command, Constant {
 
 	@Override
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-	public boolean execute(Context context) throws Exception {
+	public boolean execute(Context context) {
 		boolean result = false;
 
 		// Long id = (Long) context.get(JOB_ID);
@@ -48,6 +48,7 @@ public class MainCommand implements Command, Constant {
 			   context.put(VALIDATION, validationParameters);
 			context.put(REPORT, new ActionReport());
 			context.put(VALIDATION_REPORT, new ValidationReport());
+			context.put(CODE_SPACE, jobService.getJob().getReferential());
 
 			String name = jobService.getCommandName();
 
