@@ -72,7 +72,8 @@ import lombok.Data;
 		"checkInterchange",
 		"interchange",
 		"interchangeMaxDistance",
-		"interchangeMaxWaitSeconds"
+		"interchangeMaxWaitSeconds",
+		"samtrafikenValidation"
 })
 public class ValidationParameters {
 
@@ -258,4 +259,7 @@ public class ValidationParameters {
 
 	@XmlElement(name = "interchange_max_wait_seconds", defaultValue="3600")
 	private int interchangeMaxWaitSeconds = 3600;
+
+	@XmlElement(name = "samtrafiken")
+	private SamtrafikenValidation samtrafikenValidation;
 }
