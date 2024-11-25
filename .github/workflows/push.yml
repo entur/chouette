@@ -42,8 +42,8 @@ jobs:
               ${{ runner.os }}-
         - name: Run maven build
           env:
-              POSTGRES_HOST: postgres
-              POSTGRES_PORT: 5432
+              PG_HOST: postgres
+              PG_PORT: 5432
               JFROG_USER: ${{ secrets.ARTIFACTORY_AUTH_USER }}
               JFROG_PASS: ${{ secrets.ARTIFACTORY_AUTH_TOKEN }}
           run: mvn -DskipWildfly -DskipDelombok -Ddb.host=postgres -B clean install -s .github/workflows/settings.xml
