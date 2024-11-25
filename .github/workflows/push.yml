@@ -14,6 +14,19 @@ jobs:
     runs-on: ubuntu-24.04
     permissions:
       contents: read
+    services:
+        postgres:
+            image: postgis/postgis:13-3.1
+            env:
+             TZ: Europe/Oslo
+             POSTGRES_DB: chouette_test
+             POSTGRES_USER: chouette
+             POSTGRES_PASSWORD: chouette
+            options: ->
+              --health-cmd pg_isready 
+              --health-interval 10s 
+              --health-timeout 5s 
+              --health-retries 5
     steps:
       - uses: actions/checkout@v4
         with:
@@ -36,6 +49,9 @@ jobs:
             ${{ runner.os }}-
 
       - name: Run maven build
+        env:
+          POSTGRES_HOST: postgres
+          POSTGRES_PORT: 5432
         run: mvn -DskipWildfly -DskipDelombok -B clean install -s .github/workflows/settings.xml
       - uses: actions/upload-artifact@v4.4.3
         with:
