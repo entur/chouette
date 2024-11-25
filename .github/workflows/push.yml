@@ -58,6 +58,7 @@ jobs:
             mvn -s .github/workflows/settings.xml \
                     org.jacoco:jacoco-maven-plugin:prepare-agent verify \
                     org.jacoco:jacoco-maven-plugin:report sonar:sonar \
+                    -Ddb.host=postgres \
                     -Dmaven.main.skip \
                     -DskipTests \
                     -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
