@@ -38,6 +38,16 @@ jobs:
         with:
           java-version: 17
           distribution: temurin
+      - name: Debug Environment Variables
+        run: |
+            echo "Postgres Host: $POSTGRES_HOST"
+            echo "Postgres Port: $POSTGRES_PORT"
+      - name: Test PostgreSQL Connectivity
+        run: |
+            apt-get update && apt-get install -y postgresql-client
+            PGPASSWORD=chouette psql -h postgres -U chouette -d chouette_test -c '\l'
+      - name: Wait for PostgreSQL
+        run: sleep 20
       - name: Cache Maven dependencies
         uses: actions/cache@v4
         with:
