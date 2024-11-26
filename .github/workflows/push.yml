@@ -35,8 +35,7 @@ jobs:
         - name: Copy maven settings
           run: |
             wget https://raw.githubusercontent.com/entur/ror-maven-settings/master/.m2/settings.xml -O .github/workflows/settings.xml
-        - name: print maven local repository
-          run: mvn help:evaluate -Dexpression=settings.localRepository
+
         - name: Cache Maven dependencies
           uses: actions/cache@v4
           with:
