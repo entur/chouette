@@ -50,12 +50,12 @@ aliases:
         -Dsonar.organization=${SONAR_ORG} \
         -Dsonar.projectName=${CIRCLE_PROJECT_REPONAME} \
         -Dsonar.host.url=https://sonarcloud.io \
-        -Dsonar.login=${ENTUR_SONAR_PASSWORD}
+        -Dsonar.token=${ENTUR_SONAR_PASSWORD}
 
 jobs:
   build:
     docker:
-      - image: cimg/openjdk:17.0.11
+      - image: cimg/openjdk:17.0.13
         auth:
           username: $DOCKERHUB_LOGIN
           password: $DOCKERHUB_PASSWORD
@@ -133,7 +133,7 @@ jobs:
 
   sonar:
     docker:
-      - image: cimg/openjdk:17.0.11
+      - image: cimg/openjdk:17.0.13
         auth:
           username: $DOCKERHUB_LOGIN
           password: $DOCKERHUB_PASSWORD
