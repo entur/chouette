@@ -1,0 +1,83 @@
+name: Build and push
+on:
+  push:
+    branches:
+      - rutebanken_develop
+  pull_request:
+    branches:
+      - rutebanken_develop
+env:
+  PG_HOST: postgres
+  PG_PORT: 5432
+  JFROG_USER: ${{ secrets.ARTIFACTORY_AUTH_USER }}
+  JFROG_PASS: ${{ secrets.ARTIFACTORY_AUTH_TOKEN }}
+jobs:
+  maven-verify:
+    runs-on: ubuntu-24.04
+    container: cimg/openjdk:17.0.13
+    services:
+        postgres:
+            image: postgis/postgis:13-3.5
+            env:
+             TZ: Europe/Oslo
+             POSTGRES_DB: chouette_test
+             POSTGRES_USER: chouette
+             POSTGRES_PASSWORD: chouette
+            options: >-
+              --health-cmd pg_isready 
+              --health-interval 10s 
+              --health-timeout 5s 
+              --health-retries 5
+    steps:
+        - uses: actions/checkout@v4
+          with:
+            fetch-depth: 0
+        - name: Copy maven settings
+          run: |
+            wget https://raw.githubusercontent.com/entur/ror-maven-settings/master/.m2/settings.xml -O .github/workflows/settings.xml
+
+        - name: Cache Maven dependencies
+          uses: actions/cache@v4
+          with:
+            # Run mvn help:evaluate -Dexpression=settings.localRepository -s .github/workflows/settings.xml
+            # to find the location of the Maven cache in the container
+            path: /home/circleci/.m2/repository
+            key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+            restore-keys: |
+              ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+              ${{ runner.os }}-maven-
+              ${{ runner.os }}-
+        - name: Run maven build
+          run: mvn -DskipWildfly -DskipDelombok -Ddb.host=postgres -B clean install -s .github/workflows/settings.xml
+        - name: Sonar Scan
+          env:
+              SONAR_TOKEN: ${{ secrets.ENTUR_SONAR_PASSWORD }}
+              SONAR_PROJECT_NAME: ${{ github.event.repository.name }}
+              SONAR_PROJECT_KEY: entur_${{ github.event.repository.name }}
+          run: |
+            mvn -s .github/workflows/settings.xml \
+                    org.jacoco:jacoco-maven-plugin:prepare-agent verify \
+                    org.jacoco:jacoco-maven-plugin:report sonar:sonar \
+                    -Ddb.host=postgres \
+                    -Dmaven.main.skip \
+                    -DskipTests \
+                    -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
+                    -Dsonar.organization=enturas-github \
+                    -Dsonar.projectName=${SONAR_PROJECT_NAME} \
+                    -Dsonar.host.url=https://sonarcloud.io \
+                    -Dsonar.token=${SONAR_TOKEN}
+        - name: Upload artifact
+          uses: actions/upload-artifact@v4.4.3
+          with:
+            path: target
+
+  docker-build:
+          if: github.repository_owner == 'entur' && github.event_name == 'push' && github.ref == 'refs/heads/rutebanken_develop'
+          needs: [ maven-verify ]
+          uses: entur/gha-docker/.github/workflows/build.yml@v1
+          with:
+            build_artifact_name: artifact
+            build_artifact_path: target
+  docker-push:
+          needs: [ docker-build ]
+          uses: entur/gha-docker/.github/workflows/push.yml@v1
