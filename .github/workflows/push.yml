@@ -14,10 +14,10 @@ env:
 jobs:
   maven-verify:
     runs-on: ubuntu-24.04
-    container: cimg/openjdk:17.0.11
+    container: cimg/openjdk:17.0.13
     services:
         postgres:
-            image: postgis/postgis:13-3.1
+            image: postgis/postgis:13-3.5
             env:
              TZ: Europe/Oslo
              POSTGRES_DB: chouette_test
@@ -39,14 +39,14 @@ jobs:
         - name: Cache Maven dependencies
           uses: actions/cache@v4
           with:
+            # Run mvn help:evaluate -Dexpression=settings.localRepository -s .github/workflows/settings.xml
+            # to find the location of the Maven cache in the container
             path: /home/circleci/.m2/repository
             key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
             restore-keys: |
               ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
               ${{ runner.os }}-maven-
               ${{ runner.os }}-
-        - name: Test Maven config
-          run: mvn help:evaluate -Dexpression=settings.localRepository -s .github/workflows/settings.xml
         - name: Run maven build
           run: mvn -DskipWildfly -DskipDelombok -Ddb.host=postgres -B clean install -s .github/workflows/settings.xml
         - name: Sonar Scan
