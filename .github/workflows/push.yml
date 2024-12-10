@@ -47,6 +47,8 @@ jobs:
               ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
               ${{ runner.os }}-maven-
               ${{ runner.os }}-
+        - name: Test Maven config
+          run: mvn help:evaluate -Dexpression=settings.localRepository -s .github/workflows/settings.xml
         - name: Run maven build
           run: mvn -DskipWildfly -DskipDelombok -Ddb.host=postgres -B clean install -s .github/workflows/settings.xml
         - name: Sonar Scan
