@@ -17,7 +17,7 @@ jobs:
     container: cimg/openjdk:17.0.13
     services:
         postgres:
-            image: postgis/postgis:13-3.5
+            image: postgis/postgis:17-3.5
             env:
              TZ: Europe/Oslo
              POSTGRES_DB: chouette_test
