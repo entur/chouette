@@ -69,9 +69,9 @@ jobs:
         - name: Upload artifact
           uses: actions/upload-artifact@v4.4.3
           with:
-            path:
-              - target
-              - chouette_iev/target
+            path: |
+              target
+              chouette_iev/target
 
   docker-build:
           if: github.repository_owner == 'entur' && github.event_name == 'push' && github.ref == 'refs/heads/rutebanken_develop'
