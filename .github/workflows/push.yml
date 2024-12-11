@@ -69,9 +69,10 @@ jobs:
         - name: Upload artifact
           uses: actions/upload-artifact@v4.4.3
           with:
-            path:
-              - target
-              - chouette_iev/target
+            path: |
+              target/docker/wildfly/
+              chouette_iev/target/chouette.ear
+            if-no-files-found: error
 
   docker-build:
           if: github.repository_owner == 'entur' && github.event_name == 'push' && github.ref == 'refs/heads/rutebanken_develop'
@@ -79,7 +80,7 @@ jobs:
           uses: entur/gha-docker/.github/workflows/build.yml@v1
           with:
             build_artifact_name: artifact
-            build_artifact_path: target
+            build_artifact_path: ~
   docker-push:
           needs: [ docker-build ]
           uses: entur/gha-docker/.github/workflows/push.yml@v1
