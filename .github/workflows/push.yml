@@ -14,7 +14,7 @@ env:
 jobs:
   maven-verify:
     runs-on: ubuntu-24.04
-    container: cimg/openjdk:17.0.13
+    container: cimg/openjdk:17.0.14
     services:
         postgres:
             image: postgis/postgis:13-3.5
