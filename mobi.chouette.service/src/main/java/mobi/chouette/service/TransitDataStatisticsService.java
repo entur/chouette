@@ -243,7 +243,8 @@ public class TransitDataStatisticsService {
 
 			String number = StringUtils.trimToNull(l.getNumber());
 			if (number == null) {
-				String lineNameKey = l.getName() + "-" + l.getCompany().getName();
+				String companyName = l.getCompany() != null ? l.getCompany().getName() : null;
+				String lineNameKey = l.getName() + "-" + companyName;
 				number = lineNameToFakeLineNumber.get(lineNameKey);
 				if (number == null) {
 					number = "<" + (++fakeLineNumberCounter) + ">";
