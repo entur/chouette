@@ -6,8 +6,18 @@
   "minor": {
     "automerge": false
   },
-  "patch": {
-    "automerge": false
-  },
-  "separateMinorPatch": true
+  "separateMinorPatch": true,
+  "packageRules": [
+    {
+      "description": "Do not automerge Hibernate",
+      "matchPackageNames": [
+        "org.hibernate:*"
+      ],
+      "automerge": false
+    }
+  ]
 }
+
+
+
+
