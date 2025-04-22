@@ -11,7 +11,7 @@
     {
       "description": "Do not automerge Hibernate",
       "matchPackageNames": [
-        "org.hibernate:*"
+        "org.hibernate*"
       ],
       "automerge": false
     }
