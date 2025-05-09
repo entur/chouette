@@ -2,7 +2,9 @@
   "extends": [
     "github>entur/ror-renovate-config"
   ],
-  "baseBranch": "rutebanken_develop",
+  "baseBranches": [
+    "rutebanken_develop"
+  ],
   "minor": {
     "automerge": false
   },
@@ -17,7 +19,3 @@
     }
   ]
 }
-
-
-
-
