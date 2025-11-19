@@ -33,7 +33,7 @@ resource "google_storage_bucket" "storage_bucket" {
 
 resource "google_sql_database_instance" "db_instance" {
   name             = "chouette-db-pg13"
-  database_version = "POSTGRES_13"
+  database_version = "POSTGRES_17"
   project          = var.gcp_resources_project
   region           = var.db_region
 
