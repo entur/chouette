@@ -32,7 +32,7 @@ public class ServiceJourneyInterchangeParser implements Parser, Constant {
 				Interchange interchange = ObjectFactory.getInterchange(referential, netexInterchange.getId());
 				interchange.setObjectVersion(NetexParserUtils.getVersion(netexInterchange));
 				if (netexInterchange.getName() != null) {
-					interchange.setName(netexInterchange.getName().getValue());
+					interchange.setName(ConversionUtil.getValue(netexInterchange.getName()));
 				}
 
 				interchange.setPriority(ConversionUtil.asInteger(netexInterchange.getPriority()));

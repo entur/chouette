@@ -46,16 +46,16 @@ public class StopPlaceParser implements Parser, Constant {
 
             for (JAXBElement<? extends Zone_VersionStructure> tariffZone : tariffZones) {
                 Properties properties = new Properties();
-                properties.put(NAME, tariffZone.getValue().getName().getValue());
+                properties.put(NAME, ConversionUtil.getValue(tariffZone.getValue().getName()));
                 this.tariffZoneProperties.put(tariffZone.getValue().getId(), properties);
             }
         } else if (relationshipStruct instanceof StopPlacesInFrame_RelStructure) {
             StopPlacesInFrame_RelStructure stopPlacesStruct = (StopPlacesInFrame_RelStructure) relationshipStruct;
-            List<JAXBElement<? extends Site_VersionStructure>> stopPlaces = stopPlacesStruct.getStopPlace_();
+            List<StopPlace> stopPlaces = stopPlacesStruct.getStopPlace();
             Map<String, String> parentZoneMap = new HashMap<>();
             Map<String, String> parentSiteMap = new HashMap<>();
-            for (JAXBElement<? extends Site_VersionStructure> stopPlace : stopPlaces) {
-                parseStopPlace(context, (StopPlace) stopPlace.getValue(), parentZoneMap, parentSiteMap);
+            for (StopPlace stopPlace : stopPlaces) {
+                parseStopPlace(context, stopPlace, parentZoneMap, parentSiteMap);
             }
 
 
@@ -99,10 +99,10 @@ public class StopPlaceParser implements Parser, Constant {
         stopArea.setTransportSubMode(mapTransportSubMode(stopPlace));
 
         if (stopPlace.getDescription() != null) {
-            stopArea.setComment(stopPlace.getDescription().getValue());
+            stopArea.setComment(ConversionUtil.getValue(stopPlace.getDescription()));
         }
         if (stopPlace.getLandmark() != null) {
-            stopArea.setNearestTopicName(stopPlace.getLandmark().getValue());
+            stopArea.setNearestTopicName(ConversionUtil.getValue(stopPlace.getLandmark()));
         }
 
         PrivateCodeStructure privateCodeStruct = stopPlace.getPrivateCode();
@@ -110,7 +110,7 @@ public class StopPlaceParser implements Parser, Constant {
             stopArea.setRegistrationNumber(privateCodeStruct.getValue());
         } else {
             if (stopPlace.getShortName() != null) {
-                stopArea.setRegistrationNumber(stopPlace.getShortName().getValue());
+                stopArea.setRegistrationNumber(ConversionUtil.getValue(stopPlace.getShortName()));
             }
         }
 
@@ -132,7 +132,7 @@ public class StopPlaceParser implements Parser, Constant {
         PostalAddress postalAddress = stopPlace.getPostalAddress();
         if (postalAddress != null) {
             stopArea.setCountryCode(postalAddress.getPostCode());
-            stopArea.setStreetName(postalAddress.getAddressLine1().getValue());
+            stopArea.setStreetName(ConversionUtil.getValue(postalAddress.getAddressLine1()));
         }
 
         TariffZoneRefs_RelStructure tariffZonesStruct = stopPlace.getTariffZones();
@@ -207,7 +207,7 @@ public class StopPlaceParser implements Parser, Constant {
     }
 
 
-    TransportModeNameEnum mapTransportModeName(AllVehicleModesOfTransportEnumeration netexMode) {
+    TransportModeNameEnum mapTransportModeName(AllPublicTransportModesEnumeration netexMode) {
         if (netexMode == null) {
             return null;
         }
@@ -257,19 +257,18 @@ public class StopPlaceParser implements Parser, Constant {
         if (quay.getName() == null) {
             boardingPosition.setName(parentStopArea.getName());
         } else {
-            boardingPosition.setName(quay.getName().getValue());
+            boardingPosition.setName(ConversionUtil.getValue(quay.getName()));
         }
         boardingPosition.setParent(parentStopArea);
 
         if (quay.getDescription() != null) {
-            boardingPosition.setComment(quay.getDescription().getValue());
+            boardingPosition.setComment(ConversionUtil.getValue(quay.getDescription()));
         }
         if (quay.getLandmark() != null) {
-            boardingPosition.setNearestTopicName(quay.getLandmark().getValue());
+            boardingPosition.setNearestTopicName(ConversionUtil.getValue(quay.getLandmark()));
         }
 
-        String publicCode = quay.getPublicCode();
-        boardingPosition.setRegistrationNumber(publicCode);
+        boardingPosition.setRegistrationNumber(quay.getPublicCode() != null ? quay.getPublicCode().getValue() : null);
         
 
         SimplePoint_VersionStructure centroidStruct = quay.getCentroid();
@@ -280,7 +279,7 @@ public class StopPlaceParser implements Parser, Constant {
         PostalAddress postalAddress = quay.getPostalAddress();
         if (postalAddress != null) {
             boardingPosition.setCountryCode(postalAddress.getPostCode());
-            boardingPosition.setStreetName(postalAddress.getAddressLine1().getValue());
+            boardingPosition.setStreetName(ConversionUtil.getValue(postalAddress.getAddressLine1()));
         }
 
         TariffZoneRefs_RelStructure tariffZonesStruct = quay.getTariffZones();
@@ -327,7 +326,7 @@ public class StopPlaceParser implements Parser, Constant {
     }
 
     private void parseTariffZoneRefs(TariffZoneRefs_RelStructure tariffZonesStruct, StopArea stopArea) throws Exception {
-        List<JAXBElement<? extends ZoneRefStructure>> tariffZoneRefs = tariffZonesStruct.getTariffZoneRef_();
+        List<JAXBElement<? extends ZoneRefStructure>> tariffZoneRefs = tariffZonesStruct.getTariffZoneRef_Dummy();
 
         for (JAXBElement<? extends ZoneRefStructure> tariffZoneRef : tariffZoneRefs) {
             Properties properties = tariffZoneProperties.get(tariffZoneRef.getValue().getRef());

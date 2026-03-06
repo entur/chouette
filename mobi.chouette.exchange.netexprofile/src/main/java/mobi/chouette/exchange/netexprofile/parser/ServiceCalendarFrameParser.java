@@ -52,7 +52,7 @@ public class ServiceCalendarFrameParser extends NetexParser implements Parser, C
 		ValidBetween validBetween = getValidBetweenForFrame(context);
 
 		if (serviceCalendarFrame.getDayTypes() != null) {
-			for (JAXBElement<? extends DataManagedObjectStructure> dayTypeElement : serviceCalendarFrame.getDayTypes().getDayType_()) {
+			for (JAXBElement<? extends DataManagedObjectStructure> dayTypeElement : serviceCalendarFrame.getDayTypes().getDayType_Dummy()) {
 				DayType dayType = (DayType) dayTypeElement.getValue();
 				NetexObjectUtil.addDayTypeRef(netexReferential, dayType.getId(), dayType);
 				addValidBetween(context, dayType.getId(), validBetween);
@@ -81,7 +81,7 @@ public class ServiceCalendarFrameParser extends NetexParser implements Parser, C
 			ValidBetween calendarValidBetween = getValidBetween(context, serviceCalendar);
 
 			if (serviceCalendar.getDayTypes() != null) {
-				for (JAXBElement<?> dayTypeElement : serviceCalendar.getDayTypes().getDayTypeRefOrDayType_()) {
+				for (JAXBElement<?> dayTypeElement : serviceCalendar.getDayTypes().getDayTypeRefOrDayType_Dummy()) {
 					DayType dayType = (DayType) dayTypeElement.getValue();
 					NetexObjectUtil.addDayTypeRef(netexReferential, dayType.getId(), dayType);
 					addValidBetween(context, dayType.getId(), calendarValidBetween);

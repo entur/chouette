@@ -13,6 +13,7 @@ import mobi.chouette.common.TimeUtil;
 import mobi.chouette.exchange.importer.Parser;
 import mobi.chouette.exchange.importer.ParserFactory;
 import mobi.chouette.exchange.netexprofile.Constant;
+import mobi.chouette.exchange.netexprofile.ConversionUtil;
 import mobi.chouette.exchange.netexprofile.importer.NetexprofileImportParameters;
 import mobi.chouette.exchange.netexprofile.importer.util.NetexTimeConversionUtil;
 import mobi.chouette.model.BookingArrangement;
@@ -28,7 +29,7 @@ import mobi.chouette.model.util.ObjectFactory;
 import mobi.chouette.model.util.ObjectIdTypes;
 import mobi.chouette.model.util.Referential;
 
-import org.rutebanken.netex.model.AllVehicleModesOfTransportEnumeration;
+import org.rutebanken.netex.model.AllPublicTransportModesEnumeration;
 import org.rutebanken.netex.model.DayTypeRefStructure;
 import org.rutebanken.netex.model.DayTypeRefs_RelStructure;
 import org.rutebanken.netex.model.FlexibleServiceProperties;
@@ -82,9 +83,9 @@ public class ServiceJourneyParser extends NetexParser implements Parser, Constan
 
 			vehicleJourney.setObjectVersion(NetexParserUtils.getVersion(serviceJourney));
 
-			vehicleJourney.setPublication(NetexParserUtils.toPublicationEnum(serviceJourney.getPublication()));
+			// publication field removed in NeTEx 2.0
 
-			vehicleJourney.setPublishedJourneyIdentifier(serviceJourney.getPublicCode());
+			vehicleJourney.setPublishedJourneyIdentifier(serviceJourney.getPublicCode() != null ? serviceJourney.getPublicCode().getValue() : null);
 
 			if (serviceJourney.getPrivateCode() != null) {
 				vehicleJourney.setPrivateCode(serviceJourney.getPrivateCode().getValue());
@@ -97,7 +98,7 @@ public class ServiceJourneyParser extends NetexParser implements Parser, Constan
 			}
 
 			if (serviceJourney.getName() != null) {
-				vehicleJourney.setPublishedJourneyName(serviceJourney.getName().getValue());
+				vehicleJourney.setPublishedJourneyName(ConversionUtil.getValue(serviceJourney.getName()));
 			} else {
 				JourneyPattern journeyPattern = vehicleJourney.getJourneyPattern();
 				if (journeyPattern.getDepartureStopPoint() != null) {
@@ -130,7 +131,7 @@ public class ServiceJourneyParser extends NetexParser implements Parser, Constan
 			}
 
 			if (serviceJourney.getTransportMode() != null) {
-				AllVehicleModesOfTransportEnumeration transportMode = serviceJourney.getTransportMode();
+				AllPublicTransportModesEnumeration transportMode = serviceJourney.getTransportMode();
 				TransportModeNameEnum transportModeName = NetexParserUtils.toTransportModeNameEnum(transportMode.value());
 				vehicleJourney.setTransportMode(transportModeName);
 			}
@@ -156,7 +157,7 @@ public class ServiceJourneyParser extends NetexParser implements Parser, Constan
 
 				BookingArrangement bookingArrangement = new BookingArrangement();
 				if (netexFSP.getBookingNote() != null) {
-					bookingArrangement.setBookingNote(netexFSP.getBookingNote().getValue());
+					bookingArrangement.setBookingNote(ConversionUtil.getValue(netexFSP.getBookingNote()));
 				}
 				bookingArrangement.setBookingAccess(NetexParserUtils.toBookingAccess(netexFSP.getBookingAccess()));
 				bookingArrangement.setBookWhen(NetexParserUtils.toPurchaseWhen(netexFSP.getBookWhen()));

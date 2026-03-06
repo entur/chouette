@@ -1,5 +1,6 @@
 package mobi.chouette.exchange.netexprofile;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.time.Clock;
 import java.time.Instant;
@@ -15,7 +16,6 @@ import mobi.chouette.model.type.BookingMethodEnum;
 import mobi.chouette.model.type.DayTypeEnum;
 import mobi.chouette.model.type.FlexibleLineTypeEnum;
 import mobi.chouette.model.type.FlexibleServiceTypeEnum;
-import mobi.chouette.model.type.PublicationEnum;
 import mobi.chouette.model.type.PurchaseMomentEnum;
 import mobi.chouette.model.type.PurchaseWhenEnum;
 import mobi.chouette.model.type.ServiceAlterationEnum;
@@ -34,7 +34,7 @@ public class ConversionUtil {
 		if (v == null) {
 			return null;
 		} else {
-			return new MultilingualString().withValue(v);
+			return new MultilingualString().withContent(v);
 		}
 	}
 
@@ -106,39 +106,39 @@ public class ConversionUtil {
 		return days;
 	}
 
-	public static AllVehicleModesOfTransportEnumeration toVehicleModeOfTransportEnum(TransportModeNameEnum value) {
+	public static AllPublicTransportModesEnumeration toVehicleModeOfTransportEnum(TransportModeNameEnum value) {
 		if (value == null)
 			return null;
 		switch (value) {
 			case Air:
-				return AllVehicleModesOfTransportEnumeration.AIR;
+				return AllPublicTransportModesEnumeration.AIR;
 			case Bus:
-				return AllVehicleModesOfTransportEnumeration.BUS;
+				return AllPublicTransportModesEnumeration.BUS;
 			case Coach:
-				return AllVehicleModesOfTransportEnumeration.COACH;
+				return AllPublicTransportModesEnumeration.COACH;
 			case Metro:
-				return AllVehicleModesOfTransportEnumeration.METRO;
+				return AllPublicTransportModesEnumeration.METRO;
 			case Rail:
-				return AllVehicleModesOfTransportEnumeration.RAIL;
+				return AllPublicTransportModesEnumeration.RAIL;
 			case TrolleyBus:
-				return AllVehicleModesOfTransportEnumeration.TROLLEY_BUS;
+				return AllPublicTransportModesEnumeration.TROLLEY_BUS;
 			case Tram:
-				return AllVehicleModesOfTransportEnumeration.TRAM;
+				return AllPublicTransportModesEnumeration.TRAM;
 			case Water:
 			case Ferry:
-				return AllVehicleModesOfTransportEnumeration.WATER;
+				return AllPublicTransportModesEnumeration.WATER;
 			case Lift:
 			case Cableway:
-				return AllVehicleModesOfTransportEnumeration.CABLEWAY;
+				return AllPublicTransportModesEnumeration.CABLEWAY;
 			case Funicular:
-				return AllVehicleModesOfTransportEnumeration.FUNICULAR;
+				return AllPublicTransportModesEnumeration.FUNICULAR;
 			case Taxi:
-				return AllVehicleModesOfTransportEnumeration.TAXI;
+				return AllPublicTransportModesEnumeration.TAXI;
 
 			case Bicycle:
 			case Other:
 			default:
-				return AllVehicleModesOfTransportEnumeration.UNKNOWN;
+				return AllPublicTransportModesEnumeration.UNKNOWN;
 
 		}
 
@@ -295,13 +295,14 @@ public class ConversionUtil {
 	}
 
 	public static String getValue(MultilingualString m) {
-		String v = null;
-		if (m != null) {
-			v = StringUtils.trimToNull(m.getValue());
+		if (m == null) return null;
+		List<Serializable> content = m.getContent();
+		if (content == null || content.isEmpty()) return null;
+		StringBuilder sb = new StringBuilder();
+		for (Serializable s : content) {
+			if (s instanceof String str) sb.append(str);
 		}
-
-		return v;
-
+		return StringUtils.trimToNull(sb.toString());
 	}
 
 	public static OffsetTime toOffsetTimeUtc(java.time.LocalTime time) {
@@ -469,24 +470,21 @@ public class ConversionUtil {
 		return null;
 	}
 
-	public static PublicationEnumeration toPublicationEnumeration(PublicationEnum chouetteType) {
-		if (chouetteType == null || chouetteType == PublicationEnum.Public) {
-			return null;
-		}
-
-		switch (chouetteType) {
-			case Authorised:
-				return PublicationEnumeration.AUTHORISED;
-			case Confidential:
-				return PublicationEnumeration.CONFIDENTIAL;
-			case Private:
-				return PublicationEnumeration.PRIVATE;
-			case Restricted:
-				return PublicationEnumeration.RESTRICTED;
-			case Test:
-				return PublicationEnumeration.TEST;
-		}
-		return null;
-	}
+	// TODO: PublicationEnumeration was removed from the NeTEx 2.0 schema (netex-java-model 1.1.0).
+	//  The internal model (PublicationEnum) still exists. Re-enable if a replacement is added,
+	//  or remove PublicationEnum from the internal model if it is no longer needed.
+	// public static PublicationEnumeration toPublicationEnumeration(PublicationEnum publicationEnum) {
+	// 	if (publicationEnum == null) {
+	// 		return null;
+	// 	}
+	// 	switch (publicationEnum) {
+	// 		case DynamicTimeTable:
+	// 			return PublicationEnumeration.DYNAMIC_TIME_TABLE;
+	// 		case StaticTimeTable:
+	// 			return PublicationEnumeration.STATIC_TIME_TABLE;
+	// 		default:
+	// 			return null;
+	// 	}
+	// }
 
 }

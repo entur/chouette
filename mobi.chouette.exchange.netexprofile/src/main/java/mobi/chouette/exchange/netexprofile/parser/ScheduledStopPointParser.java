@@ -27,7 +27,7 @@ public class ScheduledStopPointParser implements Parser, Constant {
 
 				ScheduledStopPoint scheduledStopPoint = ObjectFactory.getScheduledStopPoint(referential, netexScheduledStopPoint.getId());
 				if (netexScheduledStopPoint.getName() != null) {
-					scheduledStopPoint.setName(netexScheduledStopPoint.getName().getValue());
+					scheduledStopPoint.setName(ConversionUtil.getValue(netexScheduledStopPoint.getName()));
 				}
 				TimingPointStatusEnumeration timingPointStatus = netexScheduledStopPoint.getTimingPointStatus();
 				if(timingPointStatus != null) {

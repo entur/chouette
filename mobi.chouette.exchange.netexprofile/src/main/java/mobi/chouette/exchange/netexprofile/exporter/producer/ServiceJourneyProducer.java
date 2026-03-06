@@ -47,8 +47,11 @@ public class ServiceJourneyProducer extends NetexProducer {
 		NetexProducerUtils.populateId(vehicleJourney, serviceJourney);
 
 		serviceJourney.setName(ConversionUtil.getMultiLingualString(vehicleJourney.getPublishedJourneyName()));
-		serviceJourney.setPublicCode(vehicleJourney.getPublishedJourneyIdentifier());
-		serviceJourney.setPublication(ConversionUtil.toPublicationEnumeration(vehicleJourney.getPublication()));
+		serviceJourney.setPublicCode(vehicleJourney.getPublishedJourneyIdentifier() != null ? new org.rutebanken.netex.model.PublicCodeStructure().withValue(vehicleJourney.getPublishedJourneyIdentifier()) : null);
+		// TODO: Publication field (PublicationEnumeration) was removed from the NeTEx 2.0 schema.
+		//  The internal model still carries this value. Re-enable if a replacement is added to the NeTEx model,
+		//  or remove the field from the internal model if it is no longer needed.
+		// serviceJourney.setPublication(ConversionUtil.toPublicationEnumeration(vehicleJourney.getPublication()));
 
 		if (vehicleJourney.getPrivateCode()!=null){
 			serviceJourney.setPrivateCode(new PrivateCodeStructure().withValue(vehicleJourney.getPrivateCode()));
@@ -144,7 +147,7 @@ public class ServiceJourneyProducer extends NetexProducer {
 				BookingArrangement bookingArrangement = chouetteFSP.getBookingArrangement();
 				if (bookingArrangement != null) {
 					if (bookingArrangement.getBookingNote() != null) {
-						netexFSP.setBookingNote(new MultilingualString().withValue(bookingArrangement.getBookingNote()));
+						netexFSP.setBookingNote(new MultilingualString().withContent(bookingArrangement.getBookingNote()));
 					}
 					netexFSP.setBookingAccess(ConversionUtil.toBookingAccess(bookingArrangement.getBookingAccess()));
 					netexFSP.setBookWhen(ConversionUtil.toPurchaseWhen(bookingArrangement.getBookWhen()));

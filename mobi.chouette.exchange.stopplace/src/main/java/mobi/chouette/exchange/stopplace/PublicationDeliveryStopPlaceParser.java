@@ -81,9 +81,7 @@ public class PublicationDeliveryStopPlaceParser {
                     stopPlaceParser.parse(context);
 
 
-                    for (JAXBElement<? extends Site_VersionStructure> jaxbStopPlace : siteFrame.getStopPlaces().getStopPlace_()) {
-
-                        StopPlace stopPlace = (StopPlace) jaxbStopPlace.getValue();
+                    for (StopPlace stopPlace : siteFrame.getStopPlaces().getStopPlace()) {
 
                         if (!isActive(stopPlace, now)) {
                             updateContext.getInactiveStopAreaIds().add(stopPlace.getId());

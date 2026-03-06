@@ -24,7 +24,7 @@ public class OrganisationParser implements Parser, Constant {
 		Referential referential = (Referential) context.get(REFERENTIAL);
 		OrganisationsInFrame_RelStructure organisationsInFrameStruct = (OrganisationsInFrame_RelStructure) context.get(NETEX_LINE_DATA_CONTEXT);
 
-		for (JAXBElement<? extends DataManagedObjectStructure> organisationElement : organisationsInFrameStruct.getOrganisation_()) {
+		for (JAXBElement<? extends DataManagedObjectStructure> organisationElement : organisationsInFrameStruct.getOrganisation_Dummy()) {
 			DataManagedObjectStructure organisation = organisationElement.getValue();
 			Organisation_VersionStructure organisationStruct = (Organisation_VersionStructure) organisation;
 

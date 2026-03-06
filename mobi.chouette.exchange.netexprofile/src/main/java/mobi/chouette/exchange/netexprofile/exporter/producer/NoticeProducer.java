@@ -33,7 +33,7 @@ public class NoticeProducer extends NetexProducer {
 
 			if (!exportableNetexData.getSharedNotices().containsKey(notice.getId())) {
 				notice.setText(ConversionUtil.getMultiLingualString(footnote.getLabel()));
-				notice.setPublicCode(footnote.getCode());
+				notice.setPublicCode(footnote.getCode() != null ? new org.rutebanken.netex.model.PublicCodeStructure().withValue(footnote.getCode()) : null);
 
 				exportableNetexData.getSharedNotices().put(notice.getId(), notice);
 			}
@@ -50,7 +50,7 @@ public class NoticeProducer extends NetexProducer {
 					NetexProducerUtils.populateId(footNoteAlternativeText, alternativeText);
 					MultilingualString multilingualString = netexFactory.createMultilingualString();
 					multilingualString.setLang(footNoteAlternativeText.getLanguage());
-					multilingualString.setValue(footNoteAlternativeText.getText());
+					multilingualString.withContent(footNoteAlternativeText.getText());
 					alternativeText.withText(multilingualString);
 					alternativeTextsRelStructure.getAlternativeText().add(alternativeText);
 				}

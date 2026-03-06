@@ -2,18 +2,18 @@ package mobi.chouette.exchange.netexprofile.exporter.producer;
 
 import static mobi.chouette.exchange.netexprofile.Constant.NETEX_REFERENTIAL;
 import static mobi.chouette.exchange.netexprofile.exporter.producer.NetexProducerUtils.isSet;
-import static org.rutebanken.netex.model.AllVehicleModesOfTransportEnumeration.AIR;
-import static org.rutebanken.netex.model.AllVehicleModesOfTransportEnumeration.BUS;
-import static org.rutebanken.netex.model.AllVehicleModesOfTransportEnumeration.CABLEWAY;
-import static org.rutebanken.netex.model.AllVehicleModesOfTransportEnumeration.COACH;
-import static org.rutebanken.netex.model.AllVehicleModesOfTransportEnumeration.FERRY;
-import static org.rutebanken.netex.model.AllVehicleModesOfTransportEnumeration.FUNICULAR;
-import static org.rutebanken.netex.model.AllVehicleModesOfTransportEnumeration.METRO;
-import static org.rutebanken.netex.model.AllVehicleModesOfTransportEnumeration.OTHER;
-import static org.rutebanken.netex.model.AllVehicleModesOfTransportEnumeration.RAIL;
-import static org.rutebanken.netex.model.AllVehicleModesOfTransportEnumeration.TRAM;
-import static org.rutebanken.netex.model.AllVehicleModesOfTransportEnumeration.TROLLEY_BUS;
-import static org.rutebanken.netex.model.AllVehicleModesOfTransportEnumeration.WATER;
+import static org.rutebanken.netex.model.AllPublicTransportModesEnumeration.AIR;
+import static org.rutebanken.netex.model.AllPublicTransportModesEnumeration.BUS;
+import static org.rutebanken.netex.model.AllPublicTransportModesEnumeration.CABLEWAY;
+import static org.rutebanken.netex.model.AllPublicTransportModesEnumeration.COACH;
+import static org.rutebanken.netex.model.AllPublicTransportModesEnumeration.FERRY;
+import static org.rutebanken.netex.model.AllPublicTransportModesEnumeration.FUNICULAR;
+import static org.rutebanken.netex.model.AllPublicTransportModesEnumeration.METRO;
+import static org.rutebanken.netex.model.AllPublicTransportModesEnumeration.OTHER;
+import static org.rutebanken.netex.model.AllPublicTransportModesEnumeration.RAIL;
+import static org.rutebanken.netex.model.AllPublicTransportModesEnumeration.TRAM;
+import static org.rutebanken.netex.model.AllPublicTransportModesEnumeration.TROLLEY_BUS;
+import static org.rutebanken.netex.model.AllPublicTransportModesEnumeration.WATER;
 
 import mobi.chouette.model.type.TransportModeNameEnum;
 import mobi.chouette.model.type.TransportSubModeNameEnum;
@@ -111,7 +111,7 @@ public class StopPlaceProducer extends NetexProducer implements NetexEntityProdu
 		return stopPlace;
 	}
 
-	private static AllVehicleModesOfTransportEnumeration mapTransportMode(TransportModeNameEnum transportModeNameEnum) {
+	private static AllPublicTransportModesEnumeration mapTransportMode(TransportModeNameEnum transportModeNameEnum) {
 		if (transportModeNameEnum == null) {
 			return null;
 		}
