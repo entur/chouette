@@ -21,6 +21,7 @@ import mobi.chouette.common.TimeUtil;
 import mobi.chouette.exchange.importer.Parser;
 import mobi.chouette.exchange.importer.ParserFactory;
 import mobi.chouette.exchange.netexprofile.Constant;
+import mobi.chouette.exchange.netexprofile.ConversionUtil;
 import mobi.chouette.model.BookingArrangement;
 import mobi.chouette.model.DestinationDisplay;
 import mobi.chouette.model.Route;
@@ -53,7 +54,7 @@ public class JourneyPatternParser extends NetexParser implements Parser, Constan
 		Referential referential = (Referential) context.get(REFERENTIAL);
 		JourneyPatternsInFrame_RelStructure journeyPatternStruct = (JourneyPatternsInFrame_RelStructure) context.get(NETEX_LINE_DATA_CONTEXT);
 
-		for (JAXBElement<?> journeyPatternElement : journeyPatternStruct.getJourneyPattern_OrJourneyPatternView()) {
+		for (JAXBElement<?> journeyPatternElement : journeyPatternStruct.getJourneyPattern_Dummy()) {
 			JourneyPattern_VersionStructure netexJourneyPattern = (org.rutebanken.netex.model.JourneyPattern_VersionStructure) journeyPatternElement.getValue();
 
 			mobi.chouette.model.JourneyPattern chouetteJourneyPattern = ObjectFactory.getJourneyPattern(referential, netexJourneyPattern.getId());
@@ -65,7 +66,7 @@ public class JourneyPatternParser extends NetexParser implements Parser, Constan
 			chouetteJourneyPattern.setRoute(route);
 
 			if (netexJourneyPattern.getName() != null) {
-				chouetteJourneyPattern.setName(netexJourneyPattern.getName().getValue());
+				chouetteJourneyPattern.setName(ConversionUtil.getValue(netexJourneyPattern.getName()));
 			} else {
 				chouetteJourneyPattern.setName(route.getName());
 			}
@@ -177,7 +178,7 @@ public class JourneyPatternParser extends NetexParser implements Parser, Constan
 				BookingArrangementsStructure netexBookingArrangement = pointInPattern.getBookingArrangements();
 				BookingArrangement bookingArrangement = new BookingArrangement();
 				if (netexBookingArrangement.getBookingNote() != null) {
-					bookingArrangement.setBookingNote(netexBookingArrangement.getBookingNote().getValue());
+					bookingArrangement.setBookingNote(ConversionUtil.getValue(netexBookingArrangement.getBookingNote()));
 				}
 				bookingArrangement.setBookingAccess(NetexParserUtils.toBookingAccess(netexBookingArrangement.getBookingAccess()));
 				bookingArrangement.setBookWhen(NetexParserUtils.toPurchaseWhen(netexBookingArrangement.getBookWhen()));

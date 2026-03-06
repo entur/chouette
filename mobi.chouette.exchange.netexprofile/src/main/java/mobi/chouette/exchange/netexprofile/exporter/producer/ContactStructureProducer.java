@@ -15,14 +15,14 @@ public class ContactStructureProducer {
 		}
 		org.rutebanken.netex.model.ContactStructure netexObject = new org.rutebanken.netex.model.ContactStructure();
 		if (chouetteObject.getContactPerson() != null) {
-			netexObject.setContactPerson(new MultilingualString().withValue(chouetteObject.getContactPerson()));
+			netexObject.setContactPerson(new MultilingualString().withContent(chouetteObject.getContactPerson()));
 		}
 		netexObject.setUrl(chouetteObject.getUrl());
 		netexObject.setPhone(chouetteObject.getPhone());
 		netexObject.setFax(chouetteObject.getFax());
 		netexObject.setEmail(chouetteObject.getEmail());
 		if (chouetteObject.getFurtherDetails() != null) {
-			netexObject.setFurtherDetails(new MultilingualString().withValue(chouetteObject.getFurtherDetails()));
+			netexObject.setFurtherDetails(new MultilingualString().withContent(chouetteObject.getFurtherDetails()));
 		}
 
 		return netexObject;

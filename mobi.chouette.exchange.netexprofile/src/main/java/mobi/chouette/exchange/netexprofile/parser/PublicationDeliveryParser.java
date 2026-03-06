@@ -159,7 +159,7 @@ public class PublicationDeliveryParser extends NetexParser implements Parser, Co
 
 			if (!isCommonDelivery) {
 				if (line == null) {
-					line = (org.rutebanken.netex.model.Line_VersionStructure) serviceFrame.getLines().getLine_().get(0).getValue();
+					line = (org.rutebanken.netex.model.Line_VersionStructure) serviceFrame.getLines().getLine_Dummy().get(0).getValue();
 					context.put(PARSING_CONTEXT_LINE_ID, line.getId());
 				}
 
@@ -290,7 +290,7 @@ public class PublicationDeliveryParser extends NetexParser implements Parser, Co
 			}
 
 			if(serviceFrame.getNoticeAssignments() != null) {
-				for(JAXBElement<? extends DataManagedObjectStructure> assingment : serviceFrame.getNoticeAssignments().getNoticeAssignment_()) {
+				for(JAXBElement<? extends DataManagedObjectStructure> assingment : serviceFrame.getNoticeAssignments().getNoticeAssignment_Dummy()) {
 					NoticeAssignment a = (NoticeAssignment) assingment.getValue();
 					parseNoticeAssignment(context, a);
 				}
@@ -364,7 +364,7 @@ public class PublicationDeliveryParser extends NetexParser implements Parser, Co
 			}
 
 			if (timetableFrame.getNoticeAssignments() != null) {
-				for (JAXBElement<? extends DataManagedObjectStructure> assingment : timetableFrame.getNoticeAssignments().getNoticeAssignment_()) {
+				for (JAXBElement<? extends DataManagedObjectStructure> assingment : timetableFrame.getNoticeAssignments().getNoticeAssignment_Dummy()) {
 					NoticeAssignment a = (NoticeAssignment) assingment.getValue();
 					parseNoticeAssignment(context, a);
 				}
@@ -434,14 +434,14 @@ public class PublicationDeliveryParser extends NetexParser implements Parser, Co
 
 		Footnote footnote = ObjectFactory.getFootnote(referential, notice.getId());
 		footnote.setLabel(ConversionUtil.getValue(notice.getText()));
-		footnote.setCode(notice.getPublicCode());
+		footnote.setCode(notice.getPublicCode() != null ? notice.getPublicCode().getValue() : null);
 
 		if (notice.getAlternativeTexts() != null) {
 			for (AlternativeText alternativeText : notice.getAlternativeTexts().getAlternativeText()) {
 				FootNoteAlternativeText footNoteAlternativeText = ObjectFactory.getFootnoteAlternativeText(referential, alternativeText.getId());
 				footNoteAlternativeText.setFootnote(footnote);
 				if(alternativeText.getText() != null) {
-					footNoteAlternativeText.setText(alternativeText.getText().getValue());
+					footNoteAlternativeText.setText(ConversionUtil.getValue(alternativeText.getText()));
 					footNoteAlternativeText.setLanguage(alternativeText.getText().getLang());
 				}
 				footnote.getAlternativeTexts().add(footNoteAlternativeText);
@@ -455,10 +455,10 @@ public class PublicationDeliveryParser extends NetexParser implements Parser, Co
 
 		mobi.chouette.model.Branding chouetteBranding = ObjectFactory.getBranding(referential, netexBranding.getId());
 		if (netexBranding.getName() != null) {
-			chouetteBranding.setName(netexBranding.getName().getValue());
+			chouetteBranding.setName(ConversionUtil.getValue(netexBranding.getName()));
 		}
 		if (netexBranding.getDescription() != null) {
-			chouetteBranding.setDescription(netexBranding.getDescription().getValue());
+			chouetteBranding.setDescription(ConversionUtil.getValue(netexBranding.getDescription()));
 		}
 		chouetteBranding.setUrl(netexBranding.getUrl());
 		chouetteBranding.setImage(netexBranding.getImage());

@@ -38,7 +38,7 @@ public class NetworkParser extends NetexParser implements Parser, Constant {
             chouetteNetwork.setVersionDate(netexNetwork.getChanged().toLocalDate());
         }
 
-        chouetteNetwork.setName(netexNetwork.getName().getValue());
+        chouetteNetwork.setName(ConversionUtil.getValue(netexNetwork.getName()));
 
         OrganisationRefStructure authorityRefStruct = netexNetwork.getTransportOrganisationRef().getValue();
         Company company = ObjectFactory.getCompany(referential, authorityRefStruct.getRef());

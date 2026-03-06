@@ -41,8 +41,7 @@ public class OrganisationProducer extends NetexProducer implements NetexEntityPr
 		NetexProducerUtils.populateId(company, organisation);
 
 		if(company.getCode() != null) {
-			PrivateCodeStructure privateCodeStructure = netexFactory.createPrivateCodeStructure().withValue(company.getCode());
-			organisation.setPublicCode(privateCodeStructure);
+			organisation.setPublicCode(new org.rutebanken.netex.model.PublicCodeStructure().withValue(company.getCode()));
 		}
 		organisation.setCompanyNumber(company.getRegistrationNumber());
 		organisation.setName(ConversionUtil.getMultiLingualString(company.getName()));

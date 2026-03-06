@@ -23,7 +23,7 @@ import mobi.chouette.model.type.TransportModeNameEnum;
 import mobi.chouette.model.util.ObjectFactory;
 import mobi.chouette.model.util.Referential;
 
-import org.rutebanken.netex.model.AllVehicleModesOfTransportEnumeration;
+import org.rutebanken.netex.model.AllPublicTransportModesEnumeration;
 import org.rutebanken.netex.model.DataManagedObjectStructure;
 import org.rutebanken.netex.model.FlexibleLine;
 import org.rutebanken.netex.model.GroupOfLinesRefStructure;
@@ -44,7 +44,7 @@ public class LineParser implements Parser, Constant {
 		NetexReferential netexReferential = (NetexReferential) context.get(NETEX_REFERENTIAL);
 		LinesInFrame_RelStructure linesInFrameStruct = (LinesInFrame_RelStructure) context.get(NETEX_LINE_DATA_CONTEXT);
 
-		for (JAXBElement<? extends DataManagedObjectStructure> lineElement : linesInFrameStruct.getLine_()) {
+		for (JAXBElement<? extends DataManagedObjectStructure> lineElement : linesInFrameStruct.getLine_Dummy()) {
 			org.rutebanken.netex.model.Line_VersionStructure netexLine = (org.rutebanken.netex.model.Line_VersionStructure) lineElement.getValue();
 			mobi.chouette.model.Line chouetteLine = ObjectFactory.getLine(referential, netexLine.getId());
 			chouetteLine.setObjectVersion(NetexParserUtils.getVersion(netexLine));
@@ -75,12 +75,12 @@ public class LineParser implements Parser, Constant {
 			chouetteLine.setPublishedName(ConversionUtil.getValue(netexLine.getShortName()));
 			chouetteLine.setComment(ConversionUtil.getValue(netexLine.getDescription()));
 
-			AllVehicleModesOfTransportEnumeration transportMode = netexLine.getTransportMode();
+			AllPublicTransportModesEnumeration transportMode = netexLine.getTransportMode();
 			TransportModeNameEnum transportModeName = NetexParserUtils.toTransportModeNameEnum(transportMode.value());
 			chouetteLine.setTransportModeName(transportModeName);
 			chouetteLine.setTransportSubModeName(NetexParserUtils.toTransportSubModeNameEnum(netexLine.getTransportSubmode()));
 			chouetteLine.setUrl(netexLine.getUrl());
-			chouetteLine.setNumber(netexLine.getPublicCode());
+			chouetteLine.setNumber(netexLine.getPublicCode() != null ? netexLine.getPublicCode().getValue() : null);
 
 			PrivateCodeStructure privateCode = netexLine.getPrivateCode();
 			if (privateCode != null) {
@@ -116,7 +116,7 @@ public class LineParser implements Parser, Constant {
 				flexibleLineProperties.setFlexibleLineType(NetexParserUtils.toFlexibleLineType(flexibleLine.getFlexibleLineType()));
 				BookingArrangement bookingArrangement=new BookingArrangement();
 				if (flexibleLine.getBookingNote() != null) {
-					bookingArrangement.setBookingNote(flexibleLine.getBookingNote().getValue());
+					bookingArrangement.setBookingNote(ConversionUtil.getValue(flexibleLine.getBookingNote()));
 				}
 				bookingArrangement.setBookingAccess(NetexParserUtils.toBookingAccess(flexibleLine.getBookingAccess()));
 				bookingArrangement.setBookWhen(NetexParserUtils.toPurchaseWhen(flexibleLine.getBookWhen()));

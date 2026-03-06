@@ -13,14 +13,14 @@ public class ContactStructureParser {
 		}
 		ContactStructure chouetteObject = new ContactStructure();
 		if (netexObject.getContactPerson() != null) {
-			chouetteObject.setContactPerson(netexObject.getContactPerson().getValue());
+			chouetteObject.setContactPerson(mobi.chouette.exchange.netexprofile.ConversionUtil.getValue(netexObject.getContactPerson()));
 		}
 		chouetteObject.setUrl(netexObject.getUrl());
 		chouetteObject.setPhone(netexObject.getPhone());
 		chouetteObject.setFax(netexObject.getFax());
 		chouetteObject.setEmail(netexObject.getEmail());
 		if (netexObject.getFurtherDetails() != null) {
-			chouetteObject.setFurtherDetails(netexObject.getFurtherDetails().getValue());
+			chouetteObject.setFurtherDetails(mobi.chouette.exchange.netexprofile.ConversionUtil.getValue(netexObject.getFurtherDetails()));
 		}
 		return chouetteObject;
 	}

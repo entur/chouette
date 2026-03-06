@@ -85,7 +85,7 @@ public class NetexParser implements Constant {
 		}
 
 		ValidBetween validBetween = null;
-		List<Object> validityConditionElements = validityConditionStruct.getValidityConditionRefOrValidBetweenOrValidityCondition_();
+		List<Object> validityConditionElements = validityConditionStruct.getValidityConditionRefOrValidBetweenOrValidityCondition_Dummy();
 
 		if (CollectionUtils.isNotEmpty(validityConditionElements)) {
 			Object validityConditionElement =  validityConditionElements.get(0);

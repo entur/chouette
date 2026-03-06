@@ -132,7 +132,7 @@ public class JourneyPatternProducer extends NetexProducer implements NetexEntity
 				if (bookingArrangement != null) {
 					BookingArrangementsStructure netexBookingArrangement = new BookingArrangementsStructure();
 					if (bookingArrangement.getBookingNote() != null) {
-						netexBookingArrangement.setBookingNote(new MultilingualString().withValue(bookingArrangement.getBookingNote()));
+						netexBookingArrangement.setBookingNote(new MultilingualString().withContent(bookingArrangement.getBookingNote()));
 					}
 					netexBookingArrangement.setBookingAccess(ConversionUtil.toBookingAccess(bookingArrangement.getBookingAccess()));
 					netexBookingArrangement.setBookWhen(ConversionUtil.toPurchaseWhen(bookingArrangement.getBookWhen()));

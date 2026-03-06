@@ -53,7 +53,7 @@ public class BlockParser extends NetexParser implements Parser {
         // name
         MultilingualString name = netexBlock.getName();
         if(name != null) {
-            chouetteBlock.setName(name.getValue());
+            chouetteBlock.setName(ConversionUtil.getValue(name));
         }
 
         // private code
@@ -65,7 +65,7 @@ public class BlockParser extends NetexParser implements Parser {
         // description
         MultilingualString description = netexBlock.getDescription();
         if(description != null) {
-            chouetteBlock.setDescription(description.getValue());
+            chouetteBlock.setDescription(ConversionUtil.getValue(description));
         }
 
         // start time
