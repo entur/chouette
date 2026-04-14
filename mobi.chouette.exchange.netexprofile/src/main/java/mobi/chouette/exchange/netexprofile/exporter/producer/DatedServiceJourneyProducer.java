@@ -64,7 +64,7 @@ public class DatedServiceJourneyProducer extends NetexProducer {
 		if (!datedServiceJourney.getOriginalDatedServiceJourneys().isEmpty()) {
 			netexDatedServiceJourney.setReplacedJourneys(netexFactory.createReplacedJourneys_RelStructure());
 			for (DatedServiceJourney originalDatedServiceJourney : datedServiceJourney.getOriginalDatedServiceJourneys()) {
-				DatedVehicleJourneyRefStructure originalDatedServiceJourneyRefStructure = netexFactory.createDatedVehicleJourneyRefStructure();
+				VehicleJourneyRefStructure originalDatedServiceJourneyRefStructure = new VehicleJourneyRefStructure();
 				NetexProducerUtils.populateReference(originalDatedServiceJourney, originalDatedServiceJourneyRefStructure, true);
 				JAXBElement<VehicleJourneyRefStructure> originalDatedServiceJourneyRefStructureJAXBElement = netexFactory.createDatedVehicleJourneyRef(originalDatedServiceJourneyRefStructure);
 				netexDatedServiceJourney.getReplacedJourneys().getDatedVehicleJourneyRefOrNormalDatedVehicleJourneyRef().add(originalDatedServiceJourneyRefStructureJAXBElement);
