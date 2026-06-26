@@ -1,0 +1,84 @@
+name: Manual deploy
+run-name: "Manual deploy ${{ inputs.tag }} → ${{ inputs.environment }}"
+
+# Manually deploy a previously-built image to a chosen environment.
+#
+# The git tag produced by the build pipeline (gha-docker) is identical to the
+# pushed image tag, e.g. `rutebanken_develop.20260626-SHA5a9b9e3`. So a single `tag` input is
+# used both as the chart `git_ref` (so the deployed Helm config matches the
+# tagged source) and as the tag of the pre-built image that is rolled out.
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Git tag to deploy (also the image tag), e.g. rutebanken_develop.20260626-SHA5a9b9e3"
+        required: true
+        type: string
+      environment:
+        description: "Target environment"
+        required: true
+        type: choice
+        options:
+          - dev
+          - tst
+          - prd
+      # gha-helm/deploy.yml expects the image on the form `app:tag` and prepends the
+      # registry itself — so this is the bare app name WITHOUT the registry prefix.
+      # (Passing a full `eu.gcr.io/.../chouette` path here doubles the registry.)
+      image_name:
+        description: "Image name without registry, on the form `app` (override only if it differs from the default)"
+        required: false
+        default: "chouette"
+        type: string
+
+# Avoid two concurrent manual deploys racing the same environment.
+concurrency:
+  group: manual-deploy-${{ inputs.environment }}
+  cancel-in-progress: false
+
+jobs:
+  validate-tag:
+    name: Validate tag
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - name: Validate tag format and existence
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          # 1. Format / safety check — expected build-pipeline tag form:
+          #    <branch>.<YYYYMMDD>-SHA<shortsha>  (e.g. main.20260612-SHA4d22692)
+          if [[ ! "$TAG" =~ ^[A-Za-z0-9._-]+\.[0-9]{8}-SHA[0-9a-fA-F]{7,40}$ ]]; then
+            echo "::error::Tag '$TAG' does not match the expected format <branch>.<YYYYMMDD>-SHA<sha> (e.g. main.20260612-SHA4d22692)"
+            exit 1
+          fi
+
+          # 2. Existence check — the tag must actually exist in this repository.
+          if ! gh api "repos/${REPO}/git/ref/tags/${TAG}" >/dev/null 2>&1; then
+            echo "::error::Tag '$TAG' does not exist in ${REPO}"
+            exit 1
+          fi
+
+          echo "✅ Tag '$TAG' is valid and exists in ${REPO}."
+
+  deploy:
+    name: Deploy ${{ inputs.tag }} to ${{ inputs.environment }}
+    needs: [validate-tag]
+    permissions:
+      contents: read
+      id-token: write
+    uses: entur/gha-helm/.github/workflows/deploy.yml@v1
+    with:
+      environment: ${{ inputs.environment }}
+      git_ref: ${{ inputs.tag }}
+      image: ${{ inputs.image_name }}:${{ inputs.tag }}
+      chart: helm/chouette
+      image_set_path: "image.identifier"
+      namespace: chouette
+      release_name: chouette
+    secrets: inherit

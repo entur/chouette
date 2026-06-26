@@ -1,4 +1,4 @@
-name: Build and push
+name: Build, push and deploy
 on:
   push:
     branches:
@@ -78,3 +78,71 @@ jobs:
   docker-push:
           needs: [ docker-build ]
           uses: entur/gha-docker/.github/workflows/push.yml@v1
+
+
+  helm-lint:
+    uses: entur/gha-helm/.github/workflows/lint.yml@v1
+    with:
+      environment: dev
+
+
+  deploy-dev:
+    if: ${{ !cancelled() && !contains(needs.*.result, 'failure') && github.ref == 'refs/heads/rutebanken_develop' }}
+    needs: [ helm-lint, docker-push ]
+    uses: entur/gha-helm/.github/workflows/deploy.yml@v1
+    with:
+      environment: dev
+      image: ${{ needs.docker-push.outputs.image_name }}:${{ needs.docker-push.outputs.image_tag}}
+      chart: helm/chouette
+      image_set_path: "image.identifier"
+      namespace: chouette
+      release_name: chouette
+    secrets: inherit
+
+  approval-tst:
+    if: ${{ !cancelled() && !contains(needs.*.result, 'failure') && github.ref == 'refs/heads/rutebanken_develop' }}
+    needs: [ deploy-dev, helm-lint, docker-push ]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: Approve
+    steps:
+      - name: Manual approval
+        shell: bash
+        run: echo "Approve TST deployment"
+
+  deploy-tst:
+    if: ${{ !cancelled() && !contains(needs.*.result, 'failure') && github.ref == 'refs/heads/rutebanken_develop' }}
+    needs: [ approval-tst, docker-push ]
+    uses: entur/gha-helm/.github/workflows/deploy.yml@v1
+    with:
+      environment: tst
+      image: ${{ needs.docker-push.outputs.image_name }}:${{ needs.docker-push.outputs.image_tag}}
+      chart: helm/chouette
+      image_set_path: "image.identifier"
+      namespace: chouette
+      release_name: chouette
+    secrets: inherit
+
+  approval-prd:
+    if: ${{ !cancelled() && !contains(needs.*.result, 'failure') && github.ref == 'refs/heads/rutebanken_develop' }}
+    needs: [ deploy-tst, approval-tst, docker-push ]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: Approve
+    steps:
+      - name: Manual approval
+        shell: bash
+        run: echo "Approve PRD deployment"
+
+  deploy-prd:
+    if: ${{ !cancelled() && !contains(needs.*.result, 'failure') && github.ref == 'refs/heads/rutebanken_develop' }}
+    needs: [ approval-prd, docker-push ]
+    uses: entur/gha-helm/.github/workflows/deploy.yml@v1
+    with:
+      environment: prd
+      image: ${{ needs.docker-push.outputs.image_name }}:${{ needs.docker-push.outputs.image_tag}}
+      chart: helm/chouette
+      image_set_path: "image.identifier"
+      namespace: chouette
+      release_name: chouette
+    secrets: inherit
