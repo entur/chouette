@@ -9,8 +9,6 @@ on:
 env:
   PG_HOST: postgres
   PG_PORT: 5432
-  JFROG_USER: ${{ secrets.ARTIFACTORY_AUTH_USER }}
-  JFROG_PASS: ${{ secrets.ARTIFACTORY_AUTH_TOKEN }}
 jobs:
   maven-verify:
     runs-on: ubuntu-24.04
