@@ -12,7 +12,7 @@ env:
 jobs:
   maven-verify:
     runs-on: ubuntu-24.04
-    container: cimg/openjdk:17.0.17
+    container: cimg/openjdk:25.0.4
     services:
         postgres:
             image: postgis/postgis:13-3.5
