@@ -49,7 +49,7 @@ jobs:
               SONAR_PROJECT_NAME: ${{ github.event.repository.name }}
               SONAR_PROJECT_KEY: entur_${{ github.event.repository.name }}
           run: |
-            mvn \
+            mvn -Psonar \
                     org.jacoco:jacoco-maven-plugin:prepare-agent verify \
                     org.jacoco:jacoco-maven-plugin:report sonar:sonar \
                     -Ddb.host=postgres \

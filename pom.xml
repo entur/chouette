@@ -1003,8 +1003,7 @@
 			</activation>
 
 			<properties>
-				<jdk.version>11</jdk.version>
-				<sonar-maven-plugin.version>3.7.0.1746</sonar-maven-plugin.version>
+				<sonar-maven-plugin.version>5.8.0.7211</sonar-maven-plugin.version>
 			</properties>
 
 			<build>
