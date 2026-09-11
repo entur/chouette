@@ -27,11 +27,11 @@ jobs:
               --health-timeout 5s 
               --health-retries 5
     steps:
-        - uses: actions/checkout@v4
+        - uses: actions/checkout@v4.4.0
           with:
             fetch-depth: 0
         - name: Cache Maven dependencies
-          uses: actions/cache@v4
+          uses: actions/cache@v4.3.0
           with:
             # Run mvn help:evaluate -Dexpression=settings.localRepository -s .github/workflows/settings.xml
             # to find the location of the Maven cache in the container
@@ -71,17 +71,17 @@ jobs:
   docker-build:
           if: github.repository_owner == 'entur' && github.event_name == 'push' && github.ref == 'refs/heads/rutebanken_develop'
           needs: [ maven-verify ]
-          uses: entur/gha-docker/.github/workflows/build.yml@v1
+          uses: entur/gha-docker/.github/workflows/build.yml@v1.12.0
           with:
             build_artifact_name: artifact
             build_artifact_path: ~
   docker-push:
           needs: [ docker-build ]
-          uses: entur/gha-docker/.github/workflows/push.yml@v1
+          uses: entur/gha-docker/.github/workflows/push.yml@v1.12.0
 
 
   helm-lint:
-    uses: entur/gha-helm/.github/workflows/lint.yml@v1
+    uses: entur/gha-helm/.github/workflows/lint.yml@v1.7.0
     with:
       environment: dev
 
@@ -89,7 +89,7 @@ jobs:
   deploy-dev:
     if: ${{ !cancelled() && !contains(needs.*.result, 'failure') && github.ref == 'refs/heads/rutebanken_develop' }}
     needs: [ helm-lint, docker-push ]
-    uses: entur/gha-helm/.github/workflows/deploy.yml@v1
+    uses: entur/gha-helm/.github/workflows/deploy.yml@v1.7.0
     with:
       environment: dev
       image: ${{ needs.docker-push.outputs.image_name }}:${{ needs.docker-push.outputs.image_tag}}
@@ -113,7 +113,7 @@ jobs:
   deploy-tst:
     if: ${{ !cancelled() && !contains(needs.*.result, 'failure') && github.ref == 'refs/heads/rutebanken_develop' }}
     needs: [ approval-tst, docker-push ]
-    uses: entur/gha-helm/.github/workflows/deploy.yml@v1
+    uses: entur/gha-helm/.github/workflows/deploy.yml@v1.7.0
     with:
       environment: tst
       image: ${{ needs.docker-push.outputs.image_name }}:${{ needs.docker-push.outputs.image_tag}}
@@ -137,7 +137,7 @@ jobs:
   deploy-prd:
     if: ${{ !cancelled() && !contains(needs.*.result, 'failure') && github.ref == 'refs/heads/rutebanken_develop' }}
     needs: [ approval-prd, docker-push ]
-    uses: entur/gha-helm/.github/workflows/deploy.yml@v1
+    uses: entur/gha-helm/.github/workflows/deploy.yml@v1.7.0
     with:
       environment: prd
       image: ${{ needs.docker-push.outputs.image_name }}:${{ needs.docker-push.outputs.image_tag}}

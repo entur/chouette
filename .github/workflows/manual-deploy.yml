@@ -72,7 +72,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
-    uses: entur/gha-helm/.github/workflows/deploy.yml@v1
+    uses: entur/gha-helm/.github/workflows/deploy.yml@v1.7.0
     with:
       environment: ${{ inputs.environment }}
       git_ref: ${{ inputs.tag }}
