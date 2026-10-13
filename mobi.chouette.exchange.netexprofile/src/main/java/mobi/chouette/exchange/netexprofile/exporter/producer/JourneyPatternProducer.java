@@ -166,7 +166,7 @@ public class JourneyPatternProducer extends NetexProducer implements NetexEntity
 			for (RouteSection routeSection : neptuneJourneyPattern.getRouteSections()) {
 
 				String routeSectionVersion = routeSection.getObjectVersion() > 0 ? String.valueOf(routeSection.getObjectVersion()) : NETEX_DEFAULT_OBJECT_VERSION;
-				ServiceLinkInJourneyPattern_VersionedChildStructure serviceLinkInJourneyPattern = netexFactory.createServiceLinkInJourneyPattern_VersionedChildStructure()
+				ServiceLinkInJourneyPattern_VersionedChildStructure serviceLinkInJourneyPattern = netexFactory.createServiceLinkInJourneyPattern()
 						.withId(createUniqueId(context, SERVICE_LINK_IN_JOURNEY_PATTERN)).withOrder(BigInteger.valueOf(i++)).withVersion(routeSectionVersion);
 
 				ServiceLinkRefStructure serviceLinkRefStructure = netexFactory.createServiceLinkRefStructure();
