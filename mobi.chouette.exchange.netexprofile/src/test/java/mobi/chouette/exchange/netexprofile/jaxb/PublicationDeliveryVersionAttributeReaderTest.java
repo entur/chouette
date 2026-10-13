@@ -11,7 +11,7 @@ public class PublicationDeliveryVersionAttributeReaderTest {
 	
 	@Test
 	public void testGetProfileVersion() {
-		File f = new File("Src/test/data/SK264.xml");
+		File f = new File("src/test/data/SK264.xml");
 	
 		String profileVersion = PublicactionDeliveryVersionAttributeReader.findPublicationDeliveryVersion(f);
 		Assert.assertEquals(profileVersion, "1.04:NO-NeTEx-networktimetable:1.0");
