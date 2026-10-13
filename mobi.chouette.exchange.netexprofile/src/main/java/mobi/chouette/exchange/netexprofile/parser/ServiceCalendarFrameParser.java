@@ -216,19 +216,19 @@ public class ServiceCalendarFrameParser extends NetexParser implements Parser, C
 			Timetable timetable = ObjectFactory.getTimetable(referential, dayTypeIdRef);
 
 			if (dayTypeAssignment.getDate() != null) {
-				LocalDateTime date = dayTypeAssignment.getDate();
+				LocalDate date = dayTypeAssignment.getDate();
 
-				if (isWithinValidRange(date, validBetween)) {
+				if (isWithinValidRange(date.atStartOfDay(), validBetween)) {
 					boolean included = dayTypeAssignment.isIsAvailable() != null ? dayTypeAssignment.isIsAvailable() : Boolean.TRUE;
-					timetable.addCalendarDay(new CalendarDay(date.toLocalDate(), included));
+					timetable.addCalendarDay(new CalendarDay(date, included));
 				}
 			} else if (dayTypeAssignment.getOperatingDayRef() != null) {
 				String operatingDayIdRef = dayTypeAssignment.getOperatingDayRef().getRef();
 				OperatingDay operatingDay = NetexObjectUtil.getOperatingDay(netexReferential, operatingDayIdRef);
 
-				if (operatingDay.getCalendarDate() != null && isWithinValidRange(operatingDay.getCalendarDate(), validBetween)) {
+				if (operatingDay.getCalendarDate() != null && isWithinValidRange(operatingDay.getCalendarDate().atStartOfDay(), validBetween)) {
 					boolean included = dayTypeAssignment.isIsAvailable() != null ? dayTypeAssignment.isIsAvailable() : Boolean.TRUE;
-					timetable.addCalendarDay(new CalendarDay(operatingDay.getCalendarDate().toLocalDate(), included));
+					timetable.addCalendarDay(new CalendarDay(operatingDay.getCalendarDate(), included));
 				}
 
 			} else if (dayTypeAssignment.getOperatingPeriodRef() != null) {
@@ -240,13 +240,13 @@ public class ServiceCalendarFrameParser extends NetexParser implements Parser, C
 
 				if (operatingPeriod.getFromOperatingDayRef() != null) {
 					OperatingDay operatingDay = NetexObjectUtil.getOperatingDay(netexReferential, operatingPeriod.getFromOperatingDayRef().getRef());
-					startDate = TimeUtil.toLocalDateIgnoreTime(operatingDay.getCalendarDate());
+					startDate = operatingDay.getCalendarDate();
 				} else {
 					startDate = TimeUtil.toLocalDateIgnoreTime(operatingPeriod.getFromDate());
 				}
 				if (operatingPeriod.getToOperatingDayRef() != null) {
 					OperatingDay operatingDay = NetexObjectUtil.getOperatingDay(netexReferential, operatingPeriod.getToOperatingDayRef().getRef());
-					endDate = TimeUtil.toLocalDateIgnoreTime(operatingDay.getCalendarDate());
+					endDate = operatingDay.getCalendarDate();
 				} else {
 					endDate = TimeUtil.toLocalDateIgnoreTime(operatingPeriod.getToDate());
 				}
@@ -351,8 +351,8 @@ public class ServiceCalendarFrameParser extends NetexParser implements Parser, C
 		Context publicationDeliveryContext = (Context) parsingContext.get(PublicationDeliveryParser.LOCAL_CONTEXT);
 
 		if (serviceCalendar.getFromDate() != null && serviceCalendar.getToDate() != null) {
-			LocalDateTime fromDateTime = serviceCalendar.getFromDate();
-			LocalDateTime toDateTime = serviceCalendar.getToDate();
+			LocalDateTime fromDateTime = serviceCalendar.getFromDate().atStartOfDay();
+			LocalDateTime toDateTime = serviceCalendar.getToDate().atStartOfDay();
 			return new ValidBetween().withFromDate(fromDateTime).withToDate(toDateTime);
 		} else {
 			ValidBetween entityValidity = getValidBetween(serviceCalendar);

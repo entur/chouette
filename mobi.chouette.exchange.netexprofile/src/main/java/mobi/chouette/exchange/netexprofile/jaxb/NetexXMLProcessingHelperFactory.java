@@ -64,7 +64,7 @@ public class NetexXMLProcessingHelperFactory {
 
 		if (schema == null) {
 			log.info("Initializing Netex schema version " + version + ", this may take a few seconds");
-			schema = new NeTExValidator(version).getSchema();
+			schema = NeTExValidator.getNeTExValidator(version).getSchema();
 			netexSchema.put(version, schema);
 		}
 

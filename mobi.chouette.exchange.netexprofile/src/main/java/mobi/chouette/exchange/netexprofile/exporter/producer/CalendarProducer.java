@@ -73,7 +73,7 @@ public class CalendarProducer extends NetexProducer {
 					DayTypeAssignment dayTypeAssignment = netexFactory.createDayTypeAssignment()
 							.withId(NetexProducerUtils.translateObjectId(netexDaytypeId, "DayTypeAssignment") + "-" + counter).withVersion(NETEX_DEFAULT_OBJECT_VERSION)
 							.withOrder(BigInteger.ONE).withDayTypeRef(netexFactory.createDayTypeRef(dayTypeRef))
-							.withDate(day.getDate().atStartOfDay());
+							.withDate(day.getDate());
 
 					if (day.getIncluded() != null && !day.getIncluded()) {
 						dayTypeAssignment.setIsAvailable(day.getIncluded());

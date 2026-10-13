@@ -94,7 +94,7 @@ public class ServiceCalendarFrameParserTest {
 		Timetable t2 = referential.getTimetables().get("BRA:DayType:2");
 		Assert.assertNotNull(t2);
 		Assert.assertEquals(t2.getStartOfPeriod(), java.time.LocalDate.parse("2016-09-19")); // Start date of service calendar
-		Assert.assertEquals(t2.getEndOfPeriod(), java.time.LocalDate.parse("2016-12-22")); // End date in service calendar // TODO 1 day off, must be fixed when date/time parsing is on local time
+		Assert.assertEquals(t2.getEndOfPeriod(), java.time.LocalDate.parse("2016-12-23")); // End date in service calendar
 		Assert.assertEquals(t2.getEffectiveDates().size(), 0);
 	}
 
