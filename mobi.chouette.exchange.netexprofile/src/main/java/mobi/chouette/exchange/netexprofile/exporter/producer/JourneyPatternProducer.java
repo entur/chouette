@@ -132,7 +132,7 @@ public class JourneyPatternProducer extends NetexProducer implements NetexEntity
 				if (bookingArrangement != null) {
 					BookingArrangementsStructure netexBookingArrangement = new BookingArrangementsStructure();
 					if (bookingArrangement.getBookingNote() != null) {
-						netexBookingArrangement.setBookingNote(new MultilingualString().withValue(bookingArrangement.getBookingNote()));
+						netexBookingArrangement.setBookingNote(new MultilingualString().withContent(bookingArrangement.getBookingNote()));
 					}
 					netexBookingArrangement.setBookingAccess(ConversionUtil.toBookingAccess(bookingArrangement.getBookingAccess()));
 					netexBookingArrangement.setBookWhen(ConversionUtil.toPurchaseWhen(bookingArrangement.getBookWhen()));
@@ -166,7 +166,7 @@ public class JourneyPatternProducer extends NetexProducer implements NetexEntity
 			for (RouteSection routeSection : neptuneJourneyPattern.getRouteSections()) {
 
 				String routeSectionVersion = routeSection.getObjectVersion() > 0 ? String.valueOf(routeSection.getObjectVersion()) : NETEX_DEFAULT_OBJECT_VERSION;
-				ServiceLinkInJourneyPattern_VersionedChildStructure serviceLinkInJourneyPattern = netexFactory.createServiceLinkInJourneyPattern_VersionedChildStructure()
+				ServiceLinkInJourneyPattern_VersionedChildStructure serviceLinkInJourneyPattern = netexFactory.createServiceLinkInJourneyPattern()
 						.withId(createUniqueId(context, SERVICE_LINK_IN_JOURNEY_PATTERN)).withOrder(BigInteger.valueOf(i++)).withVersion(routeSectionVersion);
 
 				ServiceLinkRefStructure serviceLinkRefStructure = netexFactory.createServiceLinkRefStructure();

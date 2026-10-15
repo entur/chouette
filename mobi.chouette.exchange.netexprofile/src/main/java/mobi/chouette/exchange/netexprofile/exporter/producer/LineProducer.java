@@ -16,7 +16,7 @@ import mobi.chouette.model.GroupOfLine;
 import mobi.chouette.model.Line;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.rutebanken.netex.model.AllVehicleModesOfTransportEnumeration;
+import org.rutebanken.netex.model.AllPublicTransportModesEnumeration;
 import org.rutebanken.netex.model.FlexibleLine;
 import org.rutebanken.netex.model.GroupOfLinesRefStructure;
 import org.rutebanken.netex.model.MultilingualString;
@@ -65,12 +65,12 @@ public class LineProducer extends NetexProducer implements NetexEntityProducer<o
 		netexLine.setDescription(ConversionUtil.getMultiLingualString(neptuneLine.getComment()));
 
 		if (isSet(neptuneLine.getTransportModeName())) {
-			AllVehicleModesOfTransportEnumeration vehicleModeOfTransport = ConversionUtil.toVehicleModeOfTransportEnum(neptuneLine.getTransportModeName());
+			AllPublicTransportModesEnumeration vehicleModeOfTransport = ConversionUtil.toVehicleModeOfTransportEnum(neptuneLine.getTransportModeName());
 			netexLine.setTransportMode(vehicleModeOfTransport);
 		}
 
 		netexLine.setTransportSubmode(ConversionUtil.toTransportSubmodeStructure(neptuneLine.getTransportSubModeName()));
-		netexLine.setPublicCode(neptuneLine.getNumber());
+		netexLine.setPublicCode(neptuneLine.getNumber() != null ? new org.rutebanken.netex.model.PublicCodeStructure().withValue(neptuneLine.getNumber()) : null);
 
 		if (isSet(neptuneLine.getRegistrationNumber())) {
 			PrivateCodeStructure privateCodeStruct = netexFactory.createPrivateCodeStructure();
@@ -131,7 +131,7 @@ public class LineProducer extends NetexProducer implements NetexEntityProducer<o
 			flexibleLine.setFlexibleLineType(ConversionUtil.toFlexibleLineType(flexibleLineProperties.getFlexibleLineType()));
 			if (bookingArrangement!=null) {
 				if (bookingArrangement.getBookingNote() != null) {
-					flexibleLine.setBookingNote(new MultilingualString().withValue(bookingArrangement.getBookingNote()));
+					flexibleLine.setBookingNote(new MultilingualString().withContent(bookingArrangement.getBookingNote()));
 				}
 				flexibleLine.setBookingAccess(ConversionUtil.toBookingAccess(bookingArrangement.getBookingAccess()));
 				flexibleLine.setBookWhen(ConversionUtil.toPurchaseWhen(bookingArrangement.getBookWhen()));

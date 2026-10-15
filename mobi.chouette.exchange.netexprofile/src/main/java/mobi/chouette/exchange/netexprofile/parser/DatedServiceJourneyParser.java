@@ -2,7 +2,6 @@ package mobi.chouette.exchange.netexprofile.parser;
 
 import lombok.extern.log4j.Log4j;
 import mobi.chouette.common.Context;
-import mobi.chouette.common.TimeUtil;
 import mobi.chouette.exchange.importer.Parser;
 import mobi.chouette.exchange.importer.ParserFactory;
 import mobi.chouette.exchange.netexprofile.Constant;
@@ -48,7 +47,7 @@ public class DatedServiceJourneyParser extends NetexParser implements Parser, Co
         NetexReferential netexReferential = (NetexReferential) context.get(NETEX_REFERENTIAL);
         String operatingDayRefId = netexDatedServiceJourney.getOperatingDayRef().getRef();
         OperatingDay operatingDay = NetexObjectUtil.getOperatingDay(netexReferential, operatingDayRefId);
-        datedServiceJourney.setOperatingDay(TimeUtil.toLocalDateIgnoreTime(operatingDay.getCalendarDate()));
+        datedServiceJourney.setOperatingDay(operatingDay.getCalendarDate());
 
         // service journey
         JAXBElement<? extends JourneyRefStructure> journeyRef = netexDatedServiceJourney.getJourneyRef();

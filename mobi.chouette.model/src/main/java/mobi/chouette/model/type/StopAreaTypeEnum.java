@@ -15,6 +15,7 @@ public enum StopAreaTypeEnum {
     FerryStop,
     LiftStation,
     VehicleRailInterchange,
+    TaxiRank,
     Other
 
 }

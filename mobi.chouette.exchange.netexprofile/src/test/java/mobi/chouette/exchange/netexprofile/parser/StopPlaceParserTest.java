@@ -30,9 +30,9 @@ public class StopPlaceParserTest {
 
         StopPlace netexStopPlace = new StopPlace();
         netexStopPlace.setId("TST:StopPlace:Id");
-        netexStopPlace.setName(new MultilingualString().withValue("name"));
+        netexStopPlace.setName(new MultilingualString().withContent("name"));
         netexStopPlace.setStopPlaceType(StopTypeEnumeration.RAIL_STATION);
-        netexStopPlace.setTransportMode(AllVehicleModesOfTransportEnumeration.RAIL);
+        netexStopPlace.setTransportMode(AllPublicTransportModesEnumeration.RAIL);
         netexStopPlace.setRailSubmode(RailSubmodeEnumeration.INTERNATIONAL);
         parser.parseStopPlace(context, netexStopPlace, new HashMap<>(), new HashMap<>());
 
@@ -130,21 +130,21 @@ public class StopPlaceParserTest {
     public void testTransportMode() {
         StopPlaceParser parser = new StopPlaceParser();
         Assert.assertNull(parser.mapTransportModeName(null));
-        Assert.assertEquals(parser.mapTransportModeName(AllVehicleModesOfTransportEnumeration.AIR), TransportModeNameEnum.Air);
-        Assert.assertEquals(parser.mapTransportModeName(AllVehicleModesOfTransportEnumeration.BUS), TransportModeNameEnum.Bus);
-        Assert.assertEquals(parser.mapTransportModeName(AllVehicleModesOfTransportEnumeration.RAIL), TransportModeNameEnum.Rail);
-       // Assert.assertEquals(parser.mapTransportModeName(AllVehicleModesOfTransportEnumeration.TAXI), TransportModeNameEnum.Taxi);
-        Assert.assertEquals(parser.mapTransportModeName(AllVehicleModesOfTransportEnumeration.TRAM), TransportModeNameEnum.Tram);
-        Assert.assertEquals(parser.mapTransportModeName(AllVehicleModesOfTransportEnumeration.COACH), TransportModeNameEnum.Coach);
-        Assert.assertEquals(parser.mapTransportModeName(AllVehicleModesOfTransportEnumeration.FERRY), TransportModeNameEnum.Ferry);
-        Assert.assertEquals(parser.mapTransportModeName(AllVehicleModesOfTransportEnumeration.METRO), TransportModeNameEnum.Metro);
-        Assert.assertEquals(parser.mapTransportModeName(AllVehicleModesOfTransportEnumeration.WATER), TransportModeNameEnum.Water);
-        Assert.assertEquals(parser.mapTransportModeName(AllVehicleModesOfTransportEnumeration.CABLEWAY), TransportModeNameEnum.Cableway);
-        Assert.assertEquals(parser.mapTransportModeName(AllVehicleModesOfTransportEnumeration.FUNICULAR), TransportModeNameEnum.Funicular);
-        Assert.assertEquals(parser.mapTransportModeName(AllVehicleModesOfTransportEnumeration.TROLLEY_BUS), TransportModeNameEnum.TrolleyBus);
+        Assert.assertEquals(parser.mapTransportModeName(AllPublicTransportModesEnumeration.AIR), TransportModeNameEnum.Air);
+        Assert.assertEquals(parser.mapTransportModeName(AllPublicTransportModesEnumeration.BUS), TransportModeNameEnum.Bus);
+        Assert.assertEquals(parser.mapTransportModeName(AllPublicTransportModesEnumeration.RAIL), TransportModeNameEnum.Rail);
+       // Assert.assertEquals(parser.mapTransportModeName(AllPublicTransportModesEnumeration.TAXI), TransportModeNameEnum.Taxi);
+        Assert.assertEquals(parser.mapTransportModeName(AllPublicTransportModesEnumeration.TRAM), TransportModeNameEnum.Tram);
+        Assert.assertEquals(parser.mapTransportModeName(AllPublicTransportModesEnumeration.COACH), TransportModeNameEnum.Coach);
+        Assert.assertEquals(parser.mapTransportModeName(AllPublicTransportModesEnumeration.FERRY), TransportModeNameEnum.Ferry);
+        Assert.assertEquals(parser.mapTransportModeName(AllPublicTransportModesEnumeration.METRO), TransportModeNameEnum.Metro);
+        Assert.assertEquals(parser.mapTransportModeName(AllPublicTransportModesEnumeration.WATER), TransportModeNameEnum.Water);
+        Assert.assertEquals(parser.mapTransportModeName(AllPublicTransportModesEnumeration.CABLEWAY), TransportModeNameEnum.Cableway);
+        Assert.assertEquals(parser.mapTransportModeName(AllPublicTransportModesEnumeration.FUNICULAR), TransportModeNameEnum.Funicular);
+        Assert.assertEquals(parser.mapTransportModeName(AllPublicTransportModesEnumeration.TROLLEY_BUS), TransportModeNameEnum.TrolleyBus);
 
-        Assert.assertEquals(parser.mapTransportModeName(AllVehicleModesOfTransportEnumeration.OTHER), TransportModeNameEnum.Other);
-        Assert.assertEquals(parser.mapTransportModeName(AllVehicleModesOfTransportEnumeration.OTHER), TransportModeNameEnum.Other);
+        Assert.assertEquals(parser.mapTransportModeName(AllPublicTransportModesEnumeration.OTHER), TransportModeNameEnum.Other);
+        Assert.assertEquals(parser.mapTransportModeName(AllPublicTransportModesEnumeration.OTHER), TransportModeNameEnum.Other);
 
     }
 }
