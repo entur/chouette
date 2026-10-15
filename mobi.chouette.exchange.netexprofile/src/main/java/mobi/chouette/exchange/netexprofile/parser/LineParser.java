@@ -44,7 +44,7 @@ public class LineParser implements Parser, Constant {
 		NetexReferential netexReferential = (NetexReferential) context.get(NETEX_REFERENTIAL);
 		LinesInFrame_RelStructure linesInFrameStruct = (LinesInFrame_RelStructure) context.get(NETEX_LINE_DATA_CONTEXT);
 
-		for (JAXBElement<? extends DataManagedObjectStructure> lineElement : linesInFrameStruct.getLine_Dummy()) {
+		for (JAXBElement<? extends DataManagedObjectStructure> lineElement : linesInFrameStruct.getLine()) {
 			org.rutebanken.netex.model.Line_VersionStructure netexLine = (org.rutebanken.netex.model.Line_VersionStructure) lineElement.getValue();
 			mobi.chouette.model.Line chouetteLine = ObjectFactory.getLine(referential, netexLine.getId());
 			chouetteLine.setObjectVersion(NetexParserUtils.getVersion(netexLine));

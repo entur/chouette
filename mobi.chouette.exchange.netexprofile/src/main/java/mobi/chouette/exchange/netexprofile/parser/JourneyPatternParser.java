@@ -54,7 +54,7 @@ public class JourneyPatternParser extends NetexParser implements Parser, Constan
 		Referential referential = (Referential) context.get(REFERENTIAL);
 		JourneyPatternsInFrame_RelStructure journeyPatternStruct = (JourneyPatternsInFrame_RelStructure) context.get(NETEX_LINE_DATA_CONTEXT);
 
-		for (JAXBElement<?> journeyPatternElement : journeyPatternStruct.getJourneyPattern_Dummy()) {
+		for (JAXBElement<?> journeyPatternElement : journeyPatternStruct.getJourneyPattern()) {
 			JourneyPattern_VersionStructure netexJourneyPattern = (org.rutebanken.netex.model.JourneyPattern_VersionStructure) journeyPatternElement.getValue();
 
 			mobi.chouette.model.JourneyPattern chouetteJourneyPattern = ObjectFactory.getJourneyPattern(referential, netexJourneyPattern.getId());

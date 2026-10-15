@@ -159,7 +159,7 @@ public class PublicationDeliveryParser extends NetexParser implements Parser, Co
 
 			if (!isCommonDelivery) {
 				if (line == null) {
-					line = (org.rutebanken.netex.model.Line_VersionStructure) serviceFrame.getLines().getLine_Dummy().get(0).getValue();
+					line = (org.rutebanken.netex.model.Line_VersionStructure) serviceFrame.getLines().getLine().get(0).getValue();
 					context.put(PARSING_CONTEXT_LINE_ID, line.getId());
 				}
 
@@ -290,7 +290,7 @@ public class PublicationDeliveryParser extends NetexParser implements Parser, Co
 			}
 
 			if(serviceFrame.getNoticeAssignments() != null) {
-				for(JAXBElement<? extends DataManagedObjectStructure> assingment : serviceFrame.getNoticeAssignments().getNoticeAssignment_Dummy()) {
+				for(JAXBElement<? extends DataManagedObjectStructure> assingment : serviceFrame.getNoticeAssignments().getNoticeAssignment()) {
 					NoticeAssignment a = (NoticeAssignment) assingment.getValue();
 					parseNoticeAssignment(context, a);
 				}
@@ -364,7 +364,7 @@ public class PublicationDeliveryParser extends NetexParser implements Parser, Co
 			}
 
 			if (timetableFrame.getNoticeAssignments() != null) {
-				for (JAXBElement<? extends DataManagedObjectStructure> assingment : timetableFrame.getNoticeAssignments().getNoticeAssignment_Dummy()) {
+				for (JAXBElement<? extends DataManagedObjectStructure> assingment : timetableFrame.getNoticeAssignments().getNoticeAssignment()) {
 					NoticeAssignment a = (NoticeAssignment) assingment.getValue();
 					parseNoticeAssignment(context, a);
 				}

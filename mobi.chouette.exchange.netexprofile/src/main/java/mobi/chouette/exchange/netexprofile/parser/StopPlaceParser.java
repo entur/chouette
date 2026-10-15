@@ -326,7 +326,7 @@ public class StopPlaceParser implements Parser, Constant {
     }
 
     private void parseTariffZoneRefs(TariffZoneRefs_RelStructure tariffZonesStruct, StopArea stopArea) throws Exception {
-        List<JAXBElement<? extends ZoneRefStructure>> tariffZoneRefs = tariffZonesStruct.getTariffZoneRef_Dummy();
+        List<JAXBElement<? extends ZoneRefStructure>> tariffZoneRefs = tariffZonesStruct.getTariffZoneRef();
 
         for (JAXBElement<? extends ZoneRefStructure> tariffZoneRef : tariffZoneRefs) {
             Properties properties = tariffZoneProperties.get(tariffZoneRef.getValue().getRef());

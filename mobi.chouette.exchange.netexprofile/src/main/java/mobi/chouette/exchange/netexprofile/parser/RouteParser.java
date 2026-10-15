@@ -34,7 +34,7 @@ public class RouteParser implements Parser, Constant {
 		Referential referential = (Referential) context.get(REFERENTIAL);
 		RoutesInFrame_RelStructure routesInFrameStruct = (RoutesInFrame_RelStructure) context.get(NETEX_LINE_DATA_CONTEXT);
 
-		List<JAXBElement<? extends LinkSequence_VersionStructure>> routeElements = routesInFrameStruct.getRoute_Dummy();
+		List<JAXBElement<? extends LinkSequence_VersionStructure>> routeElements = routesInFrameStruct.getRoute();
 
 		for (JAXBElement<? extends LinkSequence_VersionStructure> routeElement : routeElements) {
 			org.rutebanken.netex.model.Route netexRoute = (org.rutebanken.netex.model.Route) routeElement.getValue();
