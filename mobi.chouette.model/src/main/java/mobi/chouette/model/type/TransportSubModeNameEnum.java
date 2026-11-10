@@ -19,6 +19,7 @@ public enum TransportSubModeNameEnum {
     RailReplacementBus,
     RegionalBus,
     SchoolBus,
+    SchoolAndPublicServiceBus,
     ShuttleBus,
     SightseeingBus,
 
@@ -139,6 +140,7 @@ public enum TransportSubModeNameEnum {
             TransportSubModeNameEnum.RailReplacementBus,
             TransportSubModeNameEnum.RegionalBus,
             TransportSubModeNameEnum.SchoolBus,
+            TransportSubModeNameEnum.SchoolAndPublicServiceBus,
             TransportSubModeNameEnum.ShuttleBus,
             TransportSubModeNameEnum.SightseeingBus,
             TransportSubModeNameEnum.Unknown
