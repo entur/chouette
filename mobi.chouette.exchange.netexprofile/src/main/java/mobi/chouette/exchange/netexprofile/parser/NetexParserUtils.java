@@ -99,6 +99,8 @@ public class NetexParserUtils extends ParserUtils {
 						return TransportSubModeNameEnum.RegionalBus;
 					case SCHOOL_BUS:
 						return TransportSubModeNameEnum.SchoolBus;
+					case SCHOOL_AND_PUBLIC_SERVICE_BUS:
+						return TransportSubModeNameEnum.SchoolAndPublicServiceBus;
 					case SHUTTLE_BUS:
 						return TransportSubModeNameEnum.ShuttleBus;
 					case SIGHTSEEING_BUS:

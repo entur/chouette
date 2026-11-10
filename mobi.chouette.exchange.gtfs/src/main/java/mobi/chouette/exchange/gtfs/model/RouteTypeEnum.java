@@ -56,7 +56,7 @@ public enum RouteTypeEnum {
 											TransportModeNameEnum.Bus, TransportSubModeNameEnum.SightseeingBus), ShuttleBus(711, TransportModeNameEnum.Bus,
 													TransportSubModeNameEnum.ShuttleBus), SchoolBus(712, TransportModeNameEnum.Bus,
 															TransportSubModeNameEnum.SchoolBus), SchoolandPublicServiceBus(713,
-																	TransportModeNameEnum.Bus), RailReplacementBusService(714, TransportModeNameEnum.Bus,
+																	TransportModeNameEnum.Bus, TransportSubModeNameEnum.SchoolAndPublicServiceBus), RailReplacementBusService(714, TransportModeNameEnum.Bus,
 																			TransportSubModeNameEnum.RailReplacementBus), DemandandResponseBusService(715,
 																					TransportModeNameEnum.Bus), AllBusServices(716, TransportModeNameEnum.Bus),
 	// extension
@@ -221,6 +221,8 @@ public enum RouteTypeEnum {
 					return RouteTypeEnum.RegionalBusService;
 				case SchoolBus:
 					return SchoolBus;
+				case SchoolAndPublicServiceBus:
+					return SchoolandPublicServiceBus;
 				case ShuttleBus:
 					return ShuttleBus;
 				case SightseeingBus:
