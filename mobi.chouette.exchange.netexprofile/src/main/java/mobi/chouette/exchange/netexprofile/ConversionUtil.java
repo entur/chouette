@@ -167,6 +167,8 @@ public class ConversionUtil {
 					return new TransportSubmodeStructure().withBusSubmode(BusSubmodeEnumeration.REGIONAL_BUS);
 				case SchoolBus:
 					return new TransportSubmodeStructure().withBusSubmode(BusSubmodeEnumeration.SCHOOL_BUS);
+				case SchoolAndPublicServiceBus:
+					return new TransportSubmodeStructure().withBusSubmode(BusSubmodeEnumeration.SCHOOL_AND_PUBLIC_SERVICE_BUS);
 				case ShuttleBus:
 					return new TransportSubmodeStructure().withBusSubmode(BusSubmodeEnumeration.SHUTTLE_BUS);
 				case SightseeingBus:

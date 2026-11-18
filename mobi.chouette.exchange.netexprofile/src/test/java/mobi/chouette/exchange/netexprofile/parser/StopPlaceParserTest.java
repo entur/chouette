@@ -85,6 +85,7 @@ public class StopPlaceParserTest {
         Assert.assertEquals(parser.mapTransportSubMode(BusSubmodeEnumeration.RAIL_REPLACEMENT_BUS.value()), TransportSubModeNameEnum.RailReplacementBus);
         Assert.assertEquals(parser.mapTransportSubMode(BusSubmodeEnumeration.REGIONAL_BUS.value()), TransportSubModeNameEnum.RegionalBus);
         Assert.assertEquals(parser.mapTransportSubMode(BusSubmodeEnumeration.SCHOOL_BUS.value()), TransportSubModeNameEnum.SchoolBus);
+        Assert.assertEquals(parser.mapTransportSubMode(BusSubmodeEnumeration.SCHOOL_AND_PUBLIC_SERVICE_BUS.value()), TransportSubModeNameEnum.SchoolAndPublicServiceBus);
         Assert.assertEquals(parser.mapTransportSubMode(BusSubmodeEnumeration.SHUTTLE_BUS.value()), TransportSubModeNameEnum.ShuttleBus);
         Assert.assertEquals(parser.mapTransportSubMode(BusSubmodeEnumeration.SIGHTSEEING_BUS.value()), TransportSubModeNameEnum.SightseeingBus);
     }
