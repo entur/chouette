@@ -1,7 +1,12 @@
 # Adapted from https://github.com/jboss-dockerfiles/base/blob/master/Dockerfile
 FROM debian:12-slim
 
+# Oldest acceptable openjdk-17 package: 17.0.21.1 is the first build fixed for Java4Shell (CVE-2026-114938).
+# The build fails if apt installs anything older. Raising it also invalidates the cached layer below,
+# which otherwise survives a security update of the package as long as the debian base image is unchanged.
+ARG OPENJDK_MIN_VERSION=17.0.21.1
 RUN apt-get -y update && apt-get -y upgrade && apt-get install -y openjdk-17-jdk curl \
+&& dpkg --compare-versions "$(dpkg-query -W -f='${Version}' openjdk-17-jdk)" ge "$OPENJDK_MIN_VERSION" \
 && rm -rf /var/lib/apt/lists/*
 
 # Create a user and group used to launch processes
